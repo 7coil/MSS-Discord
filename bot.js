@@ -1,9 +1,9 @@
 // install ytdl-core before running this!
 // npm install --save ytdl-core
-const Discord = require("discord.js");
+const discord = require("discord.js");
 const feed = require("feed-read");
 const yt = require('ytdl-core');
-const client = new Discord.Client();
+const client = new discord.Client();
 const fs = require('fs');
 client.login("");
 
@@ -20,7 +20,7 @@ client.on('message', message => {
 
 
 	if (input[0] === '!help') {
-        return message.reply("Hello! Please go to http://moustacheminer.com/w/mss for all documentation.");
+        return message.reply("Hello! Please go to http://discord.gg/invite/527K7hg for help, or http://moustacheminer.com/w/mss for all documentation.");
 	}
 	
 	if (input[0] === '!play') {
