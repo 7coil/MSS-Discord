@@ -65,6 +65,10 @@ client.on('message', message => {
 		return richSend(message, "sexual tension", "sexual tension", "#FF9999", "https://cdn.discordapp.com/attachments/255362900187807744/269947744381042688/unknown.png");
 	}
 	
+	if(message.content === '(╯°□°）╯︵ ┻━┻') {
+		return message.channel.sendMessage("┬─┬﻿ ノ( ゜-゜ノ)");
+	}
+	
 });
 
 function richSend(message, subheading, description, colour, img) {
