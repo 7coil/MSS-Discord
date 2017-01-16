@@ -50,7 +50,7 @@ client.on('message', message => {
 				return richSend(message, "!play", "Please send a valid YouTube URL", "#FF0000");
 			}
 			
-			if (info["length_seconds"] > 3600 && !message.channel.permissionsFor(message.member).hasPermission("ADMINISTRATOR")) {
+			if (info["length_seconds"] > 3600 && !(message.channel.permissionsFor(message.member).hasPermission("ADMINISTRATOR") || message.author.id === "190519304972664832")) {
 				return richSend(message, "!play", "The duration of this video exceedes 1 hour.", "#FF0000");
 			}
 			
@@ -71,13 +71,26 @@ client.on('message', message => {
 		});
 
 	}
+	
+	if (input[0] === '!stop') {
+		if (!(message.channel.permissionsFor(message.member).hasPermission("ADMINISTRATOR") || message.author.id === "190519304972664832")) {
+			return richSend(message, "!stop", "You do not have permission to stop the bot.", "#FF0000");
+		}
+		let voiceChannel = message.member.voiceChannel;
+		if (voiceChannel) {
+			richSend(message, "!stop", "Stopped playing music in the channel.", "#00FF00");
+			return voiceChannel.leave();
+		} else {
+			return richSend(message, "!stop", "There is no bot running.", "#FF0000");
+		}
+	}
 
 	if(input[0].toLowerCase().split('').filter(function(item, i, ar){ return ar.indexOf(item) === i; }).join('') === "cirletn"){
 		return richSend(message, "Circletine", "CCCCCCCCCCCIIIIIIIIIIIIIIIIIRRRRRRRRRRRRRRRRRRRRRRRRCCCCCCCCCCCCCCCCCCCCCCLLLLLLLLLLLLLLLLLLEEEEEEEEEEEEEEETTTTTTTTTTTTTTTTTTIIIIIIIIIIIIIINNNNNNNNNNNNNNEEEEEEEEEEE", "#FFFFFF");
 	}
 	
 	if(message.content === 'sexual tension') {
-		return richSend(message, "sexual tension", "sexual tension", "#FF9999", "https://cdn.discordapp.com/attachments/255362900187807744/269947744381042688/unknown.png");
+		return richSend(message, "sexual tension", "sexual tension", "#FF9999", "http://moustacheminer.com/download/sexualtension2.png");
 	}
 	
 	var flips = ['┻', '╩', '┫', '┣', '︵', '╰', '╯', 'ノ']
