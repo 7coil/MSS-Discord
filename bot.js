@@ -43,13 +43,16 @@ client.on('message', message => {
         	return richSend(message, "MSS", "!play", "Please send a valid YouTube URL", "#FFFF00");
 	    }
 		
-		voiceChannel.join().then(connnection => {
-			let stream = yt(input[1], {audioonly: true});
-			const dispatcher = connnection.playStream(stream);
-			dispatcher.on('end', () => {
-				voiceChannel.leave();
+		voiceChannel.join()
+			.then(connnection => {
+				let stream = yt(input[1], {audioonly: true});
+				const dispatcher = connnection.playStream(stream);
+				dispatcher.on('end', () => {
+					voiceChannel.leave();
+				});
+			}).catch( error => {
+				richSend(message, "MSS", "!play", error.message, "#FF0000");
 			});
-		});
 	}
 
 	if(input[0].toLowerCase().split('').filter(function(item, i, ar){ return ar.indexOf(item) === i; }).join('') === "cirletn"){
