@@ -18,9 +18,19 @@ client.on('message', message => {
 	let input = message.content.replace( /\n/g, " " ).split(" ");
 	message.guild.member(client.user).setNickname('MSS')
 
-
 	if (input[0] === '!help') {
-        return message.reply("Hello! Please go to http://discord.gg/invite/527K7hg for help, or http://moustacheminer.com/w/mss for all documentation.");
+		var embed = new Discord.RichEmbed()
+			.setTitle('MSS')
+				.setAuthor('Help', 'http://moustacheminer.com/dickbutt.jpg')
+				.setColor(0x00AE86)
+				.setDescription('Help can be found at our wiki page, or at the moustacheminer server services Discord server.')
+				.setFooter('moustacheminer server services', 'http://moustacheminer.com/dickbutt.jpg')
+				.setTimestamp()
+				.setURL('http://moustacheminer.com/w/mss')
+				.addField('Wiki', 'http://moustacheminer.com/w/mss')
+				.addField('MSS Discord', 'http://discord.gg/invite/527K7hg');
+
+		return message.channel.sendEmbed(embed, "", { disableEveryone: true });
 	}
 	
 	if (input[0] === '!play') {
