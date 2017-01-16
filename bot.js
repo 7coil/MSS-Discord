@@ -28,7 +28,9 @@ client.on('message', message => {
 			.setTimestamp()
 			.setURL('http://moustacheminer.com/w/mss')
 			.addField('Wiki', 'http://moustacheminer.com/w/mss')
-			.addField('MSS Discord', 'http://discord.gg/invite/527K7hg');
+			.addField('MSS Discord', 'http://discord.gg/invite/527K7hg')
+			.addField('GitHub', 'https://github.com/moustacheminer/MSS-Discord')
+			.addField('PornHub', 'https://moustacheminer.com/r/?id=69');
 
 		return message.channel.sendEmbed(embed, "", { disableEveryone: true });
 	}
