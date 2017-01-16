@@ -65,8 +65,11 @@ client.on('message', message => {
 		return richSend(message, "sexual tension", "sexual tension", "#FF9999", "https://cdn.discordapp.com/attachments/255362900187807744/269947744381042688/unknown.png");
 	}
 	
-	if (message.content.includes('┻') || message.content.includes('╩')) {
-		return message.channel.sendMessage("┬─┬﻿ ノ( ゜-゜ノ)");
+	var flips = ['┻', '╩', '┫', '┣', '︵', '╰', '╯', 'ノ']
+	for (var i = 0; i < message.content.length; i++ ) {
+		if (flips.indexOf(message.content.charAt(i)) > -1) {
+			return message.channel.sendMessage("┬─┬﻿ ノ( ゜-゜ノ)");
+		}
 	}
 	
 });
