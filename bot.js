@@ -45,7 +45,18 @@ client.on('message', message => {
         	return richSend(message, "!play", "Please send a valid YouTube URL", "#FFFF00");
 	    }
 		
-		voiceChannel.join()
+		yt.getInfo(input[1], function(err, info) {
+			if (!info) {
+				return richSend(message, "!play", "Please send a valid YouTube URL", "#FF0000");
+			}
+			
+			if (info["length_seconds"] > 3600 && !message.channel.permissionsFor(message.member).hasPermission("ADMINISTRATOR")) {
+				return richSend(message, "!play", "The duration of this video exceedes 1 hour.", "#FF0000");
+			}
+			
+			richSend(message, "Now playing:", info["title"], "#00FF00", info["thumbnail_url"], "https://youtube.com/watch?v=" + info["video_id"]);
+			
+			voiceChannel.join()
 			.then(connnection => {
 				input[1] = input[1].replace(/%/g, "");
 				let stream = yt(input[1], {audioonly: true});
@@ -57,6 +68,8 @@ client.on('message', message => {
 				richSend(message, "!play", error.message, "#FF0000");
 				console.log(error);
 			});
+		});
+
 	}
 
 	if(input[0].toLowerCase().split('').filter(function(item, i, ar){ return ar.indexOf(item) === i; }).join('') === "cirletn"){
@@ -76,7 +89,11 @@ client.on('message', message => {
 	
 });
 
-function richSend(message, subheading, description, colour, img) {
+function richSend(message, subheading, description, colour, img, url) {
+	if (!url) {
+		var url = "http://moustacheminer.com/w/mss";
+	}
+	
 	var embed = new Discord.RichEmbed()
 		.setTitle(subheading)
 		.setAuthor("MSS", 'http://moustacheminer.com/dickbutt.jpg')
@@ -84,7 +101,7 @@ function richSend(message, subheading, description, colour, img) {
 		.setDescription(description)
 		.setFooter('moustacheminer.com server services', '')
 		.setTimestamp()
-		.setURL('http://moustacheminer.com/w/mss')
+		.setURL(url)
 		.setImage(img);
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true });
