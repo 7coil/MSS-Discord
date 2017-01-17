@@ -30,9 +30,9 @@ client.on('message', message => {
 				.setTimestamp()
 				.setURL('http://moustacheminer.com/w/mss')
 				.addField('Wiki', 'http://moustacheminer.com/w/mss')
-				.addField('MSS Discord', 'http://discord.gg/invite/527K7hg')
+				.addField('MSS Discord Invite', 'https://discordapp.com/oauth2/authorize?client_id=257547382277931009&permissions=0&scope=bot')
+				.addField('MSS Discord Discord Server', 'https://discord.gg/hPw5gEt')
 				.addField('GitHub', 'https://github.com/moustacheminer/MSS-Discord')
-				.addField('PornHub', 'https://moustacheminer.com/r/?id=69')
 				.addField('GNU GPLv3', "MSS-Discord\nCopyright (C) 2017 moustacheminer.com\n\nThis program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License along with this program.\n\nIf not, see <http://www.gnu.org/licenses/>.");
 
 			return message.channel.sendEmbed(embed, "", { disableEveryone: true });
@@ -100,7 +100,7 @@ client.on('message', message => {
 			}
 		}
 	} catch(err) {
-		richSend(message, "Fatal error encountered.", err.message, "#FF0000");
+		richSend(message, "Fatal error encountered.", err.stack + "\n\nPlease send a screenshot to the MSS Discord Server.\nhttps://discord.gg/ZW7GGGH", "#FF0000", "", "https://discord.gg/ZW7GGGH");
 	}
 		
 });
