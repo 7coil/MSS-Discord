@@ -18,7 +18,9 @@ client.on('message', message => {
 		if(message.author.bot) return;
 		
 		let input = message.content.replace( /\n/g, " " ).split(" ");
-		message.guild.member(client.user).setNickname('MSS');
+		if (message.guild) {
+			message.guild.member(client.user).setNickname('MSS');
+		}
 
 		if (input[0] === '!help') {
 			var embed = new Discord.RichEmbed()
@@ -44,7 +46,7 @@ client.on('message', message => {
 				return richSend(message, "!play", "Please be in a voice channel before using the !play command", "#FFFF00");
 			}
 			
-			if (!input[1]) {
+			if (!youtubeCheck(input[1])) {
 				return richSend(message, "!play", "Please send a valid YouTube URL", "#FFFF00");
 			}
 			
@@ -121,4 +123,15 @@ function richSend(message, subheading, description, colour, img, url) {
 		.setImage(img);
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true });
+}
+
+/**
+ * JavaScript function to match (and return) the video Id 
+ * of any valid Youtube Url, given as input string.
+ * @author: Stephan Schmitz <eyecatchup@gmail.com>
+ * @url: http://stackoverflow.com/a/10315969/624466
+ */
+function youtubeCheck(url) {
+  var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+  return (url.match(p)) ? RegExp.$1 : false;
 }
