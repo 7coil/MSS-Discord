@@ -13,93 +13,96 @@ client.on('ready', function() {
 });
 
 client.on('message', message => {
-	if(message.author.bot) return;
 	
-	let input = message.content.replace( /\n/g, " " ).split(" ");
-	message.guild.member(client.user).setNickname('MSS');
-
-	if (input[0] === '!help') {
-		var embed = new Discord.RichEmbed()
-			.setTitle('Help')
-			.setAuthor('MSS', 'http://moustacheminer.com/dickbutt.jpg')
-			.setColor("#00AE86")
-			.setDescription('Help can be found at our wiki page, or at the moustacheminer server services Discord server.')
-			.setFooter('moustacheminer.com server services', '')
-			.setTimestamp()
-			.setURL('http://moustacheminer.com/w/mss')
-			.addField('Wiki', 'http://moustacheminer.com/w/mss')
-			.addField('MSS Discord', 'http://discord.gg/invite/527K7hg')
-			.addField('GitHub', 'https://github.com/moustacheminer/MSS-Discord')
-			.addField('PornHub', 'https://moustacheminer.com/r/?id=69');
-
-		return message.channel.sendEmbed(embed, "", { disableEveryone: true });
-	}
-	
-	if (input[0] === '!play') {
-		let voiceChannel = message.member.voiceChannel;
-		if (!voiceChannel) {
-        	return richSend(message, "!play", "Please be in a voice channel before using the !play command", "#FFFF00");
-	    }
+	try {
+		if(message.author.bot) return;
 		
-		if (!input[1]) {
-        	return richSend(message, "!play", "Please send a valid YouTube URL", "#FFFF00");
-	    }
+		let input = message.content.replace( /\n/g, " " ).split(" ");
+		message.guild.member(client.user).setNickname('MSS');
+
+		if (input[0] === '!help') {
+			var embed = new Discord.RichEmbed()
+				.setTitle('Help')
+				.setAuthor('MSS', 'http://moustacheminer.com/dickbutt.jpg')
+				.setColor("#00AE86")
+				.setDescription('Help can be found at our wiki page, or at the moustacheminer server services Discord server.')
+				.setFooter('moustacheminer.com server services', '')
+				.setTimestamp()
+				.setURL('http://moustacheminer.com/w/mss')
+				.addField('Wiki', 'http://moustacheminer.com/w/mss')
+				.addField('MSS Discord', 'http://discord.gg/invite/527K7hg')
+				.addField('GitHub', 'https://github.com/moustacheminer/MSS-Discord')
+				.addField('PornHub', 'https://moustacheminer.com/r/?id=69')
+				.addField('GNU GPLv3', "MSS-Discord\nCopyright (C) 2017 moustacheminer.com\n\nThis program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License along with this program.\n\nIf not, see <http://www.gnu.org/licenses/>.");
+
+			return message.channel.sendEmbed(embed, "", { disableEveryone: true });
+		}
 		
-		yt.getInfo(input[1], function(err, info) {
-			if (!info) {
-				return richSend(message, "!play", "Please send a valid YouTube URL", "#FF0000");
+		if (input[0] === '!play') {
+			let voiceChannel = message.member.voiceChannel;
+			if (!voiceChannel) {
+				return richSend(message, "!play", "Please be in a voice channel before using the !play command", "#FFFF00");
 			}
 			
-			if (info["length_seconds"] > 3600 && !(message.channel.permissionsFor(message.member).hasPermission("ADMINISTRATOR") || message.author.id === "190519304972664832")) {
-				return richSend(message, "!play", "The duration of this video exceedes 1 hour.", "#FF0000");
+			if (!input[1]) {
+				return richSend(message, "!play", "Please send a valid YouTube URL", "#FFFF00");
 			}
 			
-			richSend(message, "Now playing:", info["title"], "#00FF00", info["thumbnail_url"], "https://youtube.com/watch?v=" + info["video_id"]);
-			
-			voiceChannel.join()
-			.then(connnection => {
-				input[1] = input[1].replace(/%/g, "");
-				let stream = yt(input[1], {audioonly: true});
-				const dispatcher = connnection.playStream(stream);
-				dispatcher.on('end', () => {
-					voiceChannel.leave();
+			yt.getInfo(input[1], function(err, info) {
+				if (!info) {
+					return richSend(message, "!play", "Please send a valid YouTube URL", "#FF0000");
+				}
+				
+				if (info["length_seconds"] > 3600 && !(message.channel.permissionsFor(message.member).hasPermission("ADMINISTRATOR") || message.author.id === "190519304972664832")) {
+					return richSend(message, "!play", "The duration of this video exceedes 1 hour.", "#FF0000");
+				}
+				
+				richSend(message, "Now playing:", info["title"], "#00FF00", info["thumbnail_url"], "https://youtube.com/watch?v=" + info["video_id"]);
+				
+				voiceChannel.join()
+				.then(connnection => {
+					input[1] = input[1].replace(/%/g, "");
+					let stream = yt(input[1], {audioonly: true});
+					const dispatcher = connnection.playStream(stream);
+					dispatcher.on('end', () => {
+						voiceChannel.leave();
+					});
 				});
-			}).catch( error => {
-				richSend(message, "!play", error.message, "#FF0000");
-				console.log(error);
 			});
-		});
 
-	}
-	
-	if (input[0] === '!stop') {
-		if (!(message.channel.permissionsFor(message.member).hasPermission("ADMINISTRATOR") || message.author.id === "190519304972664832")) {
-			return richSend(message, "!stop", "You do not have permission to stop the bot.", "#FF0000");
 		}
-		let voiceChannel = message.member.voiceChannel;
-		if (voiceChannel) {
-			richSend(message, "!stop", "Stopped playing music in the channel.", "#00FF00");
-			return voiceChannel.leave();
-		} else {
-			return richSend(message, "!stop", "There is no bot running.", "#FF0000");
+		
+		if (input[0] === '!stop') {
+			if (!(message.channel.permissionsFor(message.member).hasPermission("ADMINISTRATOR") || message.author.id === "190519304972664832")) {
+				return richSend(message, "!stop", "You do not have permission to stop the bot.", "#FF0000");
+			}
+			let voiceChannel = message.member.voiceChannel;
+			if (voiceChannel) {
+				richSend(message, "!stop", "Stopped playing music in the channel.", "#00FF00");
+				return voiceChannel.leave();
+			} else {
+				return richSend(message, "!stop", "There is no bot running.", "#FF0000");
+			}
 		}
-	}
 
-	if(input[0].toLowerCase().split('').filter(function(item, i, ar){ return ar.indexOf(item) === i; }).join('') === "cirletn"){
-		return richSend(message, "Circletine", "CCCCCCCCCCCIIIIIIIIIIIIIIIIIRRRRRRRRRRRRRRRRRRRRRRRRCCCCCCCCCCCCCCCCCCCCCCLLLLLLLLLLLLLLLLLLEEEEEEEEEEEEEEETTTTTTTTTTTTTTTTTTIIIIIIIIIIIIIINNNNNNNNNNNNNNEEEEEEEEEEE", "#FFFFFF");
-	}
-	
-	if(message.content === 'sexual tension') {
-		return richSend(message, "sexual tension", "sexual tension", "#FF9999", "http://moustacheminer.com/download/sexualtension2.png");
-	}
-	
-	var flips = ['┻', '╩', '┫', '┣', '︵', '╰', '╯', 'ノ']
-	for (var i = 0; i < message.content.length; i++ ) {
-		if (flips.indexOf(message.content.charAt(i)) > -1) {
-			return message.channel.sendMessage("┬─┬﻿ ノ( ゜-゜ノ)");
+		if(input[0].toLowerCase().split('').filter(function(item, i, ar){ return ar.indexOf(item) === i; }).join('') === "cirletn"){
+			return richSend(message, "Circletine", "CCCCCCCCCCCIIIIIIIIIIIIIIIIIRRRRRRRRRRRRRRRRRRRRRRRRCCCCCCCCCCCCCCCCCCCCCCLLLLLLLLLLLLLLLLLLEEEEEEEEEEEEEEETTTTTTTTTTTTTTTTTTIIIIIIIIIIIIIINNNNNNNNNNNNNNEEEEEEEEEEE", "#FFFFFF");
 		}
+		
+		if(message.content === 'sexual tension') {
+			return richSend(message, "sexual tension", "sexual tension", "#FF9999", "http://moustacheminer.com/download/sexualtension2.png");
+		}
+		
+		var flips = ['┻', '╩', '┫', '┣', '︵', '╰', '╯', 'ノ']
+		for (var i = 0; i < message.content.length; i++ ) {
+			if (flips.indexOf(message.content.charAt(i)) > -1) {
+				return message.channel.sendMessage("┬─┬﻿ ノ( ゜-゜ノ)");
+			}
+		}
+	} catch(err) {
+		richSend(message, "Fatal error encountered.", err.message, "#FF0000");
 	}
-	
+		
 });
 
 function richSend(message, subheading, description, colour, img, url) {
