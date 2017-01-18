@@ -47,11 +47,11 @@ client.on('message', message => {
 			}
 			
 			if (!youtubeCheck(input[1])) {
-				return richSend(message, "!play", "Please send a valid YouTube URL", "#FFFF00");
+				richSend(message, "!play", "Please send a valid YouTube URL", "#FFFF00");
 			}
 			
 			yt.getInfo(input[1], function(err, info) {
-				if (!info) {
+				if (!info && youtubeCheck(input[1])) {
 					return richSend(message, "!play", "Please send a valid YouTube URL", "#FF0000");
 				}
 				
