@@ -63,11 +63,8 @@ client.on('message', message => {
 				.addField('MSS Discord Discord Server', 'https://discord.gg/hPw5gEt')
 				.addField('GitHub', 'https://github.com/moustacheminer/MSS-Discord')
 				.addField('GNU GPLv3', "MSS-Discord\nCopyright (C) 2017 moustacheminer.com\n\nThis program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License along with this program.\n\nIf not, see <http://www.gnu.org/licenses/>.");
-
 			return message.channel.sendEmbed(embed, "", { disableEveryone: true });
-		}
-		
-		if (input[0] === '!play') {
+		} else if (input[0] === '!play') {
 			//Get the voice channel that it's going to play to.
 			let voiceChannel = message.member.voiceChannel;
 			
@@ -119,9 +116,7 @@ client.on('message', message => {
 				});
 			});
 
-		}
-		
-		if (input[0] === '!stop') {
+		} else if (input[0] === '!stop') {
 			
 			//Check if the person has permission to stop the music
 			if (!(message.channel.permissionsFor(message.member).hasPermission("ADMINISTRATOR") || message.author.id === "190519304972664832")) {
@@ -138,24 +133,13 @@ client.on('message', message => {
 			} else {
 				return richSend(message, "!stop", "There is no bot running in your current voice channel", "#FF0000");
 			}
-		}
-
-		//Remove all repeated characters and check if it matches 'cirletn'
-		if(input[0].toLowerCase().split('').filter(function(item, i, ar){ return ar.indexOf(item) === i; }).join('') === "cirletn"){
+			
+		} else if (input[0].toLowerCase().split('').filter(function(item, i, ar){ return ar.indexOf(item) === i; }).join('') === "cirletn"){
+			//Remove all repeated characters and check if it matches 'cirletn'
 			return richSend(message, "Circletine", "CCCCCCCCCCCIIIIIIIIIIIIIIIIIRRRRRRRRRRRRRRRRRRRRRRRRCCCCCCCCCCCCCCCCCCCCCCLLLLLLLLLLLLLLLLLLEEEEEEEEEEEEEEETTTTTTTTTTTTTTTTTTIIIIIIIIIIIIIINNNNNNNNNNNNNNEEEEEEEEEEE", "#FFFFFF");
-		}
-		
-		//Send a fancy image.
-		if(message.content === 'sexual tension') {
+		} else if (message.content === 'sexual tension') {
+			//Send a fancy image.
 			return richSend(message, "sexual tension", "sexual tension", "#FF9999", "http://moustacheminer.com/download/sexualtension2.png");
-		}
-		
-		//Unflip tables.
-		var flips = ['┻', '╩', '┫', '┣', '︵', '╰', '╯', 'ノ']
-		for (var i = 0; i < message.content.length; i++ ) {
-			if (flips.indexOf(message.content.charAt(i)) > -1) {
-				return message.channel.sendMessage("┬─┬﻿ ノ( ゜-゜ノ)");
-			}
 		}
 		
 	} catch(err) {
