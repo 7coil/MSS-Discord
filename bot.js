@@ -16,6 +16,15 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+//Get the Discord API Key.
+console.log(process.argv[2]);
+if (process.argv[2]) {
+	var api = process.argv[2];
+} else {
+	console.log("Usage:\nnode bot.js <Discord API Key>");
+	process.exit(1);
+}
+
 //Declare the Discord and client constants used to set up the Discord bot
 const Discord = require("discord.js");
 const client = new Discord.Client();
@@ -24,10 +33,11 @@ const client = new Discord.Client();
 const yt = require('ytdl-core');
 
 //Login to Discord's Bot API Service
-client.login("");
+client.login(api);
 
 //Set the running game and the avatar for the bot.
 client.on('ready', function() {
+	console.log("Successfully connected to Discord!");
 	client.user.setGame("ask for >>   !help");
 	client.user.setAvatar("http://moustacheminer.com/dickbutt.jpg");
 });
