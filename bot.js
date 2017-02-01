@@ -66,21 +66,7 @@ client.on('message', message => {
 
 		//Send help detials. Need to use the E-zed richSend someday
 		if (input[0] === '!help') {
-			var embed = new Discord.RichEmbed()
-				.setTitle('Help')
-				.setAuthor('MSS', 'http://moustacheminer.com/dickbutt.jpg')
-				.setColor("#00AE86")
-				.setDescription('Help can be found at our wiki page, or at the moustacheminer server services Discord server.')
-				.setFooter('moustacheminer.com server services', '')
-				.setTimestamp()
-				.setURL('http://moustacheminer.com/w/mss')
-				.addField('Wiki', 'http://moustacheminer.com/w/mss')
-				.addField('MSS Discord Invite', 'https://discordapp.com/oauth2/authorize?client_id=257547382277931009&permissions=0&scope=bot')
-				.addField('MSS Discord Discord Server', 'https://discord.gg/hPw5gEt')
-				.addField('MSS Reddit', 'https://www.reddit.com/r/mss')
-				.addField('GitHub', 'https://github.com/moustacheminer/MSS-Discord')
-				.addField('GNU GPLv3', "MSS-Discord\nCopyright (C) 2017 moustacheminer.com\n\nThis program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\nThis program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License along with this program.\n\nIf not, see <http://www.gnu.org/licenses/>.");
-			return message.channel.sendEmbed(embed, "", { disableEveryone: true });
+			richSend(message, "Moustacheminer Server Services", "Help is at hand, at the official MSS Discord Server @ https://discord.gg/hPw5gEt", "#FF9999", "http://i.imgur.com/h2JkYGm.jpg", "https://discord.gg/hPw5gEt");
 		} else if (input[0] === '!play') {
 			//Get the voice channel that it's going to play to.
 			let voiceChannel = message.member.voiceChannel;
