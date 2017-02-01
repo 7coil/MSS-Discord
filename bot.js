@@ -38,7 +38,7 @@ client.login(api);
 //Set the running game and the avatar for the bot.
 client.on('ready', function() {
 	console.log("Successfully connected to Discord!");
-	client.user.setGame("ask for >>   !help");
+	client.user.setGame("reddit.com/r/mss");
 	client.user.setAvatar("http://moustacheminer.com/dickbutt.jpg");
 });
 
@@ -163,7 +163,7 @@ client.on('message', message => {
 //Provide an easy wrapper for Discord and Discord API's and Discord.js' RichEmbed feature
 function richSend(message, subheading, description, colour, img, url) {
 	if (!url) {
-		var url = "http://moustacheminer.com/w/mss";
+		var url = "http://reddit.com/r/mss";
 	}
 	
 	var embed = new Discord.RichEmbed()
