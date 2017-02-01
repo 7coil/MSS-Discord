@@ -32,13 +32,19 @@ const client = new Discord.Client();
 //ytdl-core for !play
 const yt = require('ytdl-core');
 
+//fs to open the wav file
+const fs = require('fs');
+
+//exec for the DECtalk API
+const child_process = require('child_process');
+
 //Login to Discord's Bot API Service
 client.login(api);
 
 //Set the running game and the avatar for the bot.
 client.on('ready', function() {
 	console.log("Successfully connected to Discord!");
-	client.user.setGame("reddit.com/r/mss");
+	client.user.setGame("ask for >>   !help");
 	client.user.setAvatar("http://moustacheminer.com/dickbutt.jpg");
 });
 
@@ -151,6 +157,28 @@ client.on('message', message => {
 		} else if (message.content === 'sexual tension') {
 			//Send a fancy image.
 			return richSend(message, "sexual tension", "sexual tension", "#FF9999", "http://moustacheminer.com/download/sexualtension2.png");
+		} else if (input[0] === '!dec') {
+			let dec = message.content.substring(5);
+			//Get the voice channel that it's going to play to.
+			let voiceChannel = message.member.voiceChannel;
+			
+			//Check if the user is inside a voice channel
+			if (!voiceChannel) {
+				return richSend(message, "!play", "Please be in a voice channel before using the !play command", "#FFFF00");
+			}
+			
+			var file = Math.floor(Math.random() * 9999);
+			child_process.execFile('say', ['-w', 'C:\\MOUSTACHEMINER\\NodeJS\\MSS-Discord\\MSS-Discord\\DEC\\' + file + '.wav', dec], function(err, out, code) {
+				voiceChannel.join()
+				.then(connnection => {
+					let stream = fs.createReadStream('C:\\MOUSTACHEMINER\\NodeJS\\MSS-Discord\\MSS-Discord\\DEC\\' + file + '.wav');
+					const dispatcher = connnection.playStream(stream);
+					dispatcher.on('end', () => {
+						//Leave after it's done
+						voiceChannel.leave();
+					});
+				});
+			});
 		}
 		
 	} catch(err) {
@@ -163,7 +191,7 @@ client.on('message', message => {
 //Provide an easy wrapper for Discord and Discord API's and Discord.js' RichEmbed feature
 function richSend(message, subheading, description, colour, img, url) {
 	if (!url) {
-		var url = "http://reddit.com/r/mss";
+		var url = "http://moustacheminer.com/w/mss";
 	}
 	
 	var embed = new Discord.RichEmbed()
