@@ -64,7 +64,7 @@ client.on('message', message => {
 		
 		//Set the username of the bot as MSS
 		if (message.guild.id) {
-			message.guild.member(client.user).setNickname('Moustacheminer Server Services');
+			message.guild.member(client.user).setNickname('MSS');
 		} else {
 			//If the bot is not in the server, stop doing shit - It's too dangerous.
 			return richSend(message, "Error", "You are not allowed to send commands via Direct Messaging.", "#FF0000");
