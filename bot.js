@@ -41,8 +41,11 @@ const child_process = require('child_process');
 //Login to Discord's Bot API Service
 client.login(api);
 
-//Declare the playlist
+//Declare the playlist and stream variables
+//playlist[guild][position in playlist]
 var playlist = [];
+//stream[guild]
+var stream = [];
 
 //Set the running game and the avatar for the bot.
 client.on('ready', function() {
@@ -90,6 +93,15 @@ client.on('message', message => {
 			} else {
 				console.log(input[1]);
 			}
+		} else if (input[0] === '!skip') {
+			//Get the voice channel that it's going to play to.
+			let voiceChannel = message.member.voiceChannel;
+			//Check if the user is inside a voice channel
+			if (!voiceChannel.connection) {
+				return richSend(message, "!stop", "There is no bot running in your current voice channel", "#FF0000");
+			}
+			
+			stream[message.guild].destroy();
 		} else if (input[0] === '!stop') {
 			playlistClear(message);
 		} else if (input[0].toLowerCase().split('').filter(function(item, i, ar){ return ar.indexOf(item) === i; }).join('') === "cirletn"){
@@ -99,7 +111,7 @@ client.on('message', message => {
 			//Send a fancy image.
 			return richSend(message, "sexual tension", "sexual tension", "#FF9999", "http://moustacheminer.com/download/sexualtension2.png");
 		} else if (input[0] === '!dec') {
-			let dec = message.content.substring(5);
+			let dec = message.content.substring(5).replace("\n", " ");
 			//Get the voice channel that it's going to play to.
 			let voiceChannel = message.member.voiceChannel;
 			
@@ -111,10 +123,13 @@ client.on('message', message => {
 			var file = Math.floor(Math.random() * 9999);
 			child_process.execFile('say', ['-w', 'C:\\MOUSTACHEMINER\\NodeJS\\MSS-Discord\\DEC\\' + file + '.wav', dec]);
 			playlistAdd(message, "file", 'C:\\MOUSTACHEMINER\\NodeJS\\MSS-Discord\\DEC\\' + file + '.wav', "DecTalk Input");
+		} else if (input[0] === '!error') {
+			throw new Error("A error was PURPOSELY thrown for the excitement of mathematicians.");
 		}
 	} catch(err) {
+		console.log(err.stack);
 		//Catch those errors!
-		richSend(message, "Fatal error encountered.", err.stack + "\n\nPlease send a screenshot to the MSS Discord Server.\nhttps://discord.gg/ZW7GGGH", "#FF0000", "", "https://discord.gg/ZW7GGGH");
+		richSend(message, "This is a Parker Square of an error.", "A fatal error was encountered:\nKeep Calm. A singing banana has been deployed to fix the error. In the meantime, try folding a piece of A4 paper 8 times.", "#FF0000", "http://moustacheminer.com/home/img/ffs.jpg", "https://discord.gg/ZW7GGGH");
 	}
 		
 });
@@ -173,21 +188,13 @@ function playlistClear(message) {
 function playSound(message) {
 	var voiceChannel = message.member.voiceChannel;
 	var current;
-	var stream;
 	
 	voiceChannel.join()
 	.then(connnection => {
 		var looper = function() {
 			if (playlist[message.guild].length > 0) {
-				current = JSON.parse(playlist[message.guild].shift());
-				richSend(message, "Now playing:", current["title"], "#00FF00", current["thumb_url"], current["url"]);
-
-				if (current["type"] === "youtube") {
-					stream = yt(current["url"], {audioonly: true});
-				} else if (current["type"] === "file") {
-					stream = fs.createReadStream(current["url"])
-				}
-				const dispatcher = connnection.playStream(stream);
+				playlistPlay(message);
+				const dispatcher = connnection.playStream(stream[message.guild]);
 				dispatcher.on('end', () => {
 					looper();
 				});
@@ -198,6 +205,22 @@ function playSound(message) {
 		}
 		looper();
 	});
+}
+
+function playlistPlay(message) {
+	var voiceChannel = message.member.voiceChannel;
+	if (playlist[message.guild].length > 0) {
+		current = JSON.parse(playlist[message.guild].shift());
+		richSend(message, "Now playing:", current["title"], "#00FF00", current["thumb_url"], current["url"]);
+		if (current["type"] === "youtube") {
+			stream[message.guild] = yt(current["url"], {audioonly: true});
+		} else if (current["type"] === "file") {
+			stream[message.guild] = stream = fs.createReadStream(current["url"])
+		}
+	} else {
+		voiceChannel.leave();
+		return;
+	}
 }
 
 /**
