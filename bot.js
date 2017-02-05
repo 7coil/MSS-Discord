@@ -63,7 +63,7 @@ client.on('message', message => {
 		let input = message.content.replace( /\n/g, " " ).split(" ");
 		
 		//Set the username of the bot as MSS
-		if (message.guild) {
+		if (message.guild.id) {
 			message.guild.member(client.user).setNickname('Moustacheminer Server Services');
 		} else {
 			//If the bot is not in the server, stop doing shit - It's too dangerous.
@@ -99,7 +99,7 @@ client.on('message', message => {
 				return richSend(message, "!stop", "There is no bot running in your current voice channel", "#FF0000");
 			}
 			
-			stream[message.guild].destroy();
+			stream[message.guild.id].destroy();
 		} else if (input[0] === '!stop') {
 			if (!isAdmin(message)) return;
 			playlistClear(message);
@@ -115,7 +115,10 @@ client.on('message', message => {
 			
 			var file = Math.floor(Math.random() * 9999);
 			child_process.execFile('say', ['-w', 'C:\\MOUSTACHEMINER\\NodeJS\\MSS-Discord\\DEC\\' + file + '.wav', dec]);
-			playlistAdd(message, "file", 'C:\\MOUSTACHEMINER\\NodeJS\\MSS-Discord\\DEC\\' + file + '.wav', "DecTalk Input");
+			setTimeout(function(){
+				playlistAdd(message, "file", 'C:\\MOUSTACHEMINER\\NodeJS\\MSS-Discord\\DEC\\' + file + '.wav', "DecTalk Input");
+			}, 2000);
+			
 		} else if (input[0] === '!error') {
 			if (!isAdmin(message)) return;
 			throw new Error("A error was PURPOSELY thrown for the excitement of mathematicians.");
@@ -153,8 +156,8 @@ function playlistAdd(message, type, url, title, thumb_url) {
 	}
 	
 	richSend(message, "!play", "Added " + title + " to playlist", "#00FF00");
-	playlist[message.guild] = playlist[message.guild] || [];
-	playlist[message.guild].push(JSON.stringify({type: type, url: url, title: title, thumb_url: thumb_url}));
+	playlist[message.guild.id] = playlist[message.guild.id] || [];
+	playlist[message.guild.id].push(JSON.stringify({type: type, url: url, title: title, thumb_url: thumb_url}));
 	if (!message.member.voiceChannel.connection) {
 		playSound(message);
 	}
@@ -168,8 +171,8 @@ function playlistClear(message) {
 	if (voiceChannel && voiceChannel.connection) {
 		richSend(message, "!stop", "Stopped playing music in the channel.", "#00FF00");
 		voiceChannel.leave();
-		playlist[message.guild] = [];
-		stream[message.guild].destroy();
+		playlist[message.guild.id] = [];
+		stream[message.guild.id].destroy();
 		return;
 	} else {
 		return richSend(message, "!stop", "There is no bot running in your current voice channel", "#FF0000");
@@ -184,7 +187,7 @@ function playSound(message) {
 	.then(connnection => {
 		var looper = function() {
 			playlistPlay(message);
-			const dispatcher = connnection.playStream(stream[message.guild]);
+			const dispatcher = connnection.playStream(stream[message.guild.id]);
 			dispatcher.on('end', () => {
 				looper();
 			});
@@ -195,18 +198,18 @@ function playSound(message) {
 
 function playlistPlay(message) {
 	var voiceChannel = message.member.voiceChannel;
-	if (playlist[message.guild].length > 0) {
-		current = JSON.parse(playlist[message.guild].shift());
+	if (playlist[message.guild.id].length > 0) {
+		current = JSON.parse(playlist[message.guild.id].shift());
 		richSend(message, "Now playing:", current["title"], "#00FF00", current["thumb_url"], current["url"]);
 		if (current["type"] === "youtube") {
-			stream[message.guild] = yt(current["url"], {audioonly: true});
+			stream[message.guild.id] = yt(current["url"], {audioonly: true});
 		} else if (current["type"] === "file") {
-			stream[message.guild] = stream = fs.createReadStream(current["url"]);
+			stream[message.guild.id] = fs.createReadStream(current["url"]);
 		}
 	} else {
 		voiceChannel.leave();
-		playlist[message.guild] = [];
-		stream[message.guild].destroy();
+		playlist[message.guild.id] = [];
+		stream[message.guild.id].destroy();
 		return;
 	}
 }
