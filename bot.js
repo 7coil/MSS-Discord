@@ -103,22 +103,6 @@ client.on('message', message => {
 		} else if (input[0] === '!stop') {
 			if (!isAdmin(message)) return;
 			playlistClear(message);
-		} else if (input[0] === '!dec') {
-			let dec = message.content.substring(5).replace("\n", " ");
-			//Get the voice channel that it's going to play to.
-			let voiceChannel = message.member.voiceChannel;
-			
-			//Check if the user is inside a voice channel
-			if (!voiceChannel) {
-				return richSend(message, "!dec", "Please be in a voice channel before using the !dec command", "#FFFF00");
-			}
-			
-			var file = Math.floor(Math.random() * 9999);
-			child_process.execFile('say', ['-w', 'C:\\MOUSTACHEMINER\\NodeJS\\MSS-Discord\\DEC\\' + file + '.wav', dec]);
-			setTimeout(function(){
-				playlistAdd(message, "file", 'C:\\MOUSTACHEMINER\\NodeJS\\MSS-Discord\\DEC\\' + file + '.wav', "DecTalk Input");
-			}, 2000);
-			
 		} else if (input[0] === '!error') {
 			if (!isAdmin(message)) return;
 			throw new Error("A error was PURPOSELY thrown for the excitement of mathematicians.");
