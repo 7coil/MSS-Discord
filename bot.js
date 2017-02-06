@@ -229,7 +229,7 @@ function isAdmin(message) {
 	if (message.channel.permissionsFor(message.member).hasPermission("ADMINISTRATOR") || message.author.id === "190519304972664832") {
 		return true;
 	} else {
-		richSend(message, "!stop", "You do not have permission to run this command.", "#FF0000");
+		richSend(message, "MSS", "You do not have permission to run this command.", "#FF0000");
 		return false;
 	}
 }
