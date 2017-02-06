@@ -83,7 +83,7 @@ client.on('message', message => {
 			if (youtubeCheck(input[1])) {
 				yt.getInfo(input[1], function(err, info) {
 					if (!info) return richSend(message, "!play", "Please send a valid YouTube URL", "#FF0000");
-					if (info["length_seconds"] > 3600 && isAdmin(message)) return;
+					if (info["length_seconds"] > 3600 && !isAdmin(message)) return;
 					playlistAdd(message, "youtube", input[1], info["title"], info["thumbnail_url"]);
 				});
 			} else {
