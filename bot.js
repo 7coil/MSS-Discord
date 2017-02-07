@@ -44,6 +44,8 @@ client.login(api);
 //Declare the playlist and stream variables
 //playlist[guild][position in playlist]
 var playlist = [];
+//current[guild]
+var current = [];
 //stream[guild]
 var stream = [];
 
@@ -97,17 +99,25 @@ client.on('message', message => {
 			}
 		} else if (input[0] === '!skip') {
 			if (!isAdmin(message)) return;
-			//Get the voice channel that it's going to play to.
-			let voiceChannel = message.member.voiceChannel;
-			//Check if the user is inside a voice channel
-			if (!voiceChannel.connection) {
-				return richSend(message, "MSS Music Player", "There is no bot running in your current voice channel", "#FF0000");
-			}
-			
-			stream[message.guild.id].destroy();
+			playlistSkip()
 		} else if (input[0] === '!stop') {
 			if (!isAdmin(message)) return;
 			playlistClear(message);
+		} else if (input[0] === '!dec') {
+			let dec = message.content.substring(5).replace("\n", " ");
+			//Get the voice channel that it's going to play to.
+			let voiceChannel = message.member.voiceChannel;
+			
+			//Check if the user is inside a voice channel
+			if (!voiceChannel) {
+				return richSend(message, "MSS Music Player", "Please be in a voice channel before using the !dec command", "#FFFF00");
+			}
+			
+			playlistClear(message);
+			setTimeout(function(){
+				playlistAdd(message, "file", 'C:\\MOUSTACHEMINER\\NodeJS\\MSS-Discord\\DEC\\' + file + '.wav', "DecTalk Input");
+			}, 2000);
+			
 		} else if (input[0] === '!list') {
 			if (playlist[message.guild.id].length > 0) {
 				return richSend(message, "MSS Music Player", playlist[message.guild.id].map(function(sound){return JSON.parse(sound).title;}).join("\n"), "#00FF00");
@@ -132,6 +142,33 @@ client.on('message', message => {
 		richSend(message, "This is a Parker Square of an error.", "A fatal error was encountered:\n```\n" + err.stack + "\n```\nA singing banana has been deployed to fix the error. In the meantime, try folding a piece of A4 paper 8 times.", "#FF0000", "http://moustacheminer.com/home/img/ffs.jpg", "https://discord.gg/hPw5gEt");
 	}
 		
+});
+
+//Detect new reactions
+client.on('messageReactionAdd', function(messageReaction, user) {
+
+	//Only on it's own messages
+	if(!(messageReaction.message.author.id === client.user.id)) return;
+	//Prevent other bots (as well as itself) from using the reaction media controls
+    if (user.bot) return;
+	//Get the UTF-16 code for the string (reaction)
+	var input = messageReaction.emoji.name.codePointAt();
+	
+	//Log the code.
+	console.log(input);
+	
+	//Delete the reaction
+	messageReaction.remove(user);
+	
+	if (input === 10145) {
+		if (!isAdmin(user, messageReaction.message.channel)) return;
+		playlistSkip(messageReaction.message);
+	} else if (input === 8505) {
+		richSend(messageReaction.message, "Now playing:", current[messageReaction.message.guild.id]["title"], "#00FF00", current[messageReaction.message.guild.id]["thumb_url"], current[messageReaction.message.guild.id]["url"]);
+	} else if (input === 128240) {
+		return richSend(messageReaction.message, "MSS Music Player", playlist[messageReaction.message.guild.id].map(function(sound){return JSON.parse(sound).title;}).join("\n"), "#00FF00");
+	}
+
 });
 
 /**
@@ -178,7 +215,7 @@ function playlistAdd(message, type, url, title, thumb_url) {
 		thumb_url = "http://i48.tinypic.com/260v86c.png";
 	}
 	
-	richSend(message, "MSS Music Player", "Added " + title + " to playlist", "#00FF00");
+	message.react(String.fromCodePoint(128077));
 	playlist[message.guild.id] = playlist[message.guild.id] || [];
 	playlist[message.guild.id].push(JSON.stringify({type: type, url: url, title: title, thumb_url: thumb_url}));
 	if (!message.member.voiceChannel.connection) {
@@ -205,6 +242,24 @@ function playlistClear(message) {
 	} else {
 		return richSend(message, "MSS Music Player", "There is no bot running in your current voice channel", "#FF0000");
 	}
+}
+
+/**
+ * Function to skip the current song in a channel.
+ * @author: 7coil <admin@moustacheminer.com>
+ * @url: http://moustacheminer.com/
+ * @param: {Object[]} message
+ */
+function playlistSkip(message) {
+	//Get the voice channel that it's going to play to.
+	let voiceChannel = message.member.voiceChannel;
+	//Check if the user is inside a voice channel
+	if (!voiceChannel.connection) {
+		return richSend(message, "MSS Music Player", "There is no bot running in your current voice channel", "#FF0000");
+	}
+
+	message.channel.send("Destroying stream...");
+	stream[message.guild.id].destroy();
 }
 
 /**
@@ -239,12 +294,23 @@ function playSound(message) {
 function playlistPlay(message) {
 	var voiceChannel = message.member.voiceChannel;
 	if (playlist[message.guild.id].length > 0) {
-		current = JSON.parse(playlist[message.guild.id].shift());
-		richSend(message, "Now playing:", current["title"], "#00FF00", current["thumb_url"], current["url"]);
-		if (current["type"] === "youtube") {
-			stream[message.guild.id] = yt(current["url"], {audioonly: true});
-		} else if (current["type"] === "file") {
-			stream[message.guild.id] = fs.createReadStream(current["url"]);
+		current[message.guild.id] = JSON.parse(playlist[message.guild.id].shift());
+		message.channel.sendMessage('**Music Control Panel (beta)**')
+			.then(function(message) {
+				setTimeout(function(){
+					message.react(String.fromCodePoint(10145));
+				}, 500);
+				setTimeout(function(){
+					message.react(String.fromCodePoint(8505));
+				}, 1000);
+				setTimeout(function(){
+					message.react(String.fromCodePoint(128240));
+				}, 1500);
+			});
+		if (current[message.guild.id]["type"] === "youtube") {
+			stream[message.guild.id] = yt(current[message.guild.id]["url"], {audioonly: true});
+		} else if (current[message.guild.id]["type"] === "file") {
+			stream[message.guild.id] = fs.createReadStream(current[message.guild.id]["url"]);
 		}
 	} else {
 		if (voiceChannel.connection) voiceChannel.leave();
@@ -276,11 +342,19 @@ function youtubeCheck(url) {
  * @param: {Object[]} message
  * @return {Boolean} isAdmin
  */
-function isAdmin(message) {
-	if (message.channel.permissionsFor(message.member).hasPermission("ADMINISTRATOR") || message.author.id === "190519304972664832") {
-		return true;
+function isAdmin(input, channel) {
+	if (channel) {
+		if (channel.permissionsFor(input).hasPermission("ADMINISTRATOR") || input.id === "190519304972664832") {
+			return true;
+		} else {
+			return false;
+		}
 	} else {
-		richSend(message, "!stop", "You do not have permission to run this command.", "#FF0000");
-		return false;
+		if (input.channel.permissionsFor(input.member).hasPermission("ADMINISTRATOR") || input.author.id === "190519304972664832") {
+			return true;
+		} else {
+			richSend(message, "!stop", "You do not have permission to run this command.", "#FF0000");
+			return false;
+		}
 	}
 }
