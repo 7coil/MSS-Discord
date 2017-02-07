@@ -113,7 +113,8 @@ client.on('message', message => {
 				return richSend(message, "MSS Music Player", "Please be in a voice channel before using the !dec command", "#FFFF00");
 			}
 			
-			playlistClear(message);
+			var file = Math.floor(Math.random() * 9999);
+			child_process.execFile('say', ['-w', 'C:\\MOUSTACHEMINER\\NodeJS\\MSS-Discord\\DEC\\' + file + '.wav', dec]);
 			setTimeout(function(){
 				playlistAdd(message, "file", 'C:\\MOUSTACHEMINER\\NodeJS\\MSS-Discord\\DEC\\' + file + '.wav', "DecTalk Input");
 			}, 2000);
