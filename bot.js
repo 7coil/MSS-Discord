@@ -32,8 +32,8 @@ var api = [];
 //Get the Discord API Key.
 console.log(process.argv[2]);
 if (process.argv[2] && process.argv[3]) {
-	var api["discord"] = process.argv[2];
-	var api["youtube"] = process.argv[3];
+	api["discord"] = process.argv[2];
+	api["youtube"] = process.argv[3];
 } else {
 	console.log("Usage:\nnode bot.js <Discord API Key> <YouTube API Key>");
 	process.exit(1);
