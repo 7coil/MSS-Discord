@@ -58,7 +58,7 @@ const fs = require('fs');
 //Set the running game and the avatar for the bot.
 client.on('ready', function() {
 	console.log("Successfully connected to Discord!");
-	client.user.setGame("ask for >>   !help");
+	client.user.setGame("!!help");
 	client.user.setAvatar("http://moustacheminer.com/mss.png");
 });
 
@@ -77,7 +77,7 @@ client.on('message', message => {
 		}
 
 		//Send help detials. Need to use the E-zed richSend someday
-		if (input[0] === '!help') {
+		if (input[0] === '!!help') {
 			richSend(message, "Moustacheminer Server Services", "Help is at hand, at the official MSS Discord Server @ https://discord.gg/hPw5gEt", "#FF9999", "http://i.imgur.com/h2JkYGm.jpg", "https://discord.gg/hPw5gEt");
 		} else if (input[0] === '!youtube' || input[0] === '!yt') {
 			//Get the voice channel that it's going to play to.
@@ -113,18 +113,18 @@ client.on('message', message => {
 					}
 				});
 			}
-		} else if (input[0] === '!skip') {
+		} else if (input[0] === '!!skip') {
 			if (!isAdmin(message)) return;
 			playlistSkip(message);
-		} else if (input[0] === '!stop') {
+		} else if (input[0] === '!!stop') {
 			if (!isAdmin(message)) return;
 			playlistClear(message);
-		} else if (input[0] === '!list') {
+		} else if (input[0] === '!!list') {
 			playlistList(message);
-		} else if (input[0] === '!error') {
+		} else if (input[0] === '!!error') {
 			if (!isAdmin(message)) return;
 			throw new Error("A error was PURPOSELY thrown for the excitement of mathematicians.");
-		} else if (input[0] === '!eval') {
+		} else if (input[0] === '!!eval') {
 			if (message.author.id === "190519304972664832") {
 				eval(message.content.substring(6));
 			} else {
@@ -132,11 +132,11 @@ client.on('message', message => {
 				reactWith(message, false, "x");
 				return false;
 			}
-		} else if (input[0] === '!invite') {
+		} else if (input[0] === '!!invite') {
 			message.reply("Invite me into your server!\nhttps://discordapp.com/oauth2/authorize?&client_id=257547382277931009&scope=bot&permissions=70765632");
-		} else if (input[0] === '!play') {
+		} else if (input[0] === '!!play') {
 			message.reply("This command has been removed since v2017.02.27a.\n**Replacement Commands**\n== YouTube ==\n!yt <url or search>\n!youtube <url or search>");
-		} else if (input[0] === '!dec') {
+		} else if (input[0] === '!!dec') {
 			message.reply("This command has been removed since v2017.02.27a. There is no replacement for this command.");
 		}
 	} catch(err) {
