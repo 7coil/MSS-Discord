@@ -71,7 +71,7 @@ client.on('message', message => {
 		
 		//Set the username of the bot as MSS
 		if (message.guild) {
-			message.guild.member(client.user).setNickname('MSS');
+			//message.guild.member(client.user).setNickname('MSS');
 		} else {
 			//If the bot is not in the server, stop doing shit - It's too dangerous.
 			return richSend(message, "Error", "You are not allowed to send commands via Direct Messaging.", "#FF0000");
@@ -153,11 +153,7 @@ client.on('message', message => {
 			message.reply("Invite me into your server!\nhttps://discordapp.com/oauth2/authorize?&client_id=257547382277931009&scope=bot&permissions=70765632");
 		}
 	} catch(err) {
-		console.log(err.stack);
-		//Catch those errors!
-		message.react(String.fromCodePoint(128078));
-		message.react(String.fromCodePoint(128163));
-		richSend(message, "This is a Parker Square of an error.", "A fatal error was encountered:\n```\n" + err.stack + "\n```\nA singing banana has been deployed to fix the error. In the meantime, try folding a piece of A4 paper 8 times.", "#FF0000", "http://moustacheminer.com/home/img/ffs.jpg", "https://discord.gg/hPw5gEt");
+		fatalSend(message, err)
 	}
 		
 });
@@ -187,9 +183,7 @@ client.on('messageReactionAdd', function(messageReaction, user) {
 			playlistList(messageReaction.message);
 		}
 	} catch(err) {
-		console.log(err.stack);
-		//Catch those errors!
-		richSend(message, "This is a Parker Square of an error.", "A fatal error was encountered:\n```\n" + err.stack + "\n```\nA singing banana has been deployed to fix the error. In the meantime, try folding a piece of A4 paper 8 times.", "#FF0000", "http://moustacheminer.com/home/img/ffs.jpg", "https://discord.gg/hPw5gEt");
+		fatalSend(message, err)
 	}
 
 });
@@ -206,6 +200,7 @@ client.on('messageReactionAdd', function(messageReaction, user) {
  * @param: {string} url
  */
 function richSend(message, subheading, description, colour, img, url) {
+	try {
 	if (!url) {
 		var url = "http://moustacheminer.com/w/mss";
 	}
@@ -221,6 +216,9 @@ function richSend(message, subheading, description, colour, img, url) {
 		.setImage(img);
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true });
+	} catch(err) {
+		fatalSend(message, err);
+	}
 }
 
 /**
@@ -234,6 +232,7 @@ function richSend(message, subheading, description, colour, img, url) {
  * @param: {string} thumb_url
  */
 function playlistAdd(message, type, url, title, thumb_url) {
+	try {
 	if (!thumb_url) {
 		thumb_url = "http://i48.tinypic.com/260v86c.png";
 	}
@@ -244,6 +243,9 @@ function playlistAdd(message, type, url, title, thumb_url) {
 	if (!message.member.voiceChannel.connection) {
 		playSound(message);
 	}
+		} catch(err) {
+		fatalSend(message, err);
+	}
 }
 
 /**
@@ -253,6 +255,7 @@ function playlistAdd(message, type, url, title, thumb_url) {
  * @param: {Object[]} message
  */
 function playlistClear(message) {
+	try {
 	//Get the voice channel
 	let voiceChannel = message.member.voiceChannel;
 
@@ -265,6 +268,9 @@ function playlistClear(message) {
 	} else {
 		return richSend(message, "MSS Music Player", "There is no bot running in your current voice channel", "#FF0000");
 	}
+		} catch(err) {
+		fatalSend(message, err);
+	}
 }
 
 /**
@@ -274,6 +280,7 @@ function playlistClear(message) {
  * @param: {Object[]} message
  */
 function playlistSkip(message) {
+	try {
 	//Get the voice channel that it's going to play to.
 	let voiceChannel = message.member.voiceChannel;
 	//Check if the user is inside a voice channel
@@ -283,6 +290,9 @@ function playlistSkip(message) {
 
 	message.channel.send("Destroying stream...");
 	stream[message.guild.id].destroy();
+		} catch(err) {
+		fatalSend(message, err);
+	}
 }
 
 /**
@@ -292,6 +302,7 @@ function playlistSkip(message) {
  * @param: {Object[]} message
  */
 function playSound(message) {
+	try {
 	var voiceChannel = message.member.voiceChannel;
 	var current;
 	
@@ -306,6 +317,9 @@ function playSound(message) {
 		}
 		looper();
 	});
+		} catch(err) {
+		fatalSend(message, err);
+	}
 }
 
 /**
@@ -315,6 +329,7 @@ function playSound(message) {
  * @param: {Object[]} message
  */
 function playlistPlay(message) {
+	try {
 	var voiceChannel = message.member.voiceChannel;
 	if (playlist[message.guild.id].length > 0) {
 		current[message.guild.id] = JSON.parse(playlist[message.guild.id].shift());
@@ -336,11 +351,14 @@ function playlistPlay(message) {
 			stream[message.guild.id] = fs.createReadStream(current[message.guild.id]["url"]);
 		}
 	} else {
-		if (voiceChannel.connection) voiceChannel.leave();
+		if (voiceChannel && voiceChannel.connection) voiceChannel.leave();
 		playlist[message.guild.id] = [];
 		if (stream[message.guild.id]) stream[message.guild.id].destroy();
 		richSend(message, "MSS Music Player", "The playlist has ended.", "#00FF00");
 		return;
+	}
+		} catch(err) {
+		fatalSend(message, err);
 	}
 }
 
@@ -384,9 +402,21 @@ function isAdmin(input, channel) {
 }
 
 function playlistList(message) {
-	if (playlist[message.guild.id].length > 0) {
-		return richSend(message, "MSS Music Player", playlist[message.guild.id].map(function(sound){return JSON.parse(sound).title;}).join("\n"), "#00FF00");
-	} else {
-		return richSend(message, "MSS Music Player", "There is no music remaining in the playlist.", "#FF0000");
+	try {
+		if (playlist[message.guild.id].length > 0) {
+			return richSend(message, "MSS Music Player", playlist[message.guild.id].map(function(sound){return JSON.parse(sound).title;}).join("\n"), "#00FF00");
+		} else {
+			return richSend(message, "MSS Music Player", "There is no music remaining in the playlist.", "#FF0000");
+		}
+	} catch(err) {
+		fatalSend(message, err)
 	}
+}
+
+function fatalSend(message, err) {
+	console.log(err.stack);
+	//Catch those errors!
+	message.react(String.fromCodePoint(128078));
+	message.react(String.fromCodePoint(128163));
+	richSend(message, "This is a Parker Square of an error.", "A fatal error was encountered:\n```\n" + err.stack + "\n```\nA singing banana has been deployed to fix the error. In the meantime, try folding a piece of A4 paper 8 times.", "#FF0000", "http://moustacheminer.com/home/img/ffs.jpg", "https://discord.gg/hPw5gEt");
 }
