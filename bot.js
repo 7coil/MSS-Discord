@@ -16,38 +16,44 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-//Get the Discord API Key.
-console.log(process.argv[2]);
-if (process.argv[2]) {
-	var api = process.argv[2];
-} else {
-	console.log("Usage:\nnode bot.js <Discord API Key>");
-	process.exit(1);
-}
+/*
+	Declare variables used in the code
+*/
 
-//Declare the Discord and client constants used to set up the Discord bot
-const Discord = require("discord.js");
-const client = new Discord.Client();
-
-//ytdl-core for !play
-const yt = require('ytdl-core');
-
-//fs to open the wav file
-const fs = require('fs');
-
-//exec for the DECtalk API
-const child_process = require('child_process');
-
-//Login to Discord's Bot API Service
-client.login(api);
-
-//Declare the playlist and stream variables
 //playlist[guild][position in playlist]
 var playlist = [];
 //current[guild]
 var current = [];
 //stream[guild]
 var stream = [];
+//api[keyname]
+var api = [];
+
+//Get the Discord API Key.
+console.log(process.argv[2]);
+if (process.argv[2] && process.argv[3]) {
+	var api["discord"] = process.argv[2];
+	var api["youtube"] = process.argv[3];
+} else {
+	console.log("Usage:\nnode bot.js <Discord API Key> <YouTube API Key>");
+	process.exit(1);
+}
+
+//Declare the Discord and client constants used to set up the Discord bot
+const Discord = require("discord.js");
+const client = new Discord.Client();
+client.login(api["discord"]);
+
+//ytdl-core for !play
+const yt = require('ytdl-core');
+
+//youtube for searching youtube
+var searchYT = require('youtube-node');
+var searchYTClient = new YouTube();
+youTube.setKey(api["youtube"]);
+
+//fs to open the wav file
+const fs = require('fs');
 
 //Set the running game and the avatar for the bot.
 client.on('ready', function() {
@@ -73,13 +79,15 @@ client.on('message', message => {
 		//Send help detials. Need to use the E-zed richSend someday
 		if (input[0] === '!help') {
 			richSend(message, "Moustacheminer Server Services", "Help is at hand, at the official MSS Discord Server @ https://discord.gg/hPw5gEt", "#FF9999", "http://i.imgur.com/h2JkYGm.jpg", "https://discord.gg/hPw5gEt");
-		} else if (input[0] === '!play') {
-			message.reply("This command is deprecated. Please use the !youtube command in the future.")
+		} else if (input[0] === '!youtube' || input[0] === '!yt') {
 			//Get the voice channel that it's going to play to.
 			let voiceChannel = message.member.voiceChannel;
-			//Check if the user is inside a voice channel
-			if (!voiceChannel || !input[1]) {
+			//Check if the user is inside a voice channel or has inputted anything.
+			if (!voiceChannel) {
 				reactWith(message, false, "call");
+				return false;
+			} else if (!input[1]) {
+				reactWith(message, false, "link");
 				return false;
 			}
 			
@@ -93,9 +101,16 @@ client.on('message', message => {
 					playlistAdd(message, "youtube", input[1], info["title"], info["thumbnail_url"]);
 				});
 			} else {
-				console.log(input[1]);
-				reactWith(message, false, "link");
-				return;
+				searchYTClient.search(message.content.substring(input[0].length + 1), 1, function(error, result) {
+					if (error) {
+						console.log(error);
+						message.reply(error);
+						reactWith(message, false, "bomb");
+						return false;
+					} else {
+						playlistAdd(message, "youtube", result["items"]["id"]["videoId"], info["title"], info["thumbnail_url"]);
+					}
+				};
 			}
 		} else if (input[0] === '!skip') {
 			if (!isAdmin(message)) return;
@@ -118,6 +133,10 @@ client.on('message', message => {
 			}
 		} else if (input[0] === '!invite') {
 			message.reply("Invite me into your server!\nhttps://discordapp.com/oauth2/authorize?&client_id=257547382277931009&scope=bot&permissions=70765632");
+		} else if (input[0] === '!play') {
+			message.reply("This command has been removed since v2017.02.27a.\n**Replacement Commands**\n== YouTube ==\n!yt <url or search>\n!youtube <url or search>");
+		} else if (input[0] === '!dec') {
+			message.reply("This command has been removed since v2017.02.27a. There is no replacement for this command.");
 		}
 	} catch(err) {
 		fatalSend(message, err)
