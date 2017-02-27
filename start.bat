@@ -5,7 +5,8 @@ setlocal EnableExtensions
 echo Moustacheminer Server Services - Discord
 title Moustacheminer Server Services - Discord
 
-set api=KEY HERE
+set discordapi=KEY HERE
+set youtubeapi=KEY HERE
 :a
-node bot.js !api!
+node bot.js !discordapi! !youtubeapi!
 goto a
