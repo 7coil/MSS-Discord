@@ -109,7 +109,7 @@ client.on('message', message => {
 						return false;
 					} else {
 						//console.dir(result);
-						playlistAdd(message, "youtube", result["items"][0]["id"]["videoId"], result["items"][0]["snippet"]["title"], result["items"][0]["thumbnails"]["high"]["url"]);
+						playlistAdd(message, "youtube", result["items"][0]["id"]["videoId"], result["items"][0]["snippet"]["title"], result["items"][0]["snippet"]["thumbnails"]["high"]["url"]);
 					}
 				});
 			}
