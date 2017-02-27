@@ -20,6 +20,9 @@
 	Declare variables used in the code
 */
 
+//Version number of MSS-Discord
+const version = "2017.02.27b";
+
 //playlist[guild][position in playlist]
 var playlist = [];
 //current[guild]
@@ -76,9 +79,8 @@ client.on('message', message => {
 			return richSend(message, "Error", "You are not allowed to send commands via Direct Messaging.", "#FF0000");
 		}
 
-		//Send help detials. Need to use the E-zed richSend someday
 		if (input[0] === '!!help') {
-			richSend(message, "Moustacheminer Server Services", "Help is at hand, at the official MSS Discord Server @ https://discord.gg/hPw5gEt", "#FF9999", "http://i.imgur.com/h2JkYGm.jpg", "https://discord.gg/hPw5gEt");
+			message.author.sendMessage("**Moustacheminer Server Services**\n_Version " + version + "_\n\nCommands\n```//The help command gives a link to the MSS server.\n!!help\n\n//The YouTube command supports either a URL or a search query\n//Will only play over 3600 seconds of media if the user is an admin.\n!!yt <URL>\n!!yt <Search Query>\n\n!!youtube <URL>\n!!youtube <Search Query>\n\n//The skip command skips the currently playing song\n//ADMIN ONLY\n!!skip\n\n//The stop command skips and clears the playlist\n//ADMIN ONLY\n!!stop\n\n//The list command lists the playlist\n!!list\n\n//The error command throws an error\n//ADMIN ONLY\n!!error\n\n//This command executes javascript code in the script\n//OWNER ONLY - CHANGE IF STATEMENT TO YOUR OWN ID IF YOU ARE RUNNING YOUR OWN BOT\n!!eval\n\n//Pastes an invite link into the chat.\n!!invite```\n\nMSS-Discord Discord Server: https://discord.gg/wHgdmf4\nGitHub: https://github.com/moustacheminer/MSS-Discord\nChangelog: https://github.com/moustacheminer/MSS-Discord#changelog");
 		} else if (input[0] === '!!youtube' || input[0] === '!!yt') {
 			//Get the voice channel that it's going to play to.
 			let voiceChannel = message.member.voiceChannel;
@@ -203,7 +205,7 @@ function richSend(message, subheading, description, colour, img, url) {
 		.setAuthor("MSS", 'http://moustacheminer.com/dickbutt.jpg')
 		.setColor(colour)
 		.setDescription(description)
-		.setFooter('moustacheminer.com server services, v2017.02.27a', '')
+		.setFooter('moustacheminer.com server services, version ' + version, '')
 		.setTimestamp()
 		.setURL(url)
 		.setImage(img);

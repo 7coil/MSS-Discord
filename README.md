@@ -48,7 +48,20 @@ MSS-Discord (Moustacheminer Server Services for Discord) is another bot made for
 !!invite
 ```
 
-
 > The GNU GPLv3 applies to all files included in this repository  
 > A full copy of this licence can be found in licence.txt or in licence.md
 > The markdown version of this licence is by TheFox, and can be found here: https://github.com/TheFox/GPLv3.md
+
+## Changelog
+### 2017.02.27b
+
+- Added version numbering
+- Changed !!help command to actually be USEFUL
+- Made bot get YouTube id from info instead of putting a potentially dangerous URL in
+- Fixed a LOT of things
+
+### 2017.02.27a
+
+- Changed from single exclimation mark to double.
+- Reconfigured the reaction replies
+- Removed DEC
