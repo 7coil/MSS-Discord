@@ -15,7 +15,7 @@ MSS-Discord (Moustacheminer Server Services for Discord) is another bot made for
 
 ```
 //The help command gives a link to the MSS server.
-!help
+!!help
 
 //The YouTube command supports either a URL or a search query
 //Will only play over 3600 seconds of media if the user is an admin.
@@ -27,25 +27,25 @@ MSS-Discord (Moustacheminer Server Services for Discord) is another bot made for
 
 //The skip command skips the currently playing song
 //ADMIN ONLY
-!skip
+!!skip
 
 //The stop command skips and clears the playlist
 //ADMIN ONLY
-!stop
+!!stop
 
 //The list command lists the playlist
-!list
+!!list
 
 //The error command throws an error
 //ADMIN ONLY
-!error
+!!error
 
 //This command executes javascript code in the script
 //OWNER ONLY - CHANGE IF STATEMENT TO YOUR OWN ID IF YOU ARE RUNNING YOUR OWN BOT
-!eval
+!!eval
 
 //Pastes an invite link into the chat.
-!invite
+!!invite
 ```
 
 
