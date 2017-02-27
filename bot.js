@@ -98,7 +98,7 @@ client.on('message', message => {
 						return false;
 					}
 					if (info["length_seconds"] > 3600 && !isAdmin(message)) return reactWith(message, false, "ruler");
-					playlistAdd(message, "youtube", input[1], info["title"], info["thumbnail_url"]);
+					playlistAdd(message, "youtube", info["video_id"], info["title"], info["thumbnail_url"]);
 				});
 			} else {
 				searchYTClient.search(message.content.substring(input[0].length + 1), 1, function(error, result) {
@@ -114,7 +114,7 @@ client.on('message', message => {
 								return false;
 							}
 							if (info["length_seconds"] > 3600 && !isAdmin(message)) return reactWith(message, false, "ruler");
-							playlistAdd(message, "youtube", input[1], info["title"], info["thumbnail_url"]);
+							playlistAdd(message, "youtube", info["video_id"], info["title"], info["thumbnail_url"]);
 						});
 					}
 				});
