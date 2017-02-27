@@ -50,7 +50,7 @@ const yt = require('ytdl-core');
 //searchYT for searching youtube
 var searchYT = require('youtube-node');
 var searchYTClient = new searchYT();
-youTube.setKey(api["youtube"]);
+searchYTClient.setKey(api["youtube"]);
 
 //fs to open the wav file
 const fs = require('fs');
