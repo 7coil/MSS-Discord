@@ -57,14 +57,7 @@ client.on('ready', function() {
 });
 
 client.on('message', message => {
-	
 	try {
-		
-		if(message.author.id === "81026656365453312" && message.content.startsWith("Pong!")) {
-			setTimeout(function(){
-				return message.channel.send("!ping");
-			}, 1000);
-		}
 		if(message.author.bot) return;
 		
 		let input = message.content.replace( /\n/g, " " ).split(" ");
@@ -81,25 +74,19 @@ client.on('message', message => {
 		if (input[0] === '!help') {
 			richSend(message, "Moustacheminer Server Services", "Help is at hand, at the official MSS Discord Server @ https://discord.gg/hPw5gEt", "#FF9999", "http://i.imgur.com/h2JkYGm.jpg", "https://discord.gg/hPw5gEt");
 		} else if (input[0] === '!play') {
+			message.reply("This command is deprecated. Please use ")
 			//Get the voice channel that it's going to play to.
 			let voiceChannel = message.member.voiceChannel;
 			//Check if the user is inside a voice channel
-			if (!voiceChannel) {
-				message.react(String.fromCodePoint(128078));
-				message.react(String.fromCodePoint(128222));
-				return false;
-			}
-			if (!input[1]) {
-				message.react(String.fromCodePoint(128078));
-				message.react(String.fromCodePoint(128279));
+			if (!voiceChannel || !input[1]) {
+				reactWith(message, false, "call");
 				return false;
 			}
 			
 			if (youtubeCheck(input[1])) {
 				yt.getInfo(input[1], function(err, info) {
 					if (!info) {
-						message.react(String.fromCodePoint(128078));
-						message.react(String.fromCodePoint(128279));
+						reactWith(message, false, "link");
 						return false;
 					}
 					if (info["length_seconds"] > 3600 && !isAdmin(message)) return;
@@ -107,8 +94,7 @@ client.on('message', message => {
 				});
 			} else {
 				console.log(input[1]);
-				message.react(String.fromCodePoint(128078));
-				message.react(String.fromCodePoint(128279));
+				reactWith(message, false, "link");
 				return;
 			}
 		} else if (input[0] === '!skip') {
@@ -127,8 +113,7 @@ client.on('message', message => {
 				eval(message.content.substring(6));
 			} else {
 				//DO NOT ALLOW RANDOMS TO EVAL - SEND X EMOJI ERROR
-				message.react(String.fromCodePoint(128078));
-				message.react(String.fromCodePoint(10060));
+				reactWith(message, false, "x");
 				return false;
 			}
 		} else if (input[0] === '!invite') {
@@ -219,7 +204,7 @@ function playlistAdd(message, type, url, title, thumb_url) {
 		thumb_url = "http://i48.tinypic.com/260v86c.png";
 	}
 	
-	message.react(String.fromCodePoint(128077));
+	reactWith(message, true);
 	playlist[message.guild.id] = playlist[message.guild.id] || [];
 	playlist[message.guild.id].push(JSON.stringify({type: type, url: url, title: title, thumb_url: thumb_url}));
 	if (!message.member.voiceChannel.connection) {
@@ -317,15 +302,9 @@ function playlistPlay(message) {
 		current[message.guild.id] = JSON.parse(playlist[message.guild.id].shift());
 		message.channel.sendMessage('**Music Control Panel**')
 			.then(function(message) {
-				setTimeout(function(){
-					message.react(String.fromCodePoint(10145));
-				}, 500);
-				setTimeout(function(){
-					message.react(String.fromCodePoint(8505));
-				}, 1000);
-				setTimeout(function(){
-					message.react(String.fromCodePoint(128240));
-				}, 1500);
+				message.react(String.fromCodePoint(10145));
+				message.react(String.fromCodePoint(8505));
+				message.react(String.fromCodePoint(128240));
 			});
 		if (current[message.guild.id]["type"] === "youtube") {
 			stream[message.guild.id] = yt(current[message.guild.id]["url"], {audioonly: true});
@@ -376,8 +355,7 @@ function isAdmin(input, channel) {
 		if (input.channel.permissionsFor(input.member).hasPermission("ADMINISTRATOR") || input.author.id === "190519304972664832") {
 			return true;
 		} else {
-			input.react(String.fromCodePoint(128078));
-			input.react(String.fromCodePoint(128163));
+			reactWith(message, false, "bomb");
 			return false;
 		}
 	}
@@ -397,8 +375,26 @@ function playlistList(message) {
 
 function fatalSend(message, err) {
 	console.log(err.stack);
-	//Catch those errors!
-	message.react(String.fromCodePoint(128078));
-	message.react(String.fromCodePoint(128163));
+	reactWith(message, false, "bomb");
 	richSend(message, "This is a Parker Square of an error.", "A fatal error was encountered:\n```\n" + err.stack + "\n```\nA singing banana has been deployed to fix the error. In the meantime, try folding a piece of A4 paper 8 times.", "#FF0000", "http://moustacheminer.com/home/img/ffs.jpg", "https://discord.gg/hPw5gEt");
+}
+
+function reactWith(message, success, type) {
+	if (success) {
+		message.react(String.fromCodePoint(128077));
+		return;
+	} else {
+		message.react(String.fromCodePoint(128078));
+	}
+	
+	if (type === "link") {
+		message.react(String.fromCodePoint(128279));
+	} else if (type === "call") {
+		message.react(String.fromCodePoint(128222));
+	} else if (type === "bomb") {
+		message.react(String.fromCodePoint(128163));
+	} else if (type === "x") {
+		message.react(String.fromCodePoint(10060));
+	}
+	}
 }
