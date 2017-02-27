@@ -108,8 +108,8 @@ client.on('message', message => {
 						reactWith(message, false, "bomb");
 						return false;
 					} else {
-						console.dir(result);
-						playlistAdd(message, "youtube", result["items"]["id"]["videoId"], info["title"], info["thumbnail_url"]);
+						//console.dir(result);
+						playlistAdd(message, "youtube", result["items"][1]["id"]["videoId"], info["title"], info["thumbnail_url"]);
 					}
 				});
 			}
