@@ -396,5 +396,4 @@ function reactWith(message, success, type) {
 	} else if (type === "x") {
 		message.react(String.fromCodePoint(10060));
 	}
-	}
 }
