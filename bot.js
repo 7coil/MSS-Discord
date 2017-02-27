@@ -108,6 +108,7 @@ client.on('message', message => {
 						reactWith(message, false, "bomb");
 						return false;
 					} else {
+						console.dir(result);
 						playlistAdd(message, "youtube", result["items"]["id"]["videoId"], info["title"], info["thumbnail_url"]);
 					}
 				});
@@ -219,17 +220,17 @@ function richSend(message, subheading, description, colour, img, url) {
  */
 function playlistAdd(message, type, url, title, thumb_url) {
 	try {
-	if (!thumb_url) {
-		thumb_url = "http://i48.tinypic.com/260v86c.png";
-	}
-	
-	reactWith(message, true);
-	playlist[message.guild.id] = playlist[message.guild.id] || [];
-	playlist[message.guild.id].push(JSON.stringify({type: type, url: url, title: title, thumb_url: thumb_url}));
-	if (!message.member.voiceChannel.connection) {
-		playSound(message);
-	}
-		} catch(err) {
+		if (!thumb_url) {
+			thumb_url = "http://i48.tinypic.com/260v86c.png";
+		}
+
+		reactWith(message, true);
+		playlist[message.guild.id] = playlist[message.guild.id] || [];
+		playlist[message.guild.id].push(JSON.stringify({type: type, url: url, title: title, thumb_url: thumb_url}));
+		if (!message.member.voiceChannel.connection) {
+			playSound(message);
+		}
+	} catch(err) {
 		fatalSend(message, err);
 	}
 }
@@ -242,19 +243,19 @@ function playlistAdd(message, type, url, title, thumb_url) {
  */
 function playlistClear(message) {
 	try {
-	//Get the voice channel
-	let voiceChannel = message.member.voiceChannel;
+		//Get the voice channel
+		let voiceChannel = message.member.voiceChannel;
 
-	//If the person is in the voice channel, stop the bot in that channel
-	if (voiceChannel && voiceChannel.connection) {
-		voiceChannel.leave();
-		playlist[message.guild.id] = [];
-		stream[message.guild.id].destroy();
-		return;
-	} else {
-		return richSend(message, "MSS Music Player", "There is no bot running in your current voice channel", "#FF0000");
-	}
-		} catch(err) {
+		//If the person is in the voice channel, stop the bot in that channel
+		if (voiceChannel && voiceChannel.connection) {
+			voiceChannel.leave();
+			playlist[message.guild.id] = [];
+			stream[message.guild.id].destroy();
+			return;
+		} else {
+			return richSend(message, "MSS Music Player", "There is no bot running in your current voice channel", "#FF0000");
+		}
+	} catch(err) {
 		fatalSend(message, err);
 	}
 }
