@@ -110,7 +110,7 @@ client.on('message', message => {
 					} else {
 						playlistAdd(message, "youtube", result["items"]["id"]["videoId"], info["title"], info["thumbnail_url"]);
 					}
-				};
+				});
 			}
 		} else if (input[0] === '!skip') {
 			if (!isAdmin(message)) return;
