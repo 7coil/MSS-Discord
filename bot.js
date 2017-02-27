@@ -74,7 +74,7 @@ client.on('message', message => {
 		if (input[0] === '!help') {
 			richSend(message, "Moustacheminer Server Services", "Help is at hand, at the official MSS Discord Server @ https://discord.gg/hPw5gEt", "#FF9999", "http://i.imgur.com/h2JkYGm.jpg", "https://discord.gg/hPw5gEt");
 		} else if (input[0] === '!play') {
-			message.reply("This command is deprecated. Please use ")
+			message.reply("This command is deprecated. Please use the !youtube command in the future.")
 			//Get the voice channel that it's going to play to.
 			let voiceChannel = message.member.voiceChannel;
 			//Check if the user is inside a voice channel
@@ -177,7 +177,7 @@ function richSend(message, subheading, description, colour, img, url) {
 		.setAuthor("MSS", 'http://moustacheminer.com/dickbutt.jpg')
 		.setColor(colour)
 		.setDescription(description)
-		.setFooter('moustacheminer.com server services', '')
+		.setFooter('moustacheminer.com server services, v2017.02.27a', '')
 		.setTimestamp()
 		.setURL(url)
 		.setImage(img);
