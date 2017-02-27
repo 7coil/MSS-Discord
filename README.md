@@ -17,9 +17,13 @@ MSS-Discord (Moustacheminer Server Services for Discord) is another bot made for
 //The help command gives a link to the MSS server.
 !help
 
-//The play command currently only plays YouTube links.
+//The YouTube command supports either a URL or a search query
 //Will only play over 3600 seconds of media if the user is an admin.
-!play <URL>
+!!yt <URL>
+!!yt <Search Query>
+
+!!youtube <URL>
+!!youtube <Search Query>
 
 //The skip command skips the currently playing song
 //ADMIN ONLY
