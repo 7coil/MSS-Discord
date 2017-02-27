@@ -108,8 +108,14 @@ client.on('message', message => {
 						reactWith(message, false, "bomb");
 						return false;
 					} else {
-						//console.dir(result);
-						playlistAdd(message, "youtube", result["items"][0]["id"]["videoId"], result["items"][0]["snippet"]["title"], result["items"][0]["snippet"]["thumbnails"]["high"]["url"]);
+						yt.getInfo(result["items"][0]["id"]["videoId"], function(err, info) {
+							if (!info) {
+								reactWith(message, false, "bomb");
+								return false;
+							}
+							if (info["length_seconds"] > 3600 && !isAdmin(message)) return;
+							playlistAdd(message, "youtube", input[1], info["title"], info["thumbnail_url"]);
+						});
 					}
 				});
 			}
