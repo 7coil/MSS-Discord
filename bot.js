@@ -97,7 +97,7 @@ client.on('message', message => {
 						reactWith(message, false, "link");
 						return false;
 					}
-					if (info["length_seconds"] > 3600 && !isAdmin(message)) return;
+					if (info["length_seconds"] > 3600 && !isAdmin(message)) return reactWith(message, false, "ruler");
 					playlistAdd(message, "youtube", input[1], info["title"], info["thumbnail_url"]);
 				});
 			} else {
@@ -105,15 +105,15 @@ client.on('message', message => {
 					if (error) {
 						console.log(error);
 						message.reply(error);
-						reactWith(message, false, "bomb");
+						reactWith(message, false, "ruler");
 						return false;
 					} else {
 						yt.getInfo(result["items"][0]["id"]["videoId"], function(err, info) {
 							if (!info) {
-								reactWith(message, false, "bomb");
+								reactWith(message, false, "ruler");
 								return false;
 							}
-							if (info["length_seconds"] > 3600 && !isAdmin(message)) return;
+							if (info["length_seconds"] > 3600 && !isAdmin(message)) return reactWith(message, false, "ruler");
 							playlistAdd(message, "youtube", input[1], info["title"], info["thumbnail_url"]);
 						});
 					}
@@ -421,5 +421,7 @@ function reactWith(message, success, type) {
 		message.react(String.fromCodePoint(128163));
 	} else if (type === "x") {
 		message.react(String.fromCodePoint(10060));
+	} else if (type === "ruler") {
+		message.react(String.fromCodePoint(128207));
 	}
 }
