@@ -47,9 +47,9 @@ client.login(api["discord"]);
 //ytdl-core for !play
 const yt = require('ytdl-core');
 
-//youtube for searching youtube
+//searchYT for searching youtube
 var searchYT = require('youtube-node');
-var searchYTClient = new YouTube();
+var searchYTClient = new searchYT();
 youTube.setKey(api["youtube"]);
 
 //fs to open the wav file
