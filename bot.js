@@ -79,7 +79,7 @@ client.on('message', message => {
 		//Send help detials. Need to use the E-zed richSend someday
 		if (input[0] === '!!help') {
 			richSend(message, "Moustacheminer Server Services", "Help is at hand, at the official MSS Discord Server @ https://discord.gg/hPw5gEt", "#FF9999", "http://i.imgur.com/h2JkYGm.jpg", "https://discord.gg/hPw5gEt");
-		} else if (input[0] === '!youtube' || input[0] === '!yt') {
+		} else if (input[0] === '!!youtube' || input[0] === '!!yt') {
 			//Get the voice channel that it's going to play to.
 			let voiceChannel = message.member.voiceChannel;
 			//Check if the user is inside a voice channel or has inputted anything.
