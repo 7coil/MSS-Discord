@@ -138,10 +138,8 @@ client.on('message', message => {
 				break;
 			case '!!play':
 			case '!!dec':
-				message.reply("The " + input[0] + " command has been removed.");
-			default:
+				message.reply("The " + input[0] + " command has been removed.\nInvalid command supplied. Please send !!help for a list of commands.");
 				reactWith(message, false, "x");
-				message.reply("Invalid command supplied. Please send !!help for a list of commands.");
 				break;
 		}
 	} catch(err) {
