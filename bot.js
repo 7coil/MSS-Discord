@@ -77,7 +77,7 @@ client.on('message', message => {
 		switch(input[0]) {
 			case '!!help':
 				message.reply("Sent message via Direct Messaging with details enclosed.");
-				message.author.sendMessage("**MSS, also known as Moustacheminer Server Services**\n_Version " + version + ", serving " + client.guilds.array().length + " channels since 2016_\n\nCommands\n```//The help command gives a link to the MSS server.\n!!help\n\n//The YouTube command supports either a URL or a search query\n//Will only play over 3600 seconds of media if the user is an admin.\n!!yt <URL>\n!!yt <Search Query>\n\n!!youtube <URL>\n!!youtube <Search Query>\n\n//The skip command skips the currently playing song\n//ADMIN ONLY\n!!skip\n\n//The stop command skips and clears the playlist\n//ADMIN ONLY\n!!stop\n\n//The list command lists the playlist\n!!list\n\n//The error command throws an error\n//ADMIN ONLY\n!!error\n\n//This command executes javascript code in the script\n//OWNER ONLY - CHANGE IF STATEMENT TO YOUR OWN ID IF YOU ARE RUNNING YOUR OWN BOT\n!!eval\n\n//Pastes an invite link into the chat.\n!!invite```\n\nMSS-Discord Discord Server: https://discord.gg/wHgdmf4\nGitHub: https://github.com/moustacheminer/MSS-Discord\nChangelog: https://github.com/moustacheminer/MSS-Discord#changelog");
+				message.author.sendMessage("**MSS, also known as Moustacheminer Server Services**\n_Version " + version + ", serving " + client.guilds.array().length + " channels since 2016_\n\nCommands\n```//The help command gives a link to the MSS server.\n!!help\n\n//The YouTube command supports either a URL or a search query\n//Will only play over 3600 seconds of media if the user is an admin.\n!!yt <URL>\n!!yt <Search Query>\n\n!!youtube <URL>\n!!youtube <Search Query>\n\n//The skip command skips the currently playing song\n//ADMIN ONLY\n!!skip\n\n//The stop command skips and clears the playlist\n//ADMIN ONLY\n!!stop\n\n//The list command lists the playlist\n!!list\n\n//The error command throws an error\n//ADMIN ONLY\n!!error\n\n//This command executes javascript code in the script\n//OWNER ONLY - CHANGE IF STATEMENT TO YOUR OWN ID IF YOU ARE RUNNING YOUR OWN BOT\n!!eval\n\n//Pastes an invite link into the chat.\n!!invite```\n\nMSS-Discord Discord Server: http://moustacheminer.com/r/invite-server\nMSS-Discord Invite Bot: http://moustacheminer.com/r/invite-bot\nMSS-Discord GitHub: http://moustacheminer.com/r/github-bot");
 				break;
 			case '!!youtube':
 			case '!!yt':
@@ -134,7 +134,7 @@ client.on('message', message => {
 				}
 				break;
 			case '!!invite':
-				message.reply("Invite me into your server!\nhttps://discordapp.com/oauth2/authorize?&client_id=257547382277931009&scope=bot&permissions=70765632");
+				message.reply("Invite me into your server!\nhttp://moustacheminer.com/r/invite-bot");
 				break;
 			case '!!play':
 			case '!!dec':
