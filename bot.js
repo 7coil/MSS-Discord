@@ -386,6 +386,12 @@ function isAdmin(input, channel) {
 	}
 }
 
+/**
+ * Function to check the playlist for the server the bot is running in.
+ * @author: 7coil <admin@moustacheminer.com>
+ * @url: http://moustacheminer.com/
+ * @param: {Object[]} message
+ */
 function playlistList(message) {
 	try {
 		if (playlist[message.guild.id].length > 0) {
@@ -398,12 +404,27 @@ function playlistList(message) {
 	}
 }
 
+/**
+ * Function to check if the user is an admin.
+ * @author: 7coil <admin@moustacheminer.com>
+ * @url: http://moustacheminer.com/
+ * @param: {Object[]} message
+ * @param: {err} error
+ */
 function fatalSend(message, err) {
 	console.log(err.stack);
 	reactWith(message, false, "bomb");
 	richSend(message, "This is a Parker Square of an error.", "A fatal error was encountered:\n```\n" + err.stack + "\n```\nA singing banana has been deployed to fix the error. In the meantime, try folding a piece of A4 paper 8 times.", "#FF0000", "http://moustacheminer.com/home/img/ffs.jpg", "https://discord.gg/hPw5gEt");
 }
 
+/**
+ * Function to check if the user is an admin.
+ * @author: 7coil <admin@moustacheminer.com>
+ * @url: http://moustacheminer.com/
+ * @param: {object{}} message
+ * @param: {boolean} success
+ * @param: {String} emoji
+ */
 function reactWith(message, success, type) {
 	if (success) {
 		message.react(String.fromCodePoint(128077));
