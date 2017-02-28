@@ -67,43 +67,31 @@ client.on('ready', function() {
 
 client.on('message', message => {
 	try {
-		if(message.author.bot) return;
-		
+		//Split the text into individual command words.
 		let input = message.content.replace( /\n/g, " " ).split(" ");
+		//The author is a bot, and should not be replied to
+		if(message.author.bot) return;
+		//Stop commands from being run in DMs
+		if (!message.guild) return richSend(message, "Error", "You are not allowed to send commands via Direct Messaging.", "#FF0000");
 		
-		//Set the username of the bot as MSS
-		if (message.guild) {
-			//message.guild.member(client.user).setNickname('MSS');
-		} else {
-			//If the bot is not in the server, stop doing shit - It's too dangerous.
-			return richSend(message, "Error", "You are not allowed to send commands via Direct Messaging.", "#FF0000");
-		}
+		switch(input[0]) {
+			case '!!help':
+				message.reply("Sent message via Direct Messaging with details enclosed.");
+				message.author.sendMessage("**, also known as Moustacheminer Server Services**\n_Version " + version + "_\n\nCommands\n```//The help command gives a link to the MSS server.\n!!help\n\n//The YouTube command supports either a URL or a search query\n//Will only play over 3600 seconds of media if the user is an admin.\n!!yt <URL>\n!!yt <Search Query>\n\n!!youtube <URL>\n!!youtube <Search Query>\n\n//The skip command skips the currently playing song\n//ADMIN ONLY\n!!skip\n\n//The stop command skips and clears the playlist\n//ADMIN ONLY\n!!stop\n\n//The list command lists the playlist\n!!list\n\n//The error command throws an error\n//ADMIN ONLY\n!!error\n\n//This command executes javascript code in the script\n//OWNER ONLY - CHANGE IF STATEMENT TO YOUR OWN ID IF YOU ARE RUNNING YOUR OWN BOT\n!!eval\n\n//Pastes an invite link into the chat.\n!!invite```\n\nMSS-Discord Discord Server: https://discord.gg/wHgdmf4\nGitHub: https://github.com/moustacheminer/MSS-Discord\nChangelog: https://github.com/moustacheminer/MSS-Discord#changelog");
+				break;
+			case '!!youtube':
+			case '!!yt':
+				//Get the voice channel that it's going to play to.
+				let voiceChannel = message.member.voiceChannel;
+				//Check if the user is inside a voice channel or has inputted anything.
+				if (!voiceChannel) {
+					reactWith(message, false, "call");
+					return false;
+				} else if (!input[1]) {
+					reactWith(message, false, "link");
+					return false;
+				}
 
-		if (input[0] === '!!help') {
-			message.reply("Sent message via Direct Messaging with details enclosed.");
-			message.author.sendMessage("**, also known as Moustacheminer Server Services**\n_Version " + version + "_\n\nCommands\n```//The help command gives a link to the MSS server.\n!!help\n\n//The YouTube command supports either a URL or a search query\n//Will only play over 3600 seconds of media if the user is an admin.\n!!yt <URL>\n!!yt <Search Query>\n\n!!youtube <URL>\n!!youtube <Search Query>\n\n//The skip command skips the currently playing song\n//ADMIN ONLY\n!!skip\n\n//The stop command skips and clears the playlist\n//ADMIN ONLY\n!!stop\n\n//The list command lists the playlist\n!!list\n\n//The error command throws an error\n//ADMIN ONLY\n!!error\n\n//This command executes javascript code in the script\n//OWNER ONLY - CHANGE IF STATEMENT TO YOUR OWN ID IF YOU ARE RUNNING YOUR OWN BOT\n!!eval\n\n//Pastes an invite link into the chat.\n!!invite```\n\nMSS-Discord Discord Server: https://discord.gg/wHgdmf4\nGitHub: https://github.com/moustacheminer/MSS-Discord\nChangelog: https://github.com/moustacheminer/MSS-Discord#changelog");
-		} else if (input[0] === '!!youtube' || input[0] === '!!yt') {
-			//Get the voice channel that it's going to play to.
-			let voiceChannel = message.member.voiceChannel;
-			//Check if the user is inside a voice channel or has inputted anything.
-			if (!voiceChannel) {
-				reactWith(message, false, "call");
-				return false;
-			} else if (!input[1]) {
-				reactWith(message, false, "link");
-				return false;
-			}
-			
-			if (youtubeCheck(input[1])) {
-				yt.getInfo(input[1], function(err, info) {
-					if (!info) {
-						reactWith(message, false, "link");
-						return false;
-					}
-					if (info["length_seconds"] > 3600 && !isAdmin(message)) return reactWith(message, false, "ruler");
-					playlistAdd(message, "youtube", info["video_id"], info["title"], info["thumbnail_url"]);
-				});
-			} else {
 				searchYTClient.search(message.content.substring(input[0].length + 1), 1, function(error, result) {
 					if (error) {
 						console.log(error);
@@ -121,32 +109,40 @@ client.on('message', message => {
 						});
 					}
 				});
-			}
-		} else if (input[0] === '!!skip') {
-			if (!isAdmin(message)) return;
-			playlistSkip(message);
-		} else if (input[0] === '!!stop') {
-			if (!isAdmin(message)) return;
-			playlistClear(message);
-		} else if (input[0] === '!!list') {
-			playlistList(message);
-		} else if (input[0] === '!!error') {
-			if (!isAdmin(message)) return;
-			throw new Error("A error was PURPOSELY thrown for the excitement of mathematicians.");
-		} else if (input[0] === '!!eval') {
-			if (message.author.id === "190519304972664832") {
+				break;
+			case '!!skip':
+				if (!isAdmin(message)) return;
+				playlistSkip(message);
+				break;
+			case '!!stop':
+				if (!isAdmin(message)) return;
+				playlistClear(message);
+				break;
+			case '!!list':
+				playlistList(message);
+				break;
+			case '!!error':
+				if (!isAdmin(message)) return;
+				throw new Error("A error was PURPOSELY thrown for the excitement of mathematicians.");
+				break;
+			case '!!eval':
+				if (message.author.id === "190519304972664832") {
 				eval(message.content.substring(6));
-			} else {
-				//DO NOT ALLOW RANDOMS TO EVAL - SEND X EMOJI ERROR
+				} else {
+					//DO NOT ALLOW RANDOMS TO EVAL - SEND X EMOJI ERROR
+					reactWith(message, false, "x");
+				}
+				break;
+			case '!!invite':
+				message.reply("Invite me into your server!\nhttps://discordapp.com/oauth2/authorize?&client_id=257547382277931009&scope=bot&permissions=70765632");
+				break;
+			case '!!play':
+			case '!!dec':
+				message.reply("The " + input[0] + " command has been removed.");
+			default:
 				reactWith(message, false, "x");
-				return false;
-			}
-		} else if (input[0] === '!!invite') {
-			message.reply("Invite me into your server!\nhttps://discordapp.com/oauth2/authorize?&client_id=257547382277931009&scope=bot&permissions=70765632");
-		} else if (input[0] === '!!play') {
-			message.reply("This command has been removed since v2017.02.27a.\n**Replacement Commands**\n== YouTube ==\n!yt <url or search>\n!youtube <url or search>");
-		} else if (input[0] === '!!dec') {
-			message.reply("This command has been removed since v2017.02.27a. There is no replacement for this command.");
+				message.reply("Invalid command supplied. Please send !!help for a list of commands.");
+				break;
 		}
 	} catch(err) {
 		fatalSend(message, err)
