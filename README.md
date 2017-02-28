@@ -53,6 +53,11 @@ MSS-Discord (Moustacheminer Server Services for Discord) is another bot made for
 > The markdown version of this licence is by TheFox, and can be found here: https://github.com/TheFox/GPLv3.md
 
 ## Changelog
+### 2017.02.28a
+
+- Added some comments
+- Added SWITCH and CASE statements instead of many IF statements
+
 ### 2017.02.27b
 
 - Added version numbering

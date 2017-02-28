@@ -21,7 +21,7 @@
 */
 
 //Version number of MSS-Discord
-const version = "2017.02.27b";
+const version = "2017.02.28a";
 
 //playlist[guild][position in playlist]
 var playlist = [];
