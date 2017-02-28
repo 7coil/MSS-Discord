@@ -77,7 +77,7 @@ client.on('message', message => {
 		switch(input[0]) {
 			case '!!help':
 				message.reply("Sent message via Direct Messaging with details enclosed.");
-				message.author.sendMessage("**, also known as Moustacheminer Server Services**\n_Version " + version + "_\n\nCommands\n```//The help command gives a link to the MSS server.\n!!help\n\n//The YouTube command supports either a URL or a search query\n//Will only play over 3600 seconds of media if the user is an admin.\n!!yt <URL>\n!!yt <Search Query>\n\n!!youtube <URL>\n!!youtube <Search Query>\n\n//The skip command skips the currently playing song\n//ADMIN ONLY\n!!skip\n\n//The stop command skips and clears the playlist\n//ADMIN ONLY\n!!stop\n\n//The list command lists the playlist\n!!list\n\n//The error command throws an error\n//ADMIN ONLY\n!!error\n\n//This command executes javascript code in the script\n//OWNER ONLY - CHANGE IF STATEMENT TO YOUR OWN ID IF YOU ARE RUNNING YOUR OWN BOT\n!!eval\n\n//Pastes an invite link into the chat.\n!!invite```\n\nMSS-Discord Discord Server: https://discord.gg/wHgdmf4\nGitHub: https://github.com/moustacheminer/MSS-Discord\nChangelog: https://github.com/moustacheminer/MSS-Discord#changelog");
+				message.author.sendMessage("**MSS, also known as Moustacheminer Server Services**\n_Version " + version + ", serving " + client.guilds.array().length + " channels since 2016_\n\nCommands\n```//The help command gives a link to the MSS server.\n!!help\n\n//The YouTube command supports either a URL or a search query\n//Will only play over 3600 seconds of media if the user is an admin.\n!!yt <URL>\n!!yt <Search Query>\n\n!!youtube <URL>\n!!youtube <Search Query>\n\n//The skip command skips the currently playing song\n//ADMIN ONLY\n!!skip\n\n//The stop command skips and clears the playlist\n//ADMIN ONLY\n!!stop\n\n//The list command lists the playlist\n!!list\n\n//The error command throws an error\n//ADMIN ONLY\n!!error\n\n//This command executes javascript code in the script\n//OWNER ONLY - CHANGE IF STATEMENT TO YOUR OWN ID IF YOU ARE RUNNING YOUR OWN BOT\n!!eval\n\n//Pastes an invite link into the chat.\n!!invite```\n\nMSS-Discord Discord Server: https://discord.gg/wHgdmf4\nGitHub: https://github.com/moustacheminer/MSS-Discord\nChangelog: https://github.com/moustacheminer/MSS-Discord#changelog");
 				break;
 			case '!!youtube':
 			case '!!yt':
@@ -329,10 +329,15 @@ function playlistPlay(message) {
 				message.react(String.fromCodePoint(8505));
 				message.react(String.fromCodePoint(128240));
 			});
-		if (current[message.guild.id]["type"] === "youtube") {
-			stream[message.guild.id] = yt(current[message.guild.id]["url"], {audioonly: true});
-		} else if (current[message.guild.id]["type"] === "file") {
-			stream[message.guild.id] = fs.createReadStream(current[message.guild.id]["url"]);
+		switch (current[message.guild.id]["type"]) {
+			case "youtube":
+				stream[message.guild.id] = yt(current[message.guild.id]["url"], {audioonly: true});
+				break;
+			case "local":
+				stream[message.guild.id] = fs.createReadStream(current[message.guild.id]["url"]);
+				break;
+			case "url":
+				
 		}
 	} else {
 		if (voiceChannel && voiceChannel.connection) voiceChannel.leave();
@@ -344,20 +349,6 @@ function playlistPlay(message) {
 		} catch(err) {
 		fatalSend(message, err);
 	}
-}
-
-/**
- * JavaScript function to match (and return) the video Id of any valid Youtube Url, given as input string.
- * @author: Stephan Schmitz <eyecatchup@gmail.com>
- * @url: http://stackoverflow.com/a/10315969/624466
- * @param: {string} url
- * @return: {Boolean} isYouTube
- */
-function youtubeCheck(url) {
-	if (url.startsWith("https://m.youtube.com/watch?v=")) return true;
-	
-  	var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
-  	return (url.match(p)) ? RegExp.$1 : false;
 }
 
 /**
