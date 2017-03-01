@@ -75,6 +75,8 @@ client.on('message', message => {
 		if (!message.guild) return richSend(message, "Error", "You are not allowed to send commands via Direct Messaging.", "#FF0000");
 		
 		switch(input[0]) {
+			case '!help':
+				message.reply("Single exclaimation mark commands have been removed since 2017.02.27a to avoid conflicts. Please use !!<command> to call MSS in the future.");
 			case '!!help':
 				message.reply("Sent message via Direct Messaging with details enclosed.");
 				message.author.sendMessage("**MSS, also known as Moustacheminer Server Services**\n_Version " + version + ", serving " + client.guilds.array().length + " channels since 2016_\n\nCommands\n```//The help command gives a link to the MSS server.\n!!help\n\n//The YouTube command supports either a URL or a search query\n//Will only play over 3600 seconds of media if the user is an admin.\n!!yt <URL>\n!!yt <Search Query>\n\n!!youtube <URL>\n!!youtube <Search Query>\n\n//The skip command skips the currently playing song\n//ADMIN ONLY\n!!skip\n\n//The stop command skips and clears the playlist\n//ADMIN ONLY\n!!stop\n\n//The list command lists the playlist\n!!list\n\n//The error command throws an error\n//ADMIN ONLY\n!!error\n\n//This command executes javascript code in the script\n//OWNER ONLY - CHANGE IF STATEMENT TO YOUR OWN ID IF YOU ARE RUNNING YOUR OWN BOT\n!!eval\n\n//Pastes an invite link into the chat.\n!!invite```\n\nDiscord Server: http://moustacheminer.com/r/invite-server\nInvite Bot: http://moustacheminer.com/r/invite-bot\nGitHub: http://moustacheminer.com/r/github-bot");
@@ -136,7 +138,11 @@ client.on('message', message => {
 			case '!!invite':
 				message.reply("Invite me into your server!\nhttp://moustacheminer.com/r/invite-bot");
 				break;
+			case '!play':
+				message.reply("Single exclaimation mark commands have been removed since 2017.02.27a to avoid conflicts. Please use !!<command> to call MSS in the future.");
 			case '!!play':
+				message.channel.send("The !!play command has been replaced with commands designed to make playing music easier\n\n**List of replacement commands**\n```\n//Plays YouTube URL or Searches YouTube for a video to play\n!!yt <query>\n!!youtube <query>\n```");
+				break;
 			case '!!dec':
 				message.reply("The " + input[0] + " command has been removed.\nInvalid command supplied. Please send !!help for a list of commands.");
 				reactWith(message, false, "x");
