@@ -105,7 +105,7 @@ client.on('message', message => {
 								return false;
 							}
 							if (info["length_seconds"] > 3600 && !isAdmin(message)) return reactWith(message, false, "ruler");
-							playlistAdd(message, "youtube", info["video_id"], info["title"], info["thumbnail_url"]);
+							playlistAdd(message, "youtube", "https://youtube.com/watch?v=" + info["video_id"], info["title"], info["thumbnail_url"]);
 						});
 					}
 				});
