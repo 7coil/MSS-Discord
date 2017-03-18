@@ -413,7 +413,7 @@ function fatalSend(message, err) {
 }
 
 /**
- * Function to check if the user is an admin.
+ * Function to react with an emoji
  * @author: 7coil <admin@moustacheminer.com>
  * @url: http://moustacheminer.com/
  * @param: {object{}} message
