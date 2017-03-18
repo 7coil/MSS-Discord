@@ -95,7 +95,7 @@ client.on('message', message => {
 				}
 
 				searchYTClient.search(message.content.substring(input[0].length + 1), 1, function(error, result) {
-					if (error) {
+					if (error || !result["items"][0]) {
 						console.log(error);
 						message.reply(error);
 						reactWith(message, false, "bomb");
