@@ -1,3 +1,4 @@
+const config = require("./../../../config.json");
 const Discord = require("discord.js");
 
 module.exports = function(message, subheading, description, colour) {
