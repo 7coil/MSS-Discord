@@ -1,15 +1,14 @@
-//A one dimensional array for each API key.
-//api[keyname]
-var api = [];
-
-//Get the configuration file
-var config = require("./config.json");
-console.dir(config);
-
-//Declare the Discord and client constants used to set up the Discord bot
+//Get the required shit together
+const config = require("./config.json");
 const Discord = require("discord.js");
+const glob = require("glob");
+const path = require("path");
 const client = new Discord.Client();
+const MSS = require("./functions/");
+
+//Login to Discord
 client.login(config.API.discord);
+
 
 client.on('ready', function() {
 	console.log("Successfully connected to Discord!");
@@ -17,6 +16,6 @@ client.on('ready', function() {
 });
 
 client.on('message', function(message) {
-	//if(message.content.startsWith(config.MSS.prefix);
-	//let input = message.content.replace (/\n/g, "").split(" ");
+	if(message.content.startsWith(config.MSS.prefix);
+	let input = message.content.replace (/\n/g, "").split(" ");
 });

@@ -1,0 +1,1 @@
+exports.rich = require("./rich");
