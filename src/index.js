@@ -16,19 +16,32 @@
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-/*
-	Declare variables used in the code
-*/
+//=============================================================
+// Init
+//=============================================================
 
-//Version number of MSS-Discord
-const version = "2017.02.28a";
+//Sets the version number for MSS-Discord
+const version = "2017.03.20a";
 
+
+//A two dimensional array for the playlist for each channel.
 //playlist[guild][position in playlist]
+//Position 0 is the next song in the list.
+//The current song is in the 'current' array.
 var playlist = [];
+
+//A one dimensional array for the current song playing in each channel.
 //current[guild]
+//Excuse for splitting current from playlist:
+//Can do iterations easily for the playlist
 var current = [];
+
+//A one dimensional array for the node.js streams.
 //stream[guild]
+//Each stream is declared in a global context so it can be manipulated externally.
 var stream = [];
+
+//A one dimensional array for each API key.
 //api[keyname]
 var api = [];
 
@@ -47,7 +60,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 client.login(api["discord"]);
 
-//ytdl-core for !play
+//ytdl-core for !!yt
 const yt = require('ytdl-core');
 
 //searchYT for searching youtube
@@ -55,7 +68,7 @@ var searchYT = require('youtube-node');
 var searchYTClient = new searchYT();
 searchYTClient.setKey(api["youtube"]);
 
-//fs to open the wav file
+//fs to open wave files
 const fs = require('fs');
 
 //Set the running game and the avatar for the bot.
@@ -64,6 +77,10 @@ client.on('ready', function() {
 	client.user.setGame("!!help");
 	client.user.setAvatar("http://moustacheminer.com/mss.png");
 });
+
+//=============================================================
+// Main Logic for MSS
+//=============================================================
 
 client.on('message', message => {
 	try {
@@ -74,6 +91,10 @@ client.on('message', message => {
 		//Stop commands from being run in DMs
 		if (!message.guild) return richSend(message, "Error", "You are not allowed to send commands via Direct Messaging.", "#FF0000");
 		
+		
+		//-------------------------------------------------------------
+		// MSS Command Switch
+		//-------------------------------------------------------------
 		switch(input[0]) {
 			case '!help':
 				message.reply("Single exclaimation mark commands have been removed since 2017.02.27a to avoid conflicts. Please use !!<command> to call MSS in the future.");
@@ -170,18 +191,26 @@ client.on('messageReactionAdd', function(messageReaction, user) {
 		//Delete the reaction
 		messageReaction.remove(user);
 
-		if (input === 10145) {
-			if (!isAdmin(user, messageReaction.message.channel)) return;
-			playlistSkip(messageReaction.message);
-		} else if (input === 8505) {
-			richSend(messageReaction.message, "Now playing:", current[messageReaction.message.guild.id]["title"], "#00FF00", current[messageReaction.message.guild.id]["thumb_url"], current[messageReaction.message.guild.id]["url"]);
-		} else if (input === 128240) {
-			playlistList(messageReaction.message);
+		switch(input) {
+			case 10145:
+				//BLACK RIGHTWARDS ARROW (U+27A1)
+				if (!isAdmin(user, messageReaction.message.channel)) return;
+				playlistSkip(messageReaction.message);
+				break;
+			case 8505:
+			//INFORMATION SOURCE (U+2139)
+				richSend(messageReaction.message, "Now playing:", current[messageReaction.message.guild.id]["title"], "#00FF00", current[messageReaction.message.guild.id]["thumb_url"], current[messageReaction.message.guild.id]["url"]);
+				break;
+			case 128240:
+			//NEWSPAPER (U+1F4F0)
+				playlistList(messageReaction.message);
+				break;
+			}
 		}
+		
 	} catch(err) {
-		fatalSend(message, err)
+		fatalSend(messageReaction.message, err)
 	}
-
 });
 
 /**
@@ -326,33 +355,35 @@ function playSound(message) {
  */
 function playlistPlay(message) {
 	try {
-	var voiceChannel = message.member.voiceChannel;
-	if (playlist[message.guild.id].length > 0) {
-		current[message.guild.id] = JSON.parse(playlist[message.guild.id].shift());
-		message.channel.sendMessage('**Music Control Panel**')
-			.then(function(message) {
-				message.react(String.fromCodePoint(10145));
-				message.react(String.fromCodePoint(8505));
-				message.react(String.fromCodePoint(128240));
-			});
-		switch (current[message.guild.id]["type"]) {
-			case "youtube":
-				stream[message.guild.id] = yt(current[message.guild.id]["url"], {audioonly: true});
-				break;
-			case "local":
-				stream[message.guild.id] = fs.createReadStream(current[message.guild.id]["url"]);
-				break;
-			case "url":
-				
+		var voiceChannel = message.member.voiceChannel;
+		if (playlist[message.guild.id].length > 0) {
+			current[message.guild.id] = JSON.parse(playlist[message.guild.id].shift());
+			message.channel.sendMessage('**Music Control Panel**')
+				.then(function(message) {
+					message.react(String.fromCodePoint(10145));
+					message.react(String.fromCodePoint(8505));
+					message.react(String.fromCodePoint(128240));
+				}).catch(function(err) {
+					console.log(err.stack);
+				});
+			switch (current[message.guild.id]["type"]) {
+				case "youtube":
+					stream[message.guild.id] = yt(current[message.guild.id]["url"], {audioonly: true});
+					break;
+				case "local":
+					stream[message.guild.id] = fs.createReadStream(current[message.guild.id]["url"]);
+					break;
+				case "url":
+					
+			}
+		} else {
+			if (voiceChannel && voiceChannel.connection) voiceChannel.leave();
+			playlist[message.guild.id] = [];
+			if (stream[message.guild.id]) stream[message.guild.id].destroy();
+			richSend(message, "MSS Music Player", "The playlist has ended.", "#00FF00");
+			return;
 		}
-	} else {
-		if (voiceChannel && voiceChannel.connection) voiceChannel.leave();
-		playlist[message.guild.id] = [];
-		if (stream[message.guild.id]) stream[message.guild.id].destroy();
-		richSend(message, "MSS Music Player", "The playlist has ended.", "#00FF00");
-		return;
-	}
-		} catch(err) {
+	} catch(err) {
 		fatalSend(message, err);
 	}
 }
@@ -409,7 +440,7 @@ function playlistList(message) {
 function fatalSend(message, err) {
 	console.log(err.stack);
 	reactWith(message, false, "bomb");
-	richSend(message, "This is a Parker Square of an error.", "A fatal error was encountered:\n```\n" + err.stack + "\n```\nA singing banana has been deployed to fix the error. In the meantime, try folding a piece of A4 paper 8 times.", "#FF0000", "http://moustacheminer.com/home/img/ffs.jpg", "https://discord.gg/hPw5gEt");
+	richSend(message, "Error", "A fatal error was encountered:\n```\n" + err.stack + "\n```\nA Jan Micheal Vincent has been deployed to your sector.", "#FF0000", "http://moustacheminer.com/home/img/ffs.jpg", "https://discord.gg/hPw5gEt");
 }
 
 /**
