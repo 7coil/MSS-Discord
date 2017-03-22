@@ -18,4 +18,8 @@ client.on('ready', function() {
 client.on('message', function(message) {
 	if (!message.content.startsWith(config.MSS.prefix)) return false;
 	let input = message.content.replace (/\n/g, "").split(" ");
+	
+	if (input[0] === "!!eval" && message.author.id === "190519304972664832") {
+		eval(message.content.substring(6));
+	}
 });
