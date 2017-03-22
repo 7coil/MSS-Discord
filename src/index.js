@@ -9,6 +9,10 @@ const MSS = require("./functions/");
 //Login to Discord
 client.login(config.API.discord);
 
+//A global variable?
+var global.playlist = [];
+var global.stream = [];
+var global.current = [];
 
 client.on('ready', function() {
 	console.log("Successfully connected to Discord!");
