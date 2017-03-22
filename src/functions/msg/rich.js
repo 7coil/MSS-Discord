@@ -1,3 +1,5 @@
+const Discord = require("discord.js");
+
 module.exports = function(message, subheading, description, colour) {
 
 	var embed = new Discord.RichEmbed()
