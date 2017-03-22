@@ -12,7 +12,7 @@ client.login(config.API.discord);
 
 client.on('ready', function() {
 	console.log("Successfully connected to Discord!");
-	client.user.setGame("MSS Version: " + config.MSS.version);
+	client.user.setGame(config.MSS.prefix + "help | " + config.MSS.version);
 });
 
 client.on('message', function(message) {
