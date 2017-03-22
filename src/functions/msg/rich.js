@@ -8,7 +8,7 @@ module.exports = function(message, subheading, description, colour) {
 		.setAuthor("MSS", "http://moustacheminer.com/dickbutt.jpg")
 		.setColor(colour)
 		.setDescription(description)
-		.setFooter("moustacheminer.com server services, version " + version, "")
+		.setFooter("moustacheminer.com server services, version " + config.MSS.version, "")
 		.setTimestamp()
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true });
