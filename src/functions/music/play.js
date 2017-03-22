@@ -8,7 +8,7 @@ module.exports = function playlistPlay(message) {
 		return message.reply("Get in a channel!");
 	}
 	
-	if (playlist[message.guild.id].length > 0) {
+	if (global.playlist[message.guild.id].length > 0) {
 		global.current[message.guild.id] = JSON.parse(playlist[message.guild.id].shift());
 		message.channel.sendMessage('**Music Control Panel**')
 			.then(function(message) {
@@ -26,9 +26,9 @@ module.exports = function playlistPlay(message) {
 		}
 	} else {
 		if (voiceChannel && voiceChannel.connection) voiceChannel.leave();
-		playlist[message.guild.id] = [];
-		if (stream[message.guild.id]) stream[message.guild.id].destroy();
-		richSend(message, "MSS Music Player", "The playlist has ended.", "#00FF00");
+		global.playlist[message.guild.id] = [];
+		if (global.stream[message.guild.id]) global.stream[message.guild.id].destroy();
+		message.reply("it end");
 		return;
 	}
 }
