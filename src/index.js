@@ -6,7 +6,7 @@ const version = "Exports Branch";
 var api = [];
 
 //Get the Discord API Key.
-api["discord"] = process.argv[2] || {process.exitCode = 2;}
+api["discord"] = process.argv[2];
 
 //Declare the Discord and client constants used to set up the Discord bot
 const Discord = require("discord.js");
