@@ -16,6 +16,6 @@ client.on('ready', function() {
 });
 
 client.on('message', function(message) {
-	if(message.content.startsWith(config.MSS.prefix);
+	if (!message.content.startsWith(config.MSS.prefix) return false;
 	let input = message.content.replace (/\n/g, "").split(" ");
 });
