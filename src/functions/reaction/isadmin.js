@@ -5,7 +5,7 @@ module.exports = function isadmin(user, channel) {
 	if (channel.permissionsFor(user).hasPermission("ADMINISTRATOR") || user.id === config.MSS.sysadmin) {
 		return true;
 	} else {
-		reactWith(message, false, "bomb");
+		reactWith(message, false, "X");
 		return false;
 	}
 }
