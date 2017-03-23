@@ -2,7 +2,7 @@
 const config = require("./config.json");
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const MSS = require("./functions/");
+//const MSS = require("./functions/");
 const fs = require("fs");
 var command = [];
 
