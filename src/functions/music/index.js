@@ -2,6 +2,7 @@ const config = require("./../../config.json");
 const yt = require('ytdl-core');
 const fs = require('fs');
 const msg = require('./../msg/');
+const Discord = require("discord.js");
 
 var playlist = [];
 var stream = [];
@@ -106,3 +107,4 @@ function get(message) {
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true });
 }
+
