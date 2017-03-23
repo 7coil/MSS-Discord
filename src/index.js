@@ -26,7 +26,7 @@ client.on("ready", function() {
 });
 
 client.on("message", function(message) {
-	if (!message.author.bot) return;
+	if (message.author.bot) return;
 	if (!message.guild) return MSS.msg.rich(message, "Error", "You are not allowed to send commands via Direct Messaging. If you are trying to invite this bot, please goto: http://moustacheminer.com/r/invite-bot", "#FF0000");
 	
 	if (!message.content.startsWith(config.MSS.prefix)) return false;
