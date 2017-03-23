@@ -30,5 +30,4 @@ module.exports = function yt(message) {
 			});
 		}
 	});
-	break;
 }
