@@ -13,7 +13,7 @@ client.login(config.API.discord);
 fs.readdir("./commands/", function(err, items) {
 	items.forEach(function(item) {
 		var file = item.replace(/['"]+/g, '');
-		command[file] = require(file);
+		command[file] = require("./commands/" + file);
 	})
 })
 
