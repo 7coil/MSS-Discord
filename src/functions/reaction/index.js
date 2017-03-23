@@ -1,0 +1,1 @@
+exports.isadmin = require("./isadmin");
