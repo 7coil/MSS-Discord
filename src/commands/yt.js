@@ -1,5 +1,9 @@
 const config = require("./../config.json");
 const MSS = require("./../functions/");
+const searchYT = require('youtube-node');
+const searchYTClient = new searchYT();
+const yt = require('ytdl-core');
+searchYTClient.setKey(config.API.youtube);
 
 module.exports = function yt(message) {
 	let input = message.content.replace (/\n/g, "").split(" ");
@@ -26,7 +30,7 @@ module.exports = function yt(message) {
 					MSS.msg.react(message, false, "bomb");
 					return false;
 				}
-				if (info["length_seconds"] > 3600 && !isAdmin(message)) return reactWith(message, false, "ruler");
+				if (info["length_seconds"] > 3600 && !MSS.msg.isadmin(message)) return MSS.msg.react(message, false, "ruler");
 				MSS.music.add(message, "youtube", "https://youtube.com/watch?v=" + info["video_id"], info["title"], info["thumbnail_url"]);
 			});
 		}

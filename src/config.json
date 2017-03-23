@@ -1,8 +1,10 @@
 {
 	"API": {
-		"discord": ""
+		"discord": "",
+		"youtube": ""
 	},
 	"MSS": {
+		"sysadmin": "190519304972664832",
 		"version": "external files branch",
 		"prefix": "??"
 	}
