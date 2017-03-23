@@ -99,11 +99,11 @@ function get(message) {
 		.setTitle("MSS Music Player")
 		.setAuthor("MSS", "http://moustacheminer.com/mss.png")
 		.setColor("#00FF00")
-		.setDescription("Now playing: " + current[messageReaction.message.guild.id]["title"])
+		.setDescription("Now playing: " + current[message.guild.id]["title"])
 		.setFooter("MSS-Discord, " + config.MSS.version, "")
 		.setTimestamp()
-		.setURL(current[messageReaction.message.guild.id]["url"])
-		.setImage(current[messageReaction.message.guild.id]["thumb_url"]);
+		.setURL(current[message.guild.id]["url"])
+		.setImage(current[message.guild.id]["thumb_url"]);
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true });
 }
