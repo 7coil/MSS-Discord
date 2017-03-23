@@ -4,6 +4,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const MSS = require("./functions/");
 const fs = require("fs");
+var command = [];
 
 //Login to Discord
 client.login(config.API.discord);
@@ -12,7 +13,7 @@ client.login(config.API.discord);
 fs.readdir("./commands/", function(err, items) {
 	items.forEach(function(item) {
 		var file = file.replace(/['"]+/g, '');
-		var command[file] = require(file);
+		command[file] = require(file);
 	})
 })
 
