@@ -1,6 +1,6 @@
 const yt = require('ytdl-core');
 const fs = require('fs');
-const msg = require('./../msg/react');
+const msg = require('./../msg/');
 
 var playlist = [];
 var stream = [];
