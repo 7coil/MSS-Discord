@@ -71,10 +71,10 @@ function add(message, type, url, title, thumb_url) {
 }
 
 function skip(message) {
-	let voiceChannel = message.member.voiceChannel || null;
+	let voiceChannel = message.member.voiceChannel;
 
 	if (!voiceChannel || !voiceChannel.connection) {
-		message.reply("There is no bot running in your current voice channel");
+		return message.reply("There is no bot running in your current voice channel");
 	}
 
 	message.channel.send("Destroying stream...");
@@ -82,10 +82,10 @@ function skip(message) {
 }
 
 function stop(message) {
-	let voiceChannel = message.member.voiceChannel || null;
+	let voiceChannel = message.member.voiceChannel;
 	
 	if (!voiceChannel || !voiceChannel.connection) {
-		message.reply("There is no bot running in your current voice channel");
+		return message.reply("There is no bot running in your current voice channel");
 	}
 	
 	playlist[message.guild.id] = [];
