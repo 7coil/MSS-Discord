@@ -1,8 +1,6 @@
 const config = require("./../config.json");
 const MSS = require("./../functions/");
 
-
-
 module.exports = function(message) {
 	if(MSS.msg.isadmin(message)) {
 		let input = message.content.replace (/\n/g, "").split(" ");
