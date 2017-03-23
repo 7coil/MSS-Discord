@@ -6,7 +6,12 @@ MSS-Discord (Moustacheminer Server Services for Discord) is another bot made for
 
 
 ## Changelog
-### 2017.03.22a
+### ext.2017.03.23a
+
+- Readded commands like help, eval and yt
+- Made all JS files in commands/ automatically add as a command - This means commands are easy to add
+
+### 2017.03.22a (a.k.a. external files branch)
 
 - Splitting MSS into multiple includable files.
 
