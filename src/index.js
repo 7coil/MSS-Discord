@@ -1,8 +1,6 @@
 //Get the required shit together
 const config = require("./config.json");
 const Discord = require("discord.js");
-const glob = require("glob");
-const path = require("path");
 const client = new Discord.Client();
 const MSS = require("./functions/");
 
