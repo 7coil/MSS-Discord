@@ -10,6 +10,7 @@ module.exports = function(message, subheading, description, colour) {
 		.setDescription(description)
 		.setFooter("MSS-Discord, " + config.MSS.version, "")
 		.setTimestamp()
+		.setURL("http://moustacheminer.com/r/invite-server");
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true });
 }
