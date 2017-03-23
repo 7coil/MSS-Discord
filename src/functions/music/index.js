@@ -71,9 +71,9 @@ function add(message, type, url, title, thumb_url) {
 }
 
 function skip(message) {
-	let voiceChannel = message.member.voiceChannel || 0;
+	let voiceChannel = message.member.voiceChannel || null;
 
-	if (!voiceChannel || !voiceChannel.connection || !stream[message.guild.id]) {
+	if (!voiceChannel || !voiceChannel.connection) {
 		message.reply("There is no bot running in your current voice channel");
 	}
 
@@ -82,9 +82,9 @@ function skip(message) {
 }
 
 function stop(message) {
-	let voiceChannel = message.member.voiceChannel || 0;
+	let voiceChannel = message.member.voiceChannel || null;
 	
-	if (!voiceChannel || !voiceChannel.connection || stream[message.guild.id]) {
+	if (!voiceChannel || !voiceChannel.connection) {
 		message.reply("There is no bot running in your current voice channel");
 	}
 	
