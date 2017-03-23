@@ -7,7 +7,7 @@ var current = [];
 
 exports.sound = sound;
 exports.play = play;
-//exports.add = add;
+exports.add = add;
 	
 function sound(message) {
 	var voiceChannel = message.member.voiceChannel;
