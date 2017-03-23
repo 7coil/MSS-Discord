@@ -57,7 +57,7 @@ client.on("messageReactionAdd", function(messageReaction, user) {
 	if (user.bot) return;
 
 	//Get decimal codepoint of emoji
-	var input = messageReaction.emoji.name.codePointAt();
+	var input = messageReaction.emoji.name.codePointAt().toString();
 	
 	if (reaction[input]) {
 		reaction[input](messageReaction, user);
