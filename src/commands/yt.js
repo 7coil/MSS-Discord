@@ -2,6 +2,7 @@ const config = require("./../config.json");
 const MSS = require("./../functions/");
 
 module.exports = function yt(message) {
+	let input = message.content.replace (/\n/g, "").split(" ");
 	//Get the voice channel that it's going to play to.
 	let voiceChannel = message.member.voiceChannel;
 	//Check if the user is inside a voice channel or has inputted anything.
