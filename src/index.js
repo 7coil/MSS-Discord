@@ -33,4 +33,8 @@ client.on("message", function(message) {
 	if (input[0] === "eval" && message.author.id === "190519304972664832") {
 		eval(message.content.substring(config.MSS.prefix.length + input[0].length + 1));
 	}
+	
+	if(command[input[0]]) {
+		command[input[0]](message.content)
+	}
 });
