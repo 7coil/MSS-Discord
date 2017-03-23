@@ -59,7 +59,6 @@ function play(message) {
 		if (voiceChannel && voiceChannel.connection) voiceChannel.leave();
 		playlist[message.guild.id] = [];
 		if (stream[message.guild.id]) stream[message.guild.id].destroy();
-		message.reply("The playlist has ended.");
 		return;
 	}
 }
