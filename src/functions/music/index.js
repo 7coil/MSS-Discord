@@ -8,6 +8,8 @@ var current = [];
 exports.sound = sound;
 exports.play = play;
 exports.add = add;
+exports.skip = skip;
+exports.stop = stop;
 
 //A function to keep playing that stream
 function sound(message) {
@@ -66,4 +68,27 @@ function add(message, type, url, title, thumb_url) {
 	if (!message.member.voiceChannel.connection) {
 		sound(message);
 	}
+}
+
+function skip(message) {
+	let voiceChannel = message.member.voiceChannel;
+
+	if (!voiceChannel || !voiceChannel.connection) {
+		message.reply("There is no bot running in your current voice channel");
+	}
+
+	message.channel.send("Destroying stream...");
+	stream[message.guild.id].destroy();
+		} catch(err) {
+		fatalSend(message, err);
+	}
+}
+
+function stop(message) {
+	if (!voiceChannel || !voiceChannel.connection) {
+		message.reply("There is no bot running in your current voice channel");
+	}
+	
+	playlist[message.guild.id] = [];
+	skip(message);
 }
