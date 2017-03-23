@@ -9,7 +9,7 @@ const fs = require("fs");
 client.login(config.API.discord);
 
 //Include all files in the commands directory
-fs.readdir("./functions/", function(err, items) {
+fs.readdir("./commands/", function(err, items) {
 	items.forEach(function(item) {
 		console.dir(item);
 	})
