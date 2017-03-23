@@ -25,7 +25,7 @@ module.exports = function yt(message) {
 			MSS.msg.react(message, false, "bomb");
 			return false;
 		} else {
-			MSS.music.add(message, "youtube", "https://youtube.com/watch?v=" + result["items"][0]["id"]["videoId"], result["items"][0]["snippet"]["thumbnails"]["default"]["url"], result["items"][0]["snippet"]["title"]);
+			MSS.music.add(message, "youtube", "https://youtube.com/watch?v=" + result["items"][0]["id"]["videoId"], result["items"][0]["snippet"]["title"], result["items"][0]["snippet"]["thumbnails"]["default"]["url"]);
 		}
 	});
 }

@@ -107,4 +107,3 @@ function get(message) {
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true });
 }
-
