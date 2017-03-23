@@ -79,9 +79,6 @@ function skip(message) {
 
 	message.channel.send("Destroying stream...");
 	stream[message.guild.id].destroy();
-		} catch(err) {
-		fatalSend(message, err);
-	}
 }
 
 function stop(message) {
