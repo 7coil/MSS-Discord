@@ -12,17 +12,20 @@ client.login(config.API.discord);
 //Include all files in the commands directory
 fs.readdir("./commands/", function(err, items) {
 	items.forEach(function(item) {
-		var file = item.replace(/['"]+/g, '');
-		command[file] = require("./commands/" + file);
+		var file = item.replace(/['"]+/g, "");
+		if (file.endsWith(".js")) {
+			file = file.replace(".js", "")
+			command[file] = require("./commands/" + file);
+		}
 	})
 })
 
-client.on('ready', function() {
+client.on("ready", function() {
 	console.log("Successfully connected to Discord!");
 	client.user.setGame(config.MSS.prefix + "help | " + config.MSS.version);
 });
 
-client.on('message', function(message) {
+client.on("message", function(message) {
 	if (!message.content.startsWith(config.MSS.prefix)) return false;
 	let input = message.content.replace (/\n/g, "").split(" ");
 	input[0] = input[0].substring(config.MSS.prefix.length);
