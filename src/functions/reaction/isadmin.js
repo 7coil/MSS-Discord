@@ -1,7 +1,7 @@
 const config = require("./../../config.json");
 
-module.exports = function isadmin(input, channel) {
-	if (channel.permissionsFor(input.member).hasPermission("ADMINISTRATOR") || input.author.id === config.MSS.sysadmin) {
+module.exports = function isadmin(user, channel) {
+	if (channel.permissionsFor(user).hasPermission("ADMINISTRATOR") || user.id === config.MSS.sysadmin) {
 		return true;
 	} else {
 		reactWith(message, false, "bomb");
