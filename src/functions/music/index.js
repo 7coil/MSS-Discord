@@ -74,26 +74,11 @@ function add(message, type, url, title, thumb_url) {
 }
 
 function skip(message) {
-	let voiceChannel = message.member.voiceChannel;
-
-	if (!voiceChannel || !voiceChannel.connection) {
-		//No bot in channel
-		return msg.react(message, false, "robot");
-	}
-
 	message.channel.send("Destroying stream...");
 	stream[message.guild.id].destroy();
 }
 
 function stop(message) {
-	let voiceChannel = message.member.voiceChannel;
-	
-	if (!voiceChannel || !voiceChannel.connection) {
-		//No bot in channel
-		return msg.react(message, false, "robot");
-	}
-	
 	playlist[message.guild.id] = [];
 	skip(message);
 }
-

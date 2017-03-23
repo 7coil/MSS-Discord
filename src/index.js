@@ -5,11 +5,12 @@ const client = new Discord.Client();
 const MSS = require("./functions/");
 const fs = require("fs");
 var command = [];
+var reaction = [];
 
 //Login to Discord
 client.login(config.API.discord);
 
-//Include all files in the commands directory
+//Include all files in the commands directory for commands
 fs.readdir("./commands/", function(err, items) {
 	items.forEach(function(item) {
 		var file = item.replace(/['"]+/g, "");
@@ -18,7 +19,18 @@ fs.readdir("./commands/", function(err, items) {
 			command[file] = require("./commands/" + file);
 		}
 	})
-})
+});
+
+//Include all files in the commands directory for reactions
+fs.readdir("./reactions/", function(err, items) {
+	items.forEach(function(item) {
+		var file = item.replace(/['"]+/g, "");
+		if (file.endsWith(".js")) {
+			file = file.replace(".js", "")
+			reaction[file] = require("./reactions/" + file);
+		}
+	})
+});
 
 client.on("ready", function() {
 	console.log("Successfully connected to Discord!");
@@ -35,5 +47,19 @@ client.on("message", function(message) {
 	
 	if (command[input[0]]) {
 		command[input[0]](message);
+	}
+});
+
+client.on("messageReactionAdd", function(messageReaction, user) {
+	//Not on other's messages
+	if(!(messageReaction.message.author.id === client.user.id)) return;
+	//Not if the author is a bot
+	if (user.bot) return;
+
+	//Get decimal codepoint of emoji
+	var input = messageReaction.emoji.name.codePointAt();
+	
+	if (reaction[input]) {
+		reaction[input](messageReaction, user);
 	}
 });

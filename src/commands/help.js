@@ -9,33 +9,23 @@ _Version " + config.MSS.version + ", serving 2.6969696969696970 channels since 2
 Commands
 \`\`\`
 //The help command gives a link to the MSS server.
-!!help
+`+config.MSS.prefix+`help
 
 //The YouTube command supports either a URL or a search query
 //Will only play over 3600 seconds of media if the user is an admin.
-!!yt <URL>n!!yt <Search Query>
-
-!!youtube <URL>
-!!youtube <Search Query>
+`+config.MSS.prefix+`yt <URL>n!!yt <Search Query>
 
 //The skip command skips the currently playing song
 //ADMIN ONLY
-!!skip
+`+config.MSS.prefix+`skip
 
 //The stop command skips and clears the playlist
 //ADMIN ONLY
-!!stop
-
-//The list command lists the playlist
-!!list
-
-//The error command throws an error
-//ADMIN ONLY
-!!error
+`+config.MSS.prefix+`stop
 
 //This command executes javascript code in the script
 //OWNER ONLY - CHANGE IF STATEMENT TO YOUR OWN ID IF YOU ARE RUNNING YOUR OWN BOT
-!!eval
+`+config.MSS.prefix+`eval
 
 //Pastes an invite link into the chat.
 !!invite
