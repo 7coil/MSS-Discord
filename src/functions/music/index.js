@@ -56,3 +56,11 @@ function play(message) {
 		return;
 	}
 }
+
+function add(message, type, url, title, thumb_url) {
+	playlist[message.guild.id] = playlist[message.guild.id] || [];
+	playlist[message.guild.id].push(JSON.stringify({type: type, url: url, title: title, thumb_url: thumb_url}));
+	if (!message.member.voiceChannel.connection) {
+		sound(message);
+	}
+}
