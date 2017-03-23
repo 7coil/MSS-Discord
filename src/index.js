@@ -12,7 +12,7 @@ client.login(config.API.discord);
 //Include all files in the commands directory
 fs.readdir("./commands/", function(err, items) {
 	items.forEach(function(item) {
-		var file = file.replace(/['"]+/g, '');
+		var file = item.replace(/['"]+/g, '');
 		command[file] = require(file);
 	})
 })
