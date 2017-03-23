@@ -1,3 +1,4 @@
+const config = require("./../../config.json");
 const yt = require('ytdl-core');
 const fs = require('fs');
 const msg = require('./../msg/');
@@ -11,6 +12,8 @@ exports.play = play;
 exports.add = add;
 exports.skip = skip;
 exports.stop = stop;
+exports.get = get;
+exports.list = list;
 
 //A function to keep playing that stream
 function sound(message) {
@@ -44,8 +47,8 @@ function play(message) {
 		message.channel.sendMessage('**Music Control Panel**')
 			.then(function(message) {
 				message.react(String.fromCodePoint(10145));
-				//message.react(String.fromCodePoint(8505));
-				//message.react(String.fromCodePoint(128240));
+				message.react(String.fromCodePoint(8505));
+				message.react(String.fromCodePoint(128240));
 			});
 		switch (current[message.guild.id]["type"]) {
 			case "youtube":
@@ -80,4 +83,26 @@ function skip(message) {
 function stop(message) {
 	playlist[message.guild.id] = [];
 	skip(message);
+}
+
+function list(message) {
+	if (playlist[message.guild.id].length > 0) {
+		return richSend(message, "MSS Music Player", playlist[message.guild.id].map(function(sound){return JSON.parse(sound).title;}).join("\n"), "#00FF00");
+	} else {
+		return richSend(message, "MSS Music Player", "There is no music remaining in the playlist.", "#FF0000");
+	}
+}
+
+function get(message) {
+	var embed = new Discord.RichEmbed()
+		.setTitle("MSS Music Player")
+		.setAuthor("MSS", "http://moustacheminer.com/mss.png")
+		.setColor("#00FF00")
+		.setDescription("Now playing: " + current[messageReaction.message.guild.id]["title"])
+		.setFooter("MSS-Discord, " + config.MSS.version, "")
+		.setTimestamp()
+		.setURL(current[messageReaction.message.guild.id]["url"])
+		.setImage(current[messageReaction.message.guild.id]["thumb_url"]);
+
+	message.channel.sendEmbed(embed, "", { disableEveryone: true });
 }
