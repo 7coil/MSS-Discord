@@ -30,11 +30,7 @@ client.on("message", function(message) {
 	let input = message.content.replace (/\n/g, "").split(" ");
 	input[0] = input[0].substring(config.MSS.prefix.length);
 	
-	if (input[0] === "eval" && message.author.id === "190519304972664832") {
-		eval(message.content.substring(config.MSS.prefix.length + input[0].length + 1));
-	}
-	
-	if(command[input[0]]) {
+	if (command[input[0]]) {
 		command[input[0]](message);
 	}
 });
