@@ -1,3 +1,5 @@
+//Copyright Fine Bros. Entertainment
+
 module.exports = function reactWith(message, success, type) {
 	if (success) {
 		message.react(String.fromCodePoint(128077));
@@ -16,5 +18,7 @@ module.exports = function reactWith(message, success, type) {
 		message.react(String.fromCodePoint(10060));
 	} else if (type === "ruler") {
 		message.react(String.fromCodePoint(128207));
+	} else if (type === "robot") {
+		message.react(String.fromCodePoint(129302));
 	}
 }

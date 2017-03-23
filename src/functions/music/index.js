@@ -1,5 +1,6 @@
 const yt = require('ytdl-core');
 const fs = require('fs');
+const msg = require('../msg/react');
 
 var playlist = [];
 var stream = [];
@@ -14,9 +15,10 @@ exports.stop = stop;
 //A function to keep playing that stream
 function sound(message) {
 	var voiceChannel = message.member.voiceChannel;
-	
+
 	voiceChannel.join()
 	.then(connnection => {
+		//Declare a function that will be called by itself so the play(message) command will be called when required, instead of all at once.
 		var looper = function() {
 			play(message);
 			const dispatcher = connnection.playStream(stream[message.guild.id]);
@@ -33,7 +35,8 @@ function play(message) {
 	var voiceChannel = message.member.voiceChannel;
 	
 	if(!voiceChannel) {
-		return message.reply("You are not in a voice channel.");
+		//Not in voice
+		return MSS.msg.react(message, false, "call");
 	}
 	
 	if (playlist[message.guild.id].length > 0) {
@@ -74,7 +77,8 @@ function skip(message) {
 	let voiceChannel = message.member.voiceChannel;
 
 	if (!voiceChannel || !voiceChannel.connection) {
-		return message.reply("There is no bot running in your current voice channel");
+		//No bot in channel
+		return msg.react(false, "robot");
 	}
 
 	message.channel.send("Destroying stream...");
@@ -85,7 +89,8 @@ function stop(message) {
 	let voiceChannel = message.member.voiceChannel;
 	
 	if (!voiceChannel || !voiceChannel.connection) {
-		return message.reply("There is no bot running in your current voice channel");
+		//No bot in channel
+		return msg.react(false, "robot");
 	}
 	
 	playlist[message.guild.id] = [];

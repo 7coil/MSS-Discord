@@ -5,7 +5,7 @@ module.exports = function(message, subheading, description, colour) {
 
 	var embed = new Discord.RichEmbed()
 		.setTitle(subheading)
-		.setAuthor("MSS", "http://moustacheminer.com/dickbutt.jpg")
+		.setAuthor("MSS", "http://moustacheminer.com/mss.png")
 		.setColor(colour)
 		.setDescription(description)
 		.setFooter("MSS-Discord, " + config.MSS.version, "")
