@@ -8,7 +8,8 @@ var current = [];
 exports.sound = sound;
 exports.play = play;
 exports.add = add;
-	
+
+//A function to keep playing that stream
 function sound(message) {
 	var voiceChannel = message.member.voiceChannel;
 	
@@ -25,6 +26,7 @@ function sound(message) {
 	});
 }
 
+//A function to generate the streams from the playlist
 function play(message) {
 	var voiceChannel = message.member.voiceChannel;
 	
@@ -57,6 +59,7 @@ function play(message) {
 	}
 }
 
+//A function to push a new video onto the playlist stack
 function add(message, type, url, title, thumb_url) {
 	playlist[message.guild.id] = playlist[message.guild.id] || [];
 	playlist[message.guild.id].push(JSON.stringify({type: type, url: url, title: title, thumb_url: thumb_url}));

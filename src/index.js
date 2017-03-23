@@ -3,11 +3,17 @@ const config = require("./config.json");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const MSS = require("./functions/");
+const fs = require("fs");
 
 //Login to Discord
 client.login(config.API.discord);
 
-
+//Include all files in the commands directory
+fs.readdir("./functions/", function(err, items) {
+	items.forEach(function(item) {
+		console.dir(item);
+	})
+})
 
 client.on('ready', function() {
 	console.log("Successfully connected to Discord!");
