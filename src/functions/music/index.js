@@ -44,8 +44,8 @@ function play(message) {
 		message.channel.sendMessage('**Music Control Panel**')
 			.then(function(message) {
 				message.react(String.fromCodePoint(10145));
-				message.react(String.fromCodePoint(8505));
-				message.react(String.fromCodePoint(128240));
+				//message.react(String.fromCodePoint(8505));
+				//message.react(String.fromCodePoint(128240));
 			});
 		switch (current[message.guild.id]["type"]) {
 			case "youtube":
