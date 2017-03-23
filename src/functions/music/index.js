@@ -78,7 +78,7 @@ function skip(message) {
 
 	if (!voiceChannel || !voiceChannel.connection) {
 		//No bot in channel
-		return msg.react(false, "robot");
+		return msg.react(message, false, "robot");
 	}
 
 	message.channel.send("Destroying stream...");
@@ -90,9 +90,10 @@ function stop(message) {
 	
 	if (!voiceChannel || !voiceChannel.connection) {
 		//No bot in channel
-		return msg.react(false, "robot");
+		return msg.react(message, false, "robot");
 	}
 	
 	playlist[message.guild.id] = [];
 	skip(message);
 }
+
