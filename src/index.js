@@ -35,6 +35,6 @@ client.on("message", function(message) {
 	}
 	
 	if(command[input[0]]) {
-		command[input[0]](message.content)
+		command[input[0]](message);
 	}
 });
