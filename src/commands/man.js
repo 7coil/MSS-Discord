@@ -9,14 +9,14 @@ fs.readdir("./commands/", function(err, items) {
 	items.forEach(function(item) {
 		var file = item.replace(/['"]+/g, "");
 		if (file.endsWith(".json")) {
-			commands[file] = require("./" + file);
+			file = file.replace(".json", "");
+			commands[file] = require("./" + file + ".json");
 		}
 	});
 });
 
 module.exports = function manpages(message) {
 	let input = message.content.replace (/\n/g, "").split(" ");
-	input[1] = input[1] + ".json";
 
 	//Return if it doesn't exist
 	if (!commands[input[1]]) {
@@ -35,7 +35,7 @@ module.exports = function manpages(message) {
 		.setURL(commands[input[1]].meta.url);
 
 	commands[input[1]].meta.examples.forEach(function(element) {
-		embed.addField(input[1] + " " + element.var, element.description);
+		embed.addField(config.MSS.prefix + input[1] + " " + element.var, element.description);
 	});
 
 	message.channel.sendEmbed(embed, 'MSS-Discord Manual', { disableEveryone: true });
