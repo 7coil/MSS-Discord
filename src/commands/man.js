@@ -1,3 +1,4 @@
+const Discord = require("discord.js");
 const MSS = require("./../functions/");
 const config = require("./../config.json");
 const fs = require("fs");
