@@ -4,7 +4,7 @@ const fs = require("fs");
 var commands = [];
 
 //Get all .json files in this directory to read the man data.
-fs.readdir("./", function(err, items) {
+fs.readdir("./commands/", function(err, items) {
 	items.forEach(function(item) {
 		var file = item.replace(/['"]+/g, "");
 		if (file.endsWith(".json")) {
