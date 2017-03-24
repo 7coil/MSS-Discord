@@ -8,7 +8,7 @@ fs.readdir("./", function(err, items) {
 	items.forEach(function(item) {
 		var file = item.replace(/['"]+/g, "");
 		if (file.endsWith(".json")) {
-			commands[file] = require("./reactions/" + file);
+			commands[file] = require("./" + file);
 		}
 	});
 });
