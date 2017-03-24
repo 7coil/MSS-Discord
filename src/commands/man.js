@@ -16,7 +16,7 @@ fs.readdir("./commands/", function(err, items) {
 
 module.exports = function manpages(message) {
 	let input = message.content.replace (/\n/g, "").split(" ");
-	let input[1] = input[1] + ".json";
+	input[1] = input[1] + ".json";
 
 	//Return if it doesn't exist
 	if (!commands[input[1]]) {
