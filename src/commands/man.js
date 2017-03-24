@@ -22,7 +22,7 @@ module.exports = function manpages(message) {
 		return false;
 	}
 
-	const embed = new Discord.RichEmbed()
+	var embed = new Discord.RichEmbed()
 		.setTitle(command[input[1]].meta.name)
 		.setAuthor("MSS Man Pages", "http://moustacheminer.com/mss.png")
 		.setColor("#00AE86")
@@ -32,7 +32,7 @@ module.exports = function manpages(message) {
 		.setURL(command[input[1]].meta.url);
 
 	command[input[1]].meta.examples.forEach(function(element) {
-		.addField(input[1] + " " + element.var, element.description);
+		embed.addField(input[1] + " " + element.var, element.description);
 	});
 
 	message.channel.sendEmbed(embed, 'MSS-Discord Manual', { disableEveryone: true });
