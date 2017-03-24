@@ -16,9 +16,10 @@ fs.readdir("./commands/", function(err, items) {
 
 module.exports = function manpages(message) {
 	let input = message.content.replace (/\n/g, "").split(" ");
+	let input[1] = input[1] + ".json";
 
 	//Return if it doesn't exist
-	if (!commands[input[1] + ".json"]) {
+	if (!commands[input[1]]) {
 		MSS.msg.react(message, false, "link");
 		message.reply("The command either does not exist, or does not have a .json metadata file.");
 		return false;
