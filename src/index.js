@@ -18,7 +18,9 @@ fs.readdir("./commands/", function(err, items) {
 			file = file.replace(".js", "")
 			command[file] = require("./commands/" + file);
 		}
-	})
+	});
+	//List all avaliable commands
+	console.dir(command);
 });
 
 //Include all files in the commands directory for reactions
@@ -29,12 +31,12 @@ fs.readdir("./reactions/", function(err, items) {
 			file = file.replace(".js", "")
 			reaction[file] = require("./reactions/" + file);
 		}
-	})
+	});
+	//List all avalible reactions
+	console.dir(reaction);
 });
 
-//List all avaliable commands
-console.dir(command);
-console.dir(reaction);
+
 
 client.on("ready", function() {
 	console.log("Successfully connected to Discord!");
