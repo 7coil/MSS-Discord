@@ -32,6 +32,10 @@ fs.readdir("./reactions/", function(err, items) {
 	})
 });
 
+//List all avaliable commands
+console.dir(command);
+console.dir(reaction);
+
 client.on("ready", function() {
 	console.log("Successfully connected to Discord!");
 	client.user.setGame(config.MSS.prefix + "help | " + config.MSS.version);
@@ -59,6 +63,8 @@ client.on("messageReactionAdd", function(messageReaction, user) {
 	//Get decimal codepoint of emoji
 	var input = messageReaction.emoji.name.codePointAt().toString();
 	
+	console.log(input);
+
 	if (reaction[input]) {
 		reaction[input](messageReaction, user);
 	}
