@@ -1,0 +1,13 @@
+{
+	"meta": {
+		"name": "MSS-Discord man pages",
+		"description": "A command that replies with help for commands.",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "<command>",
+				"description": "Returns a man page, just like this one."
+			}
+		]
+	}
+}
