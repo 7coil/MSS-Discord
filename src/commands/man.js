@@ -17,7 +17,7 @@ module.exports = function manpages(message) {
 	let input = message.content.replace (/\n/g, "").split(" ");
 
 	//Return if it doesn't exist
-	if (!commands[input[1]]) {
+	if (!commands[input[1] + ".json"]) {
 		MSS.msg.react(message, false, "link");
 		message.reply("The command either does not exist, or does not have a .json metadata file.");
 		return false;
