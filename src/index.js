@@ -21,7 +21,7 @@ fs.readdir("./commands/", function(err, items) {
 		}
 	});
 	//List all avaliable commands
-	console.dir(command);
+	//console.dir(command);
 });
 
 //Include all files in the commands directory for reactions
@@ -35,7 +35,7 @@ fs.readdir("./reactions/", function(err, items) {
 		}
 	});
 	//List all avalible reactions
-	console.dir(reaction);
+	//console.dir(reaction);
 });
 
 
