@@ -1,5 +1,6 @@
 const MSS = require("./../functions/");
 const config = require("./../config.json");
+const fs = require("fs");
 var commands = [];
 
 //Get all .json files in this directory to read the man data.
