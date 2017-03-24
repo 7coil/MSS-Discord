@@ -24,10 +24,10 @@ module.exports = function manpages(message) {
 	}
 
 	var embed = new Discord.RichEmbed()
-		.setTitle(command[input[1]].meta.name)
+		.setTitle(commands[input[1]].meta.name)
 		.setAuthor("MSS Man Pages", "http://moustacheminer.com/mss.png")
 		.setColor("#00AE86")
-		.setDescription(command[input[1]].meta.description)
+		.setDescription(commands[input[1]].meta.description)
 		.setFooter("MSS-Discord, " + config.MSS.version, "")
 		.setTimestamp()
 		.setURL(commands[input[1]].meta.url);
