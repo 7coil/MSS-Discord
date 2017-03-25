@@ -64,6 +64,7 @@ function play(message) {
 						stream[message.guild.id] += chunk;
 					});
 				});
+				break;
 		}
 	} else {
 		if (voiceChannel && voiceChannel.connection) voiceChannel.leave();
