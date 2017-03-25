@@ -19,7 +19,7 @@ module.exports = function manpages(message) {
 	let input = message.content.replace (/\n/g, "").split(" ");
 
 	//Return the usage of the man command if no attributes were given
-	if(input[1]) {
+	if(!input[1]) {
 		var print;
 		commands.forEach(function(element) {
 			print += " - " + element.meta.name + "\n";
