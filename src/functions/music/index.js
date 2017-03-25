@@ -61,14 +61,10 @@ function play(message) {
 				stream[message.guild.id] = fs.createReadStream(current[message.guild.id]["url"]);
 				break;
 			case "http":
-				http.get(current[message.guild.id]["url"]).pipe(
-					stream[message.guild.id];
-				);
+				http.get(current[message.guild.id]["url"]).pipe(stream[message.guild.id]);
 				break;
 			case "https":
-				https.get(current[message.guild.id]["url"]).pipe(
-					stream[message.guild.id];
-				);
+				https.get(current[message.guild.id]["url"]).pipe(stream[message.guild.id]);
 				break;
 		}
 	} else {
