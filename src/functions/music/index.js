@@ -60,7 +60,7 @@ function play(message) {
 				stream[message.guild.id] = fs.createReadStream(current[message.guild.id]["url"]);
 				break;
 			case "url":
-				request.get(message.content.substring(input[0].length + 1), function(res) {
+				request.get(current[message.guild.id]["url"]), function(res) {
 					res.on('data', function(chunk) {
 						stream[message.guild.id] += chunk;
 					});
