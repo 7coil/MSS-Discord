@@ -8,7 +8,7 @@ module.exports = function(message) {
 		try {
 			eval(message.content.substring(config.MSS.prefix.length + input[0].length + 1));
 		} catch(err) {
-			message.channel.sendMessage(`\`\`\`err.stack\`\`\``);
+			message.channel.sendMessage(`\`\`\``+err.stack+``\`\`\``);
 		}
 	} else {
 		MSS.msg.react(message, false, "X");
