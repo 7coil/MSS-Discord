@@ -4,6 +4,8 @@ const request = require("request");
 const url = require("url");
 
 module.exports = function yt(message) {
+	return message.reply("This function has been disabled in software. Please use the "+config.MSS.prefix+"yt command. See '" + config.MSS.prefix + "man yt' for more details.")
+
 	let input = message.content.replace (/\n/g, "").split(" ");
 	//Get the voice channel that it's going to play to.
 	let voiceChannel = message.member.voiceChannel;
