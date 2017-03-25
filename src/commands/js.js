@@ -9,7 +9,7 @@ module.exports = function(message) {
 		let input = message.content.replace (/\n/g, "").split(" ");
 		input[0] = input[0].substring(config.MSS.prefix.length);
 		try {
-			s.run(message.content.substring(config.MSS.prefix.length + input[0].length + 1), function() {
+			s.run(message.content.substring(config.MSS.prefix.length + input[0].length + 1), function(output) {
 				message.reply(`\n\`\`\``+output.result+`\`\`\``);
 			});
 		} catch(err) {
