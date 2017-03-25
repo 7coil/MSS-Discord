@@ -1,7 +1,7 @@
 const config = require("./../config.json");
 const MSS = require("./../functions/");
 const request = require("request");
-const url = require("url").URL;
+const URL = require("url").URL;
 
 module.exports = function yt(message) {
 	let input = message.content.replace (/\n/g, "").split(" ");
@@ -16,7 +16,7 @@ module.exports = function yt(message) {
 		return false;
 	}
 
-	let sound = new url(input[1]);
+	let sound = new URL(input[1]);
 
 	switch (sound.protocol) {
 		case "http:":
