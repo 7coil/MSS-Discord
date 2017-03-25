@@ -4,7 +4,7 @@ const fs = require('fs');
 const msg = require('./../msg/');
 const Discord = require("discord.js");
 const http = require("http");
-const http = require("https");
+const https = require("https");
 
 var playlist = [];
 var stream = [];
