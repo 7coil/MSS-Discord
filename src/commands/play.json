@@ -1,0 +1,13 @@
+{
+	"meta": {
+		"name": "MSS-Discord Play",
+		"description": "A command that plays compatible sound files from a URL.",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "<URL>",
+				"description": "Add this sound file to the playlist."
+			}
+		]
+	}
+}

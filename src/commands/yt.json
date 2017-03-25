@@ -10,7 +10,7 @@
 			},
 			{
 				"var": "<URL>",
-				"description": "Play this YouTube video and add to playlist"
+				"description": "Add this YouTube video to the playlist"
 			}
 		]
 	}
