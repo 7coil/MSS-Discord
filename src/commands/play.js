@@ -16,7 +16,7 @@ module.exports = function yt(message) {
 		return false;
 	}
 
-	let url = new URL(input[1]);
+	let url = new url(input[1]);
 
 	switch (url.protocol) {
 		case "http:":
