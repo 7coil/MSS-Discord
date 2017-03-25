@@ -3,7 +3,7 @@ const yt = require('ytdl-core');
 const fs = require('fs');
 const msg = require('./../msg/');
 const Discord = require("discord.js");
-const request = require("request");
+const http = require("http");
 
 var playlist = [];
 var stream = [];
@@ -60,10 +60,8 @@ function play(message) {
 				stream[message.guild.id] = fs.createReadStream(current[message.guild.id]["url"]);
 				break;
 			case "url":
-				request.get(current[message.guild.id]["url"], function(res) {
-					res.on('data', function(chunk) {
-						stream[message.guild.id] += chunk;
-					});
+				http.request(current[message.guild.id]["url"], function(res) {
+					res.pipe(stream[message.guild.id]);
 				});
 				break;
 		}
