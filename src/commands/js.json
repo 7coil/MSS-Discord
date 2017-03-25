@@ -1,0 +1,13 @@
+{
+	"meta": {
+		"name": "Sandbox - A nifty javascript sandbox for node.js",
+		"description": "A command that lets you run JS in a safe to use sandbox.",
+		"url": "http://gf3.github.io/sandbox/",
+		"examples" : [
+			{
+				"var": "<js code>",
+				"description": "Runs code in a sandbox"
+			}
+		]
+	}
+}

@@ -1,7 +1,7 @@
 {
 	"meta": {
 		"name": "MSS-Discord EVAL",
-		"description": "A command that you shouldn't use.",
+		"description": "A command that you shouldn't use. For running JS inside a sandbox and NOT inside MSS-Discord, please use the js command.",
 		"url": "http://moustacheminer.com/",
 		"examples" : [
 			{
