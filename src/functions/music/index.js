@@ -4,6 +4,7 @@ const fs = require('fs');
 const msg = require('./../msg/');
 const Discord = require("discord.js");
 const http = require("http");
+const http = require("https");
 
 var playlist = [];
 var stream = [];
@@ -59,8 +60,13 @@ function play(message) {
 			case "local":
 				stream[message.guild.id] = fs.createReadStream(current[message.guild.id]["url"]);
 				break;
-			case "url":
+			case "http":
 				http.request(current[message.guild.id]["url"], function(res) {
+					res.pipe(stream[message.guild.id]);
+				});
+				break;
+			case "https":
+				https.request(current[message.guild.id]["url"], function(res) {
 					res.pipe(stream[message.guild.id]);
 				});
 				break;

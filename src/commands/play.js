@@ -1,6 +1,7 @@
 const config = require("./../config.json");
 const MSS = require("./../functions/");
 const request = require("request");
+const url = require("url").URL;
 
 module.exports = function yt(message) {
 	let input = message.content.replace (/\n/g, "").split(" ");
@@ -15,6 +16,19 @@ module.exports = function yt(message) {
 		return false;
 	}
 
-	MSS.msg.react(message, true);
-	MSS.music.add(message, "url", input[1], input[1], "http://moustacheminer.com/mss.png");
+	let url = new URL(input[1]);
+
+	switch (url.protocol) {
+		case "http:":
+			MSS.msg.react(message, true);
+			MSS.music.add(message, "http", input[1], input[1], "http://moustacheminer.com/mss.png");
+			break;
+		case "https:":
+			MSS.msg.react(message, true);
+			MSS.music.add(message, "https", input[1], input[1], "http://moustacheminer.com/mss.png");
+			break;
+		default:
+			MSS.msg.react(message, false, "link");
+			break;
+	}
 }
