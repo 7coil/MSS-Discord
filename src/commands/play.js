@@ -16,9 +16,9 @@ module.exports = function yt(message) {
 		return false;
 	}
 
-	let url = new url(input[1]);
+	let sound = new url(input[1]);
 
-	switch (url.protocol) {
+	switch (sound.protocol) {
 		case "http:":
 			MSS.msg.react(message, true);
 			MSS.music.add(message, "http", input[1], input[1], "http://moustacheminer.com/mss.png");
