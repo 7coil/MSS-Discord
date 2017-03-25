@@ -3,8 +3,7 @@ const yt = require('ytdl-core');
 const fs = require('fs');
 const msg = require('./../msg/');
 const Discord = require("discord.js");
-const http = require("http");
-const https = require("https");
+const http = require("request");
 
 var playlist = [];
 var stream = [];
@@ -61,15 +60,11 @@ function play(message) {
 				stream[message.guild.id] = fs.createReadStream(current[message.guild.id]["url"]);
 				break;
 			case "http":
-				http.get(current[message.guild.id]["url"], function(res) {
-					res.pipe(stream[message.guild.id]);
-				});
-				break;
 			case "https":
-				https.get(current[message.guild.id]["url"], function(res) {
-					res.pipe(stream[message.guild.id]);
-				});
+				request(current[message.guild.id]["url"]).pipe(stream[message.guild.id]);
 				break;
+
+
 		}
 	} else {
 		if (voiceChannel && voiceChannel.connection) voiceChannel.leave();
