@@ -3,7 +3,7 @@ const yt = require('ytdl-core');
 const fs = require('fs');
 const msg = require('./../msg/');
 const Discord = require("discord.js");
-const http = require("request");
+const request = require("request");
 
 var playlist = [];
 var stream = [];
