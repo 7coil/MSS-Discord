@@ -7,7 +7,7 @@ module.exports = function(message) {
 		input[0] = input[0].substring(config.MSS.prefix.length);
 		eval(message.content.substring(config.MSS.prefix.length + input[0].length + 1));
 	} else {
-		MSS.msg.react(false, "X");
+		MSS.msg.react(message, false, "X");
 	}
 }
 
