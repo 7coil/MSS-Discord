@@ -22,7 +22,7 @@ module.exports = function manpages(message) {
 	if(!input[1]) {
 		var print = "Listing all valid commands - See info for commands by running " + config.MSS.prefix + "man <command>\n";
 		commands.forEach(function(element) {
-			print += " - " + element.meta.name + "\n";
+			print.concat(" - " + element.meta.name + "\n");
 		});
 		message.reply(print);
 		return false;
