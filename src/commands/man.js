@@ -11,7 +11,7 @@ fs.readdir("./commands/", function(err, items) {
 		var file = item.replace(/['"]+/g, "");
 		if (file.endsWith(".json")) {
 			file = file.replace(".json", "");
-			print += consig.MSS.prefix + file + "\n";
+			print += config.MSS.prefix + file + "\n";
 			commands[file] = require("./" + file + ".json");
 		}
 	});
