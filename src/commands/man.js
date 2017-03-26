@@ -3,6 +3,7 @@ const MSS = require("./../functions/");
 const config = require("./../config.json");
 const fs = require("fs");
 var commands = [];
+var print = "Listing all valid commands - See info for commands by running " + config.MSS.prefix + "man <command>\n";
 
 //Get all .json files in this directory to read the man data.
 fs.readdir("./commands/", function(err, items) {
@@ -10,6 +11,7 @@ fs.readdir("./commands/", function(err, items) {
 		var file = item.replace(/['"]+/g, "");
 		if (file.endsWith(".json")) {
 			file = file.replace(".json", "");
+			print += " - " + file + "\n";
 			commands[file] = require("./" + file + ".json");
 		}
 	});
@@ -20,11 +22,6 @@ module.exports = function manpages(message) {
 
 	//Return the usage of the man command if no attributes were given
 	if(!input[1]) {
-		var print = "Listing all valid commands - See info for commands by running " + config.MSS.prefix + "man <command>\n";
-		commands.forEach(function(element, index) {
-			console.log(index);
-			print.concat(" - " + index + "\n");
-		});
 		message.reply(print);
 		return false;
 	}
