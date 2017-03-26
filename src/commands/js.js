@@ -8,9 +8,8 @@ module.exports = function(message) {
 
 	if(message.author.id === config.MSS.sysadmin) {
 		let input = message.content.replace (/\n/g, " ").split(" ");
-		input[0] = input[0].substring(config.MSS.prefix.length);
 		try {
-			let command = message.content.substring(config.MSS.prefix.length + input[0].length + 1);
+			let command = message.content.substring(input[0].length + 1);
 			if (!command) return message.reply("No code was supplied.");
 			s.run(command, function(output) {
 				var embed = new Discord.RichEmbed()
