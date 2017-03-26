@@ -14,7 +14,7 @@ module.exports = function(message) {
 			if (!command) return message.reply("No code was supplied.");
 
 			s.run(command, function(output) {
-				var console = output.console.length === 0 ? ["No output"] : output.console;
+				var consoleout = output.console.length === 0 ? ["No output"] : output.console;
 
 				var embed = new Discord.RichEmbed()
 					.setTitle("MSS-Discord JS Sandbox")
@@ -25,10 +25,10 @@ module.exports = function(message) {
 					.setTimestamp()
 					.setURL("http://moustacheminer.com/")
 					.addField("Result", output.result)
-					.addField("Console", output.console);
+					.addField("Console", consoleout);
 
 				console.log(output.result);
-				console.log(console);
+				console.log(consoleout);
 
 				message.channel.sendEmbed(embed, 'MSS-Discord JS Sandbox', { disableEveryone: true });
 			});
