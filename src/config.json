@@ -1,11 +1,7 @@
 {
-	"API": {
-		"discord": "",
-		"youtube": ""
-	},
 	"MSS": {
 		"sysadmin": "190519304972664832",
-		"version": "2017.03.23a",
+		"version": "2017.03.26a",
 		"prefix": "!!"
 	}
 }

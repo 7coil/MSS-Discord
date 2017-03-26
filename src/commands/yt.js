@@ -1,9 +1,10 @@
 const config = require("./../config.json");
+const API = require("./../api.json");
 const MSS = require("./../functions/");
 const searchYT = require('youtube-node');
 const searchYTClient = new searchYT();
 const yt = require('ytdl-core');
-searchYTClient.setKey(config.API.youtube);
+searchYTClient.setKey(API.youtube);
 
 module.exports = function yt(message) {
 	let input = message.content.replace (/\n/g, "").split(" ");

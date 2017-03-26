@@ -1,5 +1,6 @@
 //Get the required shit together
 const config = require("./config.json");
+const API = require("./api.json");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const MSS = require("./functions/");
@@ -8,7 +9,7 @@ var command = [];
 var reaction = [];
 
 //Login to Discord
-client.login(config.API.discord);
+client.login(API.discord);
 
 //Include all files in the commands directory for commands
 fs.readdir("./commands/", function(err, items) {
