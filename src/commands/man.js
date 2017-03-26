@@ -20,11 +20,11 @@ module.exports = function manpages(message) {
 
 	//Return the usage of the man command if no attributes were given
 	if(!input[1]) {
-		var print;
+		var print = "Listing all valid commands - See info for commands by running " + config.MSS.prefix + "man <command>\n";
 		commands.forEach(function(element) {
 			print += " - " + element.meta.name + "\n";
 		});
-		message.reply("Listing all valid commands - See info for commands by running " + config.MSS.prefix + "man <command>\n" + print);
+		message.reply(print);
 		return false;
 	}
 
