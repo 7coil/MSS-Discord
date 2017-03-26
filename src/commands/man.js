@@ -21,9 +21,8 @@ module.exports = function manpages(message) {
 	//Return the usage of the man command if no attributes were given
 	if(!input[1]) {
 		var print = "Listing all valid commands - See info for commands by running " + config.MSS.prefix + "man <command>\n";
-		commands.forEach(function(element) {
-			console.log(element.meta.name);
-			print.concat(" - " + element.meta.name + "\n");
+		commands.forEach(function(element, index) {
+			print.concat(" - " + index + "\n");
 		});
 		message.reply(print);
 		return false;
