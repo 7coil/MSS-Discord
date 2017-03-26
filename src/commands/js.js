@@ -28,7 +28,7 @@ module.exports = function(message) {
 					.addField("Console", output.console);
 
 				console.log(output.result);
-				console.log(output.console);
+				console.log(console);
 
 				message.channel.sendEmbed(embed, 'MSS-Discord JS Sandbox', { disableEveryone: true });
 			});
