@@ -1,6 +1,7 @@
 const config = require("./../config.json");
 const MSS = require("./../functions/");
 const Sandbox = require("sandbox");
+const Discord = require("discord.js");
 
 module.exports = function(message) {
 	var s = new Sandbox;
