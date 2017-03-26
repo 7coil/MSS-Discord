@@ -16,7 +16,7 @@ module.exports = function(message) {
 					.setTitle("MSS-Discord JS Sandbox")
 					.setAuthor(message.author.username, "http://moustacheminer.com/mss.png")
 					.setColor("#00AE86")
-					.setDescription(command)
+					.setDescription(command || "No command input.")
 					.setFooter("MSS-Discord, " + config.MSS.version, "")
 					.setTimestamp()
 					.setURL("http://moustacheminer.com/")
