@@ -11,12 +11,13 @@ module.exports = function(message) {
 		input[0] = input[0].substring(config.MSS.prefix.length);
 		try {
 			let command = message.content.substring(config.MSS.prefix.length + input[0].length + 1);
+			if (!command) return message.reply("No code was supplied.");
 			s.run(command, function(output) {
 				var embed = new Discord.RichEmbed()
 					.setTitle("MSS-Discord JS Sandbox")
 					.setAuthor(message.author.username, "http://moustacheminer.com/mss.png")
 					.setColor("#00AE86")
-					.setDescription(command || "No command input.")
+					.setDescription(command)
 					.setFooter("MSS-Discord, " + config.MSS.version, "")
 					.setTimestamp()
 					.setURL("http://moustacheminer.com/")
