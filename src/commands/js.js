@@ -20,8 +20,8 @@ module.exports = function(message) {
 					.setFooter("MSS-Discord, " + config.MSS.version, "")
 					.setTimestamp()
 					.setURL("http://moustacheminer.com/")
-					.addField("Result", output.result)
-					.addField("Console", output.console);
+					.addField("Result", output.result || "No output")
+					.addField("Console", output.console || "No output");
 
 				message.channel.sendEmbed(embed, 'MSS-Discord JS Sandbox', { disableEveryone: true });
 			});
