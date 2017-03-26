@@ -14,6 +14,8 @@ module.exports = function(message) {
 			if (!command) return message.reply("No code was supplied.");
 
 			s.run(command, function(output) {
+				var console = output.console.length === 0 ? ["No output"] : console;
+
 				var embed = new Discord.RichEmbed()
 					.setTitle("MSS-Discord JS Sandbox")
 					.setAuthor("js", "http://moustacheminer.com/mss.png")
@@ -22,8 +24,8 @@ module.exports = function(message) {
 					.setFooter("MSS-Discord, " + config.MSS.version, "")
 					.setTimestamp()
 					.setURL("http://moustacheminer.com/")
-					.addField("Result", output.result || "No output")
-					.addField("Console", output.console || "No output");
+					.addField("Result", output.result)
+					.addField("Console", output.console);
 
 				console.log(output.result);
 				console.log(output.console);
