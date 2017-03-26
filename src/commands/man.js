@@ -29,7 +29,7 @@ module.exports = function manpages(message) {
 	//Return if it doesn't exist
 	if (!commands[input[1]]) {
 		MSS.msg.react(message, false, "link");
-		message.reply("No manual entry for" + input[1]);
+		message.reply("No manual entry for " + input[1]);
 		return false;
 	}
 
