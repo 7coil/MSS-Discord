@@ -14,7 +14,7 @@ module.exports = function(message) {
 			if (!command) return message.reply("No code was supplied.");
 
 			s.run(command, function(output) {
-				var console = output.console.length === 0 ? ["No output"] : console;
+				var console = output.console.length === 0 ? ["No output"] : output.console;
 
 				var embed = new Discord.RichEmbed()
 					.setTitle("MSS-Discord JS Sandbox")
