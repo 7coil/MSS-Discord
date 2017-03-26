@@ -3,7 +3,7 @@ const MSS = require("./../functions/");
 const config = require("./../config.json");
 const fs = require("fs");
 var commands = [];
-var print = "Listing all valid commands - See info for commands by running " + config.MSS.prefix + "man <command>\n";
+var print = "What manual page do you want?\n" + config.MSS.prefix + "man <command>\n";
 
 //Get all .json files in this directory to read the man data.
 fs.readdir("./commands/", function(err, items) {
@@ -11,7 +11,7 @@ fs.readdir("./commands/", function(err, items) {
 		var file = item.replace(/['"]+/g, "");
 		if (file.endsWith(".json")) {
 			file = file.replace(".json", "");
-			print += " - " + file + "\n";
+			print += consig.MSS.prefix + file + "\n";
 			commands[file] = require("./" + file + ".json");
 		}
 	});
@@ -29,7 +29,7 @@ module.exports = function manpages(message) {
 	//Return if it doesn't exist
 	if (!commands[input[1]]) {
 		MSS.msg.react(message, false, "link");
-		message.reply("The command either does not exist, or does not have a .json metadata file.");
+		message.reply("No manual entry for" + input[1]);
 		return false;
 	}
 

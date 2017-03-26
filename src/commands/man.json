@@ -1,7 +1,7 @@
 {
 	"meta": {
-		"name": "MSS-Discord man pages",
-		"description": "A command that replies with help for commands.",
+		"name": "man - an interface to the off-line reference manuals",
+		"description": "man is MSS' manual pager. Each argument given to man is normally the name of the program, utility or function. The manual page assiated with each of these arguments is then found and displayed.",
 		"url": "http://moustacheminer.com/",
 		"examples" : [
 			{
