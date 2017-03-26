@@ -13,8 +13,8 @@ module.exports = function(message) {
 			let command = message.content.substring(config.MSS.prefix.length + input[0].length + 1);
 			s.run(command, function(output) {
 				var embed = new Discord.RichEmbed()
-					.setTitle(commands[input[1]].meta.name)
-					.setAuthor("MSS-Discord JS Sandbox", "http://moustacheminer.com/mss.png")
+					.setTitle("MSS-Discord JS Sandbox")
+					.setAuthor(message.author.username, "http://moustacheminer.com/mss.png")
 					.setColor("#00AE86")
 					.setDescription(command)
 					.setFooter("MSS-Discord, " + config.MSS.version, "")
