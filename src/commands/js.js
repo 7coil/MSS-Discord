@@ -10,11 +10,13 @@ module.exports = function(message) {
 		let input = message.content.replace (/\n/g, " ").split(" ");
 		try {
 			let command = message.content.substring(input[0].length + 1);
+			console.log(command);
 			if (!command) return message.reply("No code was supplied.");
+
 			s.run(command, function(output) {
 				var embed = new Discord.RichEmbed()
 					.setTitle("MSS-Discord JS Sandbox")
-					.setAuthor(message.author.username, "http://moustacheminer.com/mss.png")
+					.setAuthor("js", "http://moustacheminer.com/mss.png")
 					.setColor("#00AE86")
 					.setDescription(command)
 					.setFooter("MSS-Discord, " + config.MSS.version, "")
@@ -23,8 +25,12 @@ module.exports = function(message) {
 					.addField("Result", output.result || "No output")
 					.addField("Console", output.console || "No output");
 
+				console.log(output.result);
+				console.log(output.console);
+
 				message.channel.sendEmbed(embed, 'MSS-Discord JS Sandbox', { disableEveryone: true });
 			});
+
 		} catch(err) {
 			message.reply("Something happened and an ACTUAL ERROR happened outside the sandbox.");
 		}
