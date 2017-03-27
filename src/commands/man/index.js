@@ -24,12 +24,10 @@ module.exports = function manpages(message) {
 		return false;
 	}
 
-	//Remove all non-alphanumeric characters just in case people put the prefix in
-	input[1] = input[1].replace(/[^a-z0-9]/gi,'');
-
 	//Return an entire list of commands via DM
 	if(input[1] === "all") {
 		message.reply("I sent a message via Direct Messaging with details enclosed.");
+		console.dir(commands);
 
 		commands.forEach(function(item, index) {
 			var embed = new Discord.RichEmbed()
