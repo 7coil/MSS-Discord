@@ -30,6 +30,7 @@ module.exports = function manpages(message) {
 		console.dir(commands);
 
 		commands.forEach(function(item, index) {
+			console.dir(item);
 			var embed = new Discord.RichEmbed()
 				.setTitle(item.meta.name)
 				.setAuthor("MSS Man Pages", "http://moustacheminer.com/mss.png")
