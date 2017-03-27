@@ -3,7 +3,7 @@ const MSS = require("./../../functions/");
 const config = require("./../../config.json");
 const fs = require("fs");
 var commands = [];
-var print = "What manual page do you want?\n" + config.MSS.prefix + "man <command>\n";
+var print = "What manual page do you want?\n" + config.MSS.prefix + "man <command>\n" + config.MSS.prefix + "man all\n";
 
 //Get all .json files in this directory to read the man data.
 fs.readdir("./commands/", function(err, items) {
@@ -31,6 +31,30 @@ module.exports = function manpages(message) {
 		return false;
 	}
 
+	//Return an entire list of commands via DM
+	if(input[1] === "all") {
+		message.reply("I sent a message via Direct Messaging with details enclosed.");
+
+		commands.forEach(function(item, index) {
+			var embed = new Discord.RichEmbed()
+				.setTitle(item.meta.name)
+				.setAuthor("MSS Man Pages", "http://moustacheminer.com/mss.png")
+				.setColor("#00AE86")
+				.setDescription(item.meta.description)
+				.setFooter("MSS-Discord, " + config.MSS.version, "")
+				.setTimestamp()
+				.setURL(item.meta.url);
+
+			item.meta.examples.forEach(function(element) {
+				embed.addField(config.MSS.prefix + index + " " + element.var, element.description);
+			});
+
+			message.author.sendEmbed(embed, index, { disableEveryone: true });
+		});
+
+		return true;
+	}
+
 	//Remove all non-alphanumeric characters just in case people put the prefix in
 	input[1] = input[1].replace(/[^a-z0-9]/gi,'');
 
@@ -47,5 +71,5 @@ module.exports = function manpages(message) {
 		embed.addField(config.MSS.prefix + input[1] + " " + element.var, element.description);
 	});
 
-	message.channel.sendEmbed(embed, 'MSS-Discord Manual', { disableEveryone: true });
+	message.channel.sendEmbed(embed, input[1], { disableEveryone: true });
 }
