@@ -42,6 +42,8 @@ module.exports = function manpages(message) {
 				.setURL(item.meta.url);
 
 			item.meta.examples.forEach(function(element) {
+				//!!command <var> <var>
+				//Description
 				embed.addField(config.MSS.prefix + index + " " + element.var, element.description);
 			});
 
