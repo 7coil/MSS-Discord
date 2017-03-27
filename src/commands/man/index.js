@@ -31,6 +31,9 @@ module.exports = function manpages(message) {
 		return false;
 	}
 
+	//Remove all non-alphanumeric characters just in case people put the prefix in
+	input[1] = input[1].replace(/[^a-z0-9]/gi,'');
+
 	var embed = new Discord.RichEmbed()
 		.setTitle(commands[input[1]].meta.name)
 		.setAuthor("MSS Man Pages", "http://moustacheminer.com/mss.png")
