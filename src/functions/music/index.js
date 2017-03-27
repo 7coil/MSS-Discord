@@ -90,8 +90,16 @@ function skip(message) {
 }
 
 function stop(message) {
+	var voiceChannel = message.member.voiceChannel;
+	if (!voiceChannel || !voiceChannel.connection) {
+		//No bot in channel
+		return MSS.msg.react(message, false, "robot");
+	}
+
+	if (voiceChannel && voiceChannel.connection) voiceChannel.leave();
 	playlist[message.guild.id] = [];
-	skip(message);
+	if (stream[message.guild.id]) stream[message.guild.id].destroy();
+	return;
 }
 
 function list(message) {
