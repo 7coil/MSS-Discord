@@ -17,6 +17,8 @@ fs.readdir("./commands/", function(err, items) {
 	});
 });
 
+console.dir(list);
+
 module.exports = function manpages(message) {
 	let input = message.content.replace(/\n/g, " ").split(" ");
 
@@ -32,19 +34,19 @@ module.exports = function manpages(message) {
 
 		list.forEach(function(item) {
 			var embed = new Discord.RichEmbed()
-				.setTitle(commands[input[item]].meta.name)
+				.setTitle(commands[item].meta.name)
 				.setAuthor("MSS Man Pages", "http://moustacheminer.com/mss.png")
 				.setColor("#00AE86")
-				.setDescription(commands[input[item]].meta.description)
+				.setDescription(commands[item].meta.description)
 				.setFooter("MSS-Discord, " + config.MSS.version, "")
 				.setTimestamp()
-				.setURL(commands[input[item]].meta.url);
+				.setURL(commands[item].meta.url);
 
-			commands[input[item]].meta.examples.forEach(function(element) {
-				embed.addField(config.MSS.prefix + input[item] + " " + element.var, element.description);
+			commands[item].meta.examples.forEach(function(element) {
+				embed.addField(config.MSS.prefix + item + " " + element.var, element.description);
 			});
 
-			message.channel.sendEmbed(embed, input[item], { disableEveryone: true });
+			message.channel.sendEmbed(embed, item, { disableEveryone: true });
 		});
 
 		return false;
