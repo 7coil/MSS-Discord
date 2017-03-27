@@ -24,12 +24,8 @@ module.exports = function manpages(message) {
 		return false;
 	}
 
-	//Return if it doesn't exist
-	if (!commands[input[1]]) {
-		MSS.msg.react(message, false, "link");
-		message.reply("No manual entry for " + input[1]);
-		return false;
-	}
+	//Remove all non-alphanumeric characters just in case people put the prefix in
+	input[1] = input[1].replace(/[^a-z0-9]/gi,'');
 
 	//Return an entire list of commands via DM
 	if(input[1] === "all") {
@@ -52,11 +48,15 @@ module.exports = function manpages(message) {
 			message.author.sendEmbed(embed, index, { disableEveryone: true });
 		});
 
-		return true;
+		return false;
 	}
 
-	//Remove all non-alphanumeric characters just in case people put the prefix in
-	input[1] = input[1].replace(/[^a-z0-9]/gi,'');
+	//Return if it doesn't exist
+	if (!commands[input[1]]) {
+		MSS.msg.react(message, false, "link");
+		message.reply("No manual entry for " + input[1]);
+		return false;
+	}
 
 	var embed = new Discord.RichEmbed()
 		.setTitle(commands[input[1]].meta.name)
