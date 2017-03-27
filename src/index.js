@@ -18,8 +18,6 @@ fs.readdir("./commands/", function(err, items) {
 		console.log(file);
 		command[file] = require("./commands/" + file + "/");
 	});
-	//List all avaliable commands
-	//console.dir(command);
 });
 
 //Include all files in the commands directory for reactions
