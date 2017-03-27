@@ -9,7 +9,7 @@ var print = "What manual page do you want?\n" + config.MSS.prefix + "man <comman
 fs.readdir("./commands/", function(err, items) {
 	items.forEach(function(item) {
 		var file = item.replace(/['"]+/g, "");
-		print += config.MSS.prefix + file + "\n";
+		print += "> " + file + "\n";
 		//Include the meta.json files in the commands directory
 		commands[file] = require("./../" + file + "/meta.json");
 	});
