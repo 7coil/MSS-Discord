@@ -1,5 +1,5 @@
-const config = require("./../config.json");
-const MSS = require("./../functions/");
+const config = require("./../../config.json");
+const MSS = require("./../../functions/");
 const request = require("request");
 const url = require("url");
 

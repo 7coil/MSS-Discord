@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
-const MSS = require("./../functions/");
-const config = require("./../config.json");
+const MSS = require("./../../functions/");
+const config = require("./../../config.json");
 const fs = require("fs");
 var commands = [];
 var print = "What manual page do you want?\n" + config.MSS.prefix + "man <command>\n";

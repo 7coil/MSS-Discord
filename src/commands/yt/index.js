@@ -1,6 +1,6 @@
-const config = require("./../config.json");
-const API = require("./../api.json");
-const MSS = require("./../functions/");
+const config = require("./../../config.json");
+const API = require("./../../api.json");
+const MSS = require("./../../functions/");
 const searchYT = require('youtube-node');
 const searchYTClient = new searchYT();
 const yt = require('ytdl-core');

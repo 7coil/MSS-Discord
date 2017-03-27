@@ -1,5 +1,5 @@
-const config = require("./../config.json");
-const MSS = require("./../functions/");
+const config = require("./../../config.json");
+const MSS = require("./../../functions/");
 
 module.exports = function(message) {
 	if(message.author.id === config.MSS.sysadmin) {

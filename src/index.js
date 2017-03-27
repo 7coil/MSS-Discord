@@ -15,11 +15,8 @@ client.login(API.discord);
 fs.readdir("./commands/", function(err, items) {
 	items.forEach(function(item) {
 		var file = item.replace(/['"]+/g, "");
-		if (file.endsWith(".js")) {
-			file = file.replace(".js", "");
-			console.log(file);
-			command[file] = require("./commands/" + file);
-		}
+		console.log(file);
+		command[file] = require("./commands/" + file + "/");
 	});
 	//List all avaliable commands
 	//console.dir(command);

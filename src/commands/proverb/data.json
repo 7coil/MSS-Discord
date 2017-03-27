@@ -1,15 +1,4 @@
 {
-	"meta": {
-		"name": "fortune-cookie-api",
-		"description": "A command that replies with a proverb. Powered by a list from an open source project",
-		"url": "https://github.com/larryprice/fortune-cookie-api",
-		"examples" : [
-			{
-				"var": "",
-				"description": "Returns a fortune."
-			}
-		]
-	},
 	"proverbs": [
 		"A friend's frown is better than a fool's smile.",
 		"A friend in need is a friend indeed.",

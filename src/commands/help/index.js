@@ -1,4 +1,4 @@
-const config = require("./../config.json");
+const config = require("./../../config.json");
 
 module.exports = function help(message) {
 	message.reply("I sent a message via Direct Messaging with details enclosed.");

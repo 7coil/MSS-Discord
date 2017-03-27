@@ -1,0 +1,13 @@
+{
+	"meta": {
+		"name": "fortune-cookie-api",
+		"description": "A command that replies with a proverb. Powered by a list from an open source project",
+		"url": "https://github.com/larryprice/fortune-cookie-api",
+		"examples" : [
+			{
+				"var": "",
+				"description": "Returns a proverb."
+			}
+		]
+	}
+}
