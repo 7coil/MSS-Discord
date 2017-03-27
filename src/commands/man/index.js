@@ -3,6 +3,7 @@ const MSS = require("./../../functions/");
 const config = require("./../../config.json");
 const fs = require("fs");
 var commands = [];
+var list = [];
 var print = "What manual page do you want?\n" + config.MSS.prefix + "man <command>\n" + config.MSS.prefix + "man all\n";
 
 //Get all .json files in this directory to read the man data.
@@ -11,6 +12,7 @@ fs.readdir("./commands/", function(err, items) {
 		var file = item.replace(/['"]+/g, "");
 		print += "> " + file + "\n";
 		//Include the meta.json files in the commands directory
+		list.push(file);
 		commands[file] = require("./../" + file + "/meta.json");
 	});
 });
@@ -27,29 +29,22 @@ module.exports = function manpages(message) {
 	//Return an entire list of commands via DM
 	if(input[1] === "all") {
 		message.reply("I sent a message via Direct Messaging with details enclosed.");
-		console.dir(commands);
 
-		commands.forEach(function(item, index) {
-			console.log(item);
-			console.log(index);
+		list.forEach(function(item) {
 			var embed = new Discord.RichEmbed()
-				.setTitle(item.meta.name)
+				.setTitle(commands[input[item]].meta.name)
 				.setAuthor("MSS Man Pages", "http://moustacheminer.com/mss.png")
 				.setColor("#00AE86")
-				.setDescription(item.meta.description)
+				.setDescription(commands[input[item]].meta.description)
 				.setFooter("MSS-Discord, " + config.MSS.version, "")
 				.setTimestamp()
-				.setURL(item.meta.url);
+				.setURL(commands[input[item]].meta.url);
 
-			item.meta.examples.forEach(function(element) {
-				//!!command <var> <var>
-				//Description
-				embed.addField(config.MSS.prefix + index + " " + element.var, element.description);
+			commands[input[item]].meta.examples.forEach(function(element) {
+				embed.addField(config.MSS.prefix + input[item] + " " + element.var, element.description);
 			});
 
-			message.author.sendEmbed(embed, "" , { disableEveryone: true });
-
-			console.log(index);
+			message.channel.sendEmbed(embed, input[item], { disableEveryone: true });
 		});
 
 		return false;
