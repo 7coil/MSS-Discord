@@ -46,7 +46,7 @@ module.exports = function manpages(message) {
 				embed.addField(config.MSS.prefix + item + " " + element.var, element.description);
 			});
 
-			message.channel.sendEmbed(embed, item, { disableEveryone: true });
+			message.author.sendEmbed(embed, item, { disableEveryone: true });
 		});
 
 		return false;
