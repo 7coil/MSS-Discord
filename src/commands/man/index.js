@@ -30,7 +30,7 @@ module.exports = function manpages(message) {
 		console.dir(commands);
 
 		commands.forEach(function(item, index) {
-			console.dir(item);
+			console.log(item);
 			console.log(index);
 			var embed = new Discord.RichEmbed()
 				.setTitle(item.meta.name)
