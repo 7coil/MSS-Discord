@@ -45,7 +45,7 @@ module.exports = function manpages(message) {
 				embed.addField(config.MSS.prefix + index + " " + element.var, element.description);
 			});
 
-			message.author.sendEmbed(embed, "", { disableEveryone: true });
+			message.author.sendEmbed(embed, "" , { disableEveryone: true });
 
 			console.log(index);
 		});
@@ -75,3 +75,4 @@ module.exports = function manpages(message) {
 
 	message.channel.sendEmbed(embed, input[1], { disableEveryone: true });
 }
+
