@@ -38,7 +38,7 @@ fs.readdir("./reactions/", function(err, items) {
 
 client.on("ready", function() {
 	console.log("Successfully connected to Discord!");
-	client.user.setGame(config.MSS.prefix + "help | " + config.MSS.version);
+	client.user.setGame(config.MSS.prefix + "man | " + config.MSS.version);
 });
 
 client.on("message", function(message) {
