@@ -6,7 +6,7 @@ module.exports = function skip(message) {
 	var voiceChannel = message.member.voiceChannel;
 	if (!voiceChannel || !voiceChannel.connection) {
 		//No bot in channel
-		return msg.react(message, false, "robot");
+		return MSS.msg.react(message, false, "robot");
 	}
 
 	if(MSS.msg.isadmin(message)) {
