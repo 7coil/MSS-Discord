@@ -7,6 +7,9 @@ var hardwareinfo = "[CPU] (" + os.arch() + ") " + os.cpus()[0]["model"] + " (clo
 var softwareinfo = "[" + os.type() + "] " + os.release() + "\n[Hostname] " + os.hostname();
 
 module.exports = function(message, client) {
+	var pinginfo = client.ping + "ms";
+	var shardinfo = client.shard.id;
+
 	var embed = new Discord.RichEmbed()
 		.setTitle("MSS-Discord")
 		.setAuthor("Bot Data", "http://moustacheminer.com/mss.png")
@@ -15,10 +18,10 @@ module.exports = function(message, client) {
 		.setFooter("MSS-Discord, " + config.MSS.version, "")
 		.setTimestamp()
 		.setURL("http://moustacheminer.com/")
-		.addField("Average Ping", client.ping)
-		.addField("Shard ID", client.shard.id)
+		.addField("Average Ping", pinginfo)
+		.addField("Shard ID", shardinfo)
 		.addField("Hardware", hardwareinfo)
 		.addField("Software", softwareinfo);
 
-	message.author.sendEmbed(embed, "", { disableEveryone: true });
+	message.channel.sendEmbed(embed, "", { disableEveryone: true });
 }
