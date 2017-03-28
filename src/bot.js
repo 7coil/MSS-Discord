@@ -68,3 +68,7 @@ client.on("messageReactionAdd", function(messageReaction, user) {
 		reaction[input](messageReaction, user);
 	}
 });
+
+process.on("unhandledRejection", function(err) {
+  console.error("Uncaught Promise Error: \n" + err.stack);
+});
