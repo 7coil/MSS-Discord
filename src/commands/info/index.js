@@ -1,5 +1,11 @@
 const Discord = require("discord.js");
 const config = require("./../../config.json");
+const os = require('os');
+
+var shardid = client.shard.id;
+//  (x64) AMD Athlon (x3) Something @ 3ghz (clocked at ????MHz)
+var hardwareinfo = "(" + os.arch() + ") " + os.cpus()[0]["model"] + " (clocked at " + os.cpus()[0]["speed"] + "MHz)";
+var softwareinfo = "(" + os.type() + ") " + os.release() + "\n" + os.hostname();
 
 module.exports = function(message, client) {
 	var embed = new Discord.RichEmbed()
@@ -11,8 +17,9 @@ module.exports = function(message, client) {
 		.setTimestamp()
 		.setURL("http://moustacheminer.com/")
 		.addField("Average Ping", client.ping)
-		.addField("Last three pings", client.pings)
-		.addField("Shard ID", client.shard.id);
+		.addField("Shard ID", shardid)
+		.addField("Hardware", hardwareinfo)
+		.addField("Software", softwareinfo);
 
 	message.author.sendEmbed(embed, "", { disableEveryone: true });
 }
