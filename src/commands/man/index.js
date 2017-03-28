@@ -4,13 +4,13 @@ const config = require("./../../config.json");
 const fs = require("fs");
 var commands = [];
 var list = [];
-var print = "What manual page do you want?\n" + config.MSS.prefix + "man <command>\n" + config.MSS.prefix + "man all\n";
+var print = "What manual page do you want?\n`" + config.MSS.prefix + "man <command>`\n`" + config.MSS.prefix + "man all`\n";
 
 //Get all .json files in this directory to read the man data.
 fs.readdir("./commands/", function(err, items) {
 	items.forEach(function(item) {
 		var file = item.replace(/['"]+/g, "");
-		print += "> " + file + "\n";
+		print += "`" + file + "`\n";
 		//Include the meta.json files in the commands directory
 		list.push(file);
 		commands[file] = require("./../" + file + "/meta.json");
