@@ -49,7 +49,7 @@ client.on("message", function(message) {
 	input[0] = input[0].substring(config.MSS.prefix.length);
 
 	if (command[input[0]]) {
-		command[input[0]](message);
+		command[input[0]](message, client);
 	}
 });
 
