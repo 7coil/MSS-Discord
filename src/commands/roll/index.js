@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const config = require("./../../config.json");
+const MSS = require("./../../functions/");
 
 module.exports = function(message, client) {
 	let input = message.content.replace(/\n/g, " ").split(" ");
@@ -28,7 +29,7 @@ module.exports = function(message, client) {
 	}
 
 	if(rolls == 1) {
-		output = "Rolled a " + sides + "sided die.";
+		output = "Rolled a " + sides + "-sided die.";
 	} else {
 		//Rolled 6 6-sided dice.
 		output = "Rolled " + rolls + " " + sides + "-sided dice.";
