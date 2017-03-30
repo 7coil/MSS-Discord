@@ -49,7 +49,7 @@ module.exports = function(message, client) {
 		.setFooter("MSS-Discord, " + config.MSS.version, "")
 		.setTimestamp()
 		.setURL("http://moustacheminer.com/")
-		.addField("Die output", result)
+		.addField("Die output", result.join("\n"))
 		.addField("Total", sum);
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true })
