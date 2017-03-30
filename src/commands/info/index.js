@@ -11,7 +11,7 @@ module.exports = function(message, client) {
 	var shardinfo;
 	if(client.shard.id === 0 || client.shard.id) {
 		shardinfo = client.shard.id;
-	} else
+	} else {
 		shardinfo = "The bot is not running in shard mode.";
 	}
 
