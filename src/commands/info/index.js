@@ -9,10 +9,10 @@ var softwareinfo = "[" + os.type() + "] " + os.release() + "\n[Hostname] " + os.
 module.exports = function(message, client) {
 	var pinginfo = client.ping + "ms";
 	var shardinfo;
-	if(client.shard.id || client.shard.id === 0) {
-		shardinfo = client.shard.id;
-	} else {
+	if(!client.shard) {
 		shardinfo = "The bot is not running in shard mode.";
+	} else {
+		shardinfo = client.shard.id;
 	}
 
 	var embed = new Discord.RichEmbed()
