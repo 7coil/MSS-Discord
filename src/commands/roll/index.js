@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const config = require("./../../config.json");
 
 module.exports = function(message, client) {
 	let input = message.content.replace(/\n/g, " ").split(" ");
