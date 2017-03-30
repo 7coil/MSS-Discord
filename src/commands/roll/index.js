@@ -8,7 +8,7 @@ module.exports = function(message, client) {
 	var output, sum;
 
 
-	if(input[1].startsWith("d")) {
+	if(input[1] && input[1].startsWith("d")) {
 		//Check if it's trying to roll an "n" sided die.
 		sides = parseInt(input[1].substring(1).replace(/[^0-9]+/g, ''));
 	} else if (input[1]){
