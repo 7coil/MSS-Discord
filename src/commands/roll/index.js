@@ -52,7 +52,10 @@ module.exports = function(message, client) {
 		.addField("Die output", result)
 		.addField("Total", sum);
 
-	message.channel.sendEmbed(embed, "", { disableEveryone: true });
+	message.channel.sendEmbed(embed, "", { disableEveryone: true })
+		.catch(function(e) {
+			console.log(e);
+		});
 }
 
 function randInt(d) {
