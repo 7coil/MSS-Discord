@@ -43,13 +43,13 @@ module.exports = function(message, client) {
 
 	var embed = new Discord.RichEmbed()
 		.setTitle("MSS-Discord")
-		.setAuthor("DIE!", "http://moustacheminer.com/mss.png")
+		.setAuthor("roll", "http://moustacheminer.com/mss.png")
 		.setColor("#00AE86")
 		.setDescription(output)
 		.setFooter("MSS-Discord, " + config.MSS.version, "")
 		.setTimestamp()
 		.setURL("http://moustacheminer.com/")
-		.addField("Die output:", result)
+		.addField("Die output", result)
 		.addField("Total", sum);
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true });
