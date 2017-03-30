@@ -40,9 +40,6 @@ module.exports = function(message, client) {
 		result.push(value);
 	}
 
-
-
-
 	var embed = new Discord.RichEmbed()
 		.setTitle("MSS-Discord")
 		.setAuthor("DIE!", "http://moustacheminer.com/mss.png")
@@ -52,7 +49,7 @@ module.exports = function(message, client) {
 		.setTimestamp()
 		.setURL("http://moustacheminer.com/")
 		.addField("Die output:", result)
-		.addField("Total", sum)
+		.addField("Total", sum);
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true });
 }
