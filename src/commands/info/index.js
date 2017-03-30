@@ -8,7 +8,7 @@ var softwareinfo = "[" + os.type() + "] " + os.release() + "\n[Hostname] " + os.
 
 module.exports = function(message, client) {
 	var pinginfo = client.ping + "ms";
-	var shardinfo = client.shard.id;
+	var shardinfo = client.shard.id || "The bot is not running in shard mode.";
 
 	var embed = new Discord.RichEmbed()
 		.setTitle("MSS-Discord")
