@@ -36,7 +36,7 @@ module.exports = function(message, client) {
 	for(i=0; i<rolls; i++) {
 		let value = randInt(sides);
 		sum += value;
-		output.push(value);
+		result.push(value);
 	}
 
 
@@ -50,7 +50,7 @@ module.exports = function(message, client) {
 		.setFooter("MSS-Discord, " + config.MSS.version, "")
 		.setTimestamp()
 		.setURL("http://moustacheminer.com/")
-		.addField("Die output:", output)
+		.addField("Die output:", result)
 		.addField("Total", sum)
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true });
