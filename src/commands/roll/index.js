@@ -13,20 +13,22 @@ module.exports = function(message, client) {
 
 	if(input[1] && input[1].startsWith("d")) {
 		//Check if it's trying to roll an "n" sided die.
-		sides = parseInt(input[1].substring(1).replace(/[^0-9]+/g, ''));
+		sides = parseInt(input[1].substring(1));
 	} else if (input[1]){
 		//Roll the dice the number of times stated
-		rolls = parseInt(input[1].replace(/[^0-9]+/g, ''));
+		rolls = parseInt(input[1]);
 	}
 
 	if(input[2]) {
-		rolls = parseInt(input[1].replace(/[^0-9]+/g, ''));
-		sides = parseInt(input[2].replace(/[^0-9]+/g, ''));
+		rolls = parseInt(input[1]);
+		sides = parseInt(input[2]);
 	}
 
 	var a,b,d,e,f,err;
 
-
+	if(!rolls && !(rolls === 0) || !sides && !(sides === 0)) {
+		return message.reply("A parse error occured.");
+	}
 
 	//Set A
 	if (rolls === 0) {
@@ -81,6 +83,7 @@ module.exports = function(message, client) {
 		sum = "Error";
 		result.push("Error");
 	} else {
+		err = "";
 		for(i=0; i<rolls; i++) {
 			let value = randInt(sides);
 			sum += value;
