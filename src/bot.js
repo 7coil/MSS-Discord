@@ -25,7 +25,7 @@ fs.readdir("./reactions/", function(err, items) {
 	items.forEach(function(item) {
 		var file = item.replace(/['"]+/g, "");
 		if (file.endsWith(".js")) {
-			file = file.replace(".js", "");
+			file = file.replace(".js", "").toLowerCase();
 			console.log(file);
 			reaction[file] = require("./reactions/" + file);
 		}
