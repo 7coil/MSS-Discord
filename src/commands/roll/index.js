@@ -45,12 +45,12 @@ module.exports = function(message, client) {
 		.setTitle("MSS-Discord")
 		.setAuthor("roll", "http://moustacheminer.com/mss.png")
 		.setColor("#00AE86")
-		.setDescription(String(output))
+		.setDescription(output)
 		.setFooter("MSS-Discord, " + config.MSS.version, "")
 		.setTimestamp()
 		.setURL("http://moustacheminer.com/")
-		.addField("Die output", String(result.join("\n")))
-		.addField("Total", String(sum));
+		.addField("Die output", result)
+		.addField("Total", sum);
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true })
 		.catch(function(e) {
@@ -59,5 +59,5 @@ module.exports = function(message, client) {
 }
 
 function randInt(d) {
-	Math.floor(Math.random() * d) + 1
+	return Math.floor(Math.random() * d) + 1
 }
