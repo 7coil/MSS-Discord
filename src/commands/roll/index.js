@@ -6,6 +6,7 @@ module.exports = function(message, client) {
 	let input = message.content.replace(/\n/g, " ").split(" ");
 	let sides = 6;
 	let rolls = 1;
+	let sum = 0;
 	var result = [];
 	var output, sum;
 
