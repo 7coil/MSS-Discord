@@ -21,7 +21,7 @@ module.exports = function(message, client) {
 
 	if(input[2]) {
 		rolls = parseInt(input[1].replace(/[^0-9]+/g, ''));
-		sides = parseInt(input[1].replace(/[^0-9]+/g, ''));
+		sides = parseInt(input[2].replace(/[^0-9]+/g, ''));
 	}
 
 	if(!rolls || !sides || rolls < 1 || sides < 2) {
