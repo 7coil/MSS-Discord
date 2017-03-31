@@ -77,8 +77,6 @@ module.exports = function(message, client) {
 		}
 	}
 
-	err;
-
 	var embed = new Discord.RichEmbed()
 		.setTitle("MSS-Discord")
 		.setAuthor("Random Number Generator", "http://moustacheminer.com/mss.png")
