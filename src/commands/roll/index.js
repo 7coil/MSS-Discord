@@ -26,7 +26,7 @@ module.exports = function(message, client) {
 
 	if(!rolls || !sides || rolls < 1 || sides < 2) {
 		//You can't roll something with no die, no sides, less than 1 roll or with less than 2 sides.
-		MSS.msg.react(message, false, "x");
+		return MSS.msg.react(message, false, "x");
 	}
 
 	if(rolls == 1) {
