@@ -24,23 +24,71 @@ module.exports = function(message, client) {
 		sides = parseInt(input[2].replace(/[^0-9]+/g, ''));
 	}
 
-	if(!rolls || !sides || rolls < 1 || sides < 2) {
-		//You can't roll something with no die, no sides, less than 1 roll or with less than 2 sides.
-		return MSS.msg.react(message, false, "x");
-	}
+	var a,b,d,e,f,err;
 
-	if(rolls == 1) {
-		output = "Rolled a " + sides + "-sided die.";
+
+
+	//Set A
+	if (rolls === 0) {
+		a = "Did not roll";
 	} else {
-		//Rolled 6 6-sided dice.
-		output = "Rolled " + rolls + " " + sides + "-sided dice.";
+		a = "Rolled"
 	}
 
-	for(i=0; i<rolls; i++) {
-		let value = randInt(sides);
-		sum += value;
-		result.push(value);
+	//Set B, C and D
+	if (rolls === 1) {
+		b = " a ";
+		if (sides === 0) {
+			d = "no";
+			e = "-sided ";
+			f = "die";
+		} else if (sides === 1) {
+			d = "mobius strip";
+			e = "";
+		} else {
+			d = sides;
+			e = "-sided ";
+			f = "die";
+		}
+	} else {
+		b = rolls;
+
+		if (sides === 0) {
+			d = "no";
+			e = "-sided ";
+			f = "dice";
+		} else if (sides === 1) {
+			d = ""
+			e = "";
+			f = " mobius strips";
+		} else {
+			d = sides;
+			e = "-sided "
+			f = "dice";
+		}
 	}
+
+	if (sides < 0 && rolls < 0) {
+		err = "However, such a theoretical shape could not be rolled for a negative number of times.";
+		sum = "Error";
+		result.push("Error");
+	} else if (sides < 0) {
+		err = "However, such a theoretical shape could not be rolled.";
+		sum = "Error";
+		result.push("Error");
+	} else if (rolls < 0) {
+		err = "However, such a shape cannot be rolled for a negative number of times.";
+		sum = "Error";
+		result.push("Error");
+	} else {
+		for(i=0; i<rolls; i++) {
+			let value = randInt(sides);
+			sum += value;
+			result.push(value);
+		}
+	}
+
+	output = a + b + d + e + f + "\n" + err;
 
 	var embed = new Discord.RichEmbed()
 		.setTitle("MSS-Discord")
