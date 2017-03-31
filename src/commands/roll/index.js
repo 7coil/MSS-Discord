@@ -8,7 +8,7 @@ module.exports = function(message, client) {
 	let rolls = 1;
 	let sum = 0;
 	var result = [];
-	var output, sum;
+	var output;
 
 
 	if(input[1] && input[1].startsWith("d")) {
