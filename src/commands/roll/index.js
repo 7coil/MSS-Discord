@@ -30,43 +30,32 @@ module.exports = function(message, client) {
 		return message.reply("A parse error occured.");
 	}
 
+
 	//Set A
 	if (rolls === 0) {
-		a = "Did not roll";
+		output += "Did not roll ";
 	} else {
-		a = "Rolled"
+		output += "Rolled "
 	}
 
 	//Set B, C and D
 	if (rolls === 1) {
-		b = " a ";
+		output += "a ";
 		if (sides === 0) {
-			d = "no";
-			e = "-sided ";
-			f = "die";
+			output += "shape with no sides.";
 		} else if (sides === 1) {
-			d = "mobius strip";
-			e = "";
+			output += "mobius strip."
 		} else {
-			d = sides;
-			e = "-sided ";
-			f = "die";
+			output += sides + "-sided dice.";
 		}
 	} else {
-		b = rolls;
-
+		output += rolls + " ";
 		if (sides === 0) {
-			d = "no";
-			e = "-sided ";
-			f = "dice";
+			output += "die with no sides.";
 		} else if (sides === 1) {
-			d = ""
-			e = "";
-			f = " mobius strips";
+			output += "mobius strips."
 		} else {
-			d = sides;
-			e = "-sided "
-			f = "dice";
+			output += sides + "-sided die.";
 		}
 	}
 
@@ -91,7 +80,7 @@ module.exports = function(message, client) {
 		}
 	}
 
-	output = a + b + d + e + f + "\n" + err;
+	output += "\n" + err;
 
 	var embed = new Discord.RichEmbed()
 		.setTitle("MSS-Discord")
