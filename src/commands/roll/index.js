@@ -8,7 +8,7 @@ module.exports = function(message, client) {
 	let rolls = 1;
 	let sum = 0;
 	var result = [];
-	var output;
+	var output = "";
 
 
 	if(input[1] && input[1].startsWith("d")) {
@@ -23,8 +23,6 @@ module.exports = function(message, client) {
 		rolls = parseInt(input[1]);
 		sides = parseInt(input[2]);
 	}
-
-	var a,b,d,e,f,err;
 
 	if(!rolls && !(rolls === 0) || !sides && !(sides === 0)) {
 		return message.reply("A parse error occured.");
@@ -60,19 +58,18 @@ module.exports = function(message, client) {
 	}
 
 	if (sides < 0 && rolls < 0) {
-		err = "However, such a theoretical shape could not be rolled for a negative number of times.";
+		output += "\nHowever, such a theoretical shape could not be rolled for a negative number of times.";
 		sum = "Error";
 		result.push("Error");
 	} else if (sides < 0) {
-		err = "However, such a theoretical shape could not be rolled.";
+		output += "\nHowever, such a theoretical shape could not be rolled.";
 		sum = "Error";
 		result.push("Error");
 	} else if (rolls < 0) {
-		err = "However, such a shape cannot be rolled for a negative number of times.";
+		output += "\nHowever, such a shape cannot be rolled for a negative number of times.";
 		sum = "Error";
 		result.push("Error");
 	} else {
-		err = "";
 		for(i=0; i<rolls; i++) {
 			let value = randInt(sides);
 			sum += value;
@@ -80,7 +77,7 @@ module.exports = function(message, client) {
 		}
 	}
 
-	output += "\n" + err;
+	err;
 
 	var embed = new Discord.RichEmbed()
 		.setTitle("MSS-Discord")
