@@ -16,7 +16,7 @@ module.exports = function place(message) {
 		var reply = "";
 
 		if(!data.info) {
-			reply += "The user has not placed any dots down, or does not exist."
+			reply += "The user has not placed any dots down, or does not exist.";
 		} else {
 			data.info.forEach(function(element) {
 				var colour;
