@@ -1,0 +1,13 @@
+{
+	"meta": {
+		"name": "Reddit Place",
+		"description": "Search for enemies! This command allows you to look at the history of people's dots in /r/place.",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "<reddit username>",
+				"description": "Searches for the history for this username."
+			}
+		]
+	}
+}
