@@ -28,7 +28,7 @@ module.exports = function place(message) {
 				.setURL("http://moustacheminer.com/place/?username=" + user);
 
 			data.info.forEach(function(element) {
-				embed.addField(element.ID, "test");
+				embed.addField(new Date(element.time), "Coloured (" + element.x + "," + element.y + ") " + element.colour);
 			});
 
 			message.author.sendEmbed(embed, "", { disableEveryone: true });
