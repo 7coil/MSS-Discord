@@ -5,7 +5,7 @@ const url = require("url");
 
 module.exports = function yt(message) {
 	if (!message.guild) return MSS.msg.rich(message, "Error", "You are not allowed to send this command via Direct Messaging.", "#FF0000");
-	return message.reply("This function has been disabled in software. Please use the "+config.MSS.prefix+"yt command. See '" + config.MSS.prefix + "man yt' for more details.")
+	return message.reply("This function has been disabled in software. Please use the "+config.MSS.prefix+"yt command. See '" + config.MSS.prefix + "man yt' for more details.");
 
 	let input = message.content.replace (/\n/g, "").split(" ");
 	//Get the voice channel that it's going to play to.

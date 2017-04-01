@@ -4,6 +4,7 @@ const Sandbox = require("sandbox");
 const Discord = require("discord.js");
 
 module.exports = function(message) {
+	return message.reply("This function has been disabled in software. Please use the "+config.MSS.prefix+"yt command. See '" + config.MSS.prefix + "man yt' for more details.");
 	var s = new Sandbox;
 
 	let input = message.content.replace (/\n/g, " ").split(" ");
