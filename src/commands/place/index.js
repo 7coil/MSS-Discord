@@ -13,7 +13,7 @@ module.exports = function place(message) {
 		}
 
 		var data = JSON.parse(body);
-		var response = "/r/place info for " + input[1] + "\n";
+		var response;
 
 		data.info.forEach(function(element) {
 			var colour;
@@ -77,7 +77,7 @@ module.exports = function place(message) {
 		} else {
 			var embed = new Discord.RichEmbed()
 				.setTitle(input[1])
-				.setAuthor("/r/place", "http://moustacheminer.com/mss.png")
+				.setAuthor("/r/place info for " + input[1], "http://moustacheminer.com/mss.png")
 				.setColor("#00AE86")
 				.setDescription(response)
 				.setFooter("MSS-Discord, " + config.MSS.version, "")
