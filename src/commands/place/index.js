@@ -14,7 +14,7 @@ module.exports = function place(message) {
 
 		var data = JSON.parse(body);
 		var response = "/r/place info for " + input[1] + "\n";
-		var overflow;
+		var overflow = false;
 
 		data.info.forEach(function(element) {
 			var colour;
@@ -69,7 +69,7 @@ module.exports = function place(message) {
 					break;
 			}
 
-			if (response < 1900) {
+			if (response < 1800) {
 				response += "Coloured (" + element.x + "," + element.y + ") " + colour + " at " + new Date(parseInt(element.time)) + "\n";
 			} else {
 				overflow = true;
