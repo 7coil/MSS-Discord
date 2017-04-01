@@ -108,7 +108,7 @@ String.prototype.splitEvery = function ( splitter, every ){
 
     var array = this.split( splitter), newString = '', thisSplitter;
 
-    $.each( array, function( index, elem ){
+	array.forEach(function(elem, index) {
 
         thisSplitter = ( index < array.length - 1 || index % every === 0 ) ? '' : splitter;
 
