@@ -17,7 +17,7 @@ module.exports = function place(message) {
 
 		data.info.forEach(function(element) {
 			var colour;
-			switch(element.colour) {
+			switch(parseInt(element.colour)) {
 				case 1:
 					colour = "Light Grey";
 					break;
