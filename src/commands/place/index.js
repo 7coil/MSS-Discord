@@ -13,6 +13,11 @@ module.exports = function place(message) {
 		}
 
 		var data = JSON.parse(body);
+		var response = "/r/place info for " + input[1] + "\n";
+
+		data.info.forEach(function(element) {
+			response += "Coloured (" + element.x + "," + element.y + ") " + element.colour + " at " + new Date(parseInt(element.time)) + "\n";
+		});
 
 		//Yes, false is a string. I'm so sorry
 		if(data.error != "false") {
@@ -22,16 +27,12 @@ module.exports = function place(message) {
 				.setTitle(input[1])
 				.setAuthor("/r/place", "http://moustacheminer.com/mss.png")
 				.setColor("#00AE86")
-				.setDescription("/r/place info for " + input[1])
+				.setDescription(response)
 				.setFooter("MSS-Discord, " + config.MSS.version, "")
 				.setTimestamp()
 				.setURL("http://moustacheminer.com/place/?username=" + user);
 
-			data.info.forEach(function(element) {
-				embed.addField(new Date(element.time), "Coloured (" + element.x + "," + element.y + ") " + element.colour);
-			});
-
-			message.author.sendEmbed(embed, "", { disableEveryone: true });
+			message.channel.sendEmbed(embed, "", { disableEveryone: true });
 		}
 	});
 }
