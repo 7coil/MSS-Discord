@@ -15,61 +15,65 @@ module.exports = function place(message) {
 		var data = JSON.parse(body);
 		var reply = "";
 
-		data.info.forEach(function(element) {
-			var colour;
-			switch(parseInt(element.colour)) {
-				case 1:
-					colour = "Light Grey";
-					break;
-				case 2:
-					colour = "Grey";
-					break;
-				case 3:
-					colour = "Black";
-					break;
-				case 4:
-					colour = "Pink";
-					break;
-				case 5:
-					colour = "Red";
-					break;
-				case 6:
-					colour = "Orange";
-					break;
-				case 7:
-					colour = "Brown";
-					break;
-				case 8:
-					colour = "Yellow";
-					break;
-				case 9:
-					colour = "Lime";
-					break;
-				case 10:
-					colour = "Green";
-					break;
-				case 11:
-					colour = "Cyan";
-					break;
-				case 12:
-					colour = "Blue";
-					break;
-				case 13:
-					colour = "Dark Blue";
-					break;
-				case 14:
-					colour = "Magenta";
-					break;
-				case 15:
-					colour = "Purple";
-					break;
-				default:
-					colour = "Invalid Colour ID";
-					break;
-			}
+		if(!data.info) {
+			reply += "The user has not placed any dots down, or does not exist."
+		} else {
+			data.info.forEach(function(element) {
+				var colour;
+				switch(parseInt(element.colour)) {
+					case 1:
+						colour = "Light Grey";
+						break;
+					case 2:
+						colour = "Grey";
+						break;
+					case 3:
+						colour = "Black";
+						break;
+					case 4:
+						colour = "Pink";
+						break;
+					case 5:
+						colour = "Red";
+						break;
+					case 6:
+						colour = "Orange";
+						break;
+					case 7:
+						colour = "Brown";
+						break;
+					case 8:
+						colour = "Yellow";
+						break;
+					case 9:
+						colour = "Lime";
+						break;
+					case 10:
+						colour = "Green";
+						break;
+					case 11:
+						colour = "Cyan";
+						break;
+					case 12:
+						colour = "Blue";
+						break;
+					case 13:
+						colour = "Dark Blue";
+						break;
+					case 14:
+						colour = "Magenta";
+						break;
+					case 15:
+						colour = "Purple";
+						break;
+					default:
+						colour = "Invalid Colour ID";
+						break;
+				}
 
-			reply += "Coloured (" + element.x + "," + element.y + ") " + colour + " at " + new Date(parseInt(element.time)) + "\n";
-		});
+				reply += "Coloured (" + element.x + "," + element.y + ") " + colour + " at " + new Date(parseInt(element.time)) + "\n";
+			});
+		}
 
 		//Yes, false is a string. I'm so sorry
 		if(data.error != "false") {
