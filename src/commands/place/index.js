@@ -16,7 +16,59 @@ module.exports = function place(message) {
 		var response = "/r/place info for " + input[1] + "\n";
 
 		data.info.forEach(function(element) {
-			response += "Coloured (" + element.x + "," + element.y + ") " + element.colour + " at " + new Date(parseInt(element.time)) + "\n";
+			var colour;
+			switch(element.colour) {
+				case 1:
+					colour = "Light Grey";
+					break;
+				case 2:
+					colour = "Grey";
+					break;
+				case 3:
+					colour = "Black";
+					break;
+				case 4:
+					colour = "Pink";
+					break;
+				case 5:
+					colour = "Red";
+					break;
+				case 6:
+					colour = "Orange";
+					break;
+				case 7:
+					colour = "Brown";
+					break;
+				case 8:
+					colour = "Yellow";
+					break;
+				case 9:
+					colour = "Lime";
+					break;
+				case 10:
+					colour = "Green";
+					break;
+				case 11:
+					colour = "Cyan";
+					break;
+				case 12:
+					colour = "Blue";
+					break;
+				case 13:
+					colour = "Dark Blue";
+					break;
+				case 14:
+					colour = "Magenta";
+					break;
+				case 15:
+					colour = "Purple";
+					break;
+				default:
+					colour = "Invalid Colour ID";
+					break;
+			}
+
+			response += "Coloured (" + element.x + "," + element.y + ") " + colour + " at " + new Date(parseInt(element.time)) + "\n";
 		});
 
 		//Yes, false is a string. I'm so sorry
