@@ -71,7 +71,7 @@ module.exports = function place(message) {
 						break;
 				}
 
-
+				reply += "Coloured (" + element.x + "," + element.y + ") " + colour + " at " + new Date(parseInt(element.time)) + "\n";
 
 			});
 		}
