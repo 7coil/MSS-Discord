@@ -13,7 +13,7 @@ module.exports = function place(message) {
 		}
 
 		var data = JSON.parse(body);
-		var response;
+		var reply = "";
 
 		data.info.forEach(function(element) {
 			var colour;
@@ -68,7 +68,7 @@ module.exports = function place(message) {
 					break;
 			}
 
-			response += "Coloured (" + element.x + "," + element.y + ") " + colour + " at " + new Date(parseInt(element.time)) + "\n";
+			reply += "Coloured (" + element.x + "," + element.y + ") " + colour + " at " + new Date(parseInt(element.time)) + "\n";
 		});
 
 		//Yes, false is a string. I'm so sorry
@@ -79,7 +79,7 @@ module.exports = function place(message) {
 				.setTitle(input[1])
 				.setAuthor("/r/place info for " + input[1], "http://moustacheminer.com/mss.png")
 				.setColor("#00AE86")
-				.setDescription(response)
+				.setDescription(reply)
 				.setFooter("MSS-Discord, " + config.MSS.version, "")
 				.setTimestamp()
 				.setURL("http://moustacheminer.com/place/?username=" + user);
