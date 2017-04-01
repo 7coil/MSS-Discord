@@ -80,7 +80,7 @@ module.exports = function place(message) {
 		if(data.error != "false") {
 			message.reply(data.error);
 		} else {
-			let overflow = message.content.replace (/\n/g, "");
+			let overflow = reply(/\n/g, "");
 
 			var embed = new Discord.RichEmbed()
 				.setTitle(input[1])
