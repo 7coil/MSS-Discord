@@ -80,7 +80,7 @@ module.exports = function place(message) {
 		if(data.error != "false") {
 			message.reply(data.error);
 		} else {
-			let overflow = reply(/\n/g, "");
+			let overflow = reply.splitEvery('\n', 10);
 
 			var embed = new Discord.RichEmbed()
 				.setTitle(input[1])
@@ -103,3 +103,17 @@ module.exports = function place(message) {
 		}
 	});
 }
+
+String.prototype.splitEvery = function ( splitter, every ){
+
+    var array = this.split( splitter), newString = '', thisSplitter;
+
+    $.each( array, function( index, elem ){
+
+        thisSplitter = ( index < array.length - 1 || index % every === 0 ) ? '' : splitter;
+
+        newString += elem + thisSplitter;
+    });
+
+    return newString;
+};
