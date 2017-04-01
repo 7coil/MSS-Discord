@@ -14,6 +14,7 @@ module.exports = function place(message) {
 
 		var data = JSON.parse(body);
 		var reply = "";
+		var overflow = "";
 
 		if(!data.info) {
 			reply += "The user has not placed any dots down, or does not exist.";
@@ -71,7 +72,12 @@ module.exports = function place(message) {
 						break;
 				}
 
-				reply += "Coloured (" + element.x + "," + element.y + ") " + colour + " at " + new Date(parseInt(element.time)) + "\n";
+				if(reply.length < 1900) {
+					reply += "Coloured (" + element.x + "," + element.y + ") " + colour + " at " + new Date(parseInt(element.time)) + "\n";
+				} else {
+					overflow += "Coloured (" + element.x + "," + element.y + ") " + colour + " at " + new Date(parseInt(element.time)) + "\n";
+				}
+
 			});
 		}
 
@@ -87,6 +93,10 @@ module.exports = function place(message) {
 				.setFooter("MSS-Discord, " + config.MSS.version, "")
 				.setTimestamp()
 				.setURL("http://moustacheminer.com/place/?username=" + user);
+
+			if(overflow) {
+				embed.addField("Overflow", overflow);
+			}
 
 			message.channel.sendEmbed(embed, "", { disableEveryone: true });
 		}
