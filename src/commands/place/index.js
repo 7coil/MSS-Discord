@@ -16,6 +16,10 @@ module.exports = function place(message) {
 		var reply;
 		var colour = [];
 
+		for (i=0; i<15; i++) {
+			colour[i] = 0;
+		}
+
 		if(!data.info) {
 			reply += "The user has not placed any dots down, or does not exist.";
 		} else {
@@ -23,7 +27,8 @@ module.exports = function place(message) {
 				colour[element.colour]++
 			});
 
-			reply = `Info for ` + user + `\n
+			reply = `Info for ` + user + `
+				\`\`\`
 				White      | ` + colour[0]  + ` | ` + (colour[0]  / data.length).toFixed(2) + `%
 				Light Grey | ` + colour[1]  + ` | ` + (colour[1]  / data.length).toFixed(2) + `%
 				Grey       | ` + colour[2]  + ` | ` + (colour[2]  / data.length).toFixed(2) + `%
@@ -41,7 +46,8 @@ module.exports = function place(message) {
 				Magenta    | ` + colour[14] + ` | ` + (colour[14] / data.length).toFixed(2) + `%
 				Purple     | ` + colour[15] + ` | ` + (colour[15] / data.length).toFixed(2) + `%
 				-------------------------
-				Total      | ` + data.length;
+				Total      | ` + data.length + `
+				\`\`\``;
 		}
 
 		//Yes, false is a string. I'm so sorry
