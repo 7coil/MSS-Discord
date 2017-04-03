@@ -16,7 +16,7 @@ module.exports = function place(message) {
 		var reply;
 		var colour = [];
 
-		for (i=0; i<15; i++) {
+		for (i=0; i<16; i++) {
 			colour[i] = 0;
 		}
 
@@ -29,23 +29,23 @@ module.exports = function place(message) {
 
 			reply = `Info for ` + user + `
 \`\`\`
-White      | ` + colour[0]  + ` | ` + (colour[0]  / data.info.length).toFixed(2) + `%
-Light Grey | ` + colour[1]  + ` | ` + (colour[1]  / data.info.length).toFixed(2) + `%
-Grey       | ` + colour[2]  + ` | ` + (colour[2]  / data.info.length).toFixed(2) + `%
-Black      | ` + colour[3]  + ` | ` + (colour[3]  / data.info.length).toFixed(2) + `%
-Pink       | ` + colour[4]  + ` | ` + (colour[4]  / data.info.length).toFixed(2) + `%
-Red        | ` + colour[5]  + ` | ` + (colour[5]  / data.info.length).toFixed(2) + `%
-Orange     | ` + colour[6]  + ` | ` + (colour[6]  / data.info.length).toFixed(2) + `%
-Brown      | ` + colour[7]  + ` | ` + (colour[7]  / data.info.length).toFixed(2) + `%
-Yellow     | ` + colour[8]  + ` | ` + (colour[8]  / data.info.length).toFixed(2) + `%
-Lime       | ` + colour[9]  + ` | ` + (colour[9]  / data.info.length).toFixed(2) + `%
-Green      | ` + colour[10] + ` | ` + (colour[10] / data.info.length).toFixed(2) + `%
-Cyan       | ` + colour[11] + ` | ` + (colour[11] / data.info.length).toFixed(2) + `%
-Blue       | ` + colour[12] + ` | ` + (colour[12] / data.info.length).toFixed(2) + `%
-Dark Blue  | ` + colour[13] + ` | ` + (colour[13] / data.info.length).toFixed(2) + `%
-Magenta    | ` + colour[14] + ` | ` + (colour[14] / data.info.length).toFixed(2) + `%
-Purple     | ` + colour[15] + ` | ` + (colour[15] / data.info.length).toFixed(2) + `%
--------------------------
+White      | ` + colour[0]  + ` | ` + ((colour[0]  / data.info.length)*100).toFixed(2) + `%
+Light Grey | ` + colour[1]  + ` | ` + ((colour[1]  / data.info.length)*100).toFixed(2) + `%
+Grey       | ` + colour[2]  + ` | ` + ((colour[2]  / data.info.length)*100).toFixed(2) + `%
+Black      | ` + colour[3]  + ` | ` + ((colour[3]  / data.info.length)*100).toFixed(2) + `%
+Pink       | ` + colour[4]  + ` | ` + ((colour[4]  / data.info.length)*100).toFixed(2) + `%
+Red        | ` + colour[5]  + ` | ` + ((colour[5]  / data.info.length)*100).toFixed(2) + `%
+Orange     | ` + colour[6]  + ` | ` + ((colour[6]  / data.info.length)*100).toFixed(2) + `%
+Brown      | ` + colour[7]  + ` | ` + ((colour[7]  / data.info.length)*100).toFixed(2) + `%
+Yellow     | ` + colour[8]  + ` | ` + ((colour[8]  / data.info.length)*100).toFixed(2) + `%
+Lime       | ` + colour[9]  + ` | ` + ((colour[9]  / data.info.length)*100).toFixed(2) + `%
+Green      | ` + colour[10] + ` | ` + ((colour[10] / data.info.length)*100).toFixed(2) + `%
+Cyan       | ` + colour[11] + ` | ` + ((colour[11] / data.info.length)*100).toFixed(2) + `%
+Blue       | ` + colour[12] + ` | ` + ((colour[12] / data.info.length)*100).toFixed(2) + `%
+Dark Blue  | ` + colour[13] + ` | ` + ((colour[13] / data.info.length)*100).toFixed(2) + `%
+Magenta    | ` + colour[14] + ` | ` + ((colour[14] / data.info.length)*100).toFixed(2) + `%
+Purple     | ` + colour[15] + ` | ` + ((colour[15] / data.info.length)*100).toFixed(2) + `%
+-------------------------()*100
 Total      | ` + data.info.length + `\`\`\``;
 		}
 
