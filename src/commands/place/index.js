@@ -45,7 +45,7 @@ Blue       | ` + colour[12] + ` | ` + ((colour[12] / data.info.length)*100).toFi
 Dark Blue  | ` + colour[13] + ` | ` + ((colour[13] / data.info.length)*100).toFixed(2) + `%
 Magenta    | ` + colour[14] + ` | ` + ((colour[14] / data.info.length)*100).toFixed(2) + `%
 Purple     | ` + colour[15] + ` | ` + ((colour[15] / data.info.length)*100).toFixed(2) + `%
--------------------------()*100
+-----------------------------
 Total      | ` + data.info.length + `\`\`\``;
 		}
 
