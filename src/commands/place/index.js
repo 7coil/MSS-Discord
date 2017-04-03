@@ -23,8 +23,7 @@ module.exports = function place(message) {
 				colour[element.colour]++
 			});
 
-			reply = \
-			`Info for ` + user + `\n
+			reply = `Info for ` + user + `\n
 				White      | ` + colour[0]  + ` | ` + (colour[0]  / data.length).toFixed(2) + `%
 				Light Grey | ` + colour[1]  + ` | ` + (colour[1]  / data.length).toFixed(2) + `%
 				Grey       | ` + colour[2]  + ` | ` + (colour[2]  / data.length).toFixed(2) + `%
