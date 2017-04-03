@@ -55,7 +55,7 @@ module.exports = function place(message) {
 				.setDescription(reply)
 				.setFooter("MSS-Discord, " + config.MSS.version, "")
 				.setTimestamp()
-				.setURL("http://moustacheminer.com/place/?username=" + user).
+				.setURL("http://moustacheminer.com/place/?username=" + user)
 				.addField("Powered by /r/PlaceDevs", "Please go to this URL to view the rest of the log. http://moustacheminer.com/place/?username=" + user);
 
 			message.channel.sendEmbed(embed, "", { disableEveryone: true });
