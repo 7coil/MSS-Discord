@@ -81,6 +81,10 @@ function add(message, type, url, title, thumb_url) {
 }
 
 function skip(message) {
+	if (!voiceChannel || !voiceChannel.connection) {
+		//No bot in channel
+		return MSS.msg.react(message, false, "robot");
+	}
 	message.channel.send("Destroying stream...");
 	stream[message.guild.id].destroy();
 }
