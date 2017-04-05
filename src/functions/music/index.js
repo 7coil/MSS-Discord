@@ -1,7 +1,7 @@
 const config = require("./../../config.json");
 const yt = require('ytdl-core');
 const fs = require('fs');
-const msg = require('./../msg/');
+const MSS = require('./../../functions/');
 const Discord = require("discord.js");
 const request = require("request");
 
@@ -107,15 +107,15 @@ function stop(message) {
 function list(message) {
 	//Check if it does not exist, or has less than 1 item remaining.
 	if (!playlist[message.guild.id] || playlist[message.guild.id].length < 1) {
-		return msg.rich(message, "MSS Music Player", "There is no music remaining in the playlist.", "#FF0000");
+		return MSS.msg.rich(message, "MSS Music Player", "There is no music remaining in the playlist.", "#FF0000");
 	} else {
-		return msg.rich(message, "MSS Music Player", playlist[message.guild.id].map(function(sound){return JSON.parse(sound).title;}).join("\n"), "#00FF00");
+		return MSS.msg.rich(message, "MSS Music Player", playlist[message.guild.id].map(function(sound){return JSON.parse(sound).title;}).join("\n"), "#00FF00");
 	}
 }
 
 function get(message) {
 	if(!current[message.guild.id]) {
-		return msg.rich(message, "MSS Music Player", "There is no music currently playing.", "#FF0000");
+		return MSS.msg.rich(message, "MSS Music Player", "There is no music currently playing.", "#FF0000");
 	}
 
 	var embed = new Discord.RichEmbed()
