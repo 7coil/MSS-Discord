@@ -16,6 +16,7 @@ exports.skip = skip;
 exports.stop = stop;
 exports.get = get;
 exports.list = list;
+exports.panel = panel;
 
 //A function to keep playing that stream
 function sound(message) {
@@ -46,12 +47,7 @@ function play(message) {
 	
 	if (playlist[message.guild.id].length > 0) {
 		current[message.guild.id] = JSON.parse(playlist[message.guild.id].shift());
-		message.channel.sendMessage('**Music Control Panel**')
-			.then(function(message) {
-				message.react(String.fromCodePoint(10145));
-				message.react(String.fromCodePoint(8505));
-				message.react(String.fromCodePoint(128240));
-			});
+		panel(message);
 		switch (current[message.guild.id]["type"]) {
 			case "youtube":
 				stream[message.guild.id] = yt(current[message.guild.id]["url"], {audioonly: true});
@@ -122,4 +118,13 @@ function get(message) {
 		.setImage(current[message.guild.id]["thumb_url"]);
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true });
+}
+
+function panel(message) {
+	message.channel.sendMessage('**Music Control Panel**')
+	.then(function(message) {
+		message.react(String.fromCodePoint(10145));
+		message.react(String.fromCodePoint(8505));
+		message.react(String.fromCodePoint(128240));
+	});
 }

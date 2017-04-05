@@ -1,0 +1,13 @@
+{
+	"meta": {
+		"name": "control",
+		"description": "A command that resends the MSS control panel, just in case you need it.",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "",
+				"description": "Sends the MSS Control Panel."
+			}
+		]
+	}
+}
