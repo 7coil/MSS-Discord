@@ -97,7 +97,7 @@ function stop(message) {
 	}
 
 	if (voiceChannel && voiceChannel.connection) voiceChannel.leave();
-	current = [];
+	current[message.guild.id] = [];
 	playlist[message.guild.id] = [];
 	if (stream[message.guild.id]) stream[message.guild.id].destroy();
 	return;
@@ -113,7 +113,7 @@ function list(message) {
 }
 
 function get(message) {
-	if(!current) {
+	if(!current[message.guild.id]) {
 		return msg.rich(message, "MSS Music Player", "There is no music currently playing.", "#FF0000");
 	}
 
