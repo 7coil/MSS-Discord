@@ -81,6 +81,7 @@ function add(message, type, url, title, thumb_url) {
 }
 
 function skip(message) {
+	var voiceChannel = message.member.voiceChannel;
 	if (!voiceChannel || !voiceChannel.connection) {
 		//No bot in channel
 		return MSS.msg.react(message, false, "robot");
