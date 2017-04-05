@@ -93,6 +93,7 @@ function stop(message) {
 	}
 
 	if (voiceChannel && voiceChannel.connection) voiceChannel.leave();
+	current = [];
 	playlist[message.guild.id] = [];
 	if (stream[message.guild.id]) stream[message.guild.id].destroy();
 	return;
@@ -107,6 +108,10 @@ function list(message) {
 }
 
 function get(message) {
+	if(!current) {
+		return msg.rich(message, "MSS Music Player", "There is no music currently playing.", "#FF0000");
+	}
+
 	var embed = new Discord.RichEmbed()
 		.setTitle("MSS Music Player")
 		.setAuthor("MSS", "http://moustacheminer.com/mss.png")
