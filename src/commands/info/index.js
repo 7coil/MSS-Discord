@@ -18,8 +18,7 @@ module.exports = function(message, client) {
 	var embed = new Discord.RichEmbed()
 		.setFooter("MSS-Discord, " + config.MSS.version, "")
 		.setTimestamp()
-		.setURL("http://moustacheminer.com/")
-		.addField("Average Ping", pinginfo)
+		.addField("Average Ping", pinginfo, true)
 		.addField("Shard ID", shardinfo, true)
 		.addField("Hardware", hardwareinfo, true)
 		.addField("Software", softwareinfo, true);
