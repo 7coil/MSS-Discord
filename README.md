@@ -7,6 +7,11 @@ MSS-Discord (Moustacheminer Server Services for Discord) is another bot made for
 
 ## Changelog
 
+### 2017.04.07b
+
+- Added OW command for Overwatch
+- Made input commands lowercase before using it
+
 ### 2017.04.07a
 
 - Changed info and help to provide more helpful inline embeds instead of taking way too many lines

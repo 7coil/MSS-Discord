@@ -45,8 +45,8 @@ client.on("message", function(message) {
 	if (message.author.bot) return;
 
 	if (!message.content.startsWith(config.MSS.prefix)) return false;
-	let input = message.content.replace (/\n/g, "").split(" ");
-	input[0] = input[0].substring(config.MSS.prefix.length);
+	let input = message.content.replace(/\n/g, "").split(" ");
+	input[0] = input[0].substring(config.MSS.prefix.length).toLowerCase();
 
 	if (command[input[0]]) {
 		command[input[0]](message, client);
