@@ -16,17 +16,13 @@ module.exports = function(message, client) {
 	}
 
 	var embed = new Discord.RichEmbed()
-		.setTitle("MSS-Discord")
-		.setAuthor("Bot Data", "http://moustacheminer.com/mss.png")
-		.setColor("#00AE86")
-		.setDescription("Dont know why you need this, but ok.")
 		.setFooter("MSS-Discord, " + config.MSS.version, "")
 		.setTimestamp()
 		.setURL("http://moustacheminer.com/")
 		.addField("Average Ping", pinginfo)
-		.addField("Shard ID", shardinfo)
-		.addField("Hardware", hardwareinfo)
-		.addField("Software", softwareinfo);
+		.addField("Shard ID", shardinfo, true)
+		.addField("Hardware", hardwareinfo, true)
+		.addField("Software", softwareinfo, true);
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true });
 }
