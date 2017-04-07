@@ -16,6 +16,7 @@ module.exports = function(message, client) {
 	}
 
 	var embed = new Discord.RichEmbed()
+		.setFooter("MSS-Discord, " + config.MSS.version, "")
 		.setTimestamp()
 		.addField("MSS", config.MSS.version, true)
 		.addField("Ping", pinginfo, true)
@@ -24,7 +25,8 @@ module.exports = function(message, client) {
 		.addField("Uptime", process.uptime(), true)
 		.addField("PID", process.pid, true)
 		.addField("Hardware", hardwareinfo)
-		.addField("Software", softwareinfo);
+		.addField("Software", softwareinfo)
+		.addField("Licence", "This software is released under the MIT Licence.");
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true });
 }
