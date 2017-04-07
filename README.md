@@ -6,6 +6,15 @@ MSS-Discord (Moustacheminer Server Services for Discord) is another bot made for
 
 
 ## Changelog
+
+### 2017.04.07a
+
+- Changed info and help to provide more helpful inline embeds instead of taking way too many lines
+
+### 2017.04.01a
+
+- Added a useful /r/place search engine
+
 ### ext.2017.03.23a
 
 - Readded commands like help, eval and yt
