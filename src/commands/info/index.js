@@ -10,18 +10,21 @@ module.exports = function(message, client) {
 	var pinginfo = client.ping + "ms";
 	var shardinfo;
 	if(!client.shard) {
-		shardinfo = "The bot is not running in shard mode.";
+		shardinfo = "N/A";
 	} else {
 		shardinfo = client.shard.id;
 	}
 
 	var embed = new Discord.RichEmbed()
-		.setFooter("MSS-Discord, " + config.MSS.version, "")
 		.setTimestamp()
-		.addField("Average Ping", pinginfo, true)
-		.addField("Shard ID", shardinfo, true)
-		.addField("Hardware", hardwareinfo, true)
-		.addField("Software", softwareinfo, true);
+		.addField("MSS", config.MSS.version, true)
+		.addField("Ping", pinginfo, true)
+		.addField("Shard", shardinfo, true)
+		.addField("Node.js", process.version, true)
+		.addField("Uptime", process.uptime(), true)
+		.addField("PID", process.pid, true)
+		.addField("Hardware", hardwareinfo)
+		.addField("Software", softwareinfo);
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true });
 }
