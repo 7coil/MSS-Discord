@@ -42,6 +42,8 @@ client.on("ready", function() {
 });
 
 client.on("message", function(message) {
+	console.log(message.content);
+
 	//Split message into keywords
 	let input = message.content.replace(/\n/g, "").split(" ");
 
