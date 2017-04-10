@@ -51,7 +51,7 @@ client.on("message", function(message) {
 	if (message.author.bot) return;
 
 	//Remove the first term if it contains the bot ID, as well as the required brackets.
-	if (input[0].indexOf(message.author.id) != -1) input.shift();
+	if (input[0].indexOf(client.user.id) != -1) input.shift();
 
 	//Check if the first term has the prefix
 	if (!input[0].startsWith(config.MSS.prefix)) return false;
