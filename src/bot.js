@@ -50,8 +50,8 @@ client.on("message", function(message) {
 	//Disallow if the author is a bot
 	if (message.author.bot) return;
 
-	//Remove the first term if it contains the bot ID, as well as the required brackets.
-	if (input[0].indexOf(client.user.id) != -1) input.shift();
+	//Remove the first term if it contains the bot ID, as well as the required brackets. Also make sure there's a second term to replace the first one.
+	if (input[0].indexOf(client.user.id) != -1 && input[1]) input.shift();
 
 	//Check if the first term has the prefix
 	if (!input[0].startsWith(config.MSS.prefix)) return false;
