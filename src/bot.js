@@ -42,14 +42,24 @@ client.on("ready", function() {
 });
 
 client.on("message", function(message) {
+	//Split message into keywords
+	let input = message.content.replace(/\n/g, "").split(" ");
+
+	//Disallow if the author is a bot
 	if (message.author.bot) return;
 
-	if (!message.content.startsWith(config.MSS.prefix)) return false;
-	let input = message.content.replace(/\n/g, "").split(" ");
+	//Remove the first term if it contains the bot ID, as well as the required brackets.
+	if (input[0].contains(message.author.id)) input.shift();
+
+	//Check if the first term has the prefix
+	if (!input[0].startsWith(config.MSS.prefix)) return false;
+
+	//If it does, make the command lowercase and remove the prefix
 	input[0] = input[0].substring(config.MSS.prefix.length).toLowerCase();
 
+	//If the command exists, run the command
 	if (command[input[0]]) {
-		command[input[0]](message, client);
+		command[input[0]](message);
 	}
 });
 

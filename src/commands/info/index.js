@@ -6,13 +6,13 @@ const os = require('os');
 var hardwareinfo = "[CPU] (" + os.arch() + ") " + os.cpus()[0]["model"] + " (clocked at " + os.cpus()[0]["speed"] + "MHz)";
 var softwareinfo = "[" + os.type() + "] " + os.release() + "\n[Hostname] " + os.hostname();
 
-module.exports = function(message, client) {
-	var pinginfo = client.ping + "ms";
+module.exports = function(message) {
+	var pinginfo = message.client.ping + "ms";
 	var shardinfo;
-	if(!client.shard) {
+	if(!message.client.shard) {
 		shardinfo = "N/A";
 	} else {
-		shardinfo = client.shard.id;
+		shardinfo = message.client.shard.id;
 	}
 
 	var embed = new Discord.RichEmbed()
