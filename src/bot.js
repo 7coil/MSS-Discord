@@ -43,6 +43,8 @@ client.on("ready", function() {
 
 client.on("message", function(message) {
 
+	console.log(message.content);
+
 	//Split message into keywords
 	let input = message.content.replace(/\n/g, "").split(" ");
 
@@ -52,12 +54,13 @@ client.on("message", function(message) {
 	//Remove the first term if it contains the bot ID
 	if (input[0].indexOf(client.user.id) != -1 && input[1]) {
 		input.shift();
+		input[0] = input[0].toLowerCase();
 		//Rebuild the new message to fit the legacy format.
 		message.content = input.join(" ");
-	}
+		console.log("Rebuilt: " + message.content);
 
 	//If there's a prefix, remove it. Otherwise, stop the execution of commands.
-	if (input[0].startsWith(config.MSS.prefix)) {
+	} else if (input[0].startsWith(config.MSS.prefix)) {
 		input[0] = input[0].substring(config.MSS.prefix.length).toLowerCase();
 	} else {
 		return false;
