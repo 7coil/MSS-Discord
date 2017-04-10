@@ -1,40 +1,29 @@
 const config = require("./../../config.json");
 const MSS = require("./../../functions/");
-const Sandbox = require("sandbox");
 const Discord = require("discord.js");
 
 module.exports = function(message) {
-	return message.reply("This function has been disabled in software.");
-	var s = new Sandbox;
+	if(message.author.id === config.MSS.sysadmin) {
+		let input = message.content.replace (/\n/g, "").split(" ");
+		input[0] = input[0].substring(config.MSS.prefix.length);
+		let command = message.content.substring(config.MSS.prefix.length + input[0].length + 1);
 
-	let input = message.content.replace (/\n/g, " ").split(" ");
-	try {
-		let command = message.content.substring(input[0].length + 1);
-		console.log(command);
-		if (!command) return message.reply("No code was supplied.");
+		var embed = new Discord.RichEmbed()
+			.addField("Input", "```js\n" + command + "\n```")
+		try {
+			let output = eval('(' + command + ')');
+			embed.addField("Output", "```\n" + output + "\n```")
+				.setColor("#00FF00");
+			MSS.msg.react(message, true)
+		} catch(err) {
+			embed.addField("Error", "```\n" + err.stack + "\n```")
+				.setColor("#FF0000");
+			MSS.msg.react(message, false, "bomb");
+		}
 
-		s.run(command, function(output) {
-			var consoleout = output.console.length === 0 ? ["No output"] : output.console;
+		message.channel.sendEmbed(embed, "", { disableEveryone: true });
 
-			var embed = new Discord.RichEmbed()
-				.setTitle("MSS-Discord JS Sandbox")
-				.setAuthor("js", "http://moustacheminer.com/mss.png")
-				.setColor("#00AE86")
-				.setDescription(command)
-				.setFooter("MSS-Discord, " + config.MSS.version, "")
-				.setTimestamp()
-				.setURL("http://moustacheminer.com/")
-				.addField("Result", output.result)
-				.addField("Console", consoleout);
-
-			console.log(output.result);
-			console.log(consoleout);
-
-			message.channel.sendEmbed(embed, 'MSS-Discord JS Sandbox', { disableEveryone: true });
-		});
-
-	} catch(err) {
-		message.reply("Something happened and an ACTUAL ERROR happened outside the sandbox.");
+	} else {
+		MSS.msg.react(message, false, "x");
 	}
 }
-

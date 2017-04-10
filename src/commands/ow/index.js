@@ -17,12 +17,8 @@ module.exports = function manpages(message) {
 			var owData = JSON.parse(body);
 
 			var embed = new Discord.RichEmbed()
-				.setDescription("Overwatch Stats")
-				.setFooter("MSS-Discord, " + config.MSS.version, "")
-				.setTimestamp()
 				.addField("Quickplay", "Playtime: " + owData["playtime"]["quickplay"] + "\nWins: " + owData["games"]["quickplay"]["wins"])
 				.addField("Competitive", "Playtime: " + owData["playtime"]["competitive"] + "\nWins: " + owData["games"]["competitive"]["wins"] + "\nGames: " + owData["games"]["competitive"]["played"] + "\n\nRank: " + owData["competitive"]["rank"]);
-
 
 			message.channel.sendEmbed(embed, "", { disableEveryone: true });
 		}

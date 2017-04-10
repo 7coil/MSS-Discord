@@ -1,12 +1,12 @@
 {
 	"meta": {
-		"name": "Sandbox - A nifty javascript sandbox for node.js",
-		"description": "A command that lets you run JS in a safe to use sandbox.",
-		"url": "http://gf3.github.io/sandbox/",
+		"name": "MSS-Discord EVAL",
+		"description": "A command that you shouldn't use.",
+		"url": "http://moustacheminer.com/",
 		"examples" : [
 			{
 				"var": "<js code>",
-				"description": "Runs code in a sandbox"
+				"description": "Runs directly in the bot, but with a fancy border."
 			}
 		]
 	}
