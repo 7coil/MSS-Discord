@@ -53,7 +53,7 @@ client.on("message", function(message) {
 	//Remove the first term if it contains the bot ID, as well as the required brackets. Also make sure there's a second term to replace the first one.
 	if (input[0].indexOf(client.user.id) != -1 && input[1]) {
 		//Add the prefix back!
-		input[1] += "!!";
+		input[1] = "!!" + input[1];
 		input.shift();
 	}
 
