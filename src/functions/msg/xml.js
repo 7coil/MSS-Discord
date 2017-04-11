@@ -5,7 +5,7 @@ module.exports = function reactWith(message, meta, output, error) {
 	reply += "```xml\n";
 	reply += "<response>\n"
 	reply += "    <name>" + meta.meta.name + "</name>\n"
-	reply += "    <to>" + message.author.tag + "</to>\n"
+	reply += "    <to>" + message.author.username + "</to>\n"
 
 	if(output.isArray && output.length > 0) {
 		output.forEach(function(element) {
