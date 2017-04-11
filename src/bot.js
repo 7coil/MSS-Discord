@@ -52,10 +52,10 @@ client.on("message", function(message) {
 		console.dir(result);
 
 		//If the command exists, run the command
-		if (command[result.command.name[0]]) {
+		if (command[result.command.name]) {
 			//Rebuild the message to fit the legacy format
-			message.content = config.MSS.prefix + " " + result.command.name[0] + result.command.option[0]
-			command[result.command.name[0]](message);
+			message.content = config.MSS.prefix + " " + result.command.name + result.command.option
+			command[result.command.name](message);
 		}
 	});
 
