@@ -1,6 +1,6 @@
 const xml2js = require('xml2js');
 
-module.exports = function xmlReply(input) {
+module.exports = function xmlReply(message, input) {
 
 	var builder = new xml2js.Builder();
 
