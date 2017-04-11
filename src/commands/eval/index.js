@@ -8,12 +8,36 @@ module.exports = function(message) {
 		input[0] = input[0].substring(config.MSS.prefix.length);
 		try {
 			eval(message.content.substring(config.MSS.prefix.length + input[0].length + 1));
-			MSS.msg.xml(message, meta, "Success!");
+			reply = {
+				response: {
+					name: meta.name,
+					to: message.author.username,
+					error: false,
+					output: err.stack
+				}
+			}
 		} catch(err) {
-			MSS.msg.xml(message, meta, "", err.stack);
+			reply = {
+				response: {
+					name: meta.name,
+					to: message.author.username,
+					error: true,
+					output: "An error occured",
+					stack: err.stack
+				}
+			}
 		}
 	} else {
-		MSS.msg.xml(message, meta, "", "You do not have permission to use this command");
+		reply = {
+			response: {
+				name: meta.name,
+				to: message.author.username,
+				error: true,
+				output: "You do not have permission to run this command."
+			}
+		}
 	}
+
+	MSS.msg.xml(message, reply);
 }
 

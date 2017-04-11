@@ -4,6 +4,14 @@ const meta = require("./meta.json");
 const MSS = require("./../../functions/");
 
 module.exports = function(message) {
-	//Reply with an adequate cookie, then reply with a cookie reaction.
-	MSS.msg.xml(message, meta, data.cookies[Math.floor(Math.random() * data.cookies.length)]);
+	reply = {
+		response: {
+			name: meta.name,
+			to: message.author.username,
+			error: false,
+			output: data.cookies[Math.floor(Math.random() * data.cookies.length)]
+		}
+	}
+
+	MSS.msg.xml(message, reply);
 }
