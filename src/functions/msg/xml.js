@@ -8,20 +8,20 @@ module.exports = function reactWith(message, meta, output, error) {
 	reply += "    <to>" + message.author.tag + "</to>\n"
 
 	if(output.length > 0 && output.isArray) {
-		output.forEach(element) {
+		output.forEach(function(element) {
 			reply += "    <output>" + element + "</output>\n"
 		}
 	} else if (output) {
 		reply += "    <output>" + output + "</output>\n"
-	}
+	});
 
 	if(error.length > 0 && output.isArray) {
-		output.forEach(element) {
+		output.forEach(function(element) {
 			reply += "    <error>" + element + "</error>\n"
 		}
 	} else if (error) {
 		reply += "    <error>" + error + "</error>\n"
-	}
+	});
 
 	reply += "</response>"
 
