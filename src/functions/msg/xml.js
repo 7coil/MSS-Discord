@@ -23,7 +23,8 @@ module.exports = function reactWith(message, meta, output, error) {
 		reply += "    <error>" + error + "</error>\n"
 	}
 
-	reply += "</response>"
+	reply += "</response>\n"
+	reply += "```"
 
 	message.reply(reply);
 
