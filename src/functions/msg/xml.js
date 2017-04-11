@@ -7,7 +7,7 @@ module.exports = function reactWith(message, meta, output, error) {
 	reply += "    <name>" + meta.meta.name + "</name>\n"
 	reply += "    <to>" + message.author.username + "</to>\n"
 
-	if(output.isArray && output.length > 0) {
+	if(output.isArray) {
 		output.forEach(function(element) {
 			reply += "    <output>" + element + "</output>\n"
 		});
@@ -15,7 +15,7 @@ module.exports = function reactWith(message, meta, output, error) {
 		reply += "    <output>" + output + "</output>\n"
 	}
 
-	if(output.isArray && error.length > 0 ) {
+	if(output.isArray) {
 		output.forEach(function(element) {
 			reply += "    <error>" + element + "</error>\n"
 		});
