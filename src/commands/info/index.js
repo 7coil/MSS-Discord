@@ -37,5 +37,5 @@ module.exports = function(message) {
 		}
 	}
 
-	MSS.msg.xml(message, help);
+	MSS.msg.xml(message, reply);
 }
