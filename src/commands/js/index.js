@@ -4,6 +4,8 @@ const Discord = require("discord.js");
 const meta = require("./meta.json");
 
 module.exports = function(message) {
+	var reply;
+
 	reply = {
 		response: {
 			name: meta.meta.name,

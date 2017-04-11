@@ -4,7 +4,7 @@ const meta = require("./meta.json");
 const MSS = require("./../../functions/");
 
 module.exports = function(message) {
-	reply = {
+	var reply = {
 		response: {
 			name: meta.meta.name,
 			to: message.author.username,

@@ -9,6 +9,7 @@ module.exports = function(message, client) {
 	let sum = 0;
 	var result = [];
 	var output = "";
+	var reply;
 
 
 	if(input[1] && input[1].startsWith("d")) {
@@ -81,10 +82,6 @@ module.exports = function(message, client) {
 		}
 	}
 
-
-
-	MSS.msg.xml(message, reply);
-
 	if (result.join(" ").length < 512) {
 		reply = {
 			response: {
@@ -115,10 +112,7 @@ module.exports = function(message, client) {
 		}
 	}
 
-	message.channel.sendEmbed(embed, "", { disableEveryone: true })
-		.catch(function(e) {
-			console.log(e);
-		});
+	MSS.msg.xml(message, reply);
 }
 
 function randInt(d) {

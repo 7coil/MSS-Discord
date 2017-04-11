@@ -17,6 +17,7 @@ fs.readdir("./commands/", function(err, items) {
 
 module.exports = function manpages(message) {
 	let input = message.content.replace(/\n/g, " ").split(" ");
+	var reply;
 
 	//Return the usage of the man command if no attributes were given
 	if(!input[1]) {

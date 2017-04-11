@@ -6,6 +6,7 @@ const meta = require("./meta.json");
 
 module.exports = function manpages(message) {
 	let input = message.content.replace(/\n/g, " ").split(" ");
+	var reply;
 
 	if(!(input[1] && input[2] && input[3])) {
 		reply = {

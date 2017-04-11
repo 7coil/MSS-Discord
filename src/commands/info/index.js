@@ -5,7 +5,7 @@ const meta = require("./meta.json");
 const MSS = require("./../../functions/");
 
 module.exports = function(message) {
-	var reply = [];
+	var reply;
 
 	//Realtime statistics
 	var pinginfo = message.client.ping + "ms";

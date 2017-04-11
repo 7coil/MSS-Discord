@@ -7,6 +7,7 @@ const request = require("request");
 module.exports = function place(message) {
 	let input = message.content.replace (/\n/g, "").split(" ");
 	var user = encodeURI(input[1]);
+	var reply;
 
 	request('http://moustacheminer.com/place/searchapi.php?username=' + user, function(error, response, body) {
 		if(error) {
