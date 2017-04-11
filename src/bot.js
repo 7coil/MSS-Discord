@@ -47,9 +47,21 @@ client.on("message", function(message) {
 	xmlparse(message.content, function(err, result) {
 		if(err) {
 			console.log(err);
-		}
 
-		console.dir(result);
+			reply = {
+				response: {
+					name: "xml2js",
+					to: message.author.username,
+					error: true,
+					output: err
+				}
+			}
+
+			MSS.msg.xml(message, reply);
+
+		} else {
+			console.dir(result);
+		}
 
 		//If the command exists, run the command
 		if (command[result.command.name]) {
