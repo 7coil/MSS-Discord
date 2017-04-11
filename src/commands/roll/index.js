@@ -57,16 +57,17 @@ module.exports = function(message, client) {
 		}
 	}
 
+	var errmsg;
 	if (sides < 0 && rolls < 0) {
-		output += "\nHowever, such a theoretical shape could not be rolled for a negative number of times.";
+		errmsg = "However, such a theoretical shape could not be rolled for a negative number of times.";
 		sum = "Error";
 		result.push("Error");
 	} else if (sides < 0) {
-		output += "\nHowever, such a theoretical shape could not be rolled.";
+		errmsg = "However, such a theoretical shape could not be rolled.";
 		sum = "Error";
 		result.push("Error");
 	} else if (rolls < 0) {
-		output += "\nHowever, such a shape cannot be rolled for a negative number of times.";
+		errmsg = "However, such a shape cannot be rolled for a negative number of times.";
 		sum = "Error";
 		result.push("Error");
 	} else if (rolls === 0 || sides === 0) {
@@ -80,14 +81,38 @@ module.exports = function(message, client) {
 		}
 	}
 
-	var embed = new Discord.RichEmbed()
-		.setDescription(output)
-		.addField("Total", sum);
+
+
+	MSS.msg.xml(message, reply);
 
 	if (result.join(" ").length < 512) {
-		embed.addField("Die output", result.join(" "));
+		reply = {
+			response: {
+				name: meta.meta.name,
+				to: message.author.username,
+				error: false,
+				output: {
+					description: output,
+					total: sum,
+					faces: result,
+					error: errmsg
+				}
+			}
+		}
 	} else {
-		embed.addField("Error", "The output is too long to display");
+		reply = {
+			response: {
+				name: meta.meta.name,
+				to: message.author.username,
+				error: true,
+				output: {
+					description: output,
+					total: sum,
+					faces: result,
+					error: "All the faces of each die are too large to display."
+				}
+			}
+		}
 	}
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true })
