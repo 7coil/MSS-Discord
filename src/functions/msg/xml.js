@@ -10,7 +10,7 @@ module.exports = function xmlReply(message, meta, output, error) {
 	reply += "    <name>" + meta.meta.name + "</name>\n"
 	reply += "    <to>" + message.author.username + "</to>\n"
 
-	if(output.typeof === "object") {
+	if(error && output.isArray) {
 		output.forEach(function(element) {
 			reply += "    <output>" + element + "</output>\n"
 		});
@@ -18,7 +18,7 @@ module.exports = function xmlReply(message, meta, output, error) {
 		reply += "    <output>" + output + "</output>\n"
 	}
 
-	if(error.typeof === "object") {
+	if(error && error.isArray) {
 		error.forEach(function(element) {
 			reply += "    <error>" + element + "</error>\n"
 		});
