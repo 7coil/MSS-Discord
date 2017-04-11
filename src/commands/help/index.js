@@ -21,5 +21,5 @@ module.exports = function help(message) {
 		}
 	}
 
-	MSS.msg.xml(message, help);
+	MSS.msg.xml(message, reply);
 }
