@@ -1,4 +1,7 @@
-module.exports = function reactWith(message, meta, output, error) {
+module.exports = function xmlReply(message, meta, output, error) {
+
+	console.dir(output);
+	console.dir(error);
 
 	var reply = "";
 
@@ -15,8 +18,8 @@ module.exports = function reactWith(message, meta, output, error) {
 		reply += "    <output>" + output + "</output>\n"
 	}
 
-	if(output.isArray) {
-		output.forEach(function(element) {
+	if(error.isArray) {
+		error.forEach(function(element) {
 			reply += "    <error>" + element + "</error>\n"
 		});
 	} else if (error) {
