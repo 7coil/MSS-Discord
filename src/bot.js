@@ -33,7 +33,7 @@ client.on("message", function(message) {
 	message.content = message.content.replace("\n", "");
 
 	//Remove beautiful Discord code marks if it's there
-	if(message.content.toLowerCase.startsWith("```xml")) {
+	if(message.content.toLowerCase().startsWith("```xml")) {
 		message.content = message.content.substring(6).slice(0, -3);
 	} else if (message.content.startsWith("```")) {
 		message.content = message.content.substring(3).slice(0, -3);
