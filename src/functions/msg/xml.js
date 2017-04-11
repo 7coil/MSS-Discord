@@ -10,7 +10,7 @@ module.exports = function xmlReply(message, meta, output, error) {
 	reply += "    <name>" + meta.meta.name + "</name>\n"
 	reply += "    <to>" + message.author.username + "</to>\n"
 
-	if(error && output.isArray()) {
+	if(output && Array.isArray(output)) {
 		output.forEach(function(element) {
 			reply += "    <output>" + element + "</output>\n"
 		});
@@ -18,7 +18,7 @@ module.exports = function xmlReply(message, meta, output, error) {
 		reply += "    <output>" + output + "</output>\n"
 	}
 
-	if(error && error.isArray()) {
+	if(error && Array.isArray(error)) {
 		error.forEach(function(element) {
 			reply += "    <error>" + element + "</error>\n"
 		});
