@@ -56,7 +56,7 @@ function play(message) {
 	
 	if (playlist[message.guild.id].length > 0) {
 		current[message.guild.id] = JSON.parse(playlist[message.guild.id].shift());
-		panel(message);
+
 		switch (current[message.guild.id]["type"]) {
 			case "youtube":
 				stream[message.guild.id] = yt(current[message.guild.id]["url"], {audioonly: true});
