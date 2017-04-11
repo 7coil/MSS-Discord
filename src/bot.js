@@ -6,7 +6,7 @@ const client = new Discord.Client();
 const MSS = require("./functions/");
 const fs = require("fs");
 const xml2js = require('xml2js');
-const xmlparse = new xml2js.parseString();
+const xmlparse = xml2js.parseString();
 
 var command = [];
 
