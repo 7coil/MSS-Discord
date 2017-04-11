@@ -12,30 +12,27 @@ module.exports = function(message) {
 	var guildcount = message.client.guilds.size;
 	var shardcount = config.MSS.shards;
 	var shardguildratio = (message.client.guilds.size / config.MSS.shards).toFixed(2);
+	var shardinfo = message.client.shard.id;
 
 	var embed = new Discord.RichEmbed()
 		.setFooter("MSS-Discord, " + config.MSS.version, "")
 		.setTimestamp()
 		.addField("MSS", config.MSS.version, true)
 		.addField("Ping", pinginfo, true)
-
 		.addField("Node.js", process.version, true)
 		.addField("Uptime", process.uptime(), true)
+		.addField("Shard", shardinfo, true)
 		.addField("PID", process.pid, true)
 		.addField("Hardware", hardwareinfo)
 		.addField("Software", softwareinfo)
 		.addField("Licence", "This software is released under the MIT Licence.");
 
 	var shardinfo;
-	if(!message.client.shard) {
-		shardinfo = "N/A";
-	} else {
-		shardinfo = message.client.shard.id;
+	if(shardcount) {
 		embed.addField("Guilds", guildcount, true)
-		.addField("Shards", shardcount, true)
-		.addField("Shard/Guild Ratio", shardguildratio, true);
+			.addField("Shards", shardcount, true)
+			.addField("Shard/Guild Ratio", shardguildratio, true);
 	}
-	embed.addField("Shard", shardinfo, true)
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true });
 }
