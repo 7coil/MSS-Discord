@@ -12,7 +12,7 @@ module.exports = function help(message) {
 			error: false,
 			output: {
 				help: [
-					"For a list of commands, run man, with option of 'all'.",
+					"For a list of commands, run man, without any option.",
 					"For help on a specific command, run man, with the option of your choice.",
 					"This version of MSS-Discord (XML-Discord) is by 7coil, at moustacheminer.com",
 					"This software is released under the MIT Licence"
