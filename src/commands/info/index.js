@@ -15,12 +15,19 @@ module.exports = function(message) {
 		shardinfo = message.client.shard.id;
 	}
 
+	var guildcount = message.client.guilds.size;
+	var shardcount = config.MSS.shards;
+	var shardguildratio = (message.client.guilds.size / config.MSS.shards).toFixed(2);
+
 	var embed = new Discord.RichEmbed()
 		.setFooter("MSS-Discord, " + config.MSS.version, "")
 		.setTimestamp()
 		.addField("MSS", config.MSS.version, true)
 		.addField("Ping", pinginfo, true)
 		.addField("Shard", shardinfo, true)
+		.addField("Guilds", guildcount, true)
+		.addField("Shards", shardcount, true)
+		.addField("Shard/Guild Ratio", shardguildratio, true)
 		.addField("Node.js", process.version, true)
 		.addField("Uptime", process.uptime(), true)
 		.addField("PID", process.pid, true)
