@@ -34,20 +34,7 @@ module.exports = function stop(message) {
 		return false;
 	}
 
-	if(MSS.msg.isadmin(message)) {
-		MSS.music.stop(message);
-	} else {
-		reply = {
-			response: {
-				name: meta.meta.name,
-				to: message.author.username,
-				error: true,
-				output: "You do not have permission to stop."
-			}
-		}
-
-		MSS.msg.xml(message, reply);
-	}
+	MSS.music.list(message);
 
 
 }
