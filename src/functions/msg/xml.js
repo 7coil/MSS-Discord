@@ -25,4 +25,6 @@ module.exports = function reactWith(message, meta, output, error) {
 
 	reply += "</response>"
 
+	message.reply(reply);
+
 }
