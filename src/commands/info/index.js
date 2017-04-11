@@ -8,12 +8,6 @@ var softwareinfo = "[" + os.type() + "] " + os.release() + "\n[Hostname] " + os.
 
 module.exports = function(message) {
 	var pinginfo = message.client.ping + "ms";
-	var shardinfo;
-	if(!message.client.shard) {
-		shardinfo = "N/A";
-	} else {
-		shardinfo = message.client.shard.id;
-	}
 
 	var guildcount = message.client.guilds.size;
 	var shardcount = config.MSS.shards;
@@ -24,16 +18,24 @@ module.exports = function(message) {
 		.setTimestamp()
 		.addField("MSS", config.MSS.version, true)
 		.addField("Ping", pinginfo, true)
-		.addField("Shard", shardinfo, true)
-		.addField("Guilds", guildcount, true)
-		.addField("Shards", shardcount, true)
-		.addField("Shard/Guild Ratio", shardguildratio, true)
+
 		.addField("Node.js", process.version, true)
 		.addField("Uptime", process.uptime(), true)
 		.addField("PID", process.pid, true)
 		.addField("Hardware", hardwareinfo)
 		.addField("Software", softwareinfo)
 		.addField("Licence", "This software is released under the MIT Licence.");
+
+	var shardinfo;
+	if(!message.client.shard) {
+		shardinfo = "N/A";
+	} else {
+		shardinfo = message.client.shard.id;
+		embed.addField("Guilds", guildcount, true)
+		.addField("Shards", shardcount, true)
+		.addField("Shard/Guild Ratio", shardguildratio, true);
+	}
+	embed.addField("Shard", shardinfo, true)
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true });
 }
