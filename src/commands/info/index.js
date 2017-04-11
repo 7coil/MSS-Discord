@@ -8,6 +8,7 @@ var hardwareinfo = "[CPU] (" + os.arch() + ") " + os.cpus()[0]["model"] + " (clo
 var softwareinfo = "[" + os.type() + "] " + os.release() + "\n[Hostname] " + os.hostname();
 
 module.exports = function(message) {
+	var reply;
 
 	//Realtime statistics
 	var pinginfo = message.client.ping + "ms";
@@ -16,24 +17,21 @@ module.exports = function(message) {
 	var shardguildratio = (message.client.guilds.size / config.MSS.shards).toFixed(2);
 	var shardinfo = message.client.shard.id;
 
-	var embed = new Discord.RichEmbed()
-		.setFooter("MSS-Discord, " + config.MSS.version, "")
-		.setTimestamp()
-		.addField("MSS", config.MSS.version, true)
-		.addField("Ping", pinginfo, true)
-		.addField("Node.js", process.version, true)
-		.addField("Uptime", process.uptime(), true)
-		.addField("Guilds", guildcount, true)
-		.addField("PID", process.pid, true)
-		.addField("Hardware", hardwareinfo)
-		.addField("Software", softwareinfo)
-		.addField("Licence", "This software is released under the MIT Licence.");
+	reply.push("MSS: " + config.MSS.version);
+	reply.push("Ping: " + pinginfo);
+	reply.push("Node.js: " + process.version);
+	reply.push("Uptime: " + process.uptime());
+	reply.push("Guilds: " + guildcount);
+	reply.push("PID: " + process.pid);
+	reply.push("Hardware: " + hardwareinfo);
+	reply.push("Software: " + softwareinfo);
+	reply.push("Licence: This software is released under the MIT Licence.");
 
 	if(shardcount) {
-		embed.addField("Shard", shardinfo, true)
-			.addField("Shards", shardcount, true)
-			.addField("Shard/Guild Ratio", shardguildratio, true);
+		reply.push("Shard: " + shardinfo);
+		reply.push("Shards: " + shardcount);
+		reply.push("Shard/Guild Ratio: " + shardguildratio);
 	}
 
-	message.channel.sendEmbed(embed, "", { disableEveryone: true });
+	MSS.msg.xml(message, meta, reply);
 }
