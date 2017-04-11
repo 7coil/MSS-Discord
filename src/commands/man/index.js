@@ -8,15 +8,10 @@ var list = [];
 
 //Get all .json files in this directory to read the man data.
 fs.readdir("./commands/", function(err, items) {
-	print = {
-		response: {
-			name: meta.meta.name,
-			to: message.author.username,
-			error: false,
-			output: "What manual page do you want?",
-			option: items
-		}
-	}
+	items.forEach(function(item) {
+		list.push(file);
+		commands[file] = require("./../" + file + "/meta.json");
+	});
 });
 
 module.exports = function manpages(message) {
@@ -24,6 +19,15 @@ module.exports = function manpages(message) {
 
 	//Return the usage of the man command if no attributes were given
 	if(!input[1]) {
+		print = {
+			response: {
+				name: meta.meta.name,
+				to: message.author.username,
+				error: false,
+				output: "What manual page do you want?",
+				option: list
+			}
+		}
 		MSS.msg.xml(message, print);
 		return false;
 	}
