@@ -11,7 +11,7 @@ module.exports = function(message) {
 			name: meta.meta.name,
 			to: message.author.username,
 			error: true,
-			output: "XML-Discord cannot parse Javascript. XML-Discord is coded in XML. Not in Javascript."
+			output: "XML-Discord cannot parse JavaScript. XML-Discord is coded in XML. Not in JavaScript."
 		}
 	}
 
