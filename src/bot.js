@@ -47,7 +47,7 @@ client.on("message", function(message) {
 	xmlparse(message.content, function(err, result) {
 		if(err) {
 			//Get the error per line
-			let lines = err.split("\n");
+			let lines = err.message.split("\n");
 
 			//Remove the label in the details
 			lines[0] = lines[0].replace("Error: ", "")
