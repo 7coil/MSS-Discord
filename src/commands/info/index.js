@@ -10,7 +10,7 @@ var hardwareinfo = "[CPU] (" + os.arch() + ") " + os.cpus()[0]["model"] + " (clo
 var softwareinfo = "[" + os.type() + "] " + os.release() + "\n[Hostname] " + os.hostname();
 
 module.exports = function(message) {
-	var reply;
+	var reply = [];
 
 	//Realtime statistics
 	var pinginfo = message.client.ping + "ms";
