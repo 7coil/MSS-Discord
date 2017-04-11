@@ -4,6 +4,7 @@ const MSS = require("./../../functions/");
 const searchYT = require('youtube-node');
 const searchYTClient = new searchYT();
 const yt = require('ytdl-core');
+const meta = require("./meta.json");
 searchYTClient.setKey(API.youtube);
 
 module.exports = function yt(message) {
