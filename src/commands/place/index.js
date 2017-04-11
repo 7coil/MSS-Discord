@@ -57,9 +57,9 @@ module.exports = function place(message) {
 							12: colour[12],
 							13: colour[13],
 							14: colour[14],
-							15: colour[15],
-						}
-						count: data.info.length
+							15: colour[15]
+						},
+						count: data.info.length,
 						url: "http://moustacheminer.com/place/?username=" + user
 					}
 				}
