@@ -4,9 +4,9 @@ module.exports = function xmlReply(message, input) {
 
 	var builder = new xml2js.Builder();
 
-	var reply = "```xml";
+	var reply = "```xml\n";
 	reply += builder.buildObject(input);
-	reply += "```"
+	reply += "\n```"
 
 	message.channel.sendMessage(reply);
 }
