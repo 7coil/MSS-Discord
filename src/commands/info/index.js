@@ -1,6 +1,8 @@
 const Discord = require("discord.js");
 const config = require("./../../config.json");
 const os = require('os');
+const meta = require("./meta.json");
+const MSS = require("./../../functions/");
 
 //Non-changing statistics
 //  (x64) AMD Athlon (x3) Something @ 3ghz (clocked at ????MHz)
