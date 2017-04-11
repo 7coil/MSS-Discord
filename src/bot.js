@@ -46,14 +46,24 @@ client.on("message", function(message) {
 
 	xmlparse(message.content, function(err, result) {
 		if(err) {
-			console.log(err);
+			//Get the error per line
+			let lines = err.split("\n");
+
+			//Remove the label in the details
+			lines[0] = lines[0].replace("Error: ", "")
+			lines[1] = lines[1].replace("Line: ", "")
+			lines[2] = lines[2].replace("Column: ", "")
 
 			reply = {
 				response: {
 					name: "XML-Discord",
 					to: message.author.username,
 					error: true,
-					output: err
+					output: {
+						error: lines[0],
+						line: lines[1],
+						column: lines[2]
+					}
 				}
 			}
 
