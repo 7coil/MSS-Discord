@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const config = require("./../../config.json");
 const MSS = require("./../../functions/");
+const meta = require("./meta.json");
 
 module.exports = function(message, client) {
 	let input = message.content.replace(/\n/g, " ").split(" ");
