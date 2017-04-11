@@ -24,7 +24,7 @@ fs.readdir("./commands/", function(err, items) {
 
 client.on("ready", function() {
 	console.log("Successfully connected to Discord!");
-	client.user.setGame("<command>man</command>");
+	client.user.setGame("<command><name>man</name></command>");
 });
 
 client.on("message", function(message) {
