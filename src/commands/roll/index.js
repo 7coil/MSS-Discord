@@ -82,7 +82,7 @@ module.exports = function(message, client) {
 
 	var embed = new Discord.RichEmbed()
 		.setDescription(output)
-		.addField("Die output", result)
+		.addField("Die output", result.join(" "))
 		.addField("Total", sum);
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true })
