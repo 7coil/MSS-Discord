@@ -16,7 +16,6 @@ exports.skip = skip;
 exports.stop = stop;
 exports.get = get;
 exports.list = list;
-exports.panel = panel;
 
 //A function to keep playing that stream
 function sound(message) {
@@ -41,8 +40,18 @@ function play(message) {
 	var voiceChannel = message.member.voiceChannel;
 	
 	if(!voiceChannel) {
-		//Not in voice
-		return MSS.msg.react(message, false, "call");
+		reply = {
+			response: {
+				name: "XML-Music",
+				to: message.author.username,
+				error: true,
+				output: "There is no bot in the channel."
+			}
+		}
+
+		MSS.msg.xml(message, reply);
+
+		return false;
 	}
 	
 	if (playlist[message.guild.id].length > 0) {
@@ -83,10 +92,31 @@ function add(message, type, url, title, thumb_url) {
 function skip(message) {
 	var voiceChannel = message.member.voiceChannel;
 	if (!voiceChannel || !voiceChannel.connection) {
-		//No bot in channel
-		return MSS.msg.react(message, false, "robot");
+		reply = {
+			response: {
+				name: "XML-Music",
+				to: message.author.username,
+				error: true,
+				output: "There is no bot in the channel."
+			}
+		}
+
+		MSS.msg.xml(message, reply);
+
+		return false;
 	}
-	message.channel.send("Destroying stream...");
+	reply = {
+		response: {
+			name: "XML-Music",
+			to: message.author.username,
+			error: false,
+			output: "Destroying stream..."
+		}
+	}
+
+	MSS.msg.xml(message, reply);
+
+	return false;
 	stream[message.guild.id].destroy();
 }
 
@@ -94,7 +124,18 @@ function stop(message) {
 	var voiceChannel = message.member.voiceChannel;
 	if (!voiceChannel || !voiceChannel.connection) {
 		//No bot in channel
-		return MSS.msg.react(message, false, "robot");
+		reply = {
+			response: {
+				name: "XML-Music",
+				to: message.author.username,
+				error: true,
+				output: "There is no bot in the channel."
+			}
+		}
+
+		MSS.msg.xml(message, reply);
+
+		return false;
 	}
 
 	if (voiceChannel && voiceChannel.connection) voiceChannel.leave();
@@ -115,27 +156,34 @@ function list(message) {
 
 function get(message) {
 	if(!current[message.guild.id]) {
-		return MSS.msg.rich(message, "MSS Music Player", "There is no music currently playing.", "#FF0000");
+		reply = {
+			response: {
+				name: "XML-Music",
+				to: message.author.username,
+				error: true,
+				output: "You do not have permission to stop."
+			}
+		}
+
+		MSS.msg.xml(message, reply);
+
+		return false;
 	}
 
-	var embed = new Discord.RichEmbed()
-		.setTitle("MSS Music Player")
-		.setAuthor("MSS", "http://moustacheminer.com/mss.png")
-		.setColor("#00FF00")
-		.setDescription("Now playing: " + current[message.guild.id]["title"])
-		.setFooter("MSS-Discord, " + config.MSS.version, "")
-		.setTimestamp()
-		.setURL(current[message.guild.id]["url"])
-		.setImage(current[message.guild.id]["thumb_url"]);
+	reply = {
+		response: {
+			name: "XML-Music",
+			to: message.author.username,
+			error: true,
+			output: {
+				title: current[message.guild.id]["title"],
+				url: current[message.guild.id]["url"],
+				thumb: current[message.guild.id]["thumb_url"]
+			}
+		}
+	}
 
-	message.channel.sendEmbed(embed, "", { disableEveryone: true });
-}
+	MSS.msg.xml(message, reply);
 
-function panel(message) {
-	message.channel.sendMessage('**Music Control Panel**')
-	.then(function(message) {
-		message.react(String.fromCodePoint(10145));
-		message.react(String.fromCodePoint(8505));
-		message.react(String.fromCodePoint(128240));
-	});
+	return false;
 }

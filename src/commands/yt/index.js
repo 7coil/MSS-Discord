@@ -7,31 +7,77 @@ const yt = require('ytdl-core');
 searchYTClient.setKey(API.youtube);
 
 module.exports = function yt(message) {
-	if (!message.guild) return MSS.msg.rich(message, "Error", "You are not allowed to send this command via Direct Messaging.", "#FF0000");
+	if (!message.guild) {
+		reply = {
+			response: {
+				name: meta.meta.name,
+				to: message.author.username,
+				error: true,
+				output: "This command has been disabled for Direct Messaging"
+			}
+		}
+
+		MSS.msg.xml(message, reply);
+
+		return false;
+	}
+
 	let input = message.content.replace (/\n/g, "").split(" ");
 	//Get the voice channel that it's going to play to.
 	let voiceChannel = message.member.voiceChannel;
 	//Check if the user is inside a voice channel or has inputted anything.
 	if (!voiceChannel) {
-		MSS.msg.react(message, false, "call");
+		reply = {
+			response: {
+				name: meta.meta.name,
+				to: message.author.username,
+				error: true,
+				output: "You are not in a voice channel."
+			}
+		}
+
+		MSS.msg.xml(message, reply);
 		return false;
 	} else if (!input[1]) {
-		MSS.msg.react(message, false, "link");
+		reply = {
+			response: {
+				name: meta.meta.name,
+				to: message.author.username,
+				error: true,
+				output: "You did not provide a search term."
+			}
+		}
+
+		MSS.msg.xml(message, reply);
 		return false;
 	}
 
 	searchYTClient.search(message.content.substring(input[0].length + 1), 1, function(error, result) {
 		if (error) {
-			console.log(error);
-			message.reply(error);
-			MSS.msg.react(message, false, "bomb");
+			reply = {
+				response: {
+					name: meta.meta.name,
+					to: message.author.username,
+					error: true,
+					output: "An internal error occured"
+				}
+			}
+
+			MSS.msg.xml(message, reply);
 			return false;
 		} else if (!result["items"][0]) {
-			message.reply("No search results found.");
-			MSS.msg.react(message, false, "X");
+			reply = {
+				response: {
+					name: meta.meta.name,
+					to: message.author.username,
+					error: true,
+					output: "No search results found."
+				}
+			}
+
+			MSS.msg.xml(message, reply);
 			return false;
 		} else {
-			MSS.msg.react(message, true);
 			MSS.music.add(message, "youtube", "https://youtube.com/watch?v=" + result["items"][0]["id"]["videoId"], result["items"][0]["snippet"]["title"], result["items"][0]["snippet"]["thumbnails"]["default"]["url"]);
 		}
 	});
