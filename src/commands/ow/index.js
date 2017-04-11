@@ -12,15 +12,29 @@ module.exports = function manpages(message) {
 	var owUrl = "http://127.0.0.1:3000/profile/" + input[1] + "/" + input[2] + "/" + input[3];
 	request(owUrl, function (error, response, body) {
 		if (response.statusCode === 404) {
-			return message.reply("The playertag was not found. Did you insert the correct region and/or device, and is the capitalisation of the tag correct?");
+			reply = {
+				response: {
+					name: meta.meta.name,
+					to: message.author.username,
+					error: true,
+					output: "The player was not found."
+				}
+			}
+
+			MSS.msg.xml(message, reply);
 		} else if (response.statusCode === 200){
 			var owData = JSON.parse(body);
 
-			var embed = new Discord.RichEmbed()
-				.addField("Quickplay", "Playtime: " + owData["playtime"]["quickplay"] + "\nWins: " + owData["games"]["quickplay"]["wins"])
-				.addField("Competitive", "Playtime: " + owData["playtime"]["competitive"] + "\nWins: " + owData["games"]["competitive"]["wins"] + "\nGames: " + owData["games"]["competitive"]["played"] + "\n\nRank: " + owData["competitive"]["rank"]);
+			reply = {
+				response: {
+					name: meta.meta.name,
+					to: message.author.username,
+					error: false,
+					output: owData
+				}
+			}
 
-			message.channel.sendEmbed(embed, "", { disableEveryone: true });
+			MSS.msg.xml(message, reply);
 		}
 	});
 }
