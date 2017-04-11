@@ -10,7 +10,7 @@ module.exports = function(message) {
 			eval(message.content.substring(config.MSS.prefix.length + input[0].length + 1));
 			reply = {
 				response: {
-					name: meta.name,
+					name: meta.meta.name,
 					to: message.author.username,
 					error: false,
 					output: err.stack
@@ -19,18 +19,17 @@ module.exports = function(message) {
 		} catch(err) {
 			reply = {
 				response: {
-					name: meta.name,
+					name: meta.meta.name,
 					to: message.author.username,
 					error: true,
-					output: "An error occured",
-					stack: err.stack
+					output: err.stack
 				}
 			}
 		}
 	} else {
 		reply = {
 			response: {
-				name: meta.name,
+				name: meta.meta.name,
 				to: message.author.username,
 				error: true,
 				output: "You do not have permission to run this command."
