@@ -26,6 +26,6 @@ module.exports = function reactWith(message, meta, output, error) {
 	reply += "</response>\n"
 	reply += "```"
 
-	message.reply(reply);
+	message.channel.sendMessage(reply);
 
 }
