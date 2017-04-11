@@ -116,7 +116,6 @@ function skip(message) {
 
 	MSS.msg.xml(message, reply);
 
-	return false;
 	stream[message.guild.id].destroy();
 }
 
