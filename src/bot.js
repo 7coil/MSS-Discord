@@ -50,7 +50,7 @@ client.on("message", function(message) {
 
 			reply = {
 				response: {
-					name: "xml2js",
+					name: "XML-Discord",
 					to: message.author.username,
 					error: true,
 					output: err
@@ -59,12 +59,7 @@ client.on("message", function(message) {
 
 			MSS.msg.xml(message, reply);
 
-		} else {
-			console.dir(result);
-		}
-
-		//If the command exists, run the command
-		if (command[result.command.name]) {
+		} else if (command[result.command.name]) {
 			//Rebuild the message to fit the legacy format
 			message.content = config.MSS.prefix + result.command.name
 
@@ -72,6 +67,17 @@ client.on("message", function(message) {
 				message.content += " " + result.command.option
 			}
 			command[result.command.name](message);
+		} else {
+			reply = {
+				response: {
+					name: "XML-Discord",
+					to: message.author.username,
+					error: true,
+					output: "Invalid XML Command."
+				}
+			}
+
+			MSS.msg.xml(message, reply);
 		}
 	});
 
