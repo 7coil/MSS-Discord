@@ -80,6 +80,23 @@ module.exports = function yt(message) {
 			return false;
 		} else {
 			MSS.music.add(message, "youtube", "https://youtube.com/watch?v=" + result["items"][0]["id"]["videoId"], result["items"][0]["snippet"]["title"], result["items"][0]["snippet"]["thumbnails"]["default"]["url"]);
+
+			reply = {
+				response: {
+					name: meta.meta.name,
+					to: message.author.username,
+					error: false,
+					output: {
+						message: "ADD",
+						type: "youtube",
+						location: "https://youtube.com/watch?v=" + result["items"][0]["id"]["videoId"],
+						title: result["items"][0]["snippet"]["title"],
+						thumb: result["items"][0]["snippet"]["thumbnails"]["default"]["url"]
+					}
+				}
+			}
+
+			MSS.msg.xml(message, reply);
 		}
 	});
 }
