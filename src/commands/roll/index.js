@@ -82,8 +82,13 @@ module.exports = function(message, client) {
 
 	var embed = new Discord.RichEmbed()
 		.setDescription(output)
-		.addField("Die output", result.join(" "))
 		.addField("Total", sum);
+
+	if (result.join(" ") > 512) {
+		embed.addField("Die output", result.join(" "));
+	} else {
+		embed.addField("Error", "The output is too long to display");
+	}
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true })
 		.catch(function(e) {
