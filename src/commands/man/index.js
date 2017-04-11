@@ -9,6 +9,7 @@ var list = [];
 //Get all .json files in this directory to read the man data.
 fs.readdir("./commands/", function(err, items) {
 	items.forEach(function(item) {
+		var file = item.replace(/['"]+/g, "");
 		list.push(file);
 		commands[file] = require("./../" + file + "/meta.json");
 	});
