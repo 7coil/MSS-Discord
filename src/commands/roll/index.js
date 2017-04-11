@@ -84,7 +84,7 @@ module.exports = function(message, client) {
 		.setDescription(output)
 		.addField("Total", sum);
 
-	if (result.join(" ") > 512) {
+	if (result.join(" ").length > 512) {
 		embed.addField("Die output", result.join(" "));
 	} else {
 		embed.addField("Error", "The output is too long to display");
