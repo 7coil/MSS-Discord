@@ -1,0 +1,13 @@
+{
+	"meta": {
+		"name": "MSS-Discord List",
+		"description": "A command that lists the songs in the playlist",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "",
+				"description": "Lists the songs."
+			}
+		]
+	}
+}
