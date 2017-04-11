@@ -5,8 +5,10 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const MSS = require("./functions/");
 const fs = require("fs");
+const xml2js = require('xml2js');
+const xmlparse = new xml2js.parseString();
+
 var command = [];
-var reaction = [];
 
 //Login to Discord
 client.login(API.discord);
@@ -20,69 +22,37 @@ fs.readdir("./commands/", function(err, items) {
 	});
 });
 
-//Include all files in the commands directory for reactions
-fs.readdir("./reactions/", function(err, items) {
-	items.forEach(function(item) {
-		var file = item.replace(/['"]+/g, "");
-		if (file.endsWith(".js")) {
-			file = file.replace(".js", "").toLowerCase();
-			console.log(file);
-			reaction[file] = require("./reactions/" + file);
-		}
-	});
-	//List all avalible reactions
-	//console.dir(reaction);
-});
-
-
-
 client.on("ready", function() {
 	console.log("Successfully connected to Discord!");
-	client.user.setGame(config.MSS.prefix + "man | " + config.MSS.version);
+	client.user.setGame("<command>man</command>");
 });
 
 client.on("message", function(message) {
 
-	//Split message into keywords
-	let input = message.content.replace(/\n/g, "").split(" ");
+	//Remove newlines
+	message.content = message.content.replace("\n", "");
 
-	//Disallow if the author is a bot
-	if (message.author.bot) return;
-
-	//Remove the first term if it contains the bot ID
-	if (input[0].indexOf(client.user.id) != -1 && input[1]) {
-		input.shift();
-		input[0] = input[0].toLowerCase();
-		//Rebuild the new message to fit the legacy format.
-		message.content = input.join(" ");
-
-	//If there's a prefix, remove it. Otherwise, stop the execution of commands.
-	} else if (input[0].startsWith(config.MSS.prefix)) {
-		input[0] = input[0].substring(config.MSS.prefix.length).toLowerCase();
-	} else {
-		return false;
+	//Remove beautiful Discord code marks if it's there
+	if(message.content.toLowerCase.startsWith("```xml")) {
+		message.content = message.content.substring(6).slice(0, -3);
+	} else if (message.content.startsWith("```")) {
+		message.content = message.content.substring(3).slice(0, -3);
 	}
 
-	//If the command exists, run the command
-	if (command[input[0]]) {
-		command[input[0]](message);
-	}
-});
+	console.log(message.content);
 
-client.on("messageReactionAdd", function(messageReaction, user) {
-	//Not on other's messages
-	if(!(messageReaction.message.author.id === client.user.id)) return;
-	//Not if the author is a bot
-	if (user.bot) return;
+	//Stop if it's not a XML command
+	if(!message.content.startsWith("<command>")) return false;
 
-	//Get decimal codepoint of emoji
-	var input = messageReaction.emoji.name.codePointAt().toString();
+	xmlparse(message.content, function(err, result) {
+		if(err) {
+			console.log(err);
+		}
 
-	console.log(input);
+		console.dir(result);
+	});
 
-	if (reaction[input]) {
-		reaction[input](messageReaction, user);
-	}
+
 });
 
 process.on("unhandledRejection", function(err) {
