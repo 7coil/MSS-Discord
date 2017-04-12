@@ -4,6 +4,6 @@ const Discord = require("discord.js");
 
 module.exports = function screenshot(message) {
 	exec(command, function(error, stdout, stderr) {
-		 message.sendFile('./export.jpg', '.jpg', stdout);
+		 message.channel.sendFile('./export.jpg', '.jpg', stdout);
 	});
 }
