@@ -2,7 +2,7 @@
 
 MSS-Discord (Moustacheminer Server Services for Discord) is another bot made for Discord, utilising reactions to control media.
 
-[If you are trying to add the bot to your server, click here. This bot currently is ran on a DigitalOcean droplet in London.](https://discordapp.com/oauth2/authorize?&client_id=257547382277931009&scope=bot&permissions=70765632)
+[If you are trying to add the bot to your server, click here.](https://discordapp.com/oauth2/authorize?&client_id=257547382277931009&scope=bot&permissions=70765632)
 
 
 ## Changelog
