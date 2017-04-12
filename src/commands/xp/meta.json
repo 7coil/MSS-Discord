@@ -1,0 +1,13 @@
+{
+	"meta": {
+		"name": "Windows XP",
+		"description": "Screenshots vnc.moustacheminer.com",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "",
+				"description": "Takes a screenshot"
+			}
+		]
+	}
+}
