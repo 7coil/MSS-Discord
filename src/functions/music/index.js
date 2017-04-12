@@ -114,6 +114,10 @@ function list(message) {
 }
 
 function get(message) {
+	if(!message.guild) {
+		return MSS.msg.rich(message, "MSS Music Player", "You cannot use this in a DM channel!", "#FF0000");
+	}
+	
 	if(!current[message.guild.id]) {
 		return MSS.msg.rich(message, "MSS Music Player", "There is no music currently playing.", "#FF0000");
 	}
