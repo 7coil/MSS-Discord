@@ -151,7 +151,7 @@ function list(message) {
 			response: {
 				name: "XML-Music",
 				to: message.author.username,
-				error: false
+				error: false,
 				output: "There are no more songs in the playlist"
 			}
 		}
