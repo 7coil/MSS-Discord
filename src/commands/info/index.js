@@ -10,7 +10,7 @@ var softwareinfo = "[" + os.type() + "] " + os.release() + "\n[Hostname] " + os.
 module.exports = function(message) {
 
 	//Realtime statistics
-	var pinginfo = message.client.ping + "ms";
+	var pinginfo = message.client.ping.toFixed(2) + "ms";
 	var guildcount = message.client.guilds.size;
 	var shardcount = config.MSS.shards;
 	var shardguildratio = (message.client.guilds.size / config.MSS.shards).toFixed(2);
