@@ -1,6 +1,7 @@
 const exec = require('child_process').exec;
 const command = "vncsnapshot 192.168.0.3:3 export.jpg";
 const Discord = require("discord.js");
+const meta = require("./meta.json");
 const xml2js = require('xml2js');
 
 module.exports = function screenshot(message) {
