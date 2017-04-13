@@ -1,0 +1,13 @@
+{
+	"meta": {
+		"name": "moustacheminer.com Virtual Machine",
+		"description": "Screenshots vnc.moustacheminer.com",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "",
+				"description": "Takes a screenshot"
+			}
+		]
+	}
+}
