@@ -1,0 +1,69 @@
+{
+	"meta": {
+		"name": "cowsay",
+		"description": "Runs 'cowsay' in the host. Is protected from your 'sudo rm -r's",
+		"url": "https://en.wikipedia.org/wiki/Cowsay",
+		"examples" : [
+			{
+				"var": "<message>",
+				"description": "Generates an ASCII image of a cow with a message"
+			},
+			{
+				"var": "-n",
+				"description": "Disables word wrap, allowing the cow to speak FIGlet or to display other embedded ASCII art. Width in columns becomes that of the longest line, ignoring any value of `-W`."
+			},
+			{
+				"var": "-W",
+				"description": "Specifies width of the speech balloon in columns, i.e. characters in a monospace font. Default value is 40."
+			},
+			{
+				"var": "-b",
+				"description": "“Borg mode”, uses == in place of oo for the cow′s eyes."
+			},
+			{
+				"var": "-d",
+				"description": "“Dead”, uses XX, plus a descending U to represent an extruded tongue, also used on Linux kernel oops."
+			},
+			{
+				"var": "-g",
+				"description": "“Greedy”, uses $$."
+			},
+			{
+				"var": "-p",
+				"description": "“Paranoid”, uses @@."
+			},
+			{
+				"var": "-s",
+				"description": "“Stoned”, uses ** to represent bloodshot eyes, plus a descending U to represent an extruded tongue."
+			},
+			{
+				"var": "-t",
+				"description": "“Tired”, uses --."
+			},
+			{
+				"var": "-w",
+				"description": "“Wired”, uses OO."
+			},
+			{
+				"var": "-y",
+				"description": "“Youthful”, uses .. to represent smaller eyes."
+			},
+			{
+				"var": "-e <string>",
+				"description": "Manually specifies the cow′s eye-type, e.g. `cowsay -e ^^`"
+			},
+			{
+				"var": "-t <string>",
+				"description": "Manually specifies the cow′s tongue shape, e.g. `cowsay -T \\(\\)` for a pair of parentheses."
+			},
+			{
+				"var": "-f <cowfile>",
+				"description": "Specifies a .cow file from which to load alternative ASCII art. Accepts both absolute file-paths and those relative to the environment variable `COWPATH`."
+			},
+			{
+				"var": "-l",
+				"description": "Lists the names of available cow-files in the `COWPATH` directory instead of displaying a quote."
+			}
+		]
+	}
+}
