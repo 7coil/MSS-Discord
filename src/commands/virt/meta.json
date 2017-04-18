@@ -2,7 +2,7 @@
 	"meta": {
 		"name": "moustacheminer.com Virtual Machine",
 		"description": "Screenshots vnc.moustacheminer.com",
-		"url": "http://moustacheminer.com/",
+		"url": "http://vnc.moustacheminer.com/",
 		"examples" : [
 			{
 				"var": "",
