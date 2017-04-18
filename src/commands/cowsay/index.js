@@ -1,4 +1,4 @@
-const exec = require('child_process').execFile;
+const execFile = require('child_process').execFile;
 
 module.exports = function screenshot(message) {
 	let input = message.content.replace(/\n/g, "").split(" ");
