@@ -4,6 +4,7 @@ const API = require("./api.json");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const MSS = require("./functions/");
+const request = require('request');
 const fs = require("fs");
 var command = [];
 var reaction = [];
@@ -83,6 +84,41 @@ client.on("messageReactionAdd", function(messageReaction, user) {
 	if (reaction[input]) {
 		reaction[input](messageReaction, user);
 	}
+});
+
+//Fire when the bot joins the guild
+client.on('guildCreate', (guild) => {
+
+	//If there's a reply, it has been banned.
+	request(`http://autobanr.moustacheminer.com/api/guild.php?guild=${guild.id}`, (err, res, body) => {
+		if(err) return false;
+
+		if(res.statusCode == 200) {
+			//An error has not occured
+			client.getDMChannel(guild.ownerID).then((channel) => {
+				client.getDMChannel(guild.ownerID).createMessage("Your server has been banned!\nGo to http://autobanr.moustacheminer.com/ for info.");
+			});
+			guild.leave();
+			console.log("Guild ban");
+			return false;
+		} else {
+			console.log("Server not banned");
+		}
+	});
+
+	request(`http://autobanr.moustacheminer.com/api/userguild.php?user=${guild.ownerID}`, (err, res, body) => {
+		if(err) return false;
+
+		if(res.statusCode == 200) {
+			//An error has not occured
+			guild.owner.sendMessage("You have been banned from using this bot on your server!\nGo to http://autobanr.moustacheminer.com/ for info.");
+			guild.leave();
+			console.log("User ban");
+			return false;
+		} else {
+			console.log("User not banned");
+		}
+	});
 });
 
 process.on("unhandledRejection", function(err) {
