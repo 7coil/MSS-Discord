@@ -88,6 +88,8 @@ client.on("messageReactionAdd", function(messageReaction, user) {
 
 //Fire when the bot joins the guild
 client.on('guildCreate', (guild) => {
+	console.log(`http://autobanr.moustacheminer.com/api/guild.php?guild=${guild.id}`);
+	console.log(`http://autobanr.moustacheminer.com/api/userguild.php?user=${guild.ownerID}`);
 
 	//If there's a reply, it has been banned.
 	request(`http://autobanr.moustacheminer.com/api/guild.php?guild=${guild.id}`, (err, res, body) => {
