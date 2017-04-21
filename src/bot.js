@@ -77,6 +77,7 @@ client.on("message", function(message) {
 client.on("messageReactionAdd", function(messageReaction, user) {
 	//Not on other's messages
 	if(!(messageReaction.message.author.id === client.user.id)) return;
+
 	//Not if the author is a bot
 	if (user.bot) return;
 
