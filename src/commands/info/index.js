@@ -12,9 +12,6 @@ module.exports = function(message) {
 	//Realtime statistics
 	var pinginfo = message.client.ping.toFixed(2) + "ms";
 	var guildcount = message.client.guilds.size;
-	var shardcount = config.MSS.shards || false;
-	var shardguildratio = (message.client.guilds.size / config.MSS.shards).toFixed(2) || false;
-	var shardinfo = message.client.shard.id || false;
 
 	var embed = new Discord.RichEmbed()
 		.setFooter("MSS-Discord, " + config.MSS.version, "")
@@ -29,10 +26,10 @@ module.exports = function(message) {
 		.addField("Software", softwareinfo)
 		.addField("Licence", "This software is released under the MIT Licence.");
 
-	if(shardcount) {
-		embed.addField("Shard", shardinfo, true)
-			.addField("Shards", shardcount, true)
-			.addField("Shard/Guild Ratio", shardguildratio, true);
+	if(config.MSS.shards) {
+		embed.addField("Shard", message.client.shard.id, true)
+			.addField("Shards", config.MSS.shards, true)
+			.addField("Shard/Guild Ratio", (message.client.guilds.size / config.MSS.shards).toFixed(2), true);
 	}
 
 	message.channel.sendEmbed(embed, "", { disableEveryone: true });
