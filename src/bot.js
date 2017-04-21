@@ -50,6 +50,10 @@ client.on("message", function(message) {
 	//Disallow if the author is a bot
 	if (message.author.bot) return;
 
+	//If it's a selfbot, check if the message is from itself
+	if (config.MSS.selfbot && !(message.author.id === client.user.id)) return;
+
+
 	//Remove the first term if it contains the bot ID
 	if (input[0].indexOf(client.user.id) != -1 && input[1]) {
 		input.shift();
@@ -75,9 +79,6 @@ client.on("messageReactionAdd", function(messageReaction, user) {
 	if(!(messageReaction.message.author.id === client.user.id)) return;
 	//Not if the author is a bot
 	if (user.bot) return;
-
-	//If it's a selfbot, check if the message is from itself
-	if (config.MSS.selfbot && !(message.author.id === client.user.id)) return;
 
 	//Get decimal codepoint of emoji
 	var input = messageReaction.emoji.name.codePointAt().toString();
