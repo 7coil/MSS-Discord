@@ -1,16 +1,16 @@
 {
 	"meta": {
-		"name": "MSS-Discord YT",
-		"description": "A command that searches YouTube for a video and adds it to the playlist",
-		"url": "http://moustacheminer.com/",
+		"name": "SpeechFX DECtalk",
+		"description": "A command that is narrated using the DECtalk text to speech technology.",
+		"url": "http://www.speechfxinc.com/text-to-speech.html",
 		"examples" : [
 			{
-				"var": "<search term>",
-				"description": "Search YouTube for this video and add to playlist"
+				"var": "<dectalk>",
+				"description": "Say the specified input"
 			},
 			{
-				"var": "<URL>",
-				"description": "Add this YouTube video to the playlist"
+				"var": "[:phone on]mamma mia, poppa pia, baby got the dy[aa<999,999>]reeeeeeeeeaaaaaaaaaa",
+				"description": "Uh oh."
 			}
 		]
 	}
