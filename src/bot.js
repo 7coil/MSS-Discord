@@ -39,7 +39,7 @@ fs.readdir("./reactions/", function(err, items) {
 
 client.on("ready", function() {
 	console.log("Successfully connected to Discord!");
-	client.user.setGame(config.MSS.prefix + "man | " + config.MSS.version);
+	client.user.setGame("@MSS man | " + config.MSS.version);
 });
 
 client.on("message", function(message) {
@@ -53,24 +53,12 @@ client.on("message", function(message) {
 	//If it's a selfbot, check if the message is from itself
 	if (config.MSS.selfbot && !(message.author.id === client.user.id)) return;
 
-
-	//Remove the first term if it contains the bot ID
-	if (input[0].indexOf(client.user.id) != -1 && input[1]) {
-		input.shift();
-		input[0] = input[0].toLowerCase();
-		//Rebuild the new message to fit the legacy format.
-		message.content = input.join(" ");
-
-	//If there's a prefix, remove it. Otherwise, stop the execution of commands.
-	} else if (input[0].startsWith(config.MSS.prefix)) {
-		input[0] = input[0].substring(config.MSS.prefix.length).toLowerCase();
-	} else {
-		return false;
-	}
-
+	//If the first input contains the mention, let it through
+	if (input[0].indexOf(client.user.id) === -1) return;
+	
 	//If the command exists, run the command
-	if (command[input[0]]) {
-		command[input[0]](message);
+	if (command[input[1]]) {
+		command[input[1]](message);
 	}
 });
 

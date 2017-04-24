@@ -4,6 +4,7 @@ const fs = require('fs');
 const MSS = require('./../../functions/');
 const Discord = require("discord.js");
 const request = require("request");
+const streamy = require("stream");
 
 var playlist = [];
 var stream = [];
@@ -45,6 +46,10 @@ function play(message) {
 		return MSS.msg.react(message, false, "call");
 	}
 	
+	if(!stream[message.guild.id]) {
+		stream[message.guild.id] = new streamy.Writable();
+	}
+	
 	if (playlist[message.guild.id].length > 0) {
 		current[message.guild.id] = JSON.parse(playlist[message.guild.id].shift());
 		panel(message);
@@ -57,11 +62,8 @@ function play(message) {
 				break;
 			case "http":
 			case "https":
-				request(current[message.guild.id]["url"])
-					.pipe(stream[message.guild.id])
-					.on('close', function() {
-						console.log("HTTP(s) Stream ended");
-					});
+				stream[message.guild.id] = request(current[message.guild.id]["url"]);
+				break;
 		}
 	} else {
 		if (voiceChannel && voiceChannel.connection) voiceChannel.leave();
@@ -143,3 +145,4 @@ function panel(message) {
 		message.react(String.fromCodePoint(128240));
 	});
 }
+

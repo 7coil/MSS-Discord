@@ -5,8 +5,9 @@ const Discord = require("discord.js");
 module.exports = function(message) {
 	if(message.author.id === config.MSS.sysadmin) {
 		let input = message.content.replace (/\n/g, "").split(" ");
-		input[0] = input[0].substring(config.MSS.prefix.length);
-		let command = message.content.substring(config.MSS.prefix.length + input[0].length + 1);
+		input.shift();
+		input.shift();
+		let command = input.join(" ");
 
 		var embed = new Discord.RichEmbed()
 			.addField("Input", "```js\n" + command + "\n```")

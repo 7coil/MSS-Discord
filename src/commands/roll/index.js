@@ -11,17 +11,17 @@ module.exports = function(message, client) {
 	var output = "";
 
 
-	if(input[1] && input[1].startsWith("d")) {
+	if(input[2] && input[2].startsWith("d")) {
 		//Check if it's trying to roll an "n" sided die.
-		sides = parseInt(input[1].substring(1));
-	} else if (input[1]){
+		sides = parseInt(input[2].substring(1));
+	} else if (input[2]){
 		//Roll the dice the number of times stated
-		rolls = parseInt(input[1]);
+		rolls = parseInt(input[2]);
 	}
 
-	if(input[2]) {
-		rolls = parseInt(input[1]);
-		sides = parseInt(input[2]);
+	if(input[3]) {
+		rolls = parseInt(input[2]);
+		sides = parseInt(input[3]);
 	}
 
 	if(!rolls && !(rolls === 0) || !sides && !(sides === 0)) {

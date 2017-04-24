@@ -4,7 +4,7 @@ const config = require("./../../config.json");
 const fs = require("fs");
 var commands = [];
 var list = [];
-var print = "What manual page do you want?\n`" + config.MSS.prefix + "man <command>`\n`" + config.MSS.prefix + "man all`\n";
+var print = "What manual page do you want?\n`@MSS man <command>`\n`@MSS man all`\n";
 
 //Get all .json files in this directory to read the man data.
 fs.readdir("./commands/", function(err, items) {
@@ -23,13 +23,13 @@ module.exports = function manpages(message) {
 	let input = message.content.replace(/\n/g, " ").split(" ");
 
 	//Return the usage of the man command if no attributes were given
-	if(!input[1]) {
+	if(!input[2]) {
 		message.reply(print);
 		return false;
 	}
 
 	//Return an entire list of commands via DM
-	if(input[1] === "all") {
+	if(input[2] === "all") {
 		message.reply("I sent a message via Direct Messaging with details enclosed.");
 
 		list.forEach(function(item) {
@@ -43,7 +43,7 @@ module.exports = function manpages(message) {
 				.setURL(commands[item].meta.url);
 
 			commands[item].meta.examples.forEach(function(element) {
-				embed.addField(config.MSS.prefix + item + " " + element.var, element.description);
+				embed.addField(item + " " + element.var, element.description);
 			});
 
 			message.author.sendEmbed(embed, item, { disableEveryone: true });
@@ -53,25 +53,25 @@ module.exports = function manpages(message) {
 	}
 
 	//Return if it doesn't exist
-	if (!commands[input[1]]) {
+	if (!commands[input[2]]) {
 		MSS.msg.react(message, false, "link");
 		message.reply("No manual entry for " + input[1]);
 		return false;
 	}
 
 	var embed = new Discord.RichEmbed()
-		.setTitle(commands[input[1]].meta.name)
+		.setTitle(commands[input[2]].meta.name)
 		.setAuthor("MSS Man Pages", "http://moustacheminer.com/mss.png")
 		.setColor("#00AE86")
-		.setDescription(commands[input[1]].meta.description)
+		.setDescription(commands[input[2]].meta.description)
 		.setFooter("MSS-Discord, " + config.MSS.version, "")
 		.setTimestamp()
-		.setURL(commands[input[1]].meta.url);
+		.setURL(commands[input[2]].meta.url);
 
-	commands[input[1]].meta.examples.forEach(function(element) {
-		embed.addField(config.MSS.prefix + input[1] + " " + element.var, element.description);
+	commands[input[2]].meta.examples.forEach(function(element) {
+		embed.addField(input[2] + " " + element.var, element.description);
 	});
 
-	message.channel.sendEmbed(embed, input[1], { disableEveryone: true });
+	message.channel.sendEmbed(embed, input[2], { disableEveryone: true });
 }
 
