@@ -12,8 +12,8 @@ module.exports = function screenshot(message) {
 	input.shift();
 	input.shift();
 
-	if(!input[1]) {
-		input[1] = "Have you mooed today?";
+	if(!input[0]) {
+		input[0] = "Have you mooed today?";
 	}
 
 	execFile('cowsay', input, function(error, result) {
