@@ -10,6 +10,7 @@ module.exports = function screenshot(message) {
 
 	//Get everything after cowsay
 	input.shift();
+	input.shift();
 
 	if(!input[1]) {
 		input[1] = "Have you mooed today?";
