@@ -14,5 +14,5 @@ module.exports = function dbotsupdate(client) {
 		}
 	}
 	
-	request.post(body);
+	request.post(data);
 }
