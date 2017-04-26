@@ -39,12 +39,18 @@ fs.readdir("./reactions/", function(err, items) {
 
 client.on("ready", function() {
 	console.log("Successfully connected to Discord!");
-	client.user.setGame("@MSS man | " + config.MSS.version);
 	
-	MSS.system.dbotsupdate(client);
-	setInterval(() => {
+	if (config.MSS.selfbot) {
+		console.log("Selfbot mode activated");
+	} else {
+		client.user.setGame("@MSS man | " + config.MSS.version);
+		
 		MSS.system.dbotsupdate(client);
-	}, 1800000);
+		setInterval(() => {
+			MSS.system.dbotsupdate(client);
+		}, 1800000);
+	}
+	
 });
 
 client.on("message", function(message) {
