@@ -1,4 +1,4 @@
-const MSS = require("./../../functions/");
+const MSS = require("./../../../../functions/");
 
 module.exports = (message, connection) => {
 	const input = message.content.replace(/\n/g, ' ').split(' ');
