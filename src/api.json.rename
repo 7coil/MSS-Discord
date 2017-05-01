@@ -1,5 +1,11 @@
 {
 	"discord": "",
 	"youtube": "",
-	"dBots": ""
+	"dBots": "",
+	"mysql": {
+		"host": "",
+		"user": "",
+		"password": "",
+		"database": ""
+	}
 }

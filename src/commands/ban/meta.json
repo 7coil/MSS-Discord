@@ -1,0 +1,19 @@
+{
+	"meta": {
+		"name": "ban",
+		"description": "A command with secondary commands to do with Autobanr and the MOUSTACHEMINER.COM bans ecosystem",
+		"url": "https://autobanr.moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "guild <guild id> [reason]",
+				"description": "Ban the specific guild ID with a reason if needed"
+			},{
+				"var": "owner <owner id> [reason]",
+				"description": "Ban the specific owner ID with a reason if needed"
+			},{
+				"var": "verify",
+				"description": "Check that you are allowed to use BAN"
+			}
+		]
+	}
+}
