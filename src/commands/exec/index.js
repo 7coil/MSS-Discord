@@ -5,10 +5,6 @@ module.exports = function screenshot(message) {
 	let input = message.content.replace(/\n/g, "").split(" ");
 
 	if(message.author.id === config.MSS.sysadmin) {
-
-		input.shift();
-		input.shift();
-
 		if(!input[0]) {
 			message.channel.sendMessage("```\nNo input detected\n```");
 			return false;
@@ -17,7 +13,7 @@ module.exports = function screenshot(message) {
 		let command = input.splice(2).join(" ");
 		let output = "```\n";
 
-		exec(command, {cwd: "/home/mss/"} ,(error, stdout, stderr) => {
+		exec(command, {cwd: "/home/mss/"}, (error, stdout, stderr) => {
 			if(stdout){
 				output += stdout + "\n";
 			}
