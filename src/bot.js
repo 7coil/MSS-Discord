@@ -43,7 +43,7 @@ client.on("ready", function() {
 	if (config.MSS.selfbot) {
 		console.log("Selfbot mode activated");
 	} else {
-		client.user.setGame("@MSS man | " + config.MSS.version);
+		client.user.setGame("http://mss.ovh/ | " + config.MSS.version);
 		
 		MSS.system.dbotsupdate(client);
 		setInterval(() => {
