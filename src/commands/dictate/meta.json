@@ -9,6 +9,10 @@
 				"description": "Say the specified input"
 			},
 			{
+				"var": "<ID>",
+				"description": "Play the specific DECtalk sound with an ID. Check for all IDs [here](https://talk.moustacheminer.com/lib.html)"
+			},
+			{
 				"var": "[:phone on]mamma mia, poppa pia, baby got the dy[aa<999,999>]reeeeeeeeeaaaaaaaaaa",
 				"description": "Uh oh."
 			}
