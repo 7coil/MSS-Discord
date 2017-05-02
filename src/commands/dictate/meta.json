@@ -1,7 +1,7 @@
 {
 	"meta": {
 		"name": "SpeechFX DECtalk",
-		"description": "A command that is narrated using the DECtalk text to speech technology, powered by [MSS's webservice](http://talk.moustacheminer.com)",
+		"description": "A command that is narrated using the DECtalk text to speech technology, powered by [MSS's webservice](https://talk.moustacheminer.com)",
 		"url": "http://www.speechfxinc.com/text-to-speech.html",
 		"examples" : [
 			{
