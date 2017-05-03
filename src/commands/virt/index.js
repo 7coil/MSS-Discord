@@ -4,6 +4,6 @@ const Discord = require("discord.js");
 
 module.exports = function screenshot(message) {
 	exec(command, function(error, stdout, stderr) {
-		 message.channel.sendFile('./export.jpg', '.jpg', "Break the Virtual Machine! - http://vnc.moustacheminer.com/");
+		 message.channel.sendFile('./export.jpg', '.jpg', "Break the Virtual Machine! - http://mss.ovh/vm");
 	});
 }
