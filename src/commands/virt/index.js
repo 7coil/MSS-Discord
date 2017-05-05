@@ -1,9 +1,3 @@
-const exec = require('child_process').exec;
-const command = "vncsnapshot 192.168.0.3:0 export.jpg";
-const Discord = require("discord.js");
-
-module.exports = function screenshot(message) {
-	exec(command, function(error, stdout, stderr) {
-		 message.channel.sendFile('./export.jpg', '.jpg', "Break the Virtual Machine! - http://mss.ovh/vm");
-	});
+module.exports = function(message) {
+	message.reply("Project VM has ended! Why not try out @DiscordPlays, our next collaborative project? Type `@DiscordPlays help` for more info");
 }

@@ -1,0 +1,13 @@
+{
+	"meta": {
+		"name": "DiscordPlays",
+		"description": "The screenshot manager for @DiscordPlays",
+		"url": "http://mss.ovh/dp",
+		"examples" : [
+			{
+				"var": "",
+				"description": "Takes a screenshot"
+			}
+		]
+	}
+}

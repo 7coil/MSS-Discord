@@ -1,13 +1,8 @@
 {
 	"meta": {
-		"name": "moustacheminer.com Virtual Machine",
-		"description": "Screenshots vnc.moustacheminer.com",
-		"url": "http://vnc.moustacheminer.com/",
-		"examples" : [
-			{
-				"var": "",
-				"description": "Takes a screenshot"
-			}
-		]
+		"name": "Removed",
+		"description": "huh",
+		"url": "http://moustacheminer.com/",
+		"examples" : []
 	}
 }
