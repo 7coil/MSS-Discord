@@ -15,16 +15,11 @@ module.exports = function yt(message) {
 	if (!voiceChannel) {
 		MSS.msg.react(message, false, "call");
 		return false;
-	} else if (!input[1]) {
+	} else if (!input[2]) {
 		MSS.msg.react(message, false, "link");
 		return false;
 	}
 
-	input.shift();
-	input.shift();
-
-	let encoded = input.join(" ");
-
-	MSS.music.add(message, "http", encoded, "Custom URL", "https://i.mss.ovh/cloud.png");
+	MSS.music.add(message, "http", input[2], "Custom URL", "https://i.mss.ovh/cloud.png");
 }
 

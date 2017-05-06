@@ -15,7 +15,7 @@ module.exports = function yt(message) {
 	if (!voiceChannel) {
 		MSS.msg.react(message, false, "call");
 		return false;
-	} else if (!input[1]) {
+	} else if (!input[2]) {
 		MSS.msg.react(message, false, "link");
 		return false;
 	}
