@@ -4,7 +4,7 @@ const config = require("./../../config.json");
 const fs = require("fs");
 var commands = [];
 var list = [];
-var print = "What manual page do you want?\n`@MSS man <command>`\n`@MSS man all`\n";
+var print = "What manual page do you want?\n`@MSS man <command>`\n";
 
 //Get all .json files in this directory to read the man data.
 fs.readdir("./commands/", function(err, items) {
@@ -25,30 +25,6 @@ module.exports = function manpages(message) {
 	//Return the usage of the man command if no attributes were given
 	if(!input[2]) {
 		message.reply(print);
-		return false;
-	}
-
-	//Return an entire list of commands via DM
-	if(input[2] === "all") {
-		message.reply("I sent a message via Direct Messaging with details enclosed.");
-
-		list.forEach(function(item) {
-			var embed = new Discord.RichEmbed()
-				.setTitle(commands[item].meta.name)
-				.setAuthor("MSS Man Pages", "http://moustacheminer.com/mss.png")
-				.setColor("#00AE86")
-				.setDescription(commands[item].meta.description)
-				.setFooter("MSS-Discord, " + config.MSS.version, "")
-				.setTimestamp()
-				.setURL(commands[item].meta.url);
-
-			commands[item].meta.examples.forEach(function(element) {
-				embed.addField(item + " " + element.var, element.description);
-			});
-
-			message.author.sendEmbed(embed, item, { disableEveryone: true });
-		});
-
 		return false;
 	}
 
