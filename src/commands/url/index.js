@@ -23,7 +23,7 @@ module.exports = function yt(message) {
 	input.shift();
 	input.shift();
 
-	let encoded = encodeURIComponent(input.join(" "));
+	let encoded = input.join(" ");
 
 	MSS.music.add(message, "http", encoded, "Custom URL", "https://i.mss.ovh/cloud.png");
 }
