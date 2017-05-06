@@ -19,12 +19,12 @@ module.exports = function yt(message) {
 		MSS.msg.react(message, false, "link");
 		return false;
 	}
-	
+
 	input.shift();
 	input.shift();
 
 	let encoded = encodeURIComponent(input.join(" "));
 
-	MSS.music.add(message, "http", `http://talk.moustacheminer.com/get?input=${encoded}`, "MSS DecTalk", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/DECtalk_DCT01_and_Tink.jpg/300px-DECtalk_DCT01_and_Tink.jpg");
+	MSS.music.add(message, "http", encoded, "Custom URL", "https://i.mss.ovh/cloud.png");
 }
 
