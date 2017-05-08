@@ -251,3 +251,7 @@ function panel(message) {
 process.on("unhandledRejection", function(err) {
   console.error("Uncaught Promise Error: \n" + err.stack);
 });
+
+process.on("error", function(err) {
+  console.error("Uncaught Promise Error: \n" + err.stack);
+});
