@@ -107,14 +107,26 @@ function play(message) {
 
 		//If it's a local file, convert to wav and then send to stream
 		case "local":
-			stream[message.guild.id] = ffmpeg(fs.createReadStream(current[message.guild.id]["url"])).outputOptions(['-f', 'wav']).noVideo().pipe();
+			stream[message.guild.id] = ffmpeg(fs.createReadStream(current[message.guild.id]["url"]))
+				.outputOptions(['-f', 'wav'])
+				.noVideo()
+				.pipe()
+				.on('error', function(err, stdout, stderr) {
+					message.channel.sendMessage(`FFMPEG error encountered: ${err.message}`);
+				});
 
 			break;
 
 		//If it's a file on the internet, convert to wav and then send to stream.
 		case "http":
 		case "https":
-			stream[message.guild.id] = ffmpeg(request(current[message.guild.id]["url"])).outputOptions(['-f', 'wav']).noVideo().pipe();
+			stream[message.guild.id] = ffmpeg(request(current[message.guild.id]["url"]))
+				.outputOptions(['-f', 'wav'])
+				.noVideo()
+				.pipe()
+				.on('error', function(err, stdout, stderr) {
+					message.channel.sendMessage(`FFMPEG error encountered: ${err.message}`);
+				});
 			break;
 	}
 
