@@ -20,7 +20,8 @@
   },
   "homepage": "https://moustacheminer.com/",
   "dependencies": {
-    "discord.js": "^11.0.0",
+    "discord.js": "^11.1.0",
+    "fluent-ffmpeg": "^2.1.2",
     "opusscript": "0.0.3",
     "request": "^2.81.0",
     "sox-stream": "^2.0.1",

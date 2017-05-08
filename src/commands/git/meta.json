@@ -1,0 +1,13 @@
+{
+	"meta": {
+		"name": "git",
+		"description": "Execute a git command",
+		"url": "https://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "<command>",
+				"description": "Executes the command"
+			}
+		]
+	}
+}
