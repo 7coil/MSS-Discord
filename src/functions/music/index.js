@@ -163,7 +163,7 @@ function skip(message) {
 
 	//There is a bot, so we destroy the stream
 	message.channel.send("Destroying stream...");
-	stream[message.guild.id].destroy();
+	if (stream[message.guild.id]) stream[message.guild.id].destroy();
 
 	//Goodbye!
 	return;
