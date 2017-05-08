@@ -97,43 +97,42 @@ function play(message) {
 	//Send a lovely panel
 	panel(message);
 
-	try {
-		//Get the correct handler for each stream type.
-		switch (current[message.guild.id]["type"]) {
+	//Get the correct handler for each stream type.
+	switch (current[message.guild.id]["type"]) {
 
 
-		//If it's YouTube, use ytdl-core to get the audio stream
-		case "youtube":
-			stream[message.guild.id] = yt(current[message.guild.id]["url"], {audioonly: true})
-			break;
+	//If it's YouTube, use ytdl-core to get the audio stream
+	case "youtube":
+		stream[message.guild.id] = yt(current[message.guild.id]["url"], {audioonly: true})
+		break;
 
-		//If it's a local file, convert to wav and then send to stream
-		case "local":
-			stream[message.guild.id] = ffmpeg(fs.createReadStream(current[message.guild.id]["url"]))
-				.outputOptions(['-f', 'wav'])
-				.noVideo()
-				.pipe();
+	//If it's a local file, convert to wav and then send to stream
+	case "local":
+		stream[message.guild.id] = ffmpeg(fs.createReadStream(current[message.guild.id]["url"]))
+			.outputOptions(['-f', 'wav'])
+			.noVideo()
+			.pipe();
 
-			stream[message.guild.id].on('error', function(err, stdout, stderr) {
-				console.log('Cannot process video: ' + err.message);
-			});
-			break;
+		stream[message.guild.id].on('error', function(err, stdout, stderr) {
+			console.log('Cannot process video: ' + err.message);
+		});
+		break;
 
-		//If it's a file on the internet, convert to wav and then send to stream.
-		case "http":
-		case "https":
-			stream[message.guild.id] = ffmpeg(request(current[message.guild.id]["url"]))
-				.outputOptions(['-f', 'wav'])
-				.noVideo()
-				.pipe();
+	//If it's a file on the internet, convert to wav and then send to stream.
+	case "http":
+	case "https":
+		stream[message.guild.id] = ffmpeg(request(current[message.guild.id]["url"]))
+			.outputOptions(['-f', 'wav'])
+			.noVideo()
+			.pipe();
 
-			stream[message.guild.id].on('error', function(err, stdout, stderr) {
-				console.log('Cannot process video: ' + err.message);
-			});
-			break;
-		}
-	} catch (err) {
-		message.channel.sendMessage(`Error in playing song: ${err.message}`);
+		stream[message.guild.id].on('error', function(err, stdout, stderr) {
+			console.log('Cannot process video: ' + err.message);
+		});
+		break;
+	default:
+		message.channel.sendMessage("Invalid provider provided.");
+		play(message);
 	}
 
 }
@@ -249,9 +248,5 @@ function panel(message) {
 }
 
 process.on("unhandledRejection", function(err) {
-  console.error("Uncaught Promise Error: \n" + err.stack);
-});
-
-process.on("error", function(err) {
   console.error("Uncaught Promise Error: \n" + err.stack);
 });

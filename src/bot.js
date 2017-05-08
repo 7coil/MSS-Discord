@@ -86,12 +86,7 @@ client.on("messageReactionAdd", function(messageReaction, user) {
 	console.log(input);
 
 	if (reaction[input]) {
-		try {
-			reaction[input](messageReaction, user);
-		} catch(err) {
-			message.channel.sendMessage(`We fucked up! ${err.message}`)
-		}
-
+		reaction[input](messageReaction, user);
 	}
 });
 
