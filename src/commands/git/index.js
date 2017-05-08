@@ -10,9 +10,11 @@ module.exports = function screenshot(message) {
 			return false;
 		}
 
-		let output = "```\n";
+		//Shift!
+		input.shift();
+		input.shift();
 
-		input.slice(2);
+		let output = "```\n";
 
 		exec('git', input, (error, stdout, stderr) => {
 			if(stdout){
