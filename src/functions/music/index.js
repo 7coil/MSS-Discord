@@ -9,8 +9,7 @@ const fs = require('fs');
 const request = require("request");
 
 //ffmpeg for converting potential not wav to wav files so they can be streamed
-const FFMPEG = require("fluent-ffmpeg");
-const ffmpeg = new FFMPEG();
+const ffmpeg = require("fluent-ffmpeg");
 
 //Import all the MSS functions
 const MSS = require('./../../functions/');
