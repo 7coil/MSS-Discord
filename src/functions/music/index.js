@@ -12,7 +12,6 @@ const request = require("request");
 const FFMPEG = require("fluent-ffmpeg");
 const ffmpeg = new FFMPEG();
 
-
 //Import all the MSS functions
 const MSS = require('./../../functions/');
 

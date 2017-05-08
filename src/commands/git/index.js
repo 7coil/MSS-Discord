@@ -10,6 +10,8 @@ module.exports = function screenshot(message) {
 			return false;
 		}
 
+		let output = "```\n";
+
 		input.slice(2);
 
 		exec('git', input, (error, stdout, stderr) => {
