@@ -97,8 +97,10 @@ function play(message) {
 	//Send a lovely panel
 	panel(message);
 
-	//Get the correct handler for each stream type.
-	switch (current[message.guild.id]["type"]) {
+	try {
+		//Get the correct handler for each stream type.
+		switch (current[message.guild.id]["type"]) {
+
 
 		//If it's YouTube, use ytdl-core to get the audio stream
 		case "youtube":
@@ -111,10 +113,6 @@ function play(message) {
 				.outputOptions(['-f', 'wav'])
 				.noVideo()
 				.pipe()
-				.on('error', function(err, stdout, stderr) {
-					message.channel.sendMessage(`FFMPEG error encountered: ${err.message}`);
-				});
-
 			break;
 
 		//If it's a file on the internet, convert to wav and then send to stream.
@@ -124,10 +122,10 @@ function play(message) {
 				.outputOptions(['-f', 'wav'])
 				.noVideo()
 				.pipe()
-				.on('error', function(err, stdout, stderr) {
-					message.channel.sendMessage(`FFMPEG error encountered: ${err.message}`);
-				});
 			break;
+		}
+	} catch (err) {
+		message.channel.sendMessage(`Error in playing song: ${err.message}`);
 	}
 
 }
