@@ -112,10 +112,11 @@ function play(message) {
 			stream[message.guild.id] = ffmpeg(fs.createReadStream(current[message.guild.id]["url"]))
 				.outputOptions(['-f', 'wav'])
 				.noVideo()
-				.pipe()
-				.on('error', function(err, stdout, stderr) {
-					console.log('Cannot process video: ' + err.message);
-				});
+				.pipe();
+
+			stream[message.guild.id].on('error', function(err, stdout, stderr) {
+				console.log('Cannot process video: ' + err.message);
+			});
 			break;
 
 		//If it's a file on the internet, convert to wav and then send to stream.
@@ -124,10 +125,11 @@ function play(message) {
 			stream[message.guild.id] = ffmpeg(request(current[message.guild.id]["url"]))
 				.outputOptions(['-f', 'wav'])
 				.noVideo()
-				.pipe()
-				.on('error', function(err, stdout, stderr) {
-					console.log('Cannot process video: ' + err.message);
-				});
+				.pipe();
+
+			stream[message.guild.id].on('error', function(err, stdout, stderr) {
+				console.log('Cannot process video: ' + err.message);
+			});
 			break;
 		}
 	} catch (err) {
