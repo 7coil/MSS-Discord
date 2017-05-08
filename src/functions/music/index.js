@@ -8,8 +8,9 @@ const fs = require('fs');
 //request for web files
 const request = require("request");
 
-//sox-stream for converting potential not wav to wav files so they can be streamed
-const sox = require("sox-stream");
+//ffmpeg for converting potential not wav to wav files so they can be streamed
+const FFMPEG = require("fluent-ffmpeg");
+const ffmpeg = new FFMPEG();
 
 
 //Import all the MSS functions
