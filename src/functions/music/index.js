@@ -113,6 +113,9 @@ function play(message) {
 				.outputOptions(['-f', 'wav'])
 				.noVideo()
 				.pipe()
+				.on('error', function(err, stdout, stderr) {
+					console.log('Cannot process video: ' + err.message);
+				});
 			break;
 
 		//If it's a file on the internet, convert to wav and then send to stream.
@@ -122,6 +125,9 @@ function play(message) {
 				.outputOptions(['-f', 'wav'])
 				.noVideo()
 				.pipe()
+				.on('error', function(err, stdout, stderr) {
+					console.log('Cannot process video: ' + err.message);
+				});
 			break;
 		}
 	} catch (err) {
@@ -240,3 +246,6 @@ function panel(message) {
 	});
 }
 
+process.on("unhandledRejection", function(err) {
+  console.error("Uncaught Promise Error: \n" + err.stack);
+});
