@@ -15,11 +15,11 @@ module.exports = function screenshot(message) {
 
 		exec(command, {cwd: "/home/mss/"}, (error, stdout, stderr) => {
 			if(stdout){
-				output += stdout.replace("`", "'") + "\n";
+				output += stdout.replace(/`/g, "'") + "\n";
 			}
 
 			if(stderr){
-				output += stderr.replace("`", "'") + "\n";
+				output += stderr.replace(/`/g, "'") + "\n";
 			}
 
 			output += "```";
