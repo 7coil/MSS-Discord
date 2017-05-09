@@ -1,0 +1,13 @@
+{
+	"meta": {
+		"name": "ping",
+		"description": "Ping the bot.",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "",
+				"description": "Check the ping of MSS to this guild."
+			}
+		]
+	}
+}
