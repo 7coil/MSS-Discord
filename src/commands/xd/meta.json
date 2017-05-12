@@ -1,0 +1,13 @@
+{
+	"meta": {
+		"name": "😂💯👌",
+		"description": "😂💯👌",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "<message ID>",
+				"description": "😂💯👌"
+			}
+		]
+	}
+}
