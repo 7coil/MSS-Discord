@@ -3,7 +3,7 @@ module.exports = function(message) {
 
 	if(!input[2]) return message.reply("Message ID required");
 
-	message.channel.fetchMessage('312680358610993152')
+	message.channel.fetchMessage(input[2])
 		.then(message => {
 			message.react(String.fromCodePoint(128514));
 			message.react(String.fromCodePoint(128175));
