@@ -177,15 +177,15 @@ function stop(message) {
 	//If there is no bot, complain
 	if (!voiceChannel || !voiceChannel.connection) return MSS.msg.react(message, false, "robot");
 
+	//Kill FFMPEG (if there's a PID)
+	if (pid[message.guild.id]) process.kill(pid[message.guild.id], 'SIGINT');
+
 	//Leave the voicechannel
 	if (voiceChannel && voiceChannel.connection) voiceChannel.leave();
 
 	//Destroy the currently playing song, the playlist and the stream
 	current[message.guild.id] = [];
 	playlist[message.guild.id] = [];
-
-	//Kill FFMPEG
-	if (pid[message.guild.id]) process.kill(pid[message.guild.id], 'SIGINT');
 
 	//Goodbye!
 	return;
@@ -241,7 +241,7 @@ function panel(message) {
 	//There is nothing currently in the playlist
 	if(!current[message.guild.id]) return MSS.msg.rich(message, "MSS Music Player", "There is no music currently playing.", "#FF0000");
 
-	message.channel.sendMessage('**Music Control Panel**')
+	message.channel.send('**Music Control Panel**')
 	.then(function(message) {
 		message.react(String.fromCodePoint(10145));
 		message.react(String.fromCodePoint(8505));
