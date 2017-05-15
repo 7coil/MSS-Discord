@@ -86,7 +86,7 @@ function play(message) {
 		playlist[message.guild.id] = [];
 
 		//If there is still a stream (somehow), destroy it
-		if (stream[message.guild.id]) stream[message.guild.id].destroy();
+		process.kill(pid[message.guild.id], 'SIGINT');
 
 		//Goodbye!
 		return;
