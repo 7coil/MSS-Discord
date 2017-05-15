@@ -139,6 +139,10 @@ function play(message) {
 			play(message);
 		}
 	});
+
+	stream[message.guild.id].on('error', function(err) {
+		console.log(err);
+	});
 }
 
 //A function to push a new video onto the playlist stack
