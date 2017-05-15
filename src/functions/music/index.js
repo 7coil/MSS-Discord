@@ -20,6 +20,9 @@ const Discord = require("discord.js");
 //This creates a new stream for us
 const streamy = require("stream");
 
+//Use exec to manually make ffmpeg processes
+const spawn = require("child_process").spawn
+
 //Make all the arrays that will be used
 var playlist = [];
 var stream = [];
@@ -108,14 +111,15 @@ function play(message) {
 
 	//If it's a local file, convert to wav and then send to stream
 	case "local":
-		stream[message.guild.id] = ffmpeg(fs.createReadStream(current[message.guild.id]["url"]))
-			.outputOptions(['-f', 'wav'])
-			.noVideo()
-			.pipe();
+		//Pipe in a stream, and pipe out another stream
+		let ffmpeg = spawn('ffmpeg' [
+			'-i', 'pipe:0',
+			'-f', 'wav',
+			'pipe:1'
+		]);
 
-		stream[message.guild.id].on('error', function(err, stdout, stderr) {
-			console.log('Cannot process video: ' + err.message);
-		});
+		fs.createReadStream(current[message.guild.id]["url"]).pipe(ffmpeg.stdin);
+		stream[message.guild.id] = ffmpeg.stdout;
 		break;
 
 	//If it's a file on the internet, convert to wav and then send to stream.
