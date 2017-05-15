@@ -8,9 +8,6 @@ const fs = require('fs');
 //request for web files
 const request = require("request");
 
-//ffmpeg for converting potential not wav to wav files so they can be streamed
-const ffmpeg = require("fluent-ffmpeg");
-
 //Import all the MSS functions
 const MSS = require('./../../functions/');
 
@@ -259,4 +256,8 @@ function panel(message) {
 
 process.on("unhandledRejection", function(err) {
   console.error("Uncaught Promise Error: \n" + err.stack);
+});
+
+process.on("uncaughtException", function(err) {
+  console.error("Uncaught Exception Error: \n" + err.stack);
 });
