@@ -120,8 +120,8 @@ function play(message) {
 	}
 
 	ffmpeg.stderr.on('data', (data) => {
-		message.channel.send("An error occured with FFMPEG. Skipping...");
-		play(message);
+		message.channel.send("An error occured with FFMPEG.");
+		//play(message);
 	});
 
 	stream[message.guild.id] = ffmpeg.stdout;
