@@ -149,7 +149,7 @@ function skip(message) {
 	if (!voiceChannel || !voiceChannel.connection) return MSS.msg.react(message, false, "robot");
 
 	//Kill FFMPEG
-	process.kill(pid[message.guild.id]);
+	process.kill(pid[message.guild.id], 'SIGINT');
 
 	//Goodbye!
 	return;
@@ -172,7 +172,7 @@ function stop(message) {
 	playlist[message.guild.id] = [];
 
 	//Kill FFMPEG
-	process.kill(pid[message.guild.id]);
+	process.kill(pid[message.guild.id], 'SIGINT');
 
 	//Goodbye!
 	return;
