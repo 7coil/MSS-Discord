@@ -27,6 +27,7 @@ const spawn = require("child_process").spawn
 var playlist = [];
 var stream = [];
 var current = [];
+var pid = [];
 
 exports.sound = sound;
 exports.play = play;
@@ -102,6 +103,8 @@ function play(message) {
 		'pipe:1'
 	]);
 
+	pid[message.guild.id] = ffmpeg.pid;
+
 	//Send the correct input to the ffmpeg stream
 	switch (current[message.guild.id]["type"]) {
 		case "youtube":
@@ -145,9 +148,8 @@ function skip(message) {
 	//If there is no bot, complain
 	if (!voiceChannel || !voiceChannel.connection) return MSS.msg.react(message, false, "robot");
 
-	//There is a bot, so we destroy the stream
-	message.channel.send("Destroying stream...");
-	if (stream[message.guild.id]) stream[message.guild.id].destroy();
+	//Kill FFMPEG
+	process.kill(pid[message.guild.id]);
 
 	//Goodbye!
 	return;
@@ -168,7 +170,9 @@ function stop(message) {
 	//Destroy the currently playing song, the playlist and the stream
 	current[message.guild.id] = [];
 	playlist[message.guild.id] = [];
-	if (stream[message.guild.id]) stream[message.guild.id].destroy();
+
+	//Kill FFMPEG
+	process.kill(pid[message.guild.id]);
 
 	//Goodbye!
 	return;
