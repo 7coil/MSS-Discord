@@ -115,14 +115,9 @@ function play(message) {
 			request(current[message.guild.id]["url"]).pipe(ffmpeg.stdin);
 			break;
 		default:
-			message.channel.send("Invalid provider provided.");
+			message.channel.send(`${current[message.guild.id]["type"]} is not a valid audio provider.`);
 			play(message);
 	}
-
-	ffmpeg.stderr.on('data', (data) => {
-		message.channel.send("An error occured with FFMPEG.");
-		//play(message);
-	});
 
 	stream[message.guild.id] = ffmpeg.stdout;
 }
