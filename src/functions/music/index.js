@@ -96,7 +96,7 @@ function play(message) {
 	panel(message);
 
 	//Make an ffmpeg stream
-	let ffmpeg = spawn('ffmpeg' [
+	let ffmpeg = spawn('ffmpeg', [
 		'-i', 'pipe:0',
 		'-f', 'wav',
 		'pipe:1'
