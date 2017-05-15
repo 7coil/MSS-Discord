@@ -87,7 +87,10 @@ function play(message) {
 		playlist[message.guild.id] = [];
 
 		//If there is still a stream (somehow), destroy it
-		if (pid[message.guild.id]) process.kill(pid[message.guild.id], 'SIGINT');
+		if (pid[message.guild.id]) {
+			process.kill(pid[message.guild.id], 'SIGINT');
+			pid[message.guild.id] = null;
+		}
 
 		//Goodbye!
 		return;
@@ -161,8 +164,10 @@ function skip(message) {
 	//If there is no bot, complain
 	if (!voiceChannel || !voiceChannel.connection) return MSS.msg.react(message, false, "robot");
 
-	//Kill FFMPEG (if there's a PID)
-	if (pid[message.guild.id]) process.kill(pid[message.guild.id], 'SIGINT');
+	if (pid[message.guild.id]) {
+		process.kill(pid[message.guild.id], 'SIGINT');
+		pid[message.guild.id] = null;
+	}
 
 	//Goodbye!
 	return;
@@ -177,11 +182,10 @@ function stop(message) {
 	//If there is no bot, complain
 	if (!voiceChannel || !voiceChannel.connection) return MSS.msg.react(message, false, "robot");
 
-	//Kill FFMPEG (if there's a PID)
-	if (pid[message.guild.id]) process.kill(pid[message.guild.id], 'SIGINT');
-
-	//Leave the voicechannel
-	if (voiceChannel && voiceChannel.connection) voiceChannel.leave();
+	if (pid[message.guild.id]) {
+		process.kill(pid[message.guild.id], 'SIGINT');
+		pid[message.guild.id] = null;
+	}
 
 	//Destroy the currently playing song, the playlist and the stream
 	current[message.guild.id] = [];
