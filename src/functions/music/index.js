@@ -77,6 +77,7 @@ function play(message) {
 	if(!voiceChannel) return MSS.msg.react(message, false, "call");
 	//If the stream doesn't exist, make a new stream
 	if(!stream[message.guild.id]) { stream[message.guild.id] = new streamy.Writable(); }
+
 	//If we've run out, do the exit procedures
 	if (playlist[message.guild.id].length === 0) {
 		//Leave the voice channel
@@ -86,11 +87,12 @@ function play(message) {
 		playlist[message.guild.id] = [];
 
 		//If there is still a stream (somehow), destroy it
-		process.kill(pid[message.guild.id], 'SIGINT');
+		if (pid[message.guild.id]) process.kill(pid[message.guild.id], 'SIGINT');
 
 		//Goodbye!
 		return;
 	}
+
 	//Push the currently playing song into the "current" list
 	current[message.guild.id] = JSON.parse(playlist[message.guild.id].shift());
 	//Send a lovely panel
@@ -148,8 +150,8 @@ function skip(message) {
 	//If there is no bot, complain
 	if (!voiceChannel || !voiceChannel.connection) return MSS.msg.react(message, false, "robot");
 
-	//Kill FFMPEG
-	process.kill(pid[message.guild.id], 'SIGINT');
+	//Kill FFMPEG (if there's a PID)
+	if (pid[message.guild.id]) process.kill(pid[message.guild.id], 'SIGINT');
 
 	//Goodbye!
 	return;
@@ -172,7 +174,7 @@ function stop(message) {
 	playlist[message.guild.id] = [];
 
 	//Kill FFMPEG
-	process.kill(pid[message.guild.id], 'SIGINT');
+	if (pid[message.guild.id]) process.kill(pid[message.guild.id], 'SIGINT');
 
 	//Goodbye!
 	return;
