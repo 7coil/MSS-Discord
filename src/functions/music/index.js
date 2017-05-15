@@ -98,6 +98,9 @@ function play(message) {
 	//Send a lovely panel
 	panel(message);
 
+	//ffmpeg stuff helped by https://github.com/lperrin/node_airtunes
+	//BSD-2-Clause
+
 	//Make an ffmpeg stream
 	let ffmpeg = spawn('ffmpeg', [
 		'-i', 'pipe:0',
@@ -125,6 +128,14 @@ function play(message) {
 	}
 
 	stream[message.guild.id] = ffmpeg.stdout;
+
+	ffmpeg.stderr.setEncoding('utf8');
+	ffmpeg.stderr.on('data', function(data) {
+		if(/^execvp\(\)/.test(data)) {
+			console.log('failed to start ' + argv.ffmpeg);
+			play(message);
+		}
+	});
 }
 
 //A function to push a new video onto the playlist stack
