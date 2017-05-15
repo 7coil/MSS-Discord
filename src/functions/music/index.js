@@ -72,13 +72,10 @@ function play(message) {
 
 	//Get the voicechannel
 	var voiceChannel = message.member.voiceChannel;
-	
 	//If there is no voicechannel, complain
 	if(!voiceChannel) return MSS.msg.react(message, false, "call");
-	
 	//If the stream doesn't exist, make a new stream
 	if(!stream[message.guild.id]) { stream[message.guild.id] = new streamy.Writable(); }
-	
 	//If we've run out, do the exit procedures
 	if (playlist[message.guild.id].length === 0) {
 		//Leave the voice channel
@@ -93,52 +90,36 @@ function play(message) {
 		//Goodbye!
 		return;
 	}
-
 	//Push the currently playing song into the "current" list
 	current[message.guild.id] = JSON.parse(playlist[message.guild.id].shift());
-
 	//Send a lovely panel
 	panel(message);
 
-	//Get the correct handler for each stream type.
+	//Make an ffmpeg stream
+	let ffmpeg = spawn('ffmpeg' [
+		'-i', 'pipe:0',
+		'-f', 'wav',
+		'pipe:1'
+	]);
+
+	//Send the correct input to the ffmpeg stream
 	switch (current[message.guild.id]["type"]) {
-
-
-	//If it's YouTube, use ytdl-core to get the audio stream
-	case "youtube":
-		stream[message.guild.id] = yt(current[message.guild.id]["url"], {audioonly: true})
-		break;
-
-	//If it's a local file, convert to wav and then send to stream
-	case "local":
-		//Pipe in a stream, and pipe out another stream
-		let ffmpeg = spawn('ffmpeg' [
-			'-i', 'pipe:0',
-			'-f', 'wav',
-			'pipe:1'
-		]);
-
-		fs.createReadStream(current[message.guild.id]["url"]).pipe(ffmpeg.stdin);
-		stream[message.guild.id] = ffmpeg.stdout;
-		break;
-
-	//If it's a file on the internet, convert to wav and then send to stream.
-	case "http":
-	case "https":
-		stream[message.guild.id] = ffmpeg(request(current[message.guild.id]["url"]))
-			.outputOptions(['-f', 'wav'])
-			.noVideo()
-			.pipe();
-
-		stream[message.guild.id].on('error', function(err, stdout, stderr) {
-			console.log('Cannot process video: ' + err.message);
-		});
-		break;
-	default:
-		message.channel.sendMessage("Invalid provider provided.");
-		play(message);
+		case "youtube":
+			yt(current[message.guild.id]["url"], {audioonly: true}).pipe(ffmpeg.stdin);
+			break;
+		case "local":
+			fs.createReadStream(current[message.guild.id]["url"]).pipe(ffmpeg.stdin);
+			break;
+		case "http":
+		case "https":
+			request(current[message.guild.id]["url"]).pipe(ffmpeg.stdin);
+			break;
+		default:
+			message.channel.sendMessage("Invalid provider provided.");
+			play(message);
 	}
 
+	stream[message.guild.id] = ffmpeg.stdout;
 }
 
 //A function to push a new video onto the playlist stack
