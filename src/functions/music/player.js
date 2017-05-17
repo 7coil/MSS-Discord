@@ -74,7 +74,7 @@ function Player(message) {
 				case "https":
 					request(this.current.url)
 						.pipe(ffmpeg.stdin)
-						.on("error", (err) => throw);
+						.on("error", (err) => {throw err});
 
 					break;
 				default:
