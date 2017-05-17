@@ -27,7 +27,7 @@ function Player(message) {
 					console.dir(that.playlist);
 
 					//Start playing that stream.
-					const dispatcher = connnection.playStream(that.stream);
+					const dispatcher = connection.playStream(that.stream);
 
 					//When the stream ends, restart the "looper", which gets a new song on the stream
 					dispatcher.on('end', () => {
