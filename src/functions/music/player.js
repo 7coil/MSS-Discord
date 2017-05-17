@@ -119,3 +119,11 @@ function Player(message) {
 		this.skip();
 	}
 }
+
+process.on("unhandledRejection", function(err) {
+	console.error("Uncaught Promise Error: \n" + err.stack);
+});
+
+process.on("uncaughtException", function(err) {
+	console.error("Uncaught Exception Error: \n" + err.stack);
+});
