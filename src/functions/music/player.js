@@ -32,7 +32,7 @@ function Player(message) {
 					//When the stream ends, restart the "looper", which gets a new song on the stream
 					dispatcher.on('end', () => {
 						if (typeof that.playlist.shift() === "undefined") {
-							this.channel.send("End of Playlist");
+							connection.leave();
 						} else {
 							looper();
 						}
