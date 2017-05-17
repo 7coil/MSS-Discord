@@ -16,7 +16,7 @@ function Player(message) {
 	this.connect = function() {
 		this.voicechannel
 			.join()
-			.then(connnection => (connection) {
+			.then(connnection => (connection) => {
 				var looper = function() {
 
 					//Get a new song playing on the stream
