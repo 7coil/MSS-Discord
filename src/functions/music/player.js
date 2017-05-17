@@ -40,8 +40,10 @@ function Player(message) {
 	}
 
 	this.play = function() {
+
+		if(this.playlist.length === 0) return this.voiceChannel.leave();
+
 		this.current = this.playlist.shift();
-		if(typeof this.current == "undefined") return this.stop();
 
 		//Make an ffmpeg stream
 		let ffmpeg = spawn('ffmpeg', [
@@ -114,8 +116,8 @@ function Player(message) {
 	}
 
 	this.stop = function() {
-		this.playlist = []
-		message.member.voiceChannel.leave();
+		this.skip();
+		this.playlist = [];
 	}
 }
 
