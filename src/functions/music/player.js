@@ -75,14 +75,14 @@ function Player(message) {
 					request.get(this.current.url)
 						.on("error", (err) => {
 							this.channel.send(`A HTTP error occured. Congratulations!`);
-							return this.skip();
+							this.play();
 						})
 						.pipe(ffmpeg.stdin);
 
 					break;
 				default:
 					this.channel.send(`${this.current.type} is not a valid audio provider.`);
-					return this.skip();
+					this.play();
 			}
 
 			this.stream = ffmpeg.stdout;
