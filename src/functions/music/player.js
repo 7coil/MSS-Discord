@@ -75,6 +75,7 @@ function Player(message) {
 					request.get(this.current.url)
 						.on("error", (err) => {
 							this.channel.send(`A HTTP error occured. Congratulations!`);
+							this.skip();
 						})
 						.pipe(ffmpeg.stdin);
 
