@@ -110,5 +110,6 @@ function Player(message) {
 	this.stop = function() {
 		if (this.pid) process.kill(this.pid, "SIGINT");
 		this.playlist = []
+		this.voicechannel.disconnect();
 	}
 }
