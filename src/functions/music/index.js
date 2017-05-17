@@ -45,7 +45,7 @@ function list(message) {
 	if(Players[message.guild.id].playlist.length > 0) {
 		var string = "Playlist\n"
 		Players[message.guild.id].playlist.every((elem, index) => {
-			if((`${string}\n${index} - ${elem.name}`).length < 1900) {
+			if((`${string}\n${index} - ${elem.name}`).length > 1900) {
 				string += `...`
 				return false;
 			} else {
