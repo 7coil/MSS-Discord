@@ -16,7 +16,6 @@ function Player(message) {
 	this.current = {};
 	this.pid = null;
 	this.stream = new streamy.Writable();
-
 	this.connect = function() {
 		this.voicechannel
 			.join()
@@ -38,7 +37,6 @@ function Player(message) {
 				looper();
 			});
 	}
-
 	this.play = function() {
 
 		if(this.playlist.length === 0) return this.voicechannel.leave();
@@ -93,7 +91,6 @@ function Player(message) {
 			}
 		});
 	}
-
 	this.add = function(type, url, title, thumb) {
 		//Push a JSON string into the array
 		this.playlist.push({
@@ -108,12 +105,10 @@ function Player(message) {
 			this.connect();
 		}
 	}
-
 	this.skip = function() {
 		if (this.pid) process.kill(this.pid, "SIGINT");
 		this.pid = null;
 	}
-
 	this.stop = function() {
 		this.skip();
 		this.current = {};
