@@ -43,17 +43,8 @@ function list(message) {
 	init(message);
 	if (!botCheck(message)) return;
 	if(Players[message.guild.id].playlist.length > 0) {
-		var string = "Playlist"
-		//Abuse Every!
-		Players[message.guild.id].playlist.every((elem, index) => {
-			if((`${string}\n${index} - ${elem.name}`).length < 1900) {
-				string += `...`
-				return false;
-			} else {
-				string += `\n${index} - ${elem.name}`;
-				return true;
-			}
-		});
+		var string = "Playlist\n"
+		string += Players[message.guild.id].playlist.join("\n");
 		Players[message.guild.id].message.send(string)
 	} else {
 		Players[message.guild.id].message.send("The Playlist is empty")
