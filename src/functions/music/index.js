@@ -46,13 +46,14 @@ function list(message) {
 		var string = "Playlist\n```\n"
 		Players[message.guild.id].playlist.every((elem, index) => {
 			if((`${string}\n${index} - ${elem.title}`).length > 1900) {
-				string += "...\n```"
+				string += "..."
 				return false;
 			} else {
 				string += `${index} - ${elem.title}\n`;
 				return true;
 			}
 		});
+		string += "```"
 		Players[message.guild.id].channel.send(string)
 	} else {
 		Players[message.guild.id].channel.send("The Playlist is empty")
