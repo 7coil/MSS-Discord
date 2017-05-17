@@ -33,11 +33,7 @@ function Player(message) {
 
 					//When the stream ends, restart the "looper", which gets a new song on the stream
 					dispatcher.on('end', () => {
-						if (typeof that.playlist.shift() == "undefined") {
-							connection.leave();
-						} else {
-							looper();
-						}
+						looper();
 					});
 				}
 				looper();
@@ -114,6 +110,7 @@ function Player(message) {
 
 	this.skip = function() {
 		if (this.pid) process.kill(this.pid, "SIGINT");
+		this.pid = null;
 		this.stream.destroy();
 	}
 
