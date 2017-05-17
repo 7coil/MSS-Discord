@@ -45,9 +45,9 @@ function list(message) {
 	if(Players[message.guild.id].playlist.length > 0) {
 		var string = "Playlist\n"
 		string += Players[message.guild.id].playlist.join("\n");
-		message.send(string)
+		Players[message.guild.id].channel.send(string)
 	} else {
-		message.send("The Playlist is empty")
+		Players[message.guild.id].channel.send("The Playlist is empty")
 	}
 }
 
@@ -59,7 +59,7 @@ function botCheck(message) {
 	if (Players[message.guild.id].voicechannel && Players[message.guild.id].voicechannel.connection) {
 		return true;
 	} else {
-		message.send("There is no bot in your channel");
+		Players[message.guild.id].channel.send("There is no bot in your channel");
 		return false;
 	}
 }
@@ -68,7 +68,7 @@ function adminCheck(message) {
 	if(MSS.msg.isadmin(message)) {
 		return true;
 	} else {
-		Players[message.guild.id].message.send("You are not an Administrator!");
+		Players[message.guild.id].channel.send("You are not an Administrator!");
 		return false;
 	}
 }
