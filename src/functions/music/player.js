@@ -15,14 +15,12 @@ function Player(message) {
 	this.playlist = [];
 	this.current = {};
 	this.pid = null;
-	this.connection = null
 	this.stream = new streamy.Writable();
 
 	this.connect = function() {
 		this.voicechannel
 			.join()
 			.then(connection => {
-				this.connection = connection;
 				var looper = function() {
 
 					//Get a new song playing on the stream
@@ -118,7 +116,7 @@ function Player(message) {
 	this.stop = function() {
 		this.playlist = []
 		this.skip();
-		this.connection.leave();
+		if (this.voiceChannel && this.voiceChannel.connection) this.voiceChannel.leave();
 	}
 }
 
