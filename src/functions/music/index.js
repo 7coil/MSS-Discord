@@ -2,6 +2,7 @@ const Player = require("./player.js");
 const Players = [];
 
 exports.init = init;
+exports.add = add;
 
 function init(message) {
 	if(typeof obj === 'function') {
