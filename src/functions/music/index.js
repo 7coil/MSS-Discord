@@ -19,6 +19,7 @@ function init(message) {
 function add(message, type, url, title, thumb) {
 	if (!message.guild) return guildError(message);
 	init(message);
+	if (!vcCheck(message)) return;
 	Players[message.guild.id].add(type, url, title, thumb);
 }
 
@@ -62,6 +63,15 @@ function list(message) {
 
 function guildError(message) {
 	message.channel.send("You cannot run this command outside a guild!");
+}
+
+function vcCheck(message) {
+	if (Players[message.guild.id].voicechannel) {
+		return true;
+	} else {
+		Players[message.guild.id].channel.send("You are not in a voice channel");
+		return false;
+	}
 }
 
 function botCheck(message) {
