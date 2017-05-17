@@ -73,7 +73,9 @@ function Player(message) {
 				case "http":
 				case "https":
 					request.get(this.current.url)
-						.on("error", (err) => {throw err})
+						.on("error", (err) => {
+							this.channel.send(`A HTTP error occured. Congratulations!`);
+						})
 						.pipe(ffmpeg.stdin);
 
 					break;
