@@ -13,6 +13,7 @@ function Player(message) {
 	this.channel = message.channel;
 	this.voicechannel = message.member.voiceChannel;
 	this.playlist = [];
+	this.current = {};
 	this.pid = null;
 	this.connection = null
 	this.stream = new streamy.Writable();
@@ -41,8 +42,8 @@ function Player(message) {
 	}
 
 	this.play = function() {
-		//ffmpeg stuff helped by https://github.com/lperrin/node_airtunes
-		//BSD-2-Clause
+		this.current = this.playlist.shift();
+		if(typeof this.current == "undefined") this.stop();
 
 		//Make an ffmpeg stream
 		let ffmpeg = spawn('ffmpeg', [
@@ -54,18 +55,18 @@ function Player(message) {
 		this.pid = ffmpeg.pid;
 
 		//Send the correct input to the ffmpeg stream
-		switch (this.playlist[0].type) {
+		switch (this.current.type) {
 
 			//Stream from YouTube
 			case "youtube":
-				yt(this.playlist[0].url, {audioonly: true})
+				yt(this.current.url, {audioonly: true})
 					.pipe(ffmpeg.stdin);
 
 				break;
 
 			//Stream from a local file
 			case "local":
-				fs.createReadStream(this.playlist[0].url)
+				fs.createReadStream(this.current.url)
 					.pipe(ffmpeg.stdin);
 
 				break;
@@ -73,12 +74,12 @@ function Player(message) {
 			//Stream from the internet!
 			case "http":
 			case "https":
-				request(this.playlist[0].url)
+				request(this.current.url)
 					.pipe(ffmpeg.stdin);
 
 				break;
 			default:
-				this.channel.send(`${this.playlist[0].type} is not a valid audio provider.`);
+				this.channel.send(`${this.current.type} is not a valid audio provider.`);
 				this.play();
 		}
 
@@ -88,7 +89,7 @@ function Player(message) {
 		ffmpeg.stderr.on('data', function(data) {
 			if(/^execvp\(\)/.test(data)) {
 				console.log('failed to start ' + argv.ffmpeg);
-				that.play(message);
+				that.play();
 			}
 		});
 	}
