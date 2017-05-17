@@ -112,11 +112,11 @@ function Player(message) {
 	this.skip = function() {
 		if (this.pid) process.kill(this.pid, "SIGINT");
 		this.pid = null;
-		this.stream.destroy();
 	}
 
 	this.stop = function() {
 		this.skip();
+		this.current = {};
 		this.playlist = [];
 	}
 }
