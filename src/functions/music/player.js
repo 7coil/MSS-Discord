@@ -24,7 +24,6 @@ function Player(message) {
 
 					//Get a new song playing on the stream
 					that.play();
-					console.dir(that.playlist);
 
 					//Start playing that stream.
 					const dispatcher = connection.playStream(that.stream);
@@ -117,9 +116,9 @@ function Player(message) {
 }
 
 process.on("unhandledRejection", function(err) {
-	console.error("Uncaught Promise Error: \n" + err.stack);
+	console.log("Uncaught Promise Error: \n" + err.stack);
 });
 
 process.on("uncaughtException", function(err) {
-	console.error("Uncaught Exception Error: \n" + err.stack);
+	console.log(err.message);
 });
