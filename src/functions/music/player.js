@@ -41,7 +41,7 @@ function Player(message) {
 
 	this.play = function() {
 		this.current = this.playlist.shift();
-		if(typeof this.current == "undefined") this.stop();
+		if(typeof this.current == "undefined") return this.stop();
 
 		//Make an ffmpeg stream
 		let ffmpeg = spawn('ffmpeg', [
