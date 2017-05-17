@@ -27,7 +27,11 @@ function Player(message) {
 
 					//When the stream ends, restart the "looper", which gets a new song on the stream
 					dispatcher.on('end', () => {
-						looper();
+						if (typeof this.playlist.shift() === "undefined") {
+							this.channel.send("End of Playlist");
+						} else {
+							looper();
+						}
 					});
 				}
 				looper();
@@ -100,5 +104,10 @@ function Player(message) {
 		if (!this.voicechannel.connection) {
 			this.connect();
 		}
+	}
+
+	this.stop = function() {
+		if (this.pid) process.kill(this.pid, "SIGINT");
+		this.playlist = []
 	}
 }
