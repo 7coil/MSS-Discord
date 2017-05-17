@@ -41,7 +41,7 @@ function Player(message) {
 
 	this.play = function() {
 
-		if(this.playlist.length === 0) return this.voiceChannel.leave();
+		if(this.playlist.length === 0) return this.voicechannel.leave();
 
 		this.current = this.playlist.shift();
 
