@@ -110,9 +110,12 @@ function Player(message) {
 		}
 	}
 
-	this.stop = function() {
+	this.skip = function() {
 		if (this.pid) process.kill(this.pid, "SIGINT");
+	}
+
+	this.stop = function() {
 		this.playlist = []
-		this.voicechannel.disconnect();
+		this.skip();
 	}
 }
