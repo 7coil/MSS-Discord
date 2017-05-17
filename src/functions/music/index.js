@@ -45,9 +45,9 @@ function list(message) {
 	if(Players[message.guild.id].playlist.length > 0) {
 		var string = "Playlist\n"
 		string += Players[message.guild.id].playlist.join("\n");
-		Players[message.guild.id].message.send(string)
+		message.send(string)
 	} else {
-		Players[message.guild.id].message.send("The Playlist is empty")
+		message.send("The Playlist is empty")
 	}
 }
 
