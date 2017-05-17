@@ -42,7 +42,6 @@ function list(message) {
 	if (!message.guild) return;
 	init(message);
 	if (!botCheck(message)) return;
-	if (!adminCheck(message)) return;
 	if(Players[message.guild.id].playlist.length > 0) {
 		var string = "Playlist"
 		//Abuse Every!

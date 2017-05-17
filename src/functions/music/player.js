@@ -120,5 +120,5 @@ process.on("unhandledRejection", function(err) {
 });
 
 process.on("uncaughtException", function(err) {
-	console.log(err.message);
+	console.log(err.stack);
 });
