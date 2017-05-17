@@ -15,3 +15,7 @@ function add(message, type, url, title, thumb) {
 	init(message)
 	Players[message.guild.id].add(type, url, title, thumb);
 }
+
+function stop(message) {
+	Players[message.guild.id].stop();
+}
