@@ -3,6 +3,8 @@ const streamy = require("stream");
 const fs = require('fs');
 const request = require("request");
 
+exports.Player = Player;
+
 function Player(message) {
 	this.message = message;
 	this.channel = message.channel;
