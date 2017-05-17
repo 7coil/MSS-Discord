@@ -12,27 +12,28 @@ function Player(message) {
 	this.playlist = [];
 	this.pid = null;
 	this.stream = new streamy.Writable();
+
 	this.connect = function() {
 		this.voicechannel
 			.join()
-			.then(connnection => this.dispatch);
-	}
-	this.dispatch = function(connection) {
-		var looper = function() {
+			.then(connnection => (connection) {
+				var looper = function() {
 
-			//Get a new song playing on the stream
-			this.play();
+					//Get a new song playing on the stream
+					this.play();
 
-			//Start playing that stream.
-			const dispatcher = connnection.playStream(this.stream);
+					//Start playing that stream.
+					const dispatcher = connnection.playStream(this.stream);
 
-			//When the stream ends, restart the "looper", which gets a new song on the stream
-			dispatcher.on('end', () => {
+					//When the stream ends, restart the "looper", which gets a new song on the stream
+					dispatcher.on('end', () => {
+						looper();
+					});
+				}
 				looper();
 			});
-		}
-		looper();
 	}
+
 	this.play = function() {
 		//ffmpeg stuff helped by https://github.com/lperrin/node_airtunes
 		//BSD-2-Clause
@@ -84,7 +85,8 @@ function Player(message) {
 				this.play(message);
 			}
 		});
-}
+	}
+
 	this.add = function(type, url, title, thumb) {
 		//Push a JSON string into the array
 		this.playlist.push({
