@@ -115,8 +115,7 @@ function Player(message) {
 
 	this.stop = function() {
 		this.playlist = []
-		this.skip();
-		this.message.member.voiceChannel.leave();
+		message.member.voiceChannel.leave();
 	}
 }
 
