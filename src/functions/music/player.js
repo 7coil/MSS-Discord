@@ -57,14 +57,20 @@ function Player(message) {
 			//Stream from YouTube
 			case "youtube":
 				yt(this.current.url, {audioonly: true})
-					.pipe(ffmpeg.stdin);
+					.pipe(ffmpeg.stdin)
+					.on('error', (err) => {
+						this.play();
+					});
 
 				break;
 
 			//Stream from a local file
 			case "local":
 				fs.createReadStream(this.current.url)
-					.pipe(ffmpeg.stdin);
+					.pipe(ffmpeg.stdin)
+					.on('error', (err) => {
+						this.play();
+					});
 
 				break;
 
@@ -72,7 +78,11 @@ function Player(message) {
 			case "http":
 			case "https":
 				request(this.current.url)
-					.pipe(ffmpeg.stdin);
+					.pipe(ffmpeg.stdin)
+					.on('error', (err) => {
+						//Skip on error
+						this.play();
+					})
 
 				break;
 			default:
