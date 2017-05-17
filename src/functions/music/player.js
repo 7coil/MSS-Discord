@@ -14,12 +14,14 @@ function Player(message) {
 	this.voicechannel = message.member.voiceChannel;
 	this.playlist = [];
 	this.pid = null;
+	this.connection = null
 	this.stream = new streamy.Writable();
 
 	this.connect = function() {
 		this.voicechannel
 			.join()
 			.then(connection => {
+				this.connection = connection;
 				var looper = function() {
 
 					//Get a new song playing on the stream
@@ -31,8 +33,7 @@ function Player(message) {
 
 					//When the stream ends, restart the "looper", which gets a new song on the stream
 					dispatcher.on('end', () => {
-						that.playlist.shift()
-						if (playlist.length == 0) {
+						if (typeof that.playlist.shift() == "undefined") {
 							connection.leave();
 						} else {
 							looper();
@@ -119,6 +120,7 @@ function Player(message) {
 	this.stop = function() {
 		this.playlist = []
 		this.skip();
+		this.connection.leave();
 	}
 }
 
