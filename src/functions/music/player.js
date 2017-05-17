@@ -51,53 +51,50 @@ function Player(message) {
 
 		this.pid = ffmpeg.pid;
 
-		//Send the correct input to the ffmpeg stream
-		switch (this.current.type) {
+		//Try it! If it fails, it skips it.
+		try {
+			//Send the correct input to the ffmpeg stream
+			switch (this.current.type) {
 
-			//Stream from YouTube
-			case "youtube":
-				yt(this.current.url, {audioonly: true})
-					.pipe(ffmpeg.stdin)
-					.on('error', (err) => {
-						that.play();
-					});
+				//Stream from YouTube
+				case "youtube":
+					yt(this.current.url, {audioonly: true})
+						.pipe(ffmpeg.stdin);
+					break;
 
-				break;
+				//Stream from a local file
+				case "local":
+					fs.createReadStream(this.current.url)
+						.pipe(ffmpeg.stdin);
 
-			//Stream from a local file
-			case "local":
-				fs.createReadStream(this.current.url)
-					.pipe(ffmpeg.stdin)
-					.on('error', (err) => {
-						that.play();
-					});
+					break;
 
-				break;
+				//Stream from the internet!
+				case "http":
+				case "https":
+					request(this.current.url)
+						.pipe(ffmpeg.stdin);
 
-			//Stream from the internet!
-			case "http":
-			case "https":
-				request(this.current.url)
-					.pipe(ffmpeg.stdin)
-					.on('error', (err) => {
-						that.play();
-					})
+					break;
+				default:
+					this.channel.send(`${this.current.type} is not a valid audio provider.`);
+					this.skip();
+			}
 
-				break;
-			default:
-				this.channel.send(`${this.current.type} is not a valid audio provider.`);
-				this.skip();
+			this.stream = ffmpeg.stdout;
+
+			ffmpeg.stderr.setEncoding('utf8');
+			ffmpeg.stderr.on('data', function(data) {
+				if(/^execvp\(\)/.test(data)) {
+					console.log('failed to start ' + argv.ffmpeg);
+					throw "FFMPEG failed!";
+				}
+			});
+		} catch(e) {
+			this.channel.send(`${e.message} - Skipping...`);
+			this.play();
 		}
 
-		this.stream = ffmpeg.stdout;
-
-		ffmpeg.stderr.setEncoding('utf8');
-		ffmpeg.stderr.on('data', function(data) {
-			if(/^execvp\(\)/.test(data)) {
-				console.log('failed to start ' + argv.ffmpeg);
-				that.play();
-			}
-		});
 	}
 	this.add = function(type, url, title, thumb) {
 		//Push a JSON string into the array
@@ -126,8 +123,4 @@ function Player(message) {
 
 process.on("unhandledRejection", function(err) {
 	console.log("Uncaught Promise Error: \n" + err.stack);
-});
-
-process.on("uncaughtException", function(err) {
-	console.log(err.stack);
 });
