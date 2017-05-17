@@ -21,6 +21,7 @@ function Player(message) {
 
 					//Get a new song playing on the stream
 					this.play();
+					console.dir(this.playlist);
 
 					//Start playing that stream.
 					const dispatcher = connnection.playStream(this.stream);
