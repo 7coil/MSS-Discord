@@ -2,6 +2,7 @@ const yt = require('ytdl-core');
 const streamy = require("stream");
 const fs = require('fs');
 const request = require("request");
+const spawn = require("child_process").spawn
 
 module.exports = Player;
 
