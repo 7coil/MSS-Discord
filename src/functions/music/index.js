@@ -11,5 +11,6 @@ function init(message) {
 }
 
 function add(message, type, url, title, thumb) {
+	init(message)
 	Players[message.guild.id].add(type, url, title, thumb);
 }
