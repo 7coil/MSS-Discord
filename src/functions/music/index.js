@@ -43,13 +43,13 @@ function list(message) {
 	init(message);
 	if (!botCheck(message)) return;
 	if(Players[message.guild.id].playlist.length > 0) {
-		var string = "Playlist\n"
+		var string = "Playlist\n```\n"
 		Players[message.guild.id].playlist.every((elem, index) => {
 			if((`${string}\n${index} - ${elem.title}`).length > 1900) {
-				string += `...`
+				string += "...\n```"
 				return false;
 			} else {
-				string += `\n${index} - ${elem.title}`;
+				string += `${index} - ${elem.title}\n`;
 				return true;
 			}
 		});
