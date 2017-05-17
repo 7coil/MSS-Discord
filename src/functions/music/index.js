@@ -5,7 +5,8 @@ exports.init = init;
 exports.add = add;
 
 function init(message) {
-	if(typeof obj === 'function') {
+	console.log(typeof Players[message.guild.id]);
+	if(typeof Players[message.guild.id] === 'undefined') {
 		Players[message.guild.id] = new Player(message);
 	}
 }
