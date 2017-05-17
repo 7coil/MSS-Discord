@@ -3,6 +3,7 @@ const Players = [];
 
 exports.init = init;
 exports.add = add;
+exports.stop = stop;
 
 function init(message) {
 	console.log(typeof Players[message.guild.id]);
