@@ -3,21 +3,18 @@ const MSS = require("./../../functions/");
 const config = require("./../../config.json");
 const fs = require("fs");
 var commands = [];
-var list = [];
-var print = "What manual page do you want?\n`@MSS man <command>`\n";
+var print = "What manual page do you want?\n`@MSS man <command>`\n```\n";
 
 //Get all .json files in this directory to read the man data.
 fs.readdir("./commands/", function(err, items) {
 	items.forEach(function(item) {
 		var file = item.replace(/['"]+/g, "");
-		print += "`" + file + "`\n";
-		//Include the meta.json files in the commands directory
-		list.push(file);
-		commands[file] = require("./../" + file + "/meta.json");
+		commands[file] = require(`./../${file}/meta.json`);
 	});
-});
 
-console.dir(list);
+	print += items.join(`, `);
+	print += "```";
+});
 
 module.exports = function manpages(message) {
 	let input = message.content.replace(/\n/g, " ").split(" ");
