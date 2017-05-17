@@ -124,3 +124,8 @@ function Player(message) {
 process.on("unhandledRejection", function(err) {
 	console.log("Uncaught Promise Error: \n" + err.stack);
 });
+
+process.on("uncaughtException", function(err) {
+	console.log(err.stack);
+});
+
