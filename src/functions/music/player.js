@@ -113,6 +113,7 @@ function Player(message) {
 
 	this.skip = function() {
 		if (this.pid) process.kill(this.pid, "SIGINT");
+		this.stream.destroy();
 	}
 
 	this.stop = function() {
