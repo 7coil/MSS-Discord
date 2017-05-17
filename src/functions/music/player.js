@@ -59,7 +59,7 @@ function Player(message) {
 				yt(this.current.url, {audioonly: true})
 					.pipe(ffmpeg.stdin)
 					.on('error', (err) => {
-						this.play();
+						this.skip();
 					});
 
 				break;
@@ -69,7 +69,7 @@ function Player(message) {
 				fs.createReadStream(this.current.url)
 					.pipe(ffmpeg.stdin)
 					.on('error', (err) => {
-						this.play();
+						this.skip();
 					});
 
 				break;
@@ -81,13 +81,13 @@ function Player(message) {
 					.pipe(ffmpeg.stdin)
 					.on('error', (err) => {
 						//Skip on error
-						this.play();
+						this.skip();
 					})
 
 				break;
 			default:
 				this.channel.send(`${this.current.type} is not a valid audio provider.`);
-				this.play();
+				this.skip();
 		}
 
 		this.stream = ffmpeg.stdout;
