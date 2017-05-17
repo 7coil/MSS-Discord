@@ -6,6 +6,8 @@ const request = require("request");
 module.exports = Player;
 
 function Player(message) {
+	var that = this;
+
 	this.message = message;
 	this.channel = message.channel;
 	this.voicechannel = message.member.voiceChannel;
@@ -20,15 +22,15 @@ function Player(message) {
 				var looper = function() {
 
 					//Get a new song playing on the stream
-					this.play();
-					console.dir(this.playlist);
+					that.play();
+					console.dir(that.playlist);
 
 					//Start playing that stream.
-					const dispatcher = connnection.playStream(this.stream);
+					const dispatcher = connnection.playStream(that.stream);
 
 					//When the stream ends, restart the "looper", which gets a new song on the stream
 					dispatcher.on('end', () => {
-						if (typeof this.playlist.shift() === "undefined") {
+						if (typeof that.playlist.shift() === "undefined") {
 							this.channel.send("End of Playlist");
 						} else {
 							looper();
@@ -87,7 +89,7 @@ function Player(message) {
 		ffmpeg.stderr.on('data', function(data) {
 			if(/^execvp\(\)/.test(data)) {
 				console.log('failed to start ' + argv.ffmpeg);
-				this.play(message);
+				that.play(message);
 			}
 		});
 	}
