@@ -4,6 +4,7 @@ const Players = [];
 exports.init = init;
 exports.add = add;
 exports.stop = stop;
+exports.skip = skip;
 
 function init(message) {
 	console.log(typeof Players[message.guild.id]);
@@ -18,5 +19,9 @@ function add(message, type, url, title, thumb) {
 }
 
 function stop(message) {
-	Players[message.guild.id].stop();
+	if(Players[message.guild.id]) Players[message.guild.id].stop();
+}
+
+function skip(message) {
+	if(Players[message.guild.id]) Players[message.guild.id].skip();
 }
