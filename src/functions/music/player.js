@@ -116,7 +116,7 @@ function Player(message) {
 	this.stop = function() {
 		this.playlist = []
 		this.skip();
-		if (this.voicechannel && this.voicechannel.connection) this.voicechannel.leave();
+		this.voicechannel.connection.leave();
 	}
 }
 
