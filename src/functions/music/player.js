@@ -129,7 +129,6 @@ function Player(message) {
 		this.skip();
 		this.current = {};
 		this.playlist = [];
-		this.voicechannel.leave();
 	}
 }
 
@@ -138,7 +137,9 @@ process.on("unhandledRejection", function(err) {
 });
 
 process.on("uncaughtException", function(err) {
-	console.log(err.message);
-	console.log(err.stack);
+	if(err.message != "read ECONNRESET") {
+		console.log(err.stack);
+		return process.exit(1)
+	};
 });
 
