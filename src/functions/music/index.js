@@ -9,6 +9,8 @@ exports.add = add;
 exports.stop = stop;
 exports.skip = skip;
 exports.list = list;
+exports.control = control;
+exports.get = get;
 
 function init(message) {
 	console.log(typeof Players[message.guild.id]);
