@@ -94,6 +94,10 @@ function Player(message) {
 					throw "FFMPEG failed!";
 				}
 			});
+
+			this.stream.on("close", () => {
+				this.play();
+			});
 		} catch(e) {
 			this.channel.send(`${e.message} - Skipping...`);
 			this.play();
