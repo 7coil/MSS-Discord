@@ -19,19 +19,12 @@ function Player(message) {
 		console.log(`Message: Connecting to Voice Channel`);
 		this.voicechannel
 			.join()
-			.then((connection) => {
-				this.play(connection);
-			});
+			.then((connection) => this.play(connection));
 	}
 	this.play = function(connection) {
 
 		console.log(`Message: Checking playlist length`);
-		if(this.playlist.length === 0) {
-			setTimeout(() => {
-				this.voicechannel.leave();
-			}, 5000);
-			return
-		}
+		if(this.playlist.length === 0) return this.voicechannel.leave();
 
 		console.log(`Message: Shifting playlist`);
 		this.current = this.playlist.shift();
@@ -85,7 +78,7 @@ function Player(message) {
 
 			//Send FFMPEG's output to the connection
 			console.log(`Message: Piping FFMPEG to the connection`);
-			connection.playStream(ffmpeg.stdout);
+			let dispatcher = connection.playStream(ffmpeg.stdout);
 
 			//Check for FFMPEG errors
 			ffmpeg.stderr.setEncoding('utf8');
@@ -97,9 +90,7 @@ function Player(message) {
 			});
 
 			//The stream has ended, therefore it can go on to the next song
-			ffmpeg.stdout.on("close", () => {
-				this.play();
-			});
+			dispatcher.on("end", () => this.play());
 
 		} catch(e) {
 			console.log(`Failure: ${e.message}`);
