@@ -18,6 +18,7 @@ function Player(message) {
 	this.connection = null;
 	this.connect = function() {
 		console.log(`Message: Connecting to Voice Channel`);
+        this.message.send("For controls, send @MSS control");
 		this.voicechannel
 			.join()
 			.then((connection) => {
