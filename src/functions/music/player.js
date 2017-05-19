@@ -10,15 +10,13 @@ function Player(message) {
 	var that = this;
 
 	this.message = message;
-	this.channel = message.channel;
-	this.voicechannel = message.member.voiceChannel;
 	this.playlist = [];
 	this.current = {};
 	this.pid = null;
 	this.connection = null;
 	this.connect = function() {
 		console.log(`Message: Connecting to Voice Channel`);
-		this.voicechannel
+		this.message.member.voiceChannel
 			.join()
 			.then((connection) => {
 				this.connection = connection;
@@ -27,7 +25,7 @@ function Player(message) {
 	}
 	this.play = function() {
 		console.log(`Message: Checking playlist length`);
-		if(this.playlist.length === 0) return this.voicechannel.leave();
+		if(this.playlist.length === 0) return this.message.member.voiceChannel.leave();
 
 		console.log(`Message: Shifting playlist`);
 		this.current = this.playlist.shift();
@@ -67,7 +65,7 @@ function Player(message) {
 				case "https":
 					request.get(this.current.url)
 						.on("error", (err) => {
-							this.channel.send(`A HTTP error occured. Congratulations!`);
+							this.message.channel.send(`A HTTP error occured. Congratulations!`);
 							this.play();
 						})
 						.pipe(ffmpeg.stdin);
@@ -75,7 +73,7 @@ function Player(message) {
 					break;
 				default:
 					console.log(`Failure: Incorrect audio type`);
-					this.channel.send(`${this.current.type} is not a valid audio provider.`);
+					this.message.channel.send(`${this.current.type} is not a valid audio provider.`);
 					this.play();
 			}
 
@@ -102,7 +100,7 @@ function Player(message) {
 
 		} catch(e) {
 			console.log(`Failure: ${e.message}`);
-			this.channel.send(`${e.message} - Skipping...`);
+			this.message.channel.send(`${e.message} - Skipping...`);
 			this.play();
 		}
 
@@ -116,7 +114,7 @@ function Player(message) {
 		});
 
 		//If the bot is not playing, enter the channel and start playing
-		if (!this.voicechannel.connection) {
+		if (!this.message.member.voiceChannel.connection) {
 			this.connect();
 		}
 	}
