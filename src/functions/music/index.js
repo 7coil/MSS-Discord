@@ -9,7 +9,7 @@ exports.add = add;
 exports.stop = stop;
 exports.skip = skip;
 exports.list = list;
-exports.control = control;
+exports.panel = panel;
 exports.get = get;
 
 function init(message) {
