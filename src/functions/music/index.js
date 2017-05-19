@@ -66,6 +66,9 @@ function list(message) {
 }
 
 function get(message) {
+    if (!message.guild) return;
+	init(message);
+    if (!botCheck(message)) return;
     //Send a fancy embed with images and shit
 	var embed = new Discord.RichEmbed()
 		.setTitle("MSS Music Player")
