@@ -15,7 +15,6 @@ function Player(message) {
 	this.playlist = [];
 	this.current = {};
 	this.pid = null;
-	this.stream = new streamy.Writable();
 	this.connect = function() {
 		this.voicechannel
 			.join()
@@ -84,7 +83,7 @@ function Player(message) {
 			});
 
 			//The stream has ended, therefore it can go on to the next song
-			this.stream.on("close", () => {
+			ffmpeg.stdout.on("close", () => {
 				this.play();
 			});
 
