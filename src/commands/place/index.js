@@ -7,6 +7,8 @@ module.exports = function place(message) {
 	let input = message.content.replace (/\n/g, "").split(" ");
 	var user = encodeURI(input[2]);
 
+    message.reply("Your query has been sent to the database. Please wait for a response.");
+
 	request('http://moustacheminer.com/place/searchapi.php?username=' + user, function(error, response, body) {
 		if(error) {
 			message.reply("An error occured while retrieving the data: " + error);
