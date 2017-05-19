@@ -108,7 +108,6 @@ function Player(message) {
 
 	}
 	this.add = function(type, url, title, thumb) {
-		//Push a JSON string into the array
 		this.playlist.push({
 			type: type,
 			url: url,

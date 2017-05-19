@@ -1,5 +1,6 @@
 const Player = require("./player.js");
 const MSS = require('./../../functions/');
+const config = require("./../../config.json");
 
 const Players = [];
 
@@ -61,10 +62,35 @@ function list(message) {
 	}
 }
 
+function get(message) {
+    //Send a fancy embed with images and shit
+	var embed = new Discord.RichEmbed()
+		.setTitle("MSS Music Player")
+		.setAuthor("MSS", "http://moustacheminer.com/mss.png")
+		.setColor("#00FF00")
+		.setDescription("Now playing: " + Players[message.guild.id].current.title)
+		.setFooter("MSS-Discord, " + config.MSS.version, "")
+		.setTimestamp()
+		.setURL(Players[message.guild.id].current.url)
+		.setImage(Players[message.guild.id].current.thumb_url);
+
+	//Send that embed. Hurray.
+	message.channel.sendEmbed(embed, "", { disableEveryone: true });
+}
+
+function panel(message) {
+    if (!message.guild) return;
+	message.channel.sendMessage('**Music Control Panel**')
+	.then(function(message) {
+		message.react(String.fromCodePoint(10145));
+		message.react(String.fromCodePoint(8505));
+		message.react(String.fromCodePoint(128240));
+	});
+}
+
 function guildError(message) {
 	message.channel.send("You cannot run this command outside a guild!");
 }
-
 function vcCheck(message) {
 	if (Players[message.guild.id].voicechannel) {
 		return true;
@@ -73,7 +99,6 @@ function vcCheck(message) {
 		return false;
 	}
 }
-
 function botCheck(message) {
 	if (Players[message.guild.id].voicechannel && Players[message.guild.id].voicechannel.connection) {
 		return true;
@@ -82,7 +107,6 @@ function botCheck(message) {
 		return false;
 	}
 }
-
 function adminCheck(message) {
 	if(MSS.msg.isadmin(message)) {
 		return true;
