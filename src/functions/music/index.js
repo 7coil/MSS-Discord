@@ -1,7 +1,7 @@
 const Player = require("./player.js");
 const MSS = require('./../../functions/');
 const config = require("./../../config.json");
-const Discord = require("Discord.js");
+const Discord = require("discord.js");
 
 const Players = [];
 
