@@ -15,14 +15,17 @@ function Player(message) {
 	this.playlist = [];
 	this.current = {};
 	this.pid = null;
+	this.connection = null;
 	this.connect = function() {
 		console.log(`Message: Connecting to Voice Channel`);
 		this.voicechannel
 			.join()
-			.then((connection) => this.play(connection));
+			.then((connection) => {
+				this.connection = connection;
+				this.play();
+			});
 	}
-	this.play = function(connection) {
-
+	this.play = function() {
 		console.log(`Message: Checking playlist length`);
 		if(this.playlist.length === 0) return this.voicechannel.leave();
 
@@ -78,7 +81,7 @@ function Player(message) {
 
 			//Send FFMPEG's output to the connection
 			console.log(`Message: Piping FFMPEG to the connection`);
-			let dispatcher = connection.playStream(ffmpeg.stdout);
+			let dispatcher = this.connection.playStream(ffmpeg.stdout);
 
 			//Check for FFMPEG errors
 			ffmpeg.stderr.setEncoding('utf8');
