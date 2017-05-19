@@ -69,7 +69,11 @@ module.exports = function(message, client) {
 		output += "\nHowever, such a shape cannot be rolled for a negative number of times.";
 		sum = "Error";
 		result.push("Error");
-	} else if (rolls === 0 || sides === 0) {
+	} else if (rolls > 1000) {
+        output += "\nHowever, this was way too much to handle for MSS.";
+        sum = "Error";
+        result.push("Error");
+    } else if (rolls === 0 || sides === 0) {
 		sum = 0;
 		result.push(0);
 	} else {
