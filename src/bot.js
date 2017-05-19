@@ -8,6 +8,10 @@ const request = require('request');
 const fs = require("fs");
 var command = [];
 var reaction = [];
+var prefixes = [
+    "<@80351110224678912>",
+    "<@190519304972664832>"
+];
 
 //Login to Discord
 client.login(API.discord);
@@ -50,6 +54,8 @@ client.on("ready", function() {
 			MSS.system.dbotsupdate(client);
 		}, 1800000);
 	}
+
+    prefixes.push(`<@${client.user.id}>`);
 	
 });
 
@@ -64,11 +70,8 @@ client.on("message", function(message) {
 	//If it's a selfbot, check if the message is from itself
 	if (config.MSS.selfbot && !(message.author.id === client.user.id)) return;
 
-	//If the first input contains the mention, let it through
-	if (input[0].indexOf(client.user.id) === -1) return;
-	
-	//If the command exists, run the command
-	if (command[input[1]]) {
+	//If the command exists and a prefix matches, run the command
+	if (prefixes[input[0]] && command[input[1]]) {
 		command[input[1]](message);
 	}
 });

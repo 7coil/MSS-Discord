@@ -94,7 +94,7 @@ function Player(message) {
 
 			//The stream has ended, therefore it can go on to the next song
 			dispatcher.on("end", () => {
-				this.play()
+				this.play();
 			});
 			ffmpeg.on("close", () => {
 				this.pid = null;
