@@ -71,7 +71,7 @@ client.on("message", function(message) {
 	if (config.MSS.selfbot && !(message.author.id === client.user.id)) return;
 
 	//If the command exists and a prefix matches, run the command
-	if (prefixes[input[0]] && command[input[1]]) {
+	if (prefixes.includes(input[0]) && command[input[1]]) {
 		command[input[1]](message);
 	}
 });
