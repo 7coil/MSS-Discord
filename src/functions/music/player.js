@@ -86,7 +86,7 @@ function Player(message) {
 			//The stream has ended, therefore it can go on to the next song
 			this.stream.on("close", () => {
 				this.play();
-			}
+			});
 
 		} catch(e) {
 			this.channel.send(`${e.message} - Skipping...`);
