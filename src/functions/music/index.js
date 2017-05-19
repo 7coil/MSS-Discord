@@ -13,7 +13,7 @@ function init(message) {
 	console.log(typeof Players[message.guild.id]);
 	if(typeof Players[message.guild.id] === 'undefined') {
 		Players[message.guild.id] = new Player(message);
-		Players[message.guild.id].add("local", "null.mp3", "Null", "https://imgs.xkcd.com/comics/pointers.png");
+		Players[message.guild.id].add("local", "./null.mp3", "Null", "https://imgs.xkcd.com/comics/pointers.png");
 	}
 }
 
