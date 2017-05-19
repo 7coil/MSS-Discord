@@ -56,6 +56,7 @@ client.on("ready", function() {
 	}
 
     prefixes.push(`<@${client.user.id}>`);
+    console.dir(prefixes);
 	
 });
 
