@@ -26,7 +26,12 @@ function Player(message) {
 	this.play = function(connection) {
 
 		console.log(`Message: Checking playlist length`);
-		if(this.playlist.length === 0) return this.voicechannel.leave();
+		if(this.playlist.length === 0) {
+			setTimeout(() => {
+				this.voicechannel.leave();
+			}, 5000);
+			return
+		}
 
 		console.log(`Message: Shifting playlist`);
 		this.current = this.playlist.shift();
