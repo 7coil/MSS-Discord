@@ -19,7 +19,9 @@ function Player(message) {
 		console.log(`Message: Connecting to Voice Channel`);
 		this.voicechannel
 			.join()
-			.then(connection => this.play);
+			.then((connection) => {
+				this.play(connection);
+			});
 	}
 	this.play = function(connection) {
 
