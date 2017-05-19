@@ -16,17 +16,21 @@ function Player(message) {
 	this.current = {};
 	this.pid = null;
 	this.connect = function() {
+		console.log(`Message: Connecting to Voice Channel`);
 		this.voicechannel
 			.join()
 			.then(connection => this.play);
 	}
 	this.play = function(connection) {
 
+		console.log(`Message: Checking playlist length`);
 		if(this.playlist.length === 0) return this.voicechannel.leave();
 
+		console.log(`Message: Shifting playlist`);
 		this.current = this.playlist.shift();
 
 		//Make an ffmpeg stream
+		console.log(`Message: Making FFMPEG stream`);
 		let ffmpeg = spawn('ffmpeg', [
 			'-i', 'pipe:0',
 			'-f', 'wav',
@@ -38,6 +42,7 @@ function Player(message) {
 
 		//Try it! If it fails, it skips it.
 		try {
+			console.log(`Message: Playing from ${this.current.type}`);
 			//Send the correct input to the ffmpeg stream
 			switch (this.current.type) {
 
@@ -66,11 +71,13 @@ function Player(message) {
 
 					break;
 				default:
+					console.log(`Failure: Incorrect audio type`);
 					this.channel.send(`${this.current.type} is not a valid audio provider.`);
 					this.play();
 			}
 
 			//Send FFMPEG's output to the connection
+			console.log(`Message: Piping FFMPEG to the connection`);
 			connection.playStream(ffmpeg.stdout);
 
 			//Check for FFMPEG errors
@@ -78,7 +85,7 @@ function Player(message) {
 			ffmpeg.stderr.on('data', function(data) {
 				if(/^execvp\(\)/.test(data)) {
 					console.log('failed to start ' + argv.ffmpeg);
-					throw "FFMPEG failed!";
+					console.log(`Failure: FFMPEG`);
 				}
 			});
 
@@ -88,6 +95,7 @@ function Player(message) {
 			});
 
 		} catch(e) {
+			console.log(`Failure: ${e.message}`);
 			this.channel.send(`${e.message} - Skipping...`);
 			this.play();
 		}
