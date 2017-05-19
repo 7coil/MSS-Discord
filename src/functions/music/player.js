@@ -116,6 +116,7 @@ function Player(message) {
 		this.skip();
 		this.current = {};
 		this.playlist = [];
+		this.voicechannel.leave();
 	}
 }
 
