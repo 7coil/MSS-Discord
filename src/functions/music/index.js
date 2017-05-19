@@ -98,7 +98,7 @@ function guildError(message) {
 	message.channel.send("You cannot run this command outside a guild!");
 }
 function vcCheck(message) {
-	if (message.voicechannel) {
+	if (message.member.voiceChannel) {
 		return true;
 	} else {
 		message.channel.send("You are not in a voice channel");
