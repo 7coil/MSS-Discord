@@ -24,6 +24,7 @@ function add(message, type, url, title, thumb) {
 	if (!message.guild) return guildError(message);
 	init(message);
 	if (!vcCheck(message)) return;
+    Players[message.guild.id].message = message;
 	Players[message.guild.id].add(type, url, title, thumb);
 }
 
