@@ -19,24 +19,9 @@ function Player(message) {
 	this.connect = function() {
 		this.voicechannel
 			.join()
-			.then(connection => {
-				var looper = function() {
-
-					//Get a new song playing on the stream
-					that.play();
-
-					//Start playing that stream.
-					const dispatcher = connection.playStream(that.stream);
-
-					//When the stream ends, restart the "looper", which gets a new song on the stream
-					dispatcher.on('end', () => {
-						looper();
-					});
-				}
-				looper();
-			});
+			.then(connection => this.play);
 	}
-	this.play = function() {
+	this.play = function(connection) {
 
 		if(this.playlist.length === 0) return this.voicechannel.leave();
 
@@ -49,6 +34,7 @@ function Player(message) {
 			'pipe:1'
 		]);
 
+		//Set the PID of this.
 		this.pid = ffmpeg.pid;
 
 		//Try it! If it fails, it skips it.
@@ -85,8 +71,10 @@ function Player(message) {
 					this.play();
 			}
 
-			this.stream = ffmpeg.stdout;
+			//Send FFMPEG's output to the connection
+			connection.playStream(ffmpeg.stdout);
 
+			//Check for FFMPEG errors
 			ffmpeg.stderr.setEncoding('utf8');
 			ffmpeg.stderr.on('data', function(data) {
 				if(/^execvp\(\)/.test(data)) {
@@ -95,9 +83,11 @@ function Player(message) {
 				}
 			});
 
+			//The stream has ended, therefore it can go on to the next song
 			this.stream.on("close", () => {
 				this.play();
-			});
+			}
+
 		} catch(e) {
 			this.channel.send(`${e.message} - Skipping...`);
 			this.play();
