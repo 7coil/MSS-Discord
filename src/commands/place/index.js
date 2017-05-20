@@ -65,7 +65,7 @@ Total      | ` + data.info.length + `\`\`\``;
 				.setURL("http://moustacheminer.com/place/?username=" + user)
 				.addField("Powered by /r/PlaceDevs", "Please go to this URL to view the rest of the log. http://moustacheminer.com/place/?username=" + user);
 
-			message.channel.sendEmbed(embed, "", { disableEveryone: true });
+			message.channel.send("", { embed: embed, disableEveryone: true });
 		}
 	});
 }

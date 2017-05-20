@@ -31,7 +31,7 @@ module.exports = function(message) {
 			}
 		}
 
-		message.channel.sendEmbed(embed, "", { disableEveryone: true });
+		message.channel.send("", { embed: embed, disableEveryone: true });
 
 	} else {
 		MSS.msg.react(message, false, "x");

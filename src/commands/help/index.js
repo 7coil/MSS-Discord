@@ -10,5 +10,5 @@ module.exports = function help(message) {
 		.addField("Links", "[Discord Server](http://moustacheminer.com/r/invite-server)\n[Invite Bot](http://moustacheminer.com/r/invite-bot)\n[GitHub](http://moustacheminer.com/r/github-bot)")
 		.addField("Licence", "This software is released under the MIT Licence.");
 
-	message.channel.sendEmbed(embed, "", { disableEveryone: true });
+	message.channel.send("", { embed: embed, disableEveryone: true });
 }

@@ -6,14 +6,14 @@ module.exports = function screenshot(message) {
 
 	if(message.author.id === config.MSS.sysadmin) {
 		if(!input[0]) {
-			message.channel.sendMessage("```\nNo input detected\n```");
+			message.channel.send("No input detected");
 			return false;
 		}
 
 		let command = input.splice(2).join(" ");
 		let output = "```\n";
 
-		exec(command, {cwd: "/home/mss/"}, (error, stdout, stderr) => {
+		exec(command, (error, stdout, stderr) => {
 			if(stdout){
 				output += stdout.replace(/`/g, "'") + "\n";
 			}
@@ -24,7 +24,7 @@ module.exports = function screenshot(message) {
 
 			output += "```";
 
-			message.channel.sendMessage(output);
+			message.channel.send(output);
 		});
 	}
 }

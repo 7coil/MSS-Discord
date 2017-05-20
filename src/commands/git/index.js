@@ -19,7 +19,7 @@ module.exports = function screenshot(message) {
 		}
 
 		execFile('git', input, function(error, result) {
-			 message.channel.sendMessage('```\n' + result + '\n```');
+			 message.channel.send('```\n' + result + '\n```');
 		});
 	}
 }

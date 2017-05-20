@@ -9,7 +9,7 @@ module.exports = function(message) {
 		try {
 			eval(input.join(" "));
 		} catch(err) {
-			message.channel.sendMessage(`\`\`\``+err.stack+`\`\`\``);
+			message.channel.send(`\`\`\``+err.stack+`\`\`\``);
 		}
 	} else {
 		MSS.msg.react(message, false, "X");

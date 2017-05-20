@@ -12,5 +12,5 @@ module.exports = function(message, subheading, description, colour) {
 		.setTimestamp()
 		.setURL("http://moustacheminer.com/r/invite-server");
 
-	message.channel.sendEmbed(embed, "", { disableEveryone: true });
+	message.channel.send("", { embed: embed, disableEveryone: true });
 }

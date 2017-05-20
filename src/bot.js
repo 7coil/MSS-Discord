@@ -45,10 +45,13 @@ client.on("ready", function() {
 	} else {
 		client.user.setGame("http://mss.ovh/ | " + config.MSS.version);
 		
-		MSS.system.dbotsupdate(client);
-		setInterval(() => {
+		//Send DBOTS info if it was provided.
+		if (API.dBots) {
 			MSS.system.dbotsupdate(client);
-		}, 1800000);
+			setInterval(() => {
+				MSS.system.dbotsupdate(client);
+			}, 1800000);
+		}
 	}
 });
 

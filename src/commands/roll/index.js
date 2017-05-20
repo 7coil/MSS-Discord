@@ -94,7 +94,7 @@ module.exports = function(message, client) {
 		embed.addField("Error", "The output is too long to display");
 	}
 
-	message.channel.sendEmbed(embed, "", { disableEveryone: true })
+	message.channel.send("", { embed: embed, disableEveryone: true })
 		.catch(function(e) {
 			console.log(e);
 		});

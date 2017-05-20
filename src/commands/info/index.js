@@ -32,5 +32,5 @@ module.exports = function(message) {
 			.addField("Shard/Guild Ratio", (message.client.guilds.size / config.MSS.shards).toFixed(2), true);
 	}
 
-	message.channel.sendEmbed(embed, "", { disableEveryone: true });
+	message.channel.send("", { embed: embed, disableEveryone: true });
 }

@@ -82,12 +82,12 @@ function get(message) {
 		.setImage(Players[message.guild.id].current.thumb_url);
 
 	//Send that embed. Hurray.
-	message.channel.sendEmbed(embed, "", { disableEveryone: true });
+	message.channel.send("", { embed: embed, disableEveryone: true });
 }
 
 function panel(message) {
     if (!message.guild) return;
-	message.channel.sendMessage('**Music Control Panel**')
+	message.channel.send('**Music Control Panel**')
 	.then(function(message) {
 		message.react(String.fromCodePoint(10145));
 		message.react(String.fromCodePoint(8505));

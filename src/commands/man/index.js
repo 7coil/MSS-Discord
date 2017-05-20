@@ -45,6 +45,6 @@ module.exports = function manpages(message) {
 		embed.addField(input[2] + " " + element.var, element.description);
 	});
 
-	message.channel.sendEmbed(embed, input[2], { disableEveryone: true });
+	message.channel.send(input[2], { embed: embed, disableEveryone: true });
 }
 
