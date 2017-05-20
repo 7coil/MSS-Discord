@@ -110,7 +110,7 @@ function botCheck(message) {
 	if (Players[message.guild.id].voicechannel && Players[message.guild.id].voicechannel.connection) {
 		return true;
 	} else {
-		Players[message.guild.id].channel.send("There is no bot in your channel");
+		message.channel.send("There is no bot in your channel");
 		return false;
 	}
 }
@@ -118,7 +118,7 @@ function adminCheck(message) {
 	if(MSS.msg.isadmin(message)) {
 		return true;
 	} else {
-		Players[message.guild.id].channel.send("You are not an Administrator!");
+		message.channel.send("You are not an Administrator!");
 		return false;
 	}
 }
