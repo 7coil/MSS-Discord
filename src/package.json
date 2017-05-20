@@ -1,6 +1,6 @@
 {
   "name": "mss-discord",
-  "version": "2017.5.17",
+  "version": "2017.5.20",
   "description": "Moustacheminer Server Services, but for Discord.",
   "main": "index.js",
   "scripts": {
@@ -21,7 +21,6 @@
   "homepage": "https://moustacheminer.com/",
   "dependencies": {
     "discord.js": "^11.1.0",
-    "fluent-ffmpeg": "^2.1.2",
     "opusscript": "0.0.3",
     "request": "^2.81.0",
     "stream": "0.0.2",
