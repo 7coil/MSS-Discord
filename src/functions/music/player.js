@@ -1,4 +1,3 @@
-const yt = require('ytdl-core');
 const streamy = require("stream");
 const fs = require('fs');
 const request = require("request");
@@ -49,8 +48,11 @@ function Player(message) {
 
 				//Stream from YouTube
 				case "youtube":
-					yt(this.current.url, {audioonly: true})
-						.pipe(ffmpeg.stdin);
+					let youtube_dl = spawn('youtube-dl', [
+						"-o", "-",
+						this.current.url
+					]);
+					youtube_dl.stdout.pipe(ffmpeg.stdin);
 					break;
 
 				//Stream from a local file
@@ -69,7 +71,6 @@ function Player(message) {
 							this.play();
 						})
 						.pipe(ffmpeg.stdin);
-
 					break;
 				default:
 					console.log(`Failure: Incorrect audio type`);
