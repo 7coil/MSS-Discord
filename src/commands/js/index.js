@@ -11,15 +11,24 @@ module.exports = function(message) {
 
 		var embed = new Discord.RichEmbed()
 			.addField("Input", "```js\n" + command + "\n```")
+
 		try {
 			let output = eval('(' + command + ')');
+			if(output.length > 1900) output = output.substring(0, 1900) + "...";
 			embed.addField("Output", "```\n" + output + "\n```")
 				.setColor("#00FF00");
 			MSS.msg.react(message, true)
 		} catch(err) {
-			embed.addField("Error", "```\n" + err.stack + "\n```")
-				.setColor("#FF0000");
-			MSS.msg.react(message, false, "bomb");
+			if(output.length > 1900) {
+				embed.addField("Error", "```\nThe command ended so spectacularly, that the stack was too long to display. Consult the console for more details.\n```")
+					.setColor("#FF0000");
+				console.log(err.stack);
+				MSS.msg.react(message, false, "bomb");
+			} else {
+				embed.addField("Error", "```\n" + err.stack + "\n```")
+					.setColor("#FF0000");
+				MSS.msg.react(message, false, "bomb");
+			}
 		}
 
 		message.channel.sendEmbed(embed, "", { disableEveryone: true });
