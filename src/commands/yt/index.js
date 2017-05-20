@@ -8,8 +8,6 @@ searchYTClient.setKey(API.youtube);
 
 module.exports = function yt(message) {
 	let input = message.content.replace (/\n/g, "").split(" ");
-	//Get the voice channel that it's going to play to.
-	let voiceChannel = message.member.voiceChannel;
 
 	input.shift();
 	input.shift();
