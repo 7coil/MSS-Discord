@@ -14,12 +14,12 @@ module.exports = function(message) {
 
 		try {
 			let output = eval('(' + command + ')');
-			if(output.length > 1900) output = output.substring(0, 1900) + "...";
+			if(output.length > 1000) output = output.substring(0, 1000) + "...";
 			embed.addField("Output", "```\n" + output + "\n```")
 				.setColor("#00FF00");
 			MSS.msg.react(message, true)
 		} catch(err) {
-			if(err.stack.length > 1900) {
+			if(err.stack.length > 1000) {
 				embed.addField("Error", "```\nThe command ended so spectacularly, that the stack was too long to display. Consult the console for more details.\n```")
 					.setColor("#FF0000");
 				console.log(err.stack);
