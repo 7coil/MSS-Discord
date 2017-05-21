@@ -107,10 +107,10 @@ function vcCheck(message) {
 	}
 }
 function botCheck(message) {
-	if (message.member.voicechannel && message.member.voicechannel.connection) {
+	if (Players[message.guild.id].connection) {
 		return true;
 	} else {
-		message.channel.send("There is no bot in your channel");
+		message.channel.send("There is no bot in the guild");
 		return false;
 	}
 }
