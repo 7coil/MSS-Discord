@@ -126,7 +126,7 @@ function Player(message) {
 	}
 	this.skip = function() {
 		if(this.pid.ffmpeg) process.kill(this.pid.ffmpeg, "SIGINT");
-		if(this.pid.youtube_dl) process.kill(this.pid.youtube_dl, "SIGINT");
+		if(this.pid.youtube_dl) process.kill(this.pid.youtube_dl);
 		this.pid = {};
 	}
 	this.stop = function() {
