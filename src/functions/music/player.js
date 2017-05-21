@@ -55,7 +55,7 @@ function Player(message) {
 					this.pid.youtube_dl = youtube_dl.pid;
 
 					youtube_dl.on("close", () => {
-						delete this.pid.youtube_dl;
+						this.pid.youtube_dl = null;
 					});
 					youtube_dl.stdout.pipe(ffmpeg.stdin);
 					break;
@@ -101,7 +101,7 @@ function Player(message) {
 				this.play();
 			});
 			ffmpeg.on("close", () => {
-				delete this.pid.ffmpeg;
+				this.pid.ffmpeg = null;
 			});
 
 		} catch(e) {
