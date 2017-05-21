@@ -52,6 +52,14 @@ client.on("ready", function() {
 				MSS.system.dbotsupdate(client);
 			}, 1800000);
 		}
+
+		//Send FAKEDBOTS info if it was provided.
+		if (API.fakedBots) {
+			MSS.system.fakedbotsupdate(client);
+			setInterval(() => {
+				MSS.system.fakedbotsupdate(client);
+			}, 1800000);
+		}
 	}
 });
 
