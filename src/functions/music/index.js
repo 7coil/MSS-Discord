@@ -107,7 +107,7 @@ function vcCheck(message) {
 	}
 }
 function botCheck(message) {
-	if (Players[message.guild.id].voicechannel && Players[message.guild.id].voicechannel.connection) {
+	if (message.member.voicechannel && message.member.voicechannel.connection) {
 		return true;
 	} else {
 		message.channel.send("There is no bot in your channel");
