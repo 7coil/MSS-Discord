@@ -11,7 +11,7 @@ function Player(message) {
 	this.message = message;
 	this.playlist = [];
 	this.current = {};
-	this.pid = null;
+	this.pid = [];
 	this.connection = null;
 	this.connect = function() {
 		console.log(`Message: Connecting to Voice Channel`);
@@ -38,7 +38,7 @@ function Player(message) {
 		]);
 
 		//Set the PID of this.
-		this.pid = ffmpeg.pid;
+		this.pid["ffmpeg"] = ffmpeg.pid;
 
 		//Try it! If it fails, it skips it.
 		try {
@@ -52,6 +52,11 @@ function Player(message) {
 						"-o", "-",
 						this.current.url
 					]);
+					this.pid["youtube-dl"] = youtube_dl.pid;
+
+					youtube_dl.on("close", () => {
+						delete this.pid["youtube-dl"];
+					});
 					youtube_dl.stdout.pipe(ffmpeg.stdin);
 					break;
 
@@ -96,7 +101,7 @@ function Player(message) {
 				this.play();
 			});
 			ffmpeg.on("close", () => {
-				this.pid = null;
+				delete this.pid["ffmpeg"];
 			});
 
 		} catch(e) {
@@ -120,8 +125,10 @@ function Player(message) {
 		}
 	}
 	this.skip = function() {
-		if (this.pid) process.kill(this.pid, "SIGINT");
-		this.pid = null;
+		this.pid.forEach((elem)=>{
+			process.kill(elem, "SIGINT");
+		})
+		this.pid = [];
 	}
 	this.stop = function() {
 		this.skip();
