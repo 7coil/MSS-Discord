@@ -60,9 +60,9 @@ function list(message) {
 			}
 		});
 		string += "```"
-		Players[message.guild.id].channel.send(string)
+		message.channel.send(string)
 	} else {
-		Players[message.guild.id].channel.send("The Playlist is empty")
+		message.channel.send("The Playlist is empty")
 	}
 }
 
