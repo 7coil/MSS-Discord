@@ -20,6 +20,7 @@ Ubuntu Linux is officially supported from 14.04, your milage may vary with other
 * python (2.6, 2.7 or 3.2+, required for youtube-dl)
 * youtube-dl
 * cowsay
+* FFMPEG
 * A working internet connection
 * API keys for
 	* Discord Bot
@@ -75,6 +76,7 @@ Microsoft Windows is NOT supported under any circumstances. Please do not attemp
 * node.js
 * npm (Should come with node.js)
 * youtube-dl (python comes with the exe)
+* FFMPEG
 * A working sattelite internet connection
 * API keys for
 	* Discord Bot
@@ -105,9 +107,9 @@ Copy and configure the `api.json` and `config.json` files
 ```bash
 cp api.json.rename api.json
 
-# If you are professional bubbie hacker, you can replace nano for your text editor of choice
-nano api.json
-nano config.json
+# If you are professional bubbie hacker, you can replace notepad for your text editor of choice
+notepad api.json
+notepad config.json
 
 # You can leave the dBots inside api.json blank.
 ```
@@ -120,8 +122,9 @@ Because you are a Microsoft scrub, you will need to fix things for Windows (you 
 
 Delete cowsay (within `src/commands/cowsay`)
 Add youtube-dl to PATH
+Add FFMPEG to PATH
 
-#### Step 9
+#### Step 4
 
 Run the program
 
