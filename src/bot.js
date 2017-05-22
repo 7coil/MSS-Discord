@@ -74,6 +74,7 @@ client.on("message", function(message) {
 	//If it's a selfbot, check if the message is from itself
 	if (config.MSS.selfbot && !(message.author.id === client.user.id)) return;
 
+	//Check if it has the correct prefix
     if (!input[0].includes(client.user.id)) return;
 
 	//If the command exists and a prefix matches, run the command
