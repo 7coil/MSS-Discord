@@ -55,6 +55,7 @@ function Player(message) {
 					this.pid.youtube_dl = youtube_dl.pid;
 
 					youtube_dl.on("close", () => {
+						console.log("youtube_dl finished");
 						this.pid.youtube_dl = null;
 					});
 					youtube_dl.stdout.pipe(ffmpeg.stdin);
@@ -101,6 +102,7 @@ function Player(message) {
 				this.play();
 			});
 			ffmpeg.on("close", () => {
+				console.log("FFMPEG finished");
 				this.pid.ffmpeg = null;
 			});
 
