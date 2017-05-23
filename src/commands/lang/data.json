@@ -2,11 +2,11 @@
 	"languages": {
 		"en": {
 			"en": "English (UK)",
-			"pi": "Pirate",
+			"pi": "Pirate"
 		},
 		"pi": {
 			"en": "England",
-			"pi": "Home",
+			"pi": "Home"
 		},
 		"jp": {
 			"en": "英語",
