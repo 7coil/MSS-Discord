@@ -1,10 +1,10 @@
 {
-	languages: {
-		en: {
-			name: "English UK"
+	"languages": {
+		"en": {
+			"name": "English UK"
 		},
-		jp: {
-			name: "Japanese"
+		"jp": {
+			"name": "Japanese"
 		}
 	}
 }
