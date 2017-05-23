@@ -110,7 +110,12 @@ client.on("messageReactionAdd", function(messageReaction, user) {
 	console.log(input);
 
 	if (reaction[input]) {
-		reaction[input](messageReaction, user);
+		rethonk.table("users").get(user.id).run(client.rethonk, (err, result) => {
+			if (err) throw err;
+			messageReaction.message.data = result || {"lang": "en"};
+		}).then(()=> {
+			reaction[input](messageReaction, user);
+		})
 	}
 });
 
