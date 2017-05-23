@@ -21,7 +21,7 @@
 		"message_choose_lang": "言語を選択する"
 	},
 	"pi": {
-		"success_found": "Welcome abort, shipmate!",
+		"success_found": "Welcome abord, shipmate!",
 		"err_not_found": "Yer language went overboard",
 		"message_choose_lang": "Select a island to pillage"
 	}

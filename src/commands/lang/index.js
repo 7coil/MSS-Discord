@@ -20,6 +20,8 @@ module.exports = function (message) {
 		return message.reply(print);
 	}
 
+	//Get only the first 2 characters.
+	input[2] = input[2].substr(0,2)
 	console.dir(input);
 
 	if(!data.languages[message.data.lang]) return message.reply(meta[message.data.lang] && meta[message.data.lang].err_not_found || "err_not_found");
@@ -32,7 +34,7 @@ module.exports = function (message) {
 
 	r.table("users").insert({
 		id: message.member.id,
-		lang: input[2]
+		lang: input[2].substr(0,2)
 	},{
 		conflict: "replace"
 	}).run(message.client.rethonk);
