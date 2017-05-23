@@ -12,6 +12,7 @@ module.exports = function (message) {
 		let langs = [];
 		print += "\n```\n"
 		Object.keys(data.languages).forEach(function(item) {
+			console.log(item);
 			langs.push(data.languages[message.data.lang][item]);
 		});
 
