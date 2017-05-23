@@ -133,3 +133,12 @@ node index.js
 ```
 
 ## Contribution
+Wew lad, you want to help?
+
+Send a pull request with code that meets the following:
+
+1. Uses tabs
+2. Hanging brace
+3. Does not use spaces
+
+If you want to add localisation to MSS, please contact 7coil#3175 for more details on how to do so.
