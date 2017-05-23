@@ -8,22 +8,22 @@ module.exports = function (message) {
 
 	//If there is no input, send a list of languages
 	if (!input[2]) {
-		let print = typeof meta[message.data.lang] != "undefined" && meta[message.data.lang].message_choose_lang || "message_choose_lang";
+		let print = meta[message.data.lang] && meta[message.data.lang].message_choose_lang || "message_choose_lang";
 		let langs = [];
 		print += "\n```\n"
-		Object.keys(data.languages).forEach(function(item) {
-			console.log(item);
+		Object.keys(data.languages).forEach(function(item, iterator) {
+			console.log(`${iterator} | ${item}`);
 			langs.push(data.languages[message.data.lang][item]);
 		});
 
-		print += langs.join(`, `);
+		print += langs.join("\n");
 		print += "```";
 		return message.reply(print);
 	}
 
 	console.dir(input);
 
-	if(!data.languages[message.data.lang]) return message.reply(typeof meta[message.data.lang] != "undefined" && meta[message.data.lang].err_not_found || "err_not_found");
+	if(!data.languages[message.data.lang]) return message.reply(meta[message.data.lang] && meta[message.data.lang].err_not_found || "err_not_found");
 
 	//ONLY EXCEPTION FOR LANGUAGE
 	//Gets the language code from the message,
