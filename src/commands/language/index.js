@@ -1,5 +1,5 @@
 const r = require("rethinkdb");
-const lang = [
+const language = [
 	"en",
 	"pi"
 ];
@@ -7,7 +7,8 @@ const lang = [
 module.exports = function (message) {
 	//Split message into keywords
 	let input = message.content.replace(/\n/g, "").split(" ");
-	if (lang.indexOf(input[1]) == -1) return message.reply("Invalid language!");
+
+	if(!language[input[2]]) return message.reply("Invalid language!");
 
 	console.log(`Setting language of ${message.author.tag} to ${input[2]}`);
 }
