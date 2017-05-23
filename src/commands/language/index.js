@@ -12,8 +12,9 @@ module.exports = function (message) {
 	message.reply(meta[input[2]].set);
 
 	r.table("users").insert({
-			id: message.member.id,
-			lang: input[2]
-		}
-	).run(message.client.rethonk);
+		id: message.member.id,
+		lang: input[2]
+	},{
+		conflict: "replace"
+	}).run(message.client.rethonk);
 }
