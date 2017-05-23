@@ -7,9 +7,9 @@ module.exports = function (message) {
 	let input = message.content.replace(/\n/g, "").split(" ");
 	console.dir(input);
 
-	if(!data.languages[input[2]]) return message.reply(meta[message.data.lang].err);
+	if(!data.languages[input[2]]) return message.reply(meta[message.data.lang].err || "ERR");
 
-	message.reply(meta[input[2]].set);
+	message.reply(meta[input[2]].set || "SET");
 
 	r.table("users").insert({
 		id: message.member.id,
