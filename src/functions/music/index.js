@@ -46,7 +46,7 @@ function skip(message) {
 }
 
 function list(message) {
-	if (!message.guild) return;
+	if (!guildCheck(message)) return;
 	init(message);
 	if (!botCheck(message)) return;
 	if(Players[message.guild.id].playlist.length > 0) {
@@ -63,20 +63,19 @@ function list(message) {
 		string += "```"
 		message.channel.send(string)
 	} else {
-		message.channel.send("The Playlist is empty")
+		message.channel.send(meta[message.data.lang] && meta[message.data.lang].playlist_empty || "playlist_empty")
 	}
 }
 
 function get(message) {
-    if (!message.guild) return;
+    if (!guildCheck(message)) return;
 	init(message);
     if (!botCheck(message)) return;
     //Send a fancy embed with images and shit
 	var embed = new Discord.RichEmbed()
-		.setTitle("MSS Music Player")
-		.setAuthor("MSS", "http://moustacheminer.com/mss.png")
+		.setTitle(meta[message.data.lang] && meta[message.data.lang].music_player || "music_player")
 		.setColor("#00FF00")
-		.setDescription("Now playing: " + Players[message.guild.id].current.title)
+		.setDescription(`${meta[message.data.lang] && meta[message.data.lang].now_playing || "now_playing"}: ${Players[message.guild.id].current.title}`)
 		.setFooter("MSS-Discord, " + config.MSS.version, "")
 		.setTimestamp()
 		.setURL(Players[message.guild.id].current.url)
@@ -87,8 +86,8 @@ function get(message) {
 }
 
 function panel(message) {
-    if (!message.guild) return;
-	message.channel.send('**Music Control Panel**')
+    if (!guildCheck(message)) return;
+	message.channel.send(`**${meta[message.data.lang] && meta[message.data.lang].music_player || "music_player"}**`)
 	.then(function(message) {
 		message.react(String.fromCodePoint(10145));
 		message.react(String.fromCodePoint(8505));
@@ -96,14 +95,20 @@ function panel(message) {
 	});
 }
 
-function guildError(message) {
-	message.channel.send("You cannot run this command outside a guild!");
+function guildCheck(message) {
+	if(message.guild) {
+		return true;
+	} else {
+		message.channel.send(meta[message.data.lang] && meta[message.data.lang].guild_error || "guild_error");
+		return false;
+	}
 }
+
 function vcCheck(message) {
 	if (message.member.voiceChannel) {
 		return true;
 	} else {
-		message.channel.send("You are not in a voice channel");
+		message.channel.send(meta[message.data.lang] && meta[message.data.lang].voice_error || "voice_error");
 		return false;
 	}
 }
@@ -111,7 +116,7 @@ function botCheck(message) {
 	if (Players[message.guild.id].connection) {
 		return true;
 	} else {
-		message.channel.send("There is no bot in the guild");
+		message.channel.send(meta[message.data.lang] && meta[message.data.lang].bot_error || "bot_error");
 		return false;
 	}
 }
@@ -119,7 +124,7 @@ function adminCheck(message) {
 	if(MSS.msg.isadmin(message)) {
 		return true;
 	} else {
-		message.channel.send("You are not an Administrator!");
+		message.channel.send(meta[message.data.lang] && meta[message.data.lang].admin_error || "admin_error");
 		return false;
 	}
 }

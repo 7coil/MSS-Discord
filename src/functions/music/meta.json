@@ -1,17 +1,20 @@
 {
 	"en": {
-		"success_found": "Set language to English UK",
-		"err_not_found": "Invalid language supplied.",
-		"message_choose_lang": "Choose a language:"
-	},
-	"jp": {
-		"success_found": "言語を日本語に設定",
-		"err_not_found": "無効な言語",
-		"message_choose_lang": "言語を選択する"
+		"playlist_empty": "The playlist is empty",
+		"music_player": "Music Player",
+		"now_playing": "Now playing",
+		"guild_error": "You are not in a guild!",
+		"voice_error": "You are not in a voice channel!",
+		"bot_error": "There is no bot in the channel!",
+		"admin_error": "You are not an administrator!"
 	},
 	"pi": {
-		"success_found": "Welcome abort, shipmate!",
-		"err_not_found": "Yer language went overboard",
-		"message_choose_lang": "Select a island to pillage"
+		"playlist_empty": "Yer treasure comes up empty!",
+		"music_player": "Yer Jukebox",
+		"now_playing": "Now sailing",
+		"guild_error": "Yer not in a guild!",
+		"voice_error": "Yer not in a channel!",
+		"bot_error": "Yer bot went skiving!",
+		"admin_error": "Yer not the captain!"
 	}
 }
