@@ -120,11 +120,11 @@ Because you are a Microsoft scrub, you will need to fix things for Windows (you 
 
 *this list is non-exauaustive*
 
-Delete cowsay (within `src/commands/cowsay`)
-Add youtube-dl to PATH
-Add FFMPEG to PATH
+- Delete cowsay (within `src/commands/cowsay`)
+- Add youtube-dl to PATH
+- Add FFMPEG to PATH
 
-#### Step 4
+#### Step 93
 
 Run the program
 
