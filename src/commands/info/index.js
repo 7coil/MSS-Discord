@@ -10,7 +10,6 @@ module.exports = function(message) {
 	var guildcount = message.client.guilds.size;
 	var hardwareinfo = "[CPU] (" + os.arch() + ") " + os.cpus()[0]["model"] + " (" + os.cpus()[0]["speed"] + "MHz)";
 	var softwareinfo = `[${os.type()}] ${os.release()}\n[${meta[message.data.lang] && meta[message.data.lang].hostname || "hostname"}] ${os.hostname()}`;
-	var softwareinfo = "[" + os.type() + "] " + os.release() + "\n[Hostname] " + os.hostname();
 
 	var embed = new Discord.RichEmbed()
 		.setFooter("MSS-Discord, " + config.MSS.version, "")
