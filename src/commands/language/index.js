@@ -6,7 +6,7 @@ const lang = [
 
 module.exports = function (message) {
 	//Split message into keywords
-	let input = message.content.replace(/\n/g, "").toLowerCase().split(" ");
+	let input = message.content.replace(/\n/g, "").split(" ");
 
 	console.log(`Lang`);
 
