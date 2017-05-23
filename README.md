@@ -51,11 +51,11 @@ Copy and configure the `api.json` and `config.json` files
 ```bash
 cp api.json.rename api.json
 
-# If you are professional bubbie hacker, you can replace nano for your text editor of choice
+##### If you are professional bubbie hacker, you can replace nano for your text editor of choice
 nano api.json
 nano config.json
 
-# You can leave the dBots inside api.json blank.
+##### You can leave the dBots inside api.json blank.
 ```
 
 #### Step 3
@@ -105,13 +105,13 @@ npm i
 Copy and configure the `api.json` and `config.json` files
 
 ```bash
-cp api.json.rename api.json
+copy api.json.rename api.json
 
-# If you are professional bubbie hacker, you can replace notepad for your text editor of choice
+##### If you are professional bubbie hacker, you can replace notepad for your text editor of choice
 notepad api.json
 notepad config.json
 
-# You can leave the dBots inside api.json blank.
+##### You can leave the dBots inside api.json blank.
 ```
 
 #### Step 3
@@ -131,3 +131,5 @@ Run the program
 ```bash
 node index.js
 ```
+
+## Contribution
