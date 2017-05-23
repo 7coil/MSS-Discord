@@ -4,9 +4,11 @@ const lang = [
 	"pi"
 ];
 
-module.exports = function list(message) {
+module.exports = function (message) {
 	//Split message into keywords
 	let input = message.content.replace(/\n/g, "").toLowerCase().split(" ");
+
+	console.log(`Lang`);
 
 	//Check if the input is a valid language
 	if(!lang[input[2]]) return false;
