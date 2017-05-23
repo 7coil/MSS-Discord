@@ -6,10 +6,7 @@ const client = new Discord.Client();
 const MSS = require("./functions/");
 const request = require('request');
 const fs = require("fs");
-const rethonk = require('rethinkdbdash')({
-  pool: false,
-  cursor: true
-});
+const rethonk = require('rethinkdb');
 var command = [];
 var reaction = [];
 
