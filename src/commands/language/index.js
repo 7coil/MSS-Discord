@@ -11,8 +11,9 @@ module.exports = function (message) {
 
 	message.reply(meta[input[2]].set);
 
-	r.table("users").insert(
-		{"id": message.member.id, "lang": input[2]},
-		conflict = "replace"
+	r.table("users").insert({
+			id: message.member.id,
+			lang: input[2]
+		}
 	).run(message.guild.rethonk);
 }
