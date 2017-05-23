@@ -6,6 +6,7 @@ const client = new Discord.Client();
 const MSS = require("./functions/");
 const request = require('request');
 const fs = require("fs");
+const rethonk = require("rethinkdb");
 var command = [];
 var reaction = [];
 
@@ -35,32 +36,36 @@ fs.readdir("./reactions/", function(err, items) {
 	//console.dir(reaction);
 });
 
-
-
 client.on("ready", function() {
 	console.log("Successfully connected to Discord!");
 	
-	if (config.MSS.selfbot) {
-		console.log("Selfbot mode activated");
-	} else {
-		client.user.setGame("http://mss.ovh/ | " + config.MSS.version);
-		
-		//Send DBOTS info if it was provided.
-		if (API.dBots) {
-			MSS.system.dbotsupdate(client);
-			setInterval(() => {
-				MSS.system.dbotsupdate(client);
-			}, 1800000);
-		}
+	//Return if a selfbot
+	if (config.MSS.selfbot) return console.log("Selfbot mode activated");
 
-		//Send FAKEDBOTS info if it was provided.
-		if (API.fakedBots) {
-			MSS.system.fakedbotsupdate(client);
-			setInterval(() => {
-				MSS.system.fakedbotsupdate(client);
-			}, 1800000);
-		}
+	//Set current game to URL and version
+	client.user.setGame("http://mss.ovh/ | " + config.MSS.version);
+
+	//Send DBOTS info if it was provided.
+	if (API.dBots) {
+		MSS.system.dbotsupdate(client);
+		setInterval(() => {
+			MSS.system.dbotsupdate(client);
+		}, 1800000);
 	}
+
+	//Send FAKEDBOTS info if it was provided.
+	if (API.fakedBots) {
+		MSS.system.fakedbotsupdate(client);
+		setInterval(() => {
+			MSS.system.fakedbotsupdate(client);
+		}, 1800000);
+	}
+
+	//Create a RethonkDB connection
+	rethonk.connect({host: "localhost", port: 28015, db: "discord"}, (err, conn) => {
+		if (err) throw err;
+		client.rethonk = conn;
+	});
 });
 
 client.on("message", function(message) {
