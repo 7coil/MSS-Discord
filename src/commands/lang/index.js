@@ -11,9 +11,8 @@ module.exports = function (message) {
 		let print = meta[message.data.lang] && meta[message.data.lang].message_choose_lang || "message_choose_lang";
 		let langs = [];
 		print += "\n```\n"
-		Object.keys(data.languages).forEach(function(item, iterator) {
-			console.log(`${iterator} | ${item}`);
-			langs.push(data.languages[message.data.lang][item]);
+		Object.keys(data.languages).forEach(function(item) {
+			langs.push(`${item} | ${data.languages[message.data.lang][item]}`);
 		});
 
 		print += langs.join("\n");
