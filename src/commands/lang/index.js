@@ -24,7 +24,7 @@ module.exports = function (message) {
 	input[2] = input[2].substr(0,2)
 	console.dir(input);
 
-	if(!Object.keys(data.languages).some((element)=>{return element == message.data.lang})) return message.reply(meta[message.data.lang] && meta[message.data.lang].err_not_found || "err_not_found");
+	if(data.languages[input[2]]) return message.reply(meta[message.data.lang] && meta[message.data.lang].err_not_found || "err_not_found");
 
 	//ONLY EXCEPTION FOR LANGUAGE
 	//Gets the language code from the message,
@@ -34,7 +34,7 @@ module.exports = function (message) {
 
 	r.table("users").insert({
 		id: message.member.id,
-		lang: input[2].substr(0,2)
+		lang: input[2]
 	},{
 		conflict: "replace"
 	}).run(message.client.rethonk);
