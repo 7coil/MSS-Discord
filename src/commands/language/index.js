@@ -10,10 +10,9 @@ module.exports = function (message) {
 	if(!data.languages[input[2]]) return message.reply(meta[message.data.lang].err);
 
 	message.reply(meta[input[2]].set);
+
+	r.table("users").insert(
+		{"id": message.member.id, "lang": input[2]},
+		conflict = "replace"
+	).run(message.guild.rethonk);
 }
-
-
-//r.table("users").insert(
-//	{"id": message.member.id, "lang": input[2]},
-//	conflict = "replace"
-//).run(message.guild.rethonk);

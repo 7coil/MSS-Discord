@@ -86,14 +86,13 @@ client.on("message", function(message) {
 	if (command[input[1]]) {
 		//Get data for the user, and add to message
 		rethonk.table("users").get(message.author.id).run(client.rethonk, (err, result) => {
-			if (err) {
-				message.data = {"lang": "en"};
-			} else {
-				message.data = result;
-			}
-
+			if (err) throw err;
+			message.data = result || {"lang": "en"};
+		}).then(()=> {
 			command[input[1]](message);
-		});
+		})
+
+
 
 	}
 });
