@@ -21,16 +21,16 @@ module.exports = function (message) {
 
 		print += langs.join("\n");
 		print += "```";
-		return message.reply(print);
+		return message.channel.send(print);
 	}
 
-	if(!data.languages[input[2]]) return message.reply(meta[message.data.lang] && meta[message.data.lang].err_not_found || "err_not_found");
+	if(!data.languages[input[2]]) return message.channel.send(meta[message.data.lang] && meta[message.data.lang].err_not_found || "err_not_found");
 
 	//ONLY EXCEPTION FOR LANGUAGE
 	//Gets the language code from the message,
 	//as it is the one that was just set by
 	//the (l)user
-	message.reply(meta[input[2]] && meta[input[2]].success_found || "success_found");
+	message.channel.send(meta[input[2]] && meta[input[2]].success_found || "success_found");
 
 	r.table("users").insert({
 		id: message.member.id,
