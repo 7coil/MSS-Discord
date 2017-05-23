@@ -7,9 +7,9 @@ module.exports = function (message) {
 	let input = message.content.replace(/\n/g, "").split(" ");
 	console.dir(input);
 
-	if(!data.languages[input[2]]) return message.reply(meta[message.data.lang]);
+	if(!data.languages[input[2]]) return message.reply(meta[message.data.lang].err);
 
-	message.reply(meta[input[2]]);
+	message.reply(meta[input[2]].set);
 }
 
 
