@@ -85,7 +85,7 @@ client.on("message", function(message) {
 	//If the command exists and a prefix matches, run the command
 	if (command[input[1]]) {
 		//Get data for the user, and add to message
-		rethonk.table("users").get(message.author.id).run(client.rethonk, (err, result) {
+		rethonk.table("users").get(message.author.id).run(client.rethonk, (err, result) => {
 			if (err) {
 				message.data = {"lang": "en"};
 			} else {
