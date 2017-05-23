@@ -28,7 +28,7 @@ module.exports = function (message) {
 	//Gets the language code from the message,
 	//as it is the one that was just set by
 	//the (l)user
-	message.reply(typeof meta[input[2]] != "undefined" && meta[input[2]].success_found || "success_found");
+	message.reply(meta[input[2]] && meta[input[2]].success_found || "success_found");
 
 	r.table("users").insert({
 		id: message.member.id,

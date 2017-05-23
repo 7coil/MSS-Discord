@@ -1,0 +1,17 @@
+{
+	"en": {
+		"success_found": "Set language to English UK",
+		"err_not_found": "Invalid language supplied.",
+		"message_choose_lang": "Choose a language:"
+	},
+	"jp": {
+		"success_found": "言語を日本語に設定",
+		"err_not_found": "無効な言語",
+		"message_choose_lang": "言語を選択する"
+	},
+	"pi": {
+		"success_found": "Welcome abort, shipmate!",
+		"err_not_found": "Yer language went overboard",
+		"message_choose_lang": "Select a island to pillage"
+	}
+}
