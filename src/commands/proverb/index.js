@@ -2,6 +2,5 @@ const config = require("./../../config.json");
 const data = require("./data.json");
 
 module.exports = function(message) {
-	//Reply with an adequate proverb
-	message.channel.send(data.proverbs[Math.floor(Math.random() * data.proverbs.length)]);
+	message.reply(data[message.data.lang] && data[message.data.lang][Math.floor(Math.random() * data[message.data.lang].length)] || "success_found");
 }
