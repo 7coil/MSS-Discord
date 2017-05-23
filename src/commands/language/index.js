@@ -1,4 +1,5 @@
 const r = require("rethinkdb");
+const meta = require("./meta.json");
 const data = require("./data.json");
 
 module.exports = function (message) {
@@ -6,16 +7,9 @@ module.exports = function (message) {
 	let input = message.content.replace(/\n/g, "").split(" ");
 	console.dir(input);
 
-	console.log(input[2]);
-	console.log(data.languages[input[2]]);
+	if(!data.languages[input[2]]) return message.reply(meta[message.data.lang]);
 
-	if(data.languages[input[2]]) {
-		console.log(`Setting language of ${message.author.tag} to ${input[2]}`);
-	} else {
-		return message.reply("Invalid language!");
-	}
-
-
+	message.reply(meta[input[2]]);
 }
 
 

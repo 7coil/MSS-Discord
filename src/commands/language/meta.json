@@ -9,5 +9,13 @@
 				"description": "Set to English"
 			}
 		]
+	},
+	"en": {
+		"set": "Set language to English UK",
+		"err": "Invalid language supplied."
+	},
+	"jp": {
+		"set": "言語を日本語に設定",
+		"err": "無効な言語"
 	}
 }
