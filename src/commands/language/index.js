@@ -3,6 +3,8 @@ const meta = require("./meta.json");
 const data = require("./data.json");
 
 module.exports = function (message) {
+	//Split message into keywords
+	let input = message.content.replace(/\n/g, "").split(" ");
 
 	//If there is no input, send a list of languages
 	if (!input[2]) {
@@ -18,8 +20,6 @@ module.exports = function (message) {
 		return message.reply(print);
 	}
 
-	//Split message into keywords
-	let input = message.content.replace(/\n/g, "").split(" ");
 	console.dir(input);
 
 	if(!data.languages[message.data.lang]) return message.reply(typeof meta[message.data.lang] != "undefined" && meta[message.data.lang].err_not_found || "err_not_found");
