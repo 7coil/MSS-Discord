@@ -7,7 +7,7 @@ module.exports = function (message) {
 	console.dir(input);
 
 	console.log(input[2]);
-	console.log(language[input[2]]);
+	console.log(data.languages[input[2]]);
 
 	if(data.languages[input[2]]) {
 		console.log(`Setting language of ${message.author.tag} to ${input[2]}`);
