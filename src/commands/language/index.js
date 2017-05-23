@@ -9,6 +9,9 @@ module.exports = function (message) {
 	let input = message.content.replace(/\n/g, "").split(" ");
 	console.dir(input);
 
+	console.log(input[2]);
+	console.log(language[input[2]]);
+
 	if(!language[input[2]]) return message.reply("Invalid language!");
 
 	console.log(`Setting language of ${message.author.tag} to ${input[2]}`);
