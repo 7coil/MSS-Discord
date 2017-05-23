@@ -15,5 +15,5 @@ module.exports = function (message) {
 			id: message.member.id,
 			lang: input[2]
 		}
-	).run(message.guild.rethonk);
+	).run(message.client.rethonk);
 }
