@@ -1,8 +1,5 @@
 const r = require("rethinkdb");
-const language = [
-	"en",
-	"pi"
-];
+const language = require("./data.json");
 
 module.exports = function (message) {
 	//Split message into keywords
@@ -12,9 +9,13 @@ module.exports = function (message) {
 	console.log(input[2]);
 	console.log(language[input[2]]);
 
-	if(!language[input[2]]) return message.reply("Invalid language!");
+	if(language[input[2]]) {
+		console.log(`Setting language of ${message.author.tag} to ${input[2]}`);
+	} else {
+		return message.reply("Invalid language!");
+	}
 
-	console.log(`Setting language of ${message.author.tag} to ${input[2]}`);
+
 }
 
 
