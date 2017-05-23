@@ -7,7 +7,7 @@ module.exports = function (message) {
 	let input = message.content.replace(/\n/g, "").split(" ");
 	console.dir(input);
 
-	if(!data.languages[input[2]]) return message.reply(typeof meta[input[2]] != "undefined" && meta[input[2]].err ||  || "ERR");
+	if(!data.languages[input[2]]) return message.reply(typeof meta[input[2]] != "undefined" && meta[input[2]].err || "ERR");
 
 	//ONLY EXCEPTION FOR LANGUAGE
 	//Gets the language code from the message,
