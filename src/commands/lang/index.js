@@ -21,7 +21,7 @@ module.exports = function (message) {
 	}
 
 	//Get only the first 2 characters.
-	input[2] = input[2].replace(/^[a-z0-9]+$/i, "").substr(0,2)
+	input[2] = input[2].replace(/[^a-z0-9]/gi, "").substr(0,2);
 	console.dir(input);
 
 	if(data.languages[input[2]]) return message.reply(meta[message.data.lang] && meta[message.data.lang].err_not_found || "err_not_found");
