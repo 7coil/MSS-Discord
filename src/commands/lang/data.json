@@ -8,12 +8,12 @@
 		"pi": {
 			"en": "England",
 			"pi": "Home",
-			"ja": "Japan"
+			"jp": "Japan"
 		},
 		"jp": {
 			"en": "英語",
 			"pi": "パイレーツ",
-			"ja": "日本語"
+			"jp": "日本語"
 		}
 	}
 }
