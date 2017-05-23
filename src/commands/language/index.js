@@ -13,10 +13,11 @@ module.exports = function (message) {
 	//Check if the input is a valid language
 	if(lang[input[2]]) {
 		console.log(`Successfully found language`);
-
-		r.table("users").insert(
-			{"id": message.member.id, "lang": input[2]},
-			conflict = "replace"
-		).run(message.guild.rethonk);
 	}
 }
+
+
+//r.table("users").insert(
+//	{"id": message.member.id, "lang": input[2]},
+//	conflict = "replace"
+//).run(message.guild.rethonk);
