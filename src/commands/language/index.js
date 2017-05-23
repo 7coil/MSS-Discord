@@ -7,15 +7,9 @@ const lang = [
 module.exports = function (message) {
 	//Split message into keywords
 	let input = message.content.replace(/\n/g, "").split(" ");
+	if (lang.indexOf(input[1]) == -1) return message.reply("Invalid language!");
 
 	console.log(`Setting language of ${message.author.tag} to ${input[2]}`);
-
-	//Check if the input is a valid language
-	if(lang[input[2]]) {
-		console.log(`Successfully found language`);
-	} else {
-		message.reply("Invalid language!");
-	}
 }
 
 
