@@ -9,5 +9,16 @@
 				"description": "Returns all info about the bot"
 			}
 		]
+	},
+	"en": {
+		"hostname": "Hostname",
+		"ping": "Ping",
+		"uptime": "Uptime",
+		"guilds": "Guilds",
+		"hardware": "Hardware",
+		"software": "Software",
+		"shard": "Shard",
+		"shards": "Shards",
+		"ratio": "Ratio"
 	}
 }
