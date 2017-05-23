@@ -24,7 +24,6 @@ module.exports = function(message) {
 		.addField("PID", process.pid, true)
 		.addField("Hardware", hardwareinfo)
 		.addField("Software", softwareinfo)
-		.addField("Licence", "This software is released under the MIT Licence.");
 
 	if(config.MSS.shards) {
 		embed.addField("Shard", message.client.shard.id, true)
