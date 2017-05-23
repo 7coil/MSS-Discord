@@ -20,5 +20,16 @@
 		"shard": "Shard",
 		"shards": "Shards",
 		"ratio": "Ratio"
+	},
+	"pi": {
+		"hostname": "Her name",
+		"ping": "Her speed",
+		"uptime": "Her time out at sea",
+		"guilds": "Her count of islands",
+		"hardware": "Her configuration",
+		"software": "Her shipmates",
+		"shard": "Her shard",
+		"shards": "Her shards",
+		"ratio": "Her ratio"
 	}
 }
