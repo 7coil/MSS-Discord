@@ -6,6 +6,10 @@ module.exports = function (message) {
 	//Split message into keywords
 	let input = message.content.replace(/\n/g, "").split(" ");
 
+	//Get only the first 2 characters.
+	input[2] = input[2].replace(/[^a-z0-9]/gi, "").substr(0,2);
+	console.dir(input);
+
 	//If there is no input, send a list of languages
 	if (!input[2]) {
 		let print = meta[message.data.lang] && meta[message.data.lang].message_choose_lang || "message_choose_lang";
@@ -20,11 +24,7 @@ module.exports = function (message) {
 		return message.reply(print);
 	}
 
-	//Get only the first 2 characters.
-	input[2] = input[2].replace(/[^a-z0-9]/gi, "").substr(0,2);
-	console.dir(input);
-
-	if(data.languages[input[2]]) return message.reply(meta[message.data.lang] && meta[message.data.lang].err_not_found || "err_not_found");
+	if(!data.languages[input[2]]) return message.reply(meta[message.data.lang] && meta[message.data.lang].err_not_found || "err_not_found");
 
 	//ONLY EXCEPTION FOR LANGUAGE
 	//Gets the language code from the message,
