@@ -1,18 +1,18 @@
 {
 	"languages": {
 		"en": {
-			"en": "England",
-			"pi": "Landlubbers",
-			"jp": "英語"
+			"en": "English (UK)",
+			"pi": "Pirate",
+			"jp": "Japanese"
 		},
 		"pi": {
-			"en": "Pirate",
+			"en": "England",
 			"pi": "Home",
-			"ja": "パイレーツ"
+			"ja": "Japan"
 		},
 		"jp": {
-			"en": "Japanese",
-			"pi": "Japan",
+			"en": "英語",
+			"pi": "パイレーツ",
 			"ja": "日本語"
 		}
 	}
