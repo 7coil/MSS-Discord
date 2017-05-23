@@ -7,6 +7,7 @@ const language = [
 module.exports = function (message) {
 	//Split message into keywords
 	let input = message.content.replace(/\n/g, "").split(" ");
+	console.dir(input);
 
 	if(!language[input[2]]) return message.reply("Invalid language!");
 
