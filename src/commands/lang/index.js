@@ -8,7 +8,7 @@ module.exports = function (message) {
 
 	//If there is no input, send a list of languages
 	if (!input[2]) {
-		let print = typeof meta[message.data.lang] != "undefined" && meta[message.data.lang].success_found || "message_choose_lang";
+		let print = typeof meta[message.data.lang] != "undefined" && meta[message.data.lang].message_choose_lang || "message_choose_lang";
 		let langs = [];
 		print += "\n```\n"
 		Object.keys(data.languages).forEach(function(item) {
