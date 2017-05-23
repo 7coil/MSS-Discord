@@ -1,10 +1,19 @@
 {
 	"languages": {
 		"en": {
-			"name": "English UK"
+			"en": "English",
+			"pi": "Landlubbers",
+			"jp": "英語"
 		},
 		"pi": {
-			"name": "Pirate"
+			"en": "Pirate",
+			"pi": "Somalia",
+			"ja": "パイレーツ"
+		},
+		"jp": {
+			"en": "Japanese",
+			"pi": "Japan",
+			"ja": "日本語"
 		}
 	}
 }

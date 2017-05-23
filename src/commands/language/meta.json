@@ -11,11 +11,11 @@
 		]
 	},
 	"en": {
-		"set": "Set language to English UK",
-		"err": "Invalid language supplied."
+		"success_found": "Set language to English UK",
+		"err_not_found": "Invalid language supplied."
 	},
 	"jp": {
-		"set": "言語を日本語に設定",
-		"err": "無効な言語"
+		"success_found": "言語を日本語に設定",
+		"err_not_found": "無効な言語"
 	}
 }
