@@ -40,6 +40,10 @@ function Player(message) {
 		//Set the PID of this.
 		this.pid.ffmpeg = ffmpeg.pid;
 
+		//Send FFMPEG's output to the connection
+		console.log(`Message: Piping FFMPEG to the connection`);
+		let dispatcher = this.connection.playStream(ffmpeg.stdout);
+
 		//Try it! If it fails, it skips it.
 		try {
 			console.log(`Message: Playing from ${this.current.type}`);
@@ -83,10 +87,6 @@ function Player(message) {
 					this.message.channel.send(`${this.current.type} is not a valid audio provider.`);
 					this.play();
 			}
-
-			//Send FFMPEG's output to the connection
-			console.log(`Message: Piping FFMPEG to the connection`);
-			let dispatcher = this.connection.playStream(ffmpeg.stdout);
 
 			//Check for FFMPEG errors
 			ffmpeg.stderr.setEncoding('utf8');
