@@ -4,11 +4,10 @@ const config = require("./../../config.json");
 const meta = require("./meta.json");
 const fs = require("fs");
 var commands = [];
+var print = "\n`@MSS man <command>`\n```\n";
 
 //Construct the "full" list
 fs.readdir("./commands/", function(err, items) {
-	var print = "\n`@MSS man <command>`\n```\n";
-
 	items.forEach(function(item) {
 		var file = item.replace(/['"]+/g, "");
 		commands[file] = require(`./../${file}/meta.json`);
