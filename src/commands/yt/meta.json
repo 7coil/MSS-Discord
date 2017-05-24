@@ -1,5 +1,5 @@
 {
-	"meta": {
+	"en": {
 		"name": "MSS-Discord YT",
 		"description": "A command that searches YouTube for a video and adds it to the playlist",
 		"url": "https://youtube.com/",
@@ -14,7 +14,7 @@
 			}
 		]
 	},
-	"meta": {
+	"pi": {
 		"name": "YouTube",
 		"description": "Get yer shanty from YouTube",
 		"url": "https://youtube.com/",
