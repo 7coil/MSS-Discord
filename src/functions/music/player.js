@@ -32,9 +32,10 @@ function Player(message) {
 		//Make an ffmpeg stream
 		console.log(`Message: Making FFMPEG stream`);
 		let ffmpeg = spawn('ffmpeg', [
-			'-i', 'concat:pipe:0|blank.wav',
-			'-f', 'wav',
-			'-coded', 'copy',
+			'-i', 'pipe:0',
+			'-i', 'blank.wav'
+			'-filter_complex', '"[0:0][1:0]concat=n=2:v=0:a=1[out]"',
+			'-map', '"[out]"',
 			'pipe:1'
 		]);
 
