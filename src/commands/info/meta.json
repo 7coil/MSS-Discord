@@ -8,7 +8,7 @@
 				"var": "",
 				"description": "Returns all info about the bot"
 			}
-		]
+		],
 		"hostname": "Hostname",
 		"ping": "Ping",
 		"uptime": "Uptime",
@@ -28,7 +28,7 @@
 				"var": "",
 				"description": "Get her info"
 			}
-		]
+		],
 		"hostname": "Her name",
 		"ping": "Her speed",
 		"uptime": "Her time out at sea",
