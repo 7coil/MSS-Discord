@@ -1,5 +1,5 @@
 {
-	"meta": {
+	"en": {
 		"name": "cowsay",
 		"description": "Runs 'cowsay' in the host. Is protected from your 'sudo rm -r's",
 		"url": "https://en.wikipedia.org/wiki/Cowsay",
@@ -63,6 +63,73 @@
 			{
 				"var": "-l",
 				"description": "Lists the names of available cow-files in the `COWPATH` directory instead of displaying a quote."
+			}
+		]
+	},
+	"pi": {
+		"name": "Cow!",
+		"description": "Force a cow to fight in the brig",
+		"url": "https://en.wikipedia.org/wiki/Cowsay",
+		"examples" : [
+			{
+				"var": "<message>",
+				"description": "Write a message on the map"
+			},
+			{
+				"var": "-n",
+				"description": "Ye switch to disable word wrapping"
+			},
+			{
+				"var": "-W",
+				"description": "Set yer width"
+			},
+			{
+				"var": "-b",
+				"description": "Yer `oo` eyes"
+			},
+			{
+				"var": "-d",
+				"description": "Yer `XX` eyes"
+			},
+			{
+				"var": "-g",
+				"description": "Yer `$$` eyes"
+			},
+			{
+				"var": "-p",
+				"description": "Yer `@@` eyes"
+			},
+			{
+				"var": "-s",
+				"description": "Yer `**` eyes"
+			},
+			{
+				"var": "-t",
+				"description": "Yer `--` eyes"
+			},
+			{
+				"var": "-w",
+				"description": "Yer `OO` eyes"
+			},
+			{
+				"var": "-y",
+				"description": "Yer `..` eyes"
+			},
+			{
+				"var": "-e <eyepatch>",
+				"description": "Put yer own eyepatch on yer cow"
+			},
+			{
+				"var": "-t <tongue>",
+				"description": "Put yer own tongue on yer cow"
+			},
+			{
+				"var": "-f <cowfile>",
+				"description": "Select a specific cow from the market"
+			},
+			{
+				"var": "-l",
+				"description": "Get all cows that you can steal"
 			}
 		]
 	}

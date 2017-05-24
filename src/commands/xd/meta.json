@@ -9,5 +9,16 @@
 				"description": "😂💯👌"
 			}
 		]
+	},
+	"meta": {
+		"name": "😂💯👌",
+		"description": "😂💯👌",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "<pirate's speak ID>",
+				"description": "😂💯👌"
+			}
+		]
 	}
 }

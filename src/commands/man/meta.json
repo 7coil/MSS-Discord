@@ -1,13 +1,36 @@
 {
-	"meta": {
+	"en": {
 		"name": "man - an interface to the off-line reference manuals",
 		"description": "man is MSS' manual pager. Each argument given to man is normally the name of the program, utility or function. The manual page assiated with each of these arguments is then found and displayed.",
 		"url": "http://moustacheminer.com/",
 		"examples" : [
 			{
+				"var": "",
+				"description": "Returns a list of all commands"
+			},{
 				"var": "<command>",
-				"description": "Returns a man page, just like this one."
+				"description": "Returns a man page, just like this one"
 			}
-		]
+		],
+		"message_choose_man": "Choose a manual page:",
+		"err_not_found": "Page not found:",
+		"message_man_pages": "MSS Man Pages"
+	},
+	"pi": {
+		"name": "Get some help",
+		"description": "Find and shoot a naval officer",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "",
+				"description": "Return a list of where all maps are hidden"
+			},{
+				"var": "<command>",
+				"description": "Return a map!"
+			}
+		],
+		"message_choose_man": "Select a island to pillage:",
+		"err_not_found": "Yer instruction manual went overboard:",
+		"message_man_pages": "Her instruction!"
 	}
 }

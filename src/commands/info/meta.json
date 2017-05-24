@@ -1,5 +1,5 @@
 {
-	"meta": {
+	"en": {
 		"name": "MSS-Discord Info",
 		"description": "A command that replies with data about this shard.",
 		"url": "http://moustacheminer.com/",
@@ -9,8 +9,6 @@
 				"description": "Returns all info about the bot"
 			}
 		]
-	},
-	"en": {
 		"hostname": "Hostname",
 		"ping": "Ping",
 		"uptime": "Uptime",
@@ -22,6 +20,15 @@
 		"ratio": "Ratio"
 	},
 	"pi": {
+		"name": "The ship's specs",
+		"description": "Get her info",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "",
+				"description": "Get her info"
+			}
+		]
 		"hostname": "Her name",
 		"ping": "Her speed",
 		"uptime": "Her time out at sea",

@@ -2,7 +2,7 @@
 	"meta": {
 		"name": "MSS-Discord YT",
 		"description": "A command that searches YouTube for a video and adds it to the playlist",
-		"url": "http://moustacheminer.com/",
+		"url": "https://youtube.com/",
 		"examples" : [
 			{
 				"var": "<search term>",
@@ -11,6 +11,21 @@
 			{
 				"var": "<URL>",
 				"description": "Add this YouTube video to the playlist"
+			}
+		]
+	},
+	"meta": {
+		"name": "YouTube",
+		"description": "Get yer shanty from YouTube",
+		"url": "https://youtube.com/",
+		"examples" : [
+			{
+				"var": "<search term>",
+				"description": "Search YouTube for this shanty and add to playlist"
+			},
+			{
+				"var": "<URL>",
+				"description": "Add this shanty to the playlist"
 			}
 		]
 	}

@@ -1,5 +1,5 @@
 {
-	"meta": {
+	"en": {
 		"name": "git",
 		"description": "Execute a git command",
 		"url": "https://moustacheminer.com/",
@@ -7,6 +7,17 @@
 			{
 				"var": "<command>",
 				"description": "Executes the command"
+			}
+		]
+	},
+	"pi": {
+		"name": "Git on the sea",
+		"description": "Execute a git officer",
+		"url": "https://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "<command>",
+				"description": "Executes the git commanding officer"
 			}
 		]
 	}

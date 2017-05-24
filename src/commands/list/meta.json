@@ -1,5 +1,5 @@
 {
-	"meta": {
+	"en": {
 		"name": "MSS-Discord List",
 		"description": "List all the songs in the playlist",
 		"url": "http://moustacheminer.com/",
@@ -7,6 +7,17 @@
 			{
 				"var": "",
 				"description": "Show the playlist"
+			}
+		]
+	},
+	"en": {
+		"name": "Shanties",
+		"description": "List all the shanties in the playlist",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "",
+				"description": "Show the shanties"
 			}
 		]
 	}

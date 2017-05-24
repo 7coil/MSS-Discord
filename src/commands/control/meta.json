@@ -1,5 +1,5 @@
 {
-	"meta": {
+	"en": {
 		"name": "control",
 		"description": "A command that resends the MSS control panel, just in case you need it.",
 		"url": "http://moustacheminer.com/",
@@ -7,6 +7,17 @@
 			{
 				"var": "",
 				"description": "Sends the MSS Control Panel."
+			}
+		]
+	},
+	"pi": {
+		"name": "control",
+		"description": "Control the ship!",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "",
+				"description": "Walk up to the wheel"
 			}
 		]
 	}

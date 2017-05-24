@@ -1,5 +1,5 @@
 {
-	"meta": {
+	"en": {
 		"name": "MSS-Discord URL",
 		"description": "A command that plays a multimedia URL",
 		"url": "http://moustacheminer.com/",
@@ -7,6 +7,17 @@
 			{
 				"var": "<URL>",
 				"description": "Add this url to the playlist"
+			}
+		]
+	},
+	"pi": {
+		"name": "Coordinates",
+		"description": "Play a shanty from a distant URL",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "<URL>",
+				"description": "Add this shanty to the shanty list"
 			}
 		]
 	}

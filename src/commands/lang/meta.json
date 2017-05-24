@@ -1,16 +1,17 @@
 {
-	"meta": {
+	"en": {
 		"name": "MSS-Discord Language",
 		"description": "Set the language of MSS-Discord",
 		"url": "http://moustacheminer.com/",
 		"examples" : [
 			{
-				"var": "en",
-				"description": "Set to English"
+				"var": "",
+				"description": "List available languages"
+			},{
+				"var": "<lang>",
+				"description": "Set to language"
 			}
-		]
-	},
-	"en": {
+		],
 		"success_found": "Set language to English UK",
 		"err_not_found": "Invalid language supplied.",
 		"message_choose_lang": "Choose a language:"
@@ -21,6 +22,18 @@
 		"message_choose_lang": "言語を選択する"
 	},
 	"pi": {
+		"name": "Island Select",
+		"description": "Set yer language of her ship!",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "",
+				"description": "List available languages"
+			},{
+				"var": "<lang>",
+				"description": "Set to language"
+			}
+		],
 		"success_found": "Welcome abord, shipmate!",
 		"err_not_found": "Yer language went overboard",
 		"message_choose_lang": "Select a island to pillage"

@@ -1,5 +1,5 @@
 {
-	"meta": {
+	"en": {
 		"name": "fortune-cookie-api",
 		"description": "A command that replies with a proverb. Powered by a list from an open source project",
 		"url": "https://github.com/larryprice/fortune-cookie-api",
@@ -7,6 +7,17 @@
 			{
 				"var": "",
 				"description": "Returns a proverb."
+			}
+		]
+	},
+	"pi": {
+		"name": "Ancient mysteries from China",
+		"description": "An open sea provides a message from China",
+		"url": "https://github.com/larryprice/fortune-cookie-api",
+		"examples" : [
+			{
+				"var": "",
+				"description": "Steal a proverb from China"
 			}
 		]
 	}

@@ -1,12 +1,23 @@
 {
-	"meta": {
+	"en": {
 		"name": "MSS-Discord Skip",
-		"description": "A command that skips the currently playing song.",
+		"description": "A command that skips the currently playing song",
 		"url": "http://moustacheminer.com/",
 		"examples" : [
 			{
 				"var": "",
-				"description": "Skips the currently playing song."
+				"description": "Skips the currently playing song"
+			}
+		]
+	},
+	"en": {
+		"name": "Skip",
+		"description": "Just go past the navy",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "",
+				"description": "Skips the currently playing shanty"
 			}
 		]
 	}

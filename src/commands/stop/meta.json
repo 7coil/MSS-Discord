@@ -1,12 +1,23 @@
 {
-	"meta": {
+	"en": {
 		"name": "MSS-Discord Stop",
-		"description": "A command that stops the bot.",
+		"description": "A command that stops the bot",
 		"url": "http://moustacheminer.com/",
 		"examples" : [
 			{
 				"var": "",
-				"description": "Stops the bot."
+				"description": "Stops the bot"
+			}
+		]
+	},
+	"pi": {
+		"name": "Stop",
+		"description": "Stop the navy in their tracks",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "",
+				"description": "Stops the shanty"
 			}
 		]
 	}

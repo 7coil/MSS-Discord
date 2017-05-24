@@ -1,16 +1,14 @@
 {
-	"meta": {
+	"en": {
 		"name": "MSS-Discord Help",
-		"description": "A legacy list of commands. Use man. Oh wait, you're already using it.",
+		"description": "Probably the only command that is in all bots.",
 		"url": "http://moustacheminer.com/",
 		"examples" : [
 			{
 				"var": "",
 				"description": "List all commands"
 			}
-		]
-	},
-	"en": {
+		],
 		"commands": "Commands",
 		"links": "Links",
 		"licence": "Licence",
@@ -19,6 +17,15 @@
 		"paragraph3": "This software is released under the MIT Licence."
 	},
 	"pi": {
+		"name": "Ye need alliances",
+		"description": "Yer list of pirates to go with",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "",
+				"description": "Get all the sailors"
+			}
+		],
 		"commands": "The wheel",
 		"links": "The port",
 		"licence": "Ye dumb documentation",
