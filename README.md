@@ -2,13 +2,15 @@
 
 MSS-Discord (Moustacheminer Server Services for Discord) is another bot made for Discord, utilising reactions to control media.
 
-[If you are trying to add the bot to your server, click here.](https://discordapp.com/oauth2/authorize?&client_id=257547382277931009&scope=bot&permissions=70765632)
+- [If you are trying to add the bot to your server, click here.](https://discordapp.com/oauth2/authorize?&client_id=257547382277931009&scope=bot&permissions=70765632)
+- [bots.discord.pw](https://bots.discord.pw/bots/257547382277931009)
+- [discordbots.org](https://discordbots.org/bot/257547382277931009)
 
 *Fun for the whole family!*
 
 ## Installation
 
-### Linux
+### Linux, GNU/Linux, GNU-Linux, GNU+Linux, GNU?
 
 Ubuntu Linux is officially supported from 14.04, your milage may vary with other **Arch**itectures from many **Gentoo**rations. (sorry)
 
@@ -25,6 +27,7 @@ Ubuntu Linux is officially supported from 14.04, your milage may vary with other
 * API keys for
 	* Discord Bot
 	* Google (for YouTube)
+* Rethonk DB
 
 #### Step 0
 
@@ -60,6 +63,10 @@ nano config.json
 
 #### Step 3
 
+Create a table in Rethonk called "users"
+
+#### Step 4
+
 Run the program
 
 ```bash
@@ -68,7 +75,7 @@ node index.js
 
 ### Microsoft Windows (Vista and up!)
 
-Microsoft Windows is NOT supported under any circumstances. Please do not attempt to use on Windows unless you somehow are stuck on an island with a Windows based laptop and sattelite internet and not being able to download Linux.
+Microsoft Windows is NOT supported. Help can still be given, but if anything breaks, you might need to doublethonk about what you're doing.
 
 #### Prerequisites
 
@@ -81,6 +88,12 @@ Microsoft Windows is NOT supported under any circumstances. Please do not attemp
 * API keys for
 	* Discord Bot
 	* Google (for YouTube)
+* Rethonk DB
+* Be a Microsoft Certified Professional (MCP)
+	* Microsoft Certified Solutions Associate
+	* MCSE
+	* MCSD
+	* Microsoft Specialist
 
 #### Step 0
 
@@ -123,6 +136,10 @@ Because you are a Microsoft scrub, you will need to fix things for Windows (you 
 - Delete cowsay (within `src/commands/cowsay`)
 - Add youtube-dl to PATH
 - Add FFMPEG to PATH
+
+#### Step 3
+
+Create a table in Rethonk called "users"
 
 #### Step 93
 
