@@ -34,7 +34,7 @@ module.exports = function manpages(message) {
 	}
 
 	var embed = new Discord.RichEmbed()
-		.setTitle(commands[input[2]][message.data.lang]name)
+		.setTitle(commands[input[2]][message.data.lang].name)
 		.setAuthor(meta[message.data.lang] && meta[message.data.lang].message_man_pages || "message_man_pages", "http://moustacheminer.com/img/mss.png")
 		.setColor("#00AE86")
 		.setDescription(commands[input[2]][message.data.lang].description)
