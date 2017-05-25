@@ -104,6 +104,9 @@ client.on("messageReactionAdd", function(messageReaction, user) {
 	//Not if the author is a bot
 	if (user.bot) return;
 
+	//If it's a selfbot, abandon ship
+	if (config.MSS.selfbot) return;
+
 	//Get decimal codepoint of emoji
 	var input = messageReaction.emoji.name.codePointAt().toString();
 
