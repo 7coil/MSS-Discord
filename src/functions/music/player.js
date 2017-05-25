@@ -94,7 +94,7 @@ function Player(message) {
 			});
 
 
-			ffmpeg.stdout.on("data", () => {
+			ffmpeg.stdout.on("readable", () => {
 				let dispatcher = this.connection.playStream(ffmpeg.stdout);
 
 				//The stream has ended, therefore it can go on to the next song
