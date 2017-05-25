@@ -45,140 +45,74 @@ function Player(message) {
 		let dispatcher = this.connection.playStream(ffmpeg.stdout);
 		console.log(`Waiting 5 seconds before streaming...`);
 
-		setTimeout(()=>{
-			//Try it! If it fails, it skips it.
-			try {
-				console.log(`Message: Playing from ${this.current.type}`);
-				//Send the correct input to the ffmpeg stream
-				switch (this.current.type) {
+		//Try it! If it fails, it skips it.
+		try {
+			console.log(`Message: Playing from ${this.current.type}`);
+			//Send the correct input to the ffmpeg stream
+			switch (this.current.type) {
 
-					//Stream from YouTube
-					case "youtube":
-						let youtube_dl = spawn('youtube-dl', [
-							"-o", "-",
-							this.current.url
-						]);
-						this.pid.youtube_dl = youtube_dl.pid;
+				//Stream from YouTube
+				case "youtube":
+					let youtube_dl = spawn('youtube-dl', [
+						"-o", "-",
+						this.current.url
+					]);
+					this.pid.youtube_dl = youtube_dl.pid;
 
-						youtube_dl.on("close", () => {
-							console.log("youtube_dl finished");
-							this.pid.youtube_dl = null;
-						});
-						youtube_dl.stdout.pipe(ffmpeg.stdin);
-						break;
+					youtube_dl.on("close", () => {
+						console.log("youtube_dl finished");
+						this.pid.youtube_dl = null;
+					});
+					youtube_dl.stdout.pipe(ffmpeg.stdin);
+					break;
 
-					//Stream from a local file
-					case "local":
-						fs.createReadStream(this.current.url)
-							.pipe(ffmpeg.stdin);
+				//Stream from a local file
+				case "local":
+					fs.createReadStream(this.current.url)
+						.pipe(ffmpeg.stdin);
 
-						break;
+					break;
 
-					//Stream from the internet!
-					case "http":
-					case "https":
-						request.get(this.current.url)
-							.on("error", (err) => {
-								this.message.channel.send(`A HTTP error occured. Congratulations!`);
-								this.play();
-							})
-							.pipe(ffmpeg.stdin);
-						break;
-					default:
-						console.log(`Failure: Incorrect audio type`);
-						this.message.channel.send(`${this.current.type} is not a valid audio provider.`);
-						this.play();
-				}
-
-				//Check for FFMPEG errors
-				ffmpeg.stderr.setEncoding('utf8');
-				ffmpeg.stderr.on('data', function(data) {
-					if(/^execvp\(\)/.test(data)) {
-						console.log('failed to start ' + argv.ffmpeg);
-						console.log(`Failure: FFMPEG`);
-					}
-				});
-
-				//The stream has ended, therefore it can go on to the next song
-				dispatcher.on("end", () => {
+				//Stream from the internet!
+				case "http":
+				case "https":
+					request.get(this.current.url)
+						.on("error", (err) => {
+							this.message.channel.send(`A HTTP error occured. Congratulations!`);
+							this.play();
+						})
+						.pipe(ffmpeg.stdin);
+					break;
+				default:
+					console.log(`Failure: Incorrect audio type`);
+					this.message.channel.send(`${this.current.type} is not a valid audio provider.`);
 					this.play();
-				});
-				ffmpeg.on("close", () => {
-					console.log("FFMPEG finished");
-					this.pid.ffmpeg = null;
-				});
-
-			} catch(e) {
-				console.log(`Failure: ${e.message}`);
-				this.message.channel.send(`${e.message} - Skipping...`);
-				this.play();
-			}			try {
-				console.log(`Message: Playing from ${this.current.type}`);
-				//Send the correct input to the ffmpeg stream
-				switch (this.current.type) {
-
-					//Stream from YouTube
-					case "youtube":
-						let youtube_dl = spawn('youtube-dl', [
-							"-o", "-",
-							this.current.url
-						]);
-						this.pid.youtube_dl = youtube_dl.pid;
-
-						youtube_dl.on("close", () => {
-							console.log("youtube_dl finished");
-							this.pid.youtube_dl = null;
-						});
-						youtube_dl.stdout.pipe(ffmpeg.stdin);
-						break;
-
-					//Stream from a local file
-					case "local":
-						fs.createReadStream(this.current.url)
-							.pipe(ffmpeg.stdin);
-
-						break;
-
-					//Stream from the internet!
-					case "http":
-					case "https":
-						request.get(this.current.url)
-							.on("error", (err) => {
-								this.message.channel.send(`A HTTP error occured. Congratulations!`);
-								this.play();
-							})
-							.pipe(ffmpeg.stdin);
-						break;
-					default:
-						console.log(`Failure: Incorrect audio type`);
-						this.message.channel.send(`${this.current.type} is not a valid audio provider.`);
-						this.play();
-				}
-
-				//Check for FFMPEG errors
-				ffmpeg.stderr.setEncoding('utf8');
-				ffmpeg.stderr.on('data', function(data) {
-					if(/^execvp\(\)/.test(data)) {
-						console.log('failed to start ' + argv.ffmpeg);
-						console.log(`Failure: FFMPEG`);
-					}
-				});
-
-				//The stream has ended, therefore it can go on to the next song
-				dispatcher.on("end", () => {
-					this.play();
-				});
-				ffmpeg.on("close", () => {
-					console.log("FFMPEG finished");
-					this.pid.ffmpeg = null;
-				});
-
-			} catch(e) {
-				console.log(`Failure: ${e.message}`);
-				this.message.channel.send(`${e.message} - Skipping...`);
-				this.play();
 			}
-		}, 5000);
+
+			//Check for FFMPEG errors
+			ffmpeg.stderr.setEncoding('utf8');
+			ffmpeg.stderr.on('data', function(data) {
+				if(/^execvp\(\)/.test(data)) {
+					console.log('failed to start ' + argv.ffmpeg);
+					console.log(`Failure: FFMPEG`);
+				}
+			});
+
+			//The stream has ended, therefore it can go on to the next song
+			dispatcher.on("end", () => {
+				this.play();
+			});
+			ffmpeg.on("close", () => {
+				console.log("FFMPEG finished");
+				this.pid.ffmpeg = null;
+			});
+
+		} catch(e) {
+			console.log(`Failure: ${e.message}`);
+			this.message.channel.send(`${e.message} - Skipping...`);
+			this.play();
+		}
+
 	}
 	this.add = function(type, url, title, thumb) {
 		this.playlist.push({
