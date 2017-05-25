@@ -1,4 +1,6 @@
 const config = require("./../../config.json");
+const MSS = require("./../../functions/");
+const meta = require("./meta.json");
 
 module.exports = function screenshot(message) {
 	if(MSS.msg.isadmin(message)) {
