@@ -40,11 +40,6 @@ function Player(message) {
 		//Set the PID of this.
 		this.pid.ffmpeg = ffmpeg.pid;
 
-		//Send FFMPEG's output to the connection
-		console.log(`Setting up connection`);
-		let dispatcher = this.connection.playStream(ffmpeg.stdout);
-		console.log(`Waiting 5 seconds before streaming...`);
-
 		//Try it! If it fails, it skips it.
 		try {
 			console.log(`Message: Playing from ${this.current.type}`);
@@ -98,10 +93,16 @@ function Player(message) {
 				}
 			});
 
-			//The stream has ended, therefore it can go on to the next song
-			dispatcher.on("end", () => {
-				this.play();
+
+			ffmpeg.stdout.on("data", () => {
+				let dispatcher = this.connection.playStream(ffmpeg.stdout);
+
+				//The stream has ended, therefore it can go on to the next song
+				dispatcher.on("end", () => {
+					this.play();
+				});
 			});
+
 			ffmpeg.on("close", () => {
 				console.log("FFMPEG finished");
 				this.pid.ffmpeg = null;
