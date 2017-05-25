@@ -2,6 +2,7 @@ const streamy = require("stream");
 const fs = require('fs');
 const request = require("request");
 const spawn = require("child_process").spawn
+const cache = require("stream-cache");
 
 module.exports = Player;
 
@@ -29,6 +30,9 @@ function Player(message) {
 		console.log(`Message: Shifting playlist`);
 		this.current = this.playlist.shift();
 
+		//Set up a cache
+		let cache = new cache();
+
 		//Make an ffmpeg stream
 		console.log(`Message: Making FFMPEG stream`);
 		let ffmpeg = spawn('ffmpeg', [
@@ -36,6 +40,9 @@ function Player(message) {
 			'-f', 'wav',
 			'pipe:1'
 		]);
+
+		//Pipe FFMPEG to the cache
+		ffmpeg.stdout.pipe(cache);
 
 		//Set the PID of this.
 		this.pid.ffmpeg = ffmpeg.pid;
@@ -93,14 +100,11 @@ function Player(message) {
 				}
 			});
 
+			//Send the cached data to Discord
+			let dispatcher = this.connection.playStream(cache);
 
-			ffmpeg.stdout.on("readable", () => {
-				let dispatcher = this.connection.playStream(ffmpeg.stdout);
-
-				//The stream has ended, therefore it can go on to the next song
-				dispatcher.on("end", () => {
-					this.play();
-				});
+			dispatcher.on("end", () => {
+				this.play();
 			});
 
 			ffmpeg.on("close", () => {
