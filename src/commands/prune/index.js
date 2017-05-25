@@ -9,7 +9,7 @@ module.exports = function screenshot(message) {
 
 		message.channel.fetchMessages({limit: 100})
 			.then(messages => {
-				console.log(messages.length);
+				console.log(messages.size);
 				message.channel.bulkDelete(messages.filter((message) => {return message.author.id === client.user.id}))
 			})
 			.catch((err)=>{fetch = err.fetch;});
