@@ -11,7 +11,9 @@ module.exports = function screenshot(message) {
 					return msg.author.id === message.client.user.id;
 				});
 
-				message.channel.bulkDelete(msgs);
+				msgs.forEach((msg)=>{
+					msg.delete();
+				});
 			});
 	}
 }
