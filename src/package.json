@@ -25,6 +25,7 @@
     "request": "^2.81.0",
     "rethinkdb": "^2.3.3",
     "stream": "0.0.2",
+    "stream-cache": "0.0.2",
     "youtube-node": "^1.3.0",
     "ytdl-core": "^0.12.0"
   }
