@@ -39,6 +39,12 @@ fs.readdir("./reactions/", function(err, items) {
 client.on("ready", function() {
 	console.log("Successfully connected to Discord!");
 	
+	//Create a RethonkDB connection
+	rethonk.connect({host: "localhost", port: 28015, db: "discord"}, (err, conn) => {
+		if (err) throw err;
+		client.rethonk = conn;
+	});
+
 	//Return if a selfbot
 	if (config.MSS.selfbot) return console.log("Selfbot mode activated");
 
@@ -60,12 +66,6 @@ client.on("ready", function() {
 			MSS.system.fakedbotsupdate(client);
 		}, 1800000);
 	}
-
-	//Create a RethonkDB connection
-	rethonk.connect({host: "localhost", port: 28015, db: "discord"}, (err, conn) => {
-		if (err) throw err;
-		client.rethonk = conn;
-	});
 });
 
 client.on("message", function(message) {
@@ -91,8 +91,6 @@ client.on("message", function(message) {
 		}).then(()=> {
 			command[input[1]](message);
 		})
-
-
 
 	}
 });
