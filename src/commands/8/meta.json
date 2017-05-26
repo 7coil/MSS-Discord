@@ -20,5 +20,16 @@
 				"description": "Yer crystal ball speaks"
 			}
 		]
+	},
+	"tc": {
+		"name": "魔法踘",
+		"description": "Magic Marble?",
+		"url": "https://moustacheminer.com/",
+		"examples": [
+			{
+				"var": "",
+				"description": ""
+			}
+		]
 	}
 }
