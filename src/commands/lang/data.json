@@ -2,11 +2,18 @@
 	"languages": {
 		"en": {
 			"en": "English",
-			"pi": "Pirate"
+			"pi": "Pirate",
+			"tc": "Cantonese (Chinese Traditional)"
 		},
 		"pi": {
 			"en": "England",
-			"pi": "Home"
+			"pi": "Home",
+			"tc": "Hong Kong"
+		},
+		"tc": {
+			"en": "英文",
+			"pi": "海盜",
+			"tc": "廣東話"
 		}
 	}
 }
