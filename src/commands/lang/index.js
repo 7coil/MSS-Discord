@@ -10,7 +10,7 @@ module.exports = function (message) {
 	if (!input[2]) {
 		let print = meta[message.data.lang] && meta[message.data.lang].message_choose_lang || "message_choose_lang";
 		let langs = [];
-		print += "\n```\n"
+		print += "\n`@MSS` lang ##\n```\n"
 		Object.keys(data.languages).forEach(function(item) {
 			langs.push(`${item} | ${data.languages[message.data.lang][item]} (${data.languages[item][item]})`);
 		});
