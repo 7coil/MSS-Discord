@@ -1,6 +1,10 @@
 const MSS = require("./../../functions/");
 const meta = require("./meta.json");
 
+const filter = (messageReaction, user) => {
+	return !user.bot
+}
+
 const emoji = {
 	1: "\u0031\u20e3",
 	2: "\u0032\u20e3",
@@ -28,7 +32,7 @@ module.exports = function yt(message) {
 		return message.channel.send("Too many options!");
 	}
 
-	let reply = meta[message.data.lang] && meta[message.data.lang].message_message_vote || "message_vote";
+	let reply = meta[message.data.lang] && meta[message.data.lang].message_vote || "message_vote";
 
 	vote.forEach((item, iterator) => {
 		reply += `\n${emoji[iterator + 1]} ${item}`
@@ -42,6 +46,10 @@ module.exports = function yt(message) {
 				}, 1000 * iterator);
 			});
 
-
+			message.awaitReactions(filter, {time: 30000, errors: ['time']})
+				.catch((collected) => {
+					console.dir(collected);
+					message.channel.send("Vote ended, console.dir temp")
+				})
 		});
 }
