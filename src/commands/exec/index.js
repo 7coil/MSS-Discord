@@ -1,5 +1,6 @@
 const config = require("./../../config.json");
 const exec = require('child_process').exec;
+const MSS = require("./../../functions/");
 
 module.exports = function screenshot(message) {
 	let input = message.content.replace(/\n/g, "").split(" ");
@@ -11,9 +12,10 @@ module.exports = function screenshot(message) {
 		}
 
 		let command = input.splice(2).join(" ");
-		let output = "```\n";
 
 		exec(command, (error, stdout, stderr) => {
+			let output = "";
+
 			if(stdout){
 				output += stdout.replace(/`/g, "'") + "\n";
 			}
@@ -22,9 +24,12 @@ module.exports = function screenshot(message) {
 				output += stderr.replace(/`/g, "'") + "\n";
 			}
 
-			output += "```";
-
-			message.channel.send(output);
+			if(output && output.length > 1900) {
+				message.channel.send(```\nUploading output to GitHub\n```")
+				MSS.system.gist(message, output);
+			} else {
+				message.channel.send("```\nOutput\n```");
+			}
 		});
 	}
 }
