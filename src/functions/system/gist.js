@@ -1,6 +1,8 @@
 const request = require('request');
 
-module.exports = function gist(input) {
+module.exports = function gist(message, input) {
+	if (typeof input != "string") return;
+
 	let data = {
 		url: `https://api.github.com/gists`,
 		method: "POST",
@@ -21,9 +23,9 @@ module.exports = function gist(input) {
 
 	request.post(data, (err, res, body) => {
 		if (err) {
-			return "Error in posting GitHub Gist";
+			message.channel.send("Error in posting GitHub Gist");
 		}
 
-		return body.files["mss.txt"].raw_url;
+		message.channel.send(body.files["mss.txt"].raw_url);
 	});
 }

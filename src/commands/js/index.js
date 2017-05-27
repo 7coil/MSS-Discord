@@ -14,21 +14,26 @@ module.exports = function(message) {
 
 		try {
 			let output = eval('(' + command + ')');
-			if(output && output.length > 1000) output = output.substring(0, 1000) + "...";
-			embed.addField("Output", "```\n" + output + "\n```")
-				.setColor("#00FF00");
+			if(output && output.length > 1000) {
+				embed.addField("Output", "```\nUploading output to GitHub\n```")
+					.setColor("#00FF00");
+				MSS.system.gist(message, output);
+			} else {
+				embed.addField("Output", "```\n" + output + "\n```")
+					.setColor("#00FF00");
+			}
+
 			MSS.msg.react(message, true)
 		} catch(err) {
 			if(err.stack && err.stack.length > 1000) {
-				embed.addField("Error", "```\nThe command ended so spectacularly, that the stack was too long to display. Consult the console for more details.\n```")
+				embed.addField("Error", "```\nUploading error to GitHub\n```")
 					.setColor("#FF0000");
-				console.log(err.stack);
-				MSS.msg.react(message, false, "bomb");
+				MSS.system.gist(message, err.stack);
 			} else {
 				embed.addField("Error", "```\n" + err.stack + "\n```")
 					.setColor("#FF0000");
-				MSS.msg.react(message, false, "bomb");
 			}
+			MSS.msg.react(message, false, "bomb");
 		}
 
 		message.channel.send("", { embed: embed, disableEveryone: true });
