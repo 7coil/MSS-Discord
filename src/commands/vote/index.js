@@ -28,7 +28,7 @@ module.exports = function yt(message) {
 		return message.channel.send("Too many options!");
 	}
 
-	let reply = meta[message.data.lang] && meta[message.data.lang].message_choose_lang || "message_vote";
+	let reply = meta[message.data.lang] && meta[message.data.lang].message_vote || "message_vote";
 
 	vote.forEach((item, iterator) => {
 		message.react(emoji[iterator])
