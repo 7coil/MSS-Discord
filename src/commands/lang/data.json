@@ -2,12 +2,11 @@
 	"languages": {
 		"en": {
 			"en": "English",
-			"pi": "Pirate",
-
+			"pi": "Pirate"
 		},
 		"pi": {
 			"en": "England",
-			"pi": "Yer Pirate Cove",
+			"pi": "Yer Pirate Cove"
 
 		},
 		"tc": {

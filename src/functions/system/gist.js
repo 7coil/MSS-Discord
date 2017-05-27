@@ -22,7 +22,7 @@ module.exports = function dbotsupdate(client) {
 
 	request.post(data, (err, res, body) => {
 		if (error) {
-			return "Error in posting GitHub Gist"
+			return "Error in posting GitHub Gist";
 		}
 
 		return JSON.parse(body).url;
