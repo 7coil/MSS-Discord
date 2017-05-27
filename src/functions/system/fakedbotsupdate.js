@@ -7,6 +7,7 @@ module.exports = function dbotsupdate(client) {
 		method: "POST",
 		json: true,
 		headers: {
+			"User-Agent": "Moustacheminer Server Services",
 			authorization: API.fakedBots
 		},
 		body: {
