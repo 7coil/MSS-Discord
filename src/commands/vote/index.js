@@ -1,6 +1,19 @@
 const MSS = require("./../../functions/");
 const meta = require("./meta.json");
 
+const emoji = {
+	1: ":one:",
+	2: ":two:",
+	3: ":three:",
+	4: ":four:",
+	5: ":five:",
+	6: ":six:",
+	7: ":seven:",
+	8: ":eight:",
+	9: ":nine:",
+	0: ":zero:"
+}
+
 module.exports = function yt(message) {
 	let input = message.content.replace (/\n/g, "").split(" ");
 
@@ -18,10 +31,9 @@ module.exports = function yt(message) {
 	let reply = meta[message.data.lang] && meta[message.data.lang].message_choose_lang || "message_vote";
 
 	vote.forEach((item, iterator) => {
-		message.react(String.fromCodePoint(49 + iterator))
-		reply += `\n${String.fromCodePoint(49 + iterator)} ${item}`
+		message.react(emoji[iterator])
+		reply += `\n${emoji[iterator]} ${item}`
 	});
 
 	message.channel.send(reply);
 }
-
