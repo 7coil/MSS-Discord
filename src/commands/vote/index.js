@@ -2,16 +2,16 @@ const MSS = require("./../../functions/");
 const meta = require("./meta.json");
 
 const emoji = {
-	1: "one",
-	2: "two",
-	3: "three",
-	4: "four",
-	5: "five",
-	6: "six",
-	7: "seven",
-	8: "eight",
-	9: "nine",
-	0: "zero"
+	1: ":one:",
+	2: ":two:",
+	3: ":three:",
+	4: ":four:",
+	5: ":five:",
+	6: ":six:",
+	7: ":seven:",
+	8: ":eight:",
+	9: ":nine:",
+	0: ":zero:"
 }
 
 module.exports = function yt(message) {
@@ -28,11 +28,11 @@ module.exports = function yt(message) {
 		return message.channel.send("Too many options!");
 	}
 
-	let reply = meta[message.data.lang] && meta[message.data.lang].message_vote || "message_vote";
+	let reply = meta[message.data.lang] && meta[message.data.lang].message_message_vote || "message_vote";
 
 	vote.forEach((item, iterator) => {
-		message.react(iterator.toString());
-		reply += `\n:${emoji[iterator]}: ${item}`
+		message.react(emoji[iterator])
+		reply += `\n${emoji[iterator]} ${item}`
 	});
 
 	message.channel.send(reply);
