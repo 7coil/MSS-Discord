@@ -18,8 +18,8 @@ module.exports = function yt(message) {
 	let reply = meta[message.data.lang] && meta[message.data.lang].message_choose_lang || "message_vote";
 
 	vote.forEach((item, iterator) => {
-		message.react(String.fromCodePoint(508419 + iterator))
-		reply += `\n${String.fromCodePoint(508419 + iterator)} ${item}`
+		message.react(String.fromCodePoint(49 + iterator))
+		reply += `\n${String.fromCodePoint(49 + iterator)} ${item}`
 	});
 
 	message.channel.send(reply);
