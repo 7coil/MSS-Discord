@@ -14,7 +14,7 @@ module.exports = function(message) {
 
 		try {
 			let output = eval('(' + command + ')');
-			if(output.length > 1000) output = output.substring(0, 1000) + "...";
+			if(output && output.length > 1000) output = output.substring(0, 1000) + "...";
 			embed.addField("Output", "```\n" + output + "\n```")
 				.setColor("#00FF00");
 			MSS.msg.react(message, true)
