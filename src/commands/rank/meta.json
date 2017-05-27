@@ -1,0 +1,24 @@
+{
+	"en": {
+		"name": "Rank This Thing",
+		"description": "Evaluate and rank an input",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "<thing>",
+				"description": "Give a rank out of 10 for the specific thing"
+			}
+		]
+	},
+	"pi": {
+		"name": "Yer Evaluator",
+		"description": "Rank that ship!",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "",
+				"description": "Give the ship a ranking out of 10 buckaroos"
+			}
+		]
+	}
+}
