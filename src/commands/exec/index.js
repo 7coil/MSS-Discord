@@ -25,7 +25,7 @@ module.exports = function screenshot(message) {
 			}
 
 			if(output && output.length > 1900) {
-				message.channel.send(```\nUploading output to GitHub\n```")
+				message.channel.send("```\nUploading output to GitHub\n```")
 				MSS.system.gist(message, output);
 			} else {
 				message.channel.send("```\nOutput\n```");
