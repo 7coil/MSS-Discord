@@ -1,6 +1,6 @@
 const request = require('request');
 
-module.exports = function gist() {
+module.exports = function gist(input) {
 	let data = {
 		url: `https://api.github.com/gists`,
 		method: "POST",
@@ -12,8 +12,8 @@ module.exports = function gist() {
 			"description": "the description for this gist",
 			"public": true,
 			"files": {
-				"file1.txt": {
-					"content": "String file contents"
+				"mss.txt": {
+					"content": input
 				}
 			}
 		}
@@ -24,6 +24,6 @@ module.exports = function gist() {
 			return "Error in posting GitHub Gist";
 		}
 
-		console.log(body);
+		return body.files["mss.txt"].raw_url;
 	});
 }

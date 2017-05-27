@@ -19,7 +19,7 @@ module.exports = function(message) {
 				.setColor("#00FF00");
 			MSS.msg.react(message, true)
 		} catch(err) {
-			if(err.stack.length > 1000) {
+			if(err.stack && err.stack.length > 1000) {
 				embed.addField("Error", "```\nThe command ended so spectacularly, that the stack was too long to display. Consult the console for more details.\n```")
 					.setColor("#FF0000");
 				console.log(err.stack);
