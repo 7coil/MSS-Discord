@@ -31,8 +31,8 @@ module.exports = function yt(message) {
 	let reply = meta[message.data.lang] && meta[message.data.lang].message_message_vote || "message_vote";
 
 	vote.forEach((item, iterator) => {
-		message.react(emoji[iterator])
-		reply += `\n${emoji[iterator]} ${item}`
+		message.react(emoji[iterator + 1])
+		reply += `\n${emoji[iterator + 1]} ${item}`
 	});
 
 	message.channel.send(reply);
