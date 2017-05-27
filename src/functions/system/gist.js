@@ -17,7 +17,7 @@ module.exports = function gist() {
 	}
 
 	request.post(data, (err, res, body) => {
-		if (error) {
+		if (err) {
 			return "Error in posting GitHub Gist";
 		}
 
