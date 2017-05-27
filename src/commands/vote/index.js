@@ -2,16 +2,16 @@ const MSS = require("./../../functions/");
 const meta = require("./meta.json");
 
 const emoji = {
-	1: ":one:",
-	2: ":two:",
-	3: ":three:",
-	4: ":four:",
-	5: ":five:",
-	6: ":six:",
-	7: ":seven:",
-	8: ":eight:",
-	9: ":nine:",
-	0: ":zero:"
+	1: "one",
+	2: "two",
+	3: "three",
+	4: "four",
+	5: "five",
+	6: "six",
+	7: "seven",
+	8: "eight",
+	9: "nine",
+	0: "zero"
 }
 
 module.exports = function yt(message) {
@@ -32,7 +32,7 @@ module.exports = function yt(message) {
 
 	vote.forEach((item, iterator) => {
 		message.react(emoji[iterator])
-		reply += `\n${emoji[iterator]} ${item}`
+		reply += `\n:${emoji[iterator]}: ${item}`
 	});
 
 	message.channel.send(reply);
