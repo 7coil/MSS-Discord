@@ -16,6 +16,13 @@ const emoji = {
 	0: "\u0030\u20e3"
 }
 
+const count = names =>
+	names.reduce((a, b) =>
+		Object.assign(a, {[b]: (a[b] || 0) + 1}), {})
+
+const duplicates = dict =>
+	Object.keys(dict).filter((a) => dict[a] > 1)
+
 module.exports = function yt(message) {
 	let input = message.content.replace (/\n/g, "").split(" ");
 
@@ -46,8 +53,9 @@ module.exports = function yt(message) {
 
 			message.awaitReactions(filter, {time: 10000, errors: ['time']})
 				.catch((collected) => {
-
 					let voters = [];
+					let legit = [];
+					let spoiled = 0;
 
 					//Get all voters
 					collected.forEach((messageReaction)=>{
@@ -56,11 +64,18 @@ module.exports = function yt(message) {
 						});
 					});
 
-					//Get all unique voters
-					voters = [...new Set(voters)];
+					count(voters).forEach((voter, iterator)=>{
+						if (voter != 1) {
+							spoiled++;
+						} else {
+							legit.push(iterator);
+						}
+					});
 
 					//Log voters
 					console.log(voters);
+
+					console.log(legit);
 				});
 		});
 }
