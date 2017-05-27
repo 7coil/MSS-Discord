@@ -9,13 +9,15 @@ module.exports = function screenshot(message) {
 	let rank = md5 % 10;
 
 	switch(message.data.lang) {
-		case en:
+		case "en":
 			message.channel.send(`I rank ${input[2]} a ${rank} out of 10`);
 			break;
-		case pi:
-			message.channel.send(`Yar! This ${input[2]} gets a ${rank} from me!`)
-		case tc:
-			message.channel.send(`我给 ${rank * 10} 分`)
+		case "pi":
+			message.channel.send(`Yar! This ${input[2]} gets a ${rank} from me!`);
+			break;
+		case "tc":
+			message.channel.send(`我给 ${rank * 10} 分`);
+			break;
 	}
 
 }
