@@ -5,8 +5,7 @@ module.exports = function screenshot(message) {
 	let input = message.content.replace(/\n/g, " ").split(" ");
 	if (input[2].length > 100) input[2] = input[2].substring(0,100) + "...";
 
-	let md5 = crypto.createHash("md5").update(input[2]);
-	let rank = md5 % 10;
+	let rank = parseInt(crypto.createHash("md5").update(input[2]).digest("hex"), 16) % 10;
 
 	switch(message.data.lang) {
 		case "en":
