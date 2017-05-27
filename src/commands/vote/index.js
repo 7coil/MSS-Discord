@@ -42,6 +42,6 @@ module.exports = function yt(message) {
 				}, 1000 * iterator);
 			});
 
-			message.
+
 		});
 }
