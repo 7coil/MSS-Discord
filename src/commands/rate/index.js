@@ -14,7 +14,7 @@ module.exports = function screenshot(message) {
 
 	switch(message.data.lang) {
 		case "en":
-			message.channel.send(`I rank ${stringtoberanked} a ${rank} out of 10`);
+			message.channel.send(`I rate ${stringtoberanked} a ${rank} out of 10`);
 			break;
 		case "pi":
 			message.channel.send(`Yar! This ${stringtoberanked} gets a ${rank} from me!`);
