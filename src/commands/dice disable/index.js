@@ -16,14 +16,6 @@ const emoji = {
 	0: "\u0030\u20e3"
 }
 
-//https://stackoverflow.com/questions/840781/easiest-way-to-find-duplicate-values-in-a-javascript-array
-const count = names =>
-	names.reduce((a, b) =>
-		Object.assign(a, {[b]: (a[b] || 0) + 1}), {})
-
-const duplicates = dict =>
-	Object.keys(dict).filter((a) => dict[a] > 1)
-
 module.exports = function yt(message) {
 	let input = message.content.replace (/\n/g, "").split(" ");
 
@@ -55,7 +47,6 @@ module.exports = function yt(message) {
 			message.awaitReactions(filter, {time: 10000, errors: ['time']})
 				.catch((collected) => {
 					let voters = [];
-					let legit = [];
 					let spoiled = 0;
 
 					//Get all voters
@@ -65,18 +56,11 @@ module.exports = function yt(message) {
 						});
 					});
 
-					count(voters).forEach((voter, iterator)=>{
-						if (voter != 1) {
-							spoiled++;
-						} else {
-							legit.push(iterator);
-						}
-					});
+					//Get an array of unique voters
+					voters = [...new Set(voters)];
 
 					//Log voters
 					console.log(voters);
-
-					console.log(legit);
 				});
 		});
 }
