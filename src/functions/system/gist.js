@@ -21,6 +21,6 @@ module.exports = function gist() {
 			return "Error in posting GitHub Gist";
 		}
 
-		return JSON.parse(body).url;
+		console.log(body);
 	});
 }
