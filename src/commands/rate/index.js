@@ -10,7 +10,7 @@ module.exports = function screenshot(message) {
 
 	if (stringtoberanked.length > 100) stringtoberanked = stringtoberanked.substring(0,100) + "...";
 
-	let rank = parseInt(crypto.createHash("md5").update(stringtoberanked).digest("hex"), 16) % 10;
+	let rank = parseInt(crypto.createHash("md5").update(stringtoberanked).digest("hex"), 16) % 11;
 
 	switch(message.data.lang) {
 		case "en":
