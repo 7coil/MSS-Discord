@@ -47,13 +47,25 @@ module.exports = function yt(message) {
 			message.awaitReactions(filter, {time: 10000, errors: ['time']})
 				.catch((collected) => {
 
-					//Collate all people who voted
+					let voters = [];
 					let votes = [];
 
+					//Get all users into the voters array
 					collected.forEach((messageReaction)=>{
 						messageReaction.users.forEach((user)=>{
-							if(!votes[user.id]) votes[user.id] = [];
-							votes[user.id].push(messageReaction.name);
+							voters.push(user.id);
+						});
+					});
+
+					//Fot each unique voter, create an array
+					[...new Set(voters)].forEach((voter) => {
+						votes[voter] = [];
+					})
+
+					//Push each reaction to each user
+					collected.forEach((messageReaction)=>{
+						messageReaction.users.forEach((user)=>{
+							votes[voter].push(messageReaction.emoji.id)
 						});
 					});
 
