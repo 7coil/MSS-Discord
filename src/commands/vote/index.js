@@ -44,13 +44,23 @@ module.exports = function yt(message) {
 				}, 1000 * iterator);
 			});
 
-			message.awaitReactions(filter, {time: 5000, errors: ['time']})
+			message.awaitReactions(filter, {time: 10000, errors: ['time']})
 				.catch((collected) => {
+
+					let voters = [];
+
+					//Get all voters
 					collected.forEach((messageReaction)=>{
 						messageReaction.users.forEach((user)=>{
-							console.log(user.id);
+							voters.push(user.id);
 						});
 					});
+
+					//Get all unique voters
+					voters = [...new Set(voters)];
+
+					//Log voters
+					console.log(voters);
 				});
 		});
 }
