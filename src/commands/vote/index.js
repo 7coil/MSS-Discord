@@ -1,9 +1,7 @@
 const MSS = require("./../../functions/");
 const meta = require("./meta.json");
 
-const filter = (messageReaction, user) => {
-	return !user.bot
-}
+const filter = () => { return true; }
 
 const emoji = {
 	1: "\u0031\u20e3",
@@ -46,10 +44,19 @@ module.exports = function yt(message) {
 				}, 1000 * iterator);
 			});
 
-			message.awaitReactions(filter, {time: 30000, errors: ['time']})
+			message.awaitReactions(filter, {time: 10000, errors: ['time']})
 				.catch((collected) => {
-					console.dir(collected);
-					message.channel.send("Vote ended, console.dir temp")
-				})
+
+					//Collate all people who voted
+					let votes = [];
+
+					collected.forEach((messageReaction)=>{
+						messageReaction.users.forEach((user)=>{
+							votes[user.id].push(messageReaction.name);
+						});
+					});
+
+					console.dir(votes);
+				});
 		});
 }
