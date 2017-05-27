@@ -31,7 +31,7 @@ module.exports = function yt(message) {
 	let reply = meta[message.data.lang] && meta[message.data.lang].message_vote || "message_vote";
 
 	vote.forEach((item, iterator) => {
-		message.react(emoji[iterator])
+		message.react(iterator.toString());
 		reply += `\n:${emoji[iterator]}: ${item}`
 	});
 
