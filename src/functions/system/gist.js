@@ -1,14 +1,10 @@
-const API = require("./../../api.json");
 const request = require('request');
 
-module.exports = function dbotsupdate(client) {
+module.exports = function gist() {
 	let data = {
-		url: `https://bots.discord.pw/api/bots/${client.user.id}/stats`,
+		url: `https://api.github.com/gists`,
 		method: "POST",
 		json: true,
-		headers: {
-			authorization: API.dBots
-		},
 		body: {
 			"description": "the description for this gist",
 			"public": true,
