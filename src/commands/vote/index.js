@@ -65,7 +65,7 @@ module.exports = function yt(message) {
 					//Push each reaction to each user
 					collected.forEach((messageReaction)=>{
 						messageReaction.users.forEach((user)=>{
-							votes[voter].push(messageReaction.emoji.id)
+							votes[user.id].push(messageReaction.emoji.id)
 						});
 					});
 
