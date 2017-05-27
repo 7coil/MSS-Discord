@@ -35,11 +35,11 @@ module.exports = function yt(message) {
 	});
 
 	message.channel.send(reply)
-		.then((message)=>{
+		.then((message) => {
 			vote.forEach((item, iterator) => {
-				setTimeout({
+				setTimeout(() => {
 					message.react(emoji[iterator + 1]);
-				}, 1000 * iterator)
+				}, 1000 * iterator);
 			});
 
 			message.
