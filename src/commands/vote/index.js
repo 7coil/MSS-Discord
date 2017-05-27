@@ -16,6 +16,7 @@ const emoji = {
 	0: "\u0030\u20e3"
 }
 
+//https://stackoverflow.com/questions/840781/easiest-way-to-find-duplicate-values-in-a-javascript-array
 const count = names =>
 	names.reduce((a, b) =>
 		Object.assign(a, {[b]: (a[b] || 0) + 1}), {})
