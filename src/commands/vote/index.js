@@ -52,6 +52,7 @@ module.exports = function yt(message) {
 
 					collected.forEach((messageReaction)=>{
 						messageReaction.users.forEach((user)=>{
+							if(!votes[user.id]) votes[user.id] = [];
 							votes[user.id].push(messageReaction.name);
 						});
 					});
