@@ -80,18 +80,60 @@ client.on("message", function(message) {
 	if (config.MSS.selfbot && !(message.author.id === client.user.id)) return;
 
 	//Check if it has the correct prefix
-    if (!input[0].includes(client.user.id)) return;
+    if (!(input[0].includes(client.user.id) || input[0].toLowerCase() === config.MSS.prefix)) {
+		//If the command exists and a prefix matches, run the command
+		if (command[input[1]]) {
+			//Get data for the user, and add to message
+			rethonk.table("users").get(message.author.id).run(client.rethonk, (err, result) => {
+				if (err) throw err;
+				message.data = result || {"lang": "en"};
+			}).then(()=> {
+				command[input[1]](message);
+			})
+		}
+	} else {
+		//Embed capabilities! This rich embeds things that aren't going to rich embed themselves, like Kahoot
 
-	//If the command exists and a prefix matches, run the command
-	if (command[input[1]]) {
-		//Get data for the user, and add to message
-		rethonk.table("users").get(message.author.id).run(client.rethonk, (err, result) => {
-			if (err) throw err;
-			message.data = result || {"lang": "en"};
-		}).then(()=> {
-			command[input[1]](message);
-		})
+		//KAHOOT
+		input.forEach((item)=>{
+			if(item.startsWith("https://create.kahoot.it/#quiz/")) {
+				let n = item.lastIndexOf('/');
+				let id = item.substring(n+1);
 
+				let data = {
+					url: `https://create.kahoot.it/rest/kahoots/${id}`,
+					json: true,
+					headers: {
+						"User-Agent": config.MSS.useragent,
+						Authorization: API.kahoot
+					}
+				}
+
+				request.get(data, (err, res, body) => {
+					if(err) return;
+					if(body.error) return;
+					let embed = {
+						embed: {
+							title: body.title,
+							url: `https://create.kahoot.it/#quiz/${body.uuid}`,
+							description: body.description,
+							timestamp: new Date(body.created),
+							author: {
+								name: body.creator_username
+							},
+							image: {
+								url: body.cover
+							},
+							footer: {
+								text: `DiscordKahoot`
+							}
+						}
+					};
+
+					message.channel.send(embed);
+				});
+			}
+		});
 	}
 });
 
