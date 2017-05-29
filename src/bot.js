@@ -80,7 +80,7 @@ client.on("message", function(message) {
 	if (config.MSS.selfbot && !(message.author.id === client.user.id)) return;
 
 	//Check if it has the correct prefix
-    if (!(input[0].includes(client.user.id) || input[0].toLowerCase() === config.MSS.prefix)) {
+    if (input[0].includes(client.user.id) || input[0].toLowerCase() === config.MSS.prefix) {
 		//If the command exists and a prefix matches, run the command
 		if (command[input[1]]) {
 			//Get data for the user, and add to message
