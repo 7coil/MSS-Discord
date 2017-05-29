@@ -108,7 +108,7 @@ function add(message, id) {
 					.then((message)=>{
 						message.channel.awaitMessages((m) => {
 								let input = m.content.replace(/\n/g, "").split(" ");
-								if (Number.isInteger(parseInt(input[0])) && parseInt(input[0]) <= 4 && parseInt(input[0]) >= 1 && answered.indexOf(message.author.id) == -1) {
+								if (Number.isInteger(parseInt(input[0])) && parseInt(input[0]) <= 4 && parseInt(input[0]) >= 1 && !answered.includes(message.author.id))) {
 									answered.push(message.author.id);
 									return true;
 								} else {
