@@ -3,6 +3,7 @@ const API = require("./../../api.json");
 const MSS = require("./../../functions/");
 const Discord = require("discord.js");
 const meta = require("./meta.json");
+const request = require('request');
 
 module.exports = function help(message) {
 	let input = message.content.replace(/\n/g, "").split(" ");
