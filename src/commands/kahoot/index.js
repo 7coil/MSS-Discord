@@ -42,8 +42,7 @@ module.exports = function help(message) {
 					return Number.isInteger(m.content) && parseInt(m.content) <= body.entities.length && parseInt(m.content) >= 1;
 				}, {maxMatches: 1, time: 10000, errors: ["time"]})
 				.catch((collected) => {
-					message.delete();
-					if(message.size === 0) return false;
+					if(collected.size === 0) return false;
 					let input = collected.entries().next().value.content.replace(/\n/g, "").split(" ");
 					message.channel.send(MSS.kahoot.embed(body.entities[parseInt(input[0])].uuid));
 				});
