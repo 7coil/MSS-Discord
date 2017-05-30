@@ -45,7 +45,7 @@ module.exports = function help(message) {
 							.catch((collected) => {
 								message.delete();
 								if(message.size === 0) return false;
-								let input = collected.first.content.replace(/\n/g, "").split(" ");
+								let input = collected.entries().next().value.content.replace(/\n/g, "").split(" ");
 								message.channel.send(MSS.kahoot.embed(body.entities[parseInt(input[0])].uuid));
 							});
 					});
