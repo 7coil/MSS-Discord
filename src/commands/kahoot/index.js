@@ -27,7 +27,7 @@ module.exports = function help(message) {
 			if(body.entities.length === 0) {
 				return message.reply("No Kahoots found.");
 			} else /*if(body.entities.length === 1)*/ {
-				return message.channel.send(MSS.kahoot.embed(body.entities[0].uuid));
+				return message.channel.send(MSS.kahoot.embed(body.entities[0]));
 			} /* else {
 				let print = `${body.totalHits} Kahoots found - Select one of the top Kahoots or try again. (10s limit)`
 				print += "\n```md"
@@ -44,7 +44,7 @@ module.exports = function help(message) {
 				.catch((collected) => {
 					if(collected.size === 0) return false;
 					let input = collected.entries().next().value.content.replace(/\n/g, "").split(" ");
-					message.channel.send(MSS.kahoot.embed(body.entities[parseInt(input[0])].uuid));
+					message.channel.send(MSS.kahoot.embed(body.entities[parseInt(input[0])]));
 				});
 			} */
 		});
