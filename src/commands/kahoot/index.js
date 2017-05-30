@@ -40,7 +40,7 @@ module.exports = function help(message) {
 				return message.channel.send(print)
 					.then((message)=>{
 						message.channel.awaitMessages((m) => {
-								return Number.isInteger(m.content)) && parseInt(m.content) <= body.entities.length && parseInt(m.content) >= 1 && message.author.id === m.author.id;
+								return Number.isInteger(m.content) && parseInt(m.content) <= body.entities.length && parseInt(m.content) >= 1 && message.author.id === m.author.id;
 							}, {maxMatches: 1, time: 10000, errors: ["time"]})
 							.catch((collected) => {
 								message.delete();
