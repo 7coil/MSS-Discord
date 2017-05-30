@@ -3,6 +3,7 @@
 		"sysadmin": "190519304972664832",
 		"version": "2017.05.20a",
 		"selfbot": false,
-		"prefix": "mss"
+		"prefix": "mss",
+		"useragent": "Moustacheminer Server Services"
 	}
 }

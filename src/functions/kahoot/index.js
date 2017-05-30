@@ -12,6 +12,7 @@ const games = [];
 
 exports.add = add;
 exports.stop = stop;
+exports.embed = embedify;
 
 function add(message, id) {
 	if(games.includes(message.channel.id)) return message.channel.send("There is already a Kahoot game in this channel");
@@ -29,25 +30,8 @@ function add(message, id) {
 	request.get(data, (err, res, body) => {
 		if(err) return message.channel.send("Request error!");
 		if(body.error) return message.channel.send(body.error);
-		let embed = {
-			embed: {
-				title: body.title,
-				url: `https://create.kahoot.it/#quiz/${body.uuid}`,
-				description: body.description,
-				timestamp: new Date(body.created),
-				author: {
-					name: body.creator_username
-				},
-				image: {
-					url: body.cover
-				},
-				footer: {
-					text: `Loaded Kahoot! Starting in 10 seconds...`
-				}
-			}
-		}
 
-		message.channel.send(embed);
+		message.channel.send("Loaded Kahoot! Starting game in 10 seconds...", embedify(body));
 		let part = 0;
 		let points = [];
 
@@ -162,5 +146,25 @@ function adminCheck(message) {
 	} else {
 		message.channel.send("You are not an administrator!");
 		return false;
+	}
+}
+
+function embedify(kahoot) {
+	return {
+		embed: {
+			title: kahoot.title,
+			url: `https://create.kahoot.it/#quiz/${kahoot.uuid}`,
+			description: kahoot.description,
+			timestamp: new Date(kahoot.created),
+			author: {
+				name: kahoot.creator_username
+			},
+			image: {
+				url: kahoot.cover
+			},
+			footer: {
+				text: `DiscordKahoot`
+			}
+		}
 	}
 }

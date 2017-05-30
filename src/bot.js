@@ -112,25 +112,7 @@ client.on("message", function(message) {
 				request.get(data, (err, res, body) => {
 					if(err) return;
 					if(body.error) return;
-					let embed = {
-						embed: {
-							title: body.title,
-							url: `https://create.kahoot.it/#quiz/${body.uuid}`,
-							description: body.description,
-							timestamp: new Date(body.created),
-							author: {
-								name: body.creator_username
-							},
-							image: {
-								url: body.cover
-							},
-							footer: {
-								text: `DiscordKahoot`
-							}
-						}
-					};
-
-					message.channel.send(embed);
+					message.channel.send(MSS.kahoot.embed(body));
 				});
 			}
 		});
