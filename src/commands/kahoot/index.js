@@ -36,18 +36,17 @@ module.exports = function help(message) {
 				});
 				print += "\n```"
 
-				return message.channel.send(print)
-					.then((message)=>{
-						message.channel.awaitMessages((m) => {
-								return Number.isInteger(m.content) && parseInt(m.content) <= body.entities.length && parseInt(m.content) >= 1 && message.author.id === m.author.id;
-							}, {maxMatches: 1, time: 10000, errors: ["time"]})
-							.catch((collected) => {
-								message.delete();
-								if(message.size === 0) return false;
-								let input = collected.entries().next().value.content.replace(/\n/g, "").split(" ");
-								message.channel.send(MSS.kahoot.embed(body.entities[parseInt(input[0])].uuid));
-							});
-					});
+				message.channel.send(print)
+
+				return message.channel.awaitMessages((m) => {
+					return Number.isInteger(m.content) && parseInt(m.content) <= body.entities.length && parseInt(m.content) >= 1;
+				}, {maxMatches: 1, time: 10000, errors: ["time"]})
+				.catch((collected) => {
+					message.delete();
+					if(message.size === 0) return false;
+					let input = collected.entries().next().value.content.replace(/\n/g, "").split(" ");
+					message.channel.send(MSS.kahoot.embed(body.entities[parseInt(input[0])].uuid));
+				});
 			}
 		});
 		return false;
