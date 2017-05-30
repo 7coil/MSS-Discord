@@ -56,7 +56,9 @@ module.exports = function help(message) {
 	if(input[2] === "play") {
 		let n = input[3].lastIndexOf('/');
 		let id = input[3].substring(n+1);
-		MSS.kahoot.add(message, id);
+		return MSS.kahoot.add(message, id);
 	}
+
+	message.channel.send("Valid Kahoot commands:\n```\nstop, search, play\n```")
 
 }
