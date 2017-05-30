@@ -7,7 +7,6 @@ const request = require('request');
 
 module.exports = function help(message) {
 	let input = message.content.replace(/\n/g, "").split(" ");
-	if(!input[2]) return message.channel.send("No UUID/URL or command supplied.");
 	if(input[2] === "stop") return MSS.kahoot.stop(message);
 	if(input[2] === "search") {
 		input.shift();
@@ -30,7 +29,7 @@ module.exports = function help(message) {
 			} else if(body.entities.length === 1) {
 				return message.channel.send(MSS.kahoot.embed(body.entities[0].uuid));
 			} else {
-				let print = `${body.totalHists} Kahoots found - Select one of the top Kahoots or try again. (10s limit)`
+				let print = `${body.totalHits} Kahoots found - Select one of the top Kahoots or try again. (10s limit)`
 				print += "\n```md"
 				body.entities.forEach((item, iterator)=>{
 					print += `\n${iterator + 1}. ${item.title}`;
