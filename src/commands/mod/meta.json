@@ -1,0 +1,24 @@
+{
+	"en": {
+		"name": "mod",
+		"description": "Ping a moderator",
+		"url": "http://moustacheminer.com/",
+		"examples": [
+			{
+				"var": "",
+				"description": "Ping a random online moderator, or the owner if none was found"
+			}
+		]
+	},
+	"pi": {
+		"name": "Cap'n",
+		"description": "Find yer captain or their partners",
+		"url": "http://moustacheminer.com/",
+		"examples": [
+			{
+				"var": "",
+				"description": "Eeny, meeny, miny, moe, Catch a tiger by the toe. If he hollers, let him go, Eeny, meeny, miny, moe."
+			}
+		]
+	}
+}
