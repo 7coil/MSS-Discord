@@ -99,7 +99,7 @@ function add(message, id) {
 						let soundtrack = `https://play.kahoot.it/theme/base/audio/${alt}answer_${length}sec.ogg`
 
 						//Start playing Kahoot music (if needed)
-						MSS.music.addSilent(message, "url", soundtrack, "Kahoot", logo);
+						MSS.music.addSilent(message, "https", soundtrack, "Kahoot", logo);
 
 						msg.channel.awaitMessages((m) => {
 								let input = m.content.replace(/\n/g, "").split(" ");
