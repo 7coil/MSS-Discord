@@ -91,7 +91,7 @@ function add(message, id) {
 
 			setTimeout(()=>{
 				message.channel.send(print)
-					.then((message)=>{
+					.then((msg)=>{
 						//Get a random soundtrack to play
 						let altsound = Math.floor(Math.random() * 4);
 						let length = altsound ? MSS.system.pad(body.questions[part].time/1000, 3) : MSS.system.pad(body.questions[part].time/1000, 2);
@@ -101,10 +101,10 @@ function add(message, id) {
 						//Start playing Kahoot music (if needed)
 						MSS.music.addSilent(message, "url", soundtrack, "Kahoot", logo);
 
-						message.channel.awaitMessages((m) => {
+						msg.channel.awaitMessages((m) => {
 								let input = m.content.replace(/\n/g, "").split(" ");
-								if (Number.isInteger(parseInt(input[0])) && parseInt(input[0]) <= 4 && parseInt(input[0]) >= 1 && !answered.includes(message.author.id)) {
-									answered.push(message.author.id);
+								if (Number.isInteger(parseInt(input[0])) && parseInt(input[0]) <= 4 && parseInt(input[0]) >= 1 && !answered.includes(m.author.id)) {
+									answered.push(m.author.id);
 									return true;
 								} else {
 									return false;
