@@ -1,5 +1,5 @@
 const exec = require('child_process').exec;
-const command = "vncsnapshot 192.168.0.3:6 screenshot.jpg";
+const command = "vncsnapshot 192.168.0.3:6 screenshot.jpg -compresslevel 0";
 
 module.exports = function(message) {
 	if (!message.guild) return message.channel.send("You are not in a guild!");
