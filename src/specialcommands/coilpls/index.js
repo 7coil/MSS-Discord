@@ -11,5 +11,5 @@ module.exports = function(message) {
 		}
 	}
 
-	message.channel.send("Well, 7coil once said...", { embed: embed, disableEveryone: true });
+	message.channel.send("Well, 7coil once said...", embed);
 }
