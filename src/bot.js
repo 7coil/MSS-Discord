@@ -105,8 +105,8 @@ client.on("message", function(message) {
 			})
 		}
 	//For NON-MSS commands that are still needed - Needs to match the entire single word
-	} else if (specialcommands[message.words[0]]) {
-		specialcommands[message.words[0]](message);
+	} else if (specialcommand[message.words[0]]) {
+		specialcommand[message.words[0]](message);
 	} else {
 		//Embed capabilities! This rich embeds things that aren't going to rich embed themselves, like Kahoot
 		message.words.forEach((item)=>{
