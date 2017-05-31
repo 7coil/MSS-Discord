@@ -111,7 +111,7 @@ client.on("message", function(message) {
 		//Embed capabilities! This rich embeds things that aren't going to rich embed themselves, like Kahoot
 		message.words.forEach((item)=>{
 			//KAHOOT
-			if(item.startsWith("https://create.kahoot.it/#quiz/")) {
+			if(item.includes("https://") && item.includes("kahoot")) {
 				let n = item.lastIndexOf('/');
 				let id = item.substring(n+1);
 
