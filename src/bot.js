@@ -79,8 +79,16 @@ client.on("message", function(message) {
 	//If it's a selfbot, check if the message is from itself
 	if (config.MSS.selfbot && !(message.author.id === client.user.id)) return;
 
+	//If it has a specified prefix, convert to the new MSS mention format
+	if (message.words[0].startsWith(config.MSS.prefix)) {
+		message.words.unshift(client.user.id);
+		message.words[1].substring(config.MSS.prefix.length);
+		message.content = message.words.join(" ");
+		console.dir(message.words);
+	}
+
 	//Check if it has the correct prefix
-    if (message.words[0].includes(client.user.id) || message.words[0] === config.MSS.prefix) {
+    if (message.words[0].includes(client.user.id)) {
 		//If the command exists and a prefix matches, run the command
 		if (command[message.words[1]]) {
 			//Get data for the user, and add to message
