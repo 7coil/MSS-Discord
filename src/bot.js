@@ -79,8 +79,14 @@ client.on("message", function(message) {
 	//If it's a selfbot, check if the message is from itself
 	if (config.MSS.selfbot && !(message.author.id === client.user.id)) return;
 
+	//If it has a specified prefix, convert to the new MSS mention format
+	if (input[0].startsWith(config.MSS.prefix)) {
+		input.unshift(client.user.id);
+		input[1].substring(config.MSS.prefix.length);
+	}
+
 	//Check if it has the correct prefix
-    if (input[0].includes(client.user.id) || input[0].toLowerCase() === config.MSS.prefix) {
+    if (input[0].includes(client.user.id)) {
 		//If the command exists and a prefix matches, run the command
 		if (command[input[1]]) {
 			//Get data for the user, and add to message
@@ -93,9 +99,8 @@ client.on("message", function(message) {
 		}
 	} else {
 		//Embed capabilities! This rich embeds things that aren't going to rich embed themselves, like Kahoot
-
-		//KAHOOT
 		input.forEach((item)=>{
+			//KAHOOT
 			if(item.startsWith("https://create.kahoot.it/#quiz/")) {
 				let n = item.lastIndexOf('/');
 				let id = item.substring(n+1);
