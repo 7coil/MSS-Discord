@@ -93,9 +93,14 @@ function add(message, id) {
 				message.channel.send(print)
 					.then((msg)=>{
 						//Get a random soundtrack to play
-						let altsound = Math.floor(Math.random() * 4);
-						let length = altsound ? MSS.system.pad(body.questions[part].time/1000, 3) : MSS.system.pad(body.questions[part].time/1000, 2);
-						let alt = altsound ? `alt${MSS.system.pad(altsound, 2)}-` : "";
+						let altsound = Math.floor(Math.random() * 3);
+						if(altsound == 1) {
+							alt = "";
+							length = MSS.system.pad(body.questions[part].time/1000, 2);
+						} else {
+							alt = `alt${MSS.system.pad(altsound, 2)}-`;
+							length = MSS.system.pad(body.questions[part].time/1000, 3);
+						}
 						let soundtrack = `https://play.kahoot.it/theme/base/audio/${alt}answer_${length}sec.ogg`;
 						console.log(soundtrack);
 
