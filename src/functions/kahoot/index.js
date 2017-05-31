@@ -73,7 +73,7 @@ function add(message, id) {
 				embed: {
 					title: body.title,
 					url: `https://create.kahoot.it/#quiz/${body.uuid}`,
-					description: body.questions[part].question,
+					description: body.questions[part].question.replace(/<.?i>/g, "_").replace(/<.?b>/g, "**"),
 					timestamp: new Date(body.created),
 					author: {
 						name: body.creator_username
