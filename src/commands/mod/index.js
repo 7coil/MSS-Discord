@@ -4,7 +4,7 @@ const command = "vncsnapshot 192.168.0.3:6 screenshot.jpg";
 module.exports = function(message) {
 	if (!message.guild) return message.channel.send("You are not in a guild!");
 	let moderator = message.guild.members.filter((user)=>{
-		return (user.hasPermission(0x00000008) || user.hasPermission(0x00000004) || user.hasPermission(0x00000002)) && user.presence.status === "online" && !user.bot
+		return ((user.hasPermission(0x00000008) || user.hasPermission(0x00000004) || user.hasPermission(0x00000002)) && user.presence.status === "online" && !user.bot);
 	}).random() || message.guild.owner;
 	message.words.shift();
 	message.words.shift();
@@ -20,5 +20,5 @@ module.exports = function(message) {
 		});
 	}
 
-	message.channel.send(`Report by <@${message.author.id}> to ${moderator}:\n${report}`);
+	message.channel.send(`Report by <@${message.author}> to ${moderator}:\n${report}`);
 }
