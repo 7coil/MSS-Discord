@@ -93,7 +93,7 @@ function add(message, id) {
 				message.channel.send(print)
 					.then((msg)=>{
 						//Get a random soundtrack to play
-						let altsound = Math.floor(Math.random() * 3);
+						let altsound = Math.floor(Math.random() * 3) + 1;
 						if(altsound == 1) {
 							alt = "";
 							length = MSS.system.pad(body.questions[part].time/1000, 2);
