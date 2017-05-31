@@ -96,7 +96,8 @@ function add(message, id) {
 						let altsound = Math.floor(Math.random() * 4);
 						let length = altsound ? MSS.system.pad(body.questions[part].time/1000, 3) : MSS.system.pad(body.questions[part].time/1000, 2);
 						let alt = altsound ? `alt${MSS.system.pad(altsound, 2)}-` : "";
-						let soundtrack = `https://play.kahoot.it/theme/base/audio/${alt}answer_${length}sec.ogg`
+						let soundtrack = `https://play.kahoot.it/theme/base/audio/${alt}answer_${length}sec.ogg`;
+						console.log(soundtrack);
 
 						//Start playing Kahoot music (if needed)
 						MSS.music.addSilent(message, "https", soundtrack, "Kahoot", logo);
