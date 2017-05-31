@@ -1,6 +1,8 @@
 module.exports = function(message) {
 	if (!message.guild) return message.channel.send("You are not in a guild!");
-	let moderator = message.guild.members.filter((user)=>{return user.hasPermission(0x00000008) && user.presence.status === "online"}).random().id || message.guild.ownerID;
+	let moderator = message.guild.members.filter((user)=>{
+		return (user.hasPermission(0x00000008) || user.hasPermission(0x00000004) || user.hasPermission(0x00000002)) && user.presence.status === "online"
+	}).random().id || message.guild.ownerID;
 	message.words.shift();
 	message.words.shift();
 	let report = message.words.join(" ") || "No report provided :shrug:";
