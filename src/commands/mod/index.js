@@ -11,8 +11,8 @@ module.exports = function(message) {
 	let report = message.words.join(" ") || "No report provided :shrug:";
 
 	if(message.guild.id === "110373943822540800" /*&& message.channel.id === "110373943822540800"*/) {
-		exec(command, function(error, stdout, stderr) {
-			return message.channel.send(`Report by <@${message.author.id}> to ${moderator}:\n${report}\nAuto Screenshot:`, {
+		return exec(command, function(error, stdout, stderr) {
+			message.channel.send(`Report by <@${message.author.id}> to ${moderator}:\n${report}\nAuto Screenshot:`, {
 				files: [
 					"./screenshot.jpg"
 				]
