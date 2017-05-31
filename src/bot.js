@@ -9,6 +9,7 @@ const fs = require("fs");
 const rethonk = require('rethinkdb');
 var command = [];
 var reaction = [];
+var specialcommand = [];
 
 //Login to Discord
 client.login(API.discord);
@@ -22,18 +23,22 @@ fs.readdir("./commands/", function(err, items) {
 	});
 });
 
+//Include all files in the special commands dir for special one word commands
+fs.readdir("./specialcommands/", function(err, items) {
+	items.forEach(function(item) {
+		var file = item.replace(/['"]+/g, "");
+		console.log(file);
+		specialcommand[file] = require("./specialcommands/" + file + "/");
+	});
+});
+
 //Include all files in the commands directory for reactions
 fs.readdir("./reactions/", function(err, items) {
 	items.forEach(function(item) {
 		var file = item.replace(/['"]+/g, "");
-		if (file.endsWith(".js")) {
-			file = file.replace(".js", "").toLowerCase();
-			console.log(file);
-			reaction[file] = require("./reactions/" + file);
-		}
+		console.log(file);
+		reaction[file] = require("./reactions/" + file);
 	});
-	//List all avalible reactions
-	//console.dir(reaction);
 });
 
 client.on("ready", function() {
@@ -99,6 +104,9 @@ client.on("message", function(message) {
 				command[message.words[1]](message);
 			})
 		}
+	//For NON-MSS commands that are still needed - Needs to match the entire single word
+	} else if (specialcommands[message.words[0]]) {
+		specialcommands[message.words[0]](message);
 	} else {
 		//Embed capabilities! This rich embeds things that aren't going to rich embed themselves, like Kahoot
 		message.words.forEach((item)=>{
