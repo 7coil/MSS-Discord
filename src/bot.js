@@ -82,7 +82,7 @@ client.on("message", function(message) {
 	//If it has a specified prefix, convert to the new MSS mention format
 	if (message.words[0].startsWith(config.MSS.prefix)) {
 		message.words.unshift(client.user.id);
-		message.words[1].substring(config.MSS.prefix.length);
+		message.words[1] = message.words[1].substring(config.MSS.prefix.length);
 		message.content = message.words.join(" ");
 		console.dir(message.words);
 	}
