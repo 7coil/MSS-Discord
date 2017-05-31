@@ -71,7 +71,7 @@ client.on("ready", function() {
 client.on("message", function(message) {
 
 	//Split message into keywords
-	let input = message.content.replace(/\n/g, "").split(" ");
+	message.words = message.content.replace(/\n/g, "").split(" ");
 
 	//Disallow if the author is a bot
 	if (message.author.bot) return;
@@ -80,21 +80,22 @@ client.on("message", function(message) {
 	if (config.MSS.selfbot && !(message.author.id === client.user.id)) return;
 
 	//If it has a specified prefix, convert to the new MSS mention format
-	if (input[0].startsWith(config.MSS.prefix)) {
-		input.unshift(client.user.id);
-		input[1].substring(config.MSS.prefix.length);
+	if (message.words[0].startsWith(config.MSS.prefix)) {
+		message.words.unshift(client.user.id);
+		message.words[1].substring(config.MSS.prefix.length);
+		message.content = message.words.join(" ");
 	}
 
 	//Check if it has the correct prefix
-    if (input[0].includes(client.user.id)) {
+    if (message.words[0].includes(client.user.id)) {
 		//If the command exists and a prefix matches, run the command
-		if (command[input[1]]) {
+		if (command[message.words[1]]) {
 			//Get data for the user, and add to message
 			rethonk.table("users").get(message.author.id).run(client.rethonk, (err, result) => {
 				if (err) throw err;
 				message.data = result || {"lang": "en"};
 			}).then(()=> {
-				command[input[1]](message);
+				command[message.words[1]](message);
 			})
 		}
 	} else {
