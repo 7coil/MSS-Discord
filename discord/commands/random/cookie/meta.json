@@ -1,0 +1,13 @@
+{
+	"en": {
+		"name": "fortune-cookie",
+		"description": "A command that replies with a cookie. Powered by a list from an open source project",
+		"url": "https://github.com/reggi/fortune-cookie",
+		"examples" : [
+			{
+				"var": "",
+				"description": "Returns a cookie."
+			}
+		]
+	}
+}

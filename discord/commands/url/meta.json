@@ -1,0 +1,13 @@
+{
+	"meta": {
+		"name": "MSS-Discord URL",
+		"description": "A command that plays a multimedia URL",
+		"url": "http://moustacheminer.com/",
+		"examples" : [
+			{
+				"var": "<URL>",
+				"description": "Add this url to the playlist"
+			}
+		]
+	}
+}
