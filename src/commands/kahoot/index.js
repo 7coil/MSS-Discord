@@ -26,27 +26,9 @@ module.exports = function help(message) {
 			if(body.error) return message.channel.send(body.error);
 			if(body.entities.length === 0) {
 				return message.reply("No Kahoots found.");
-			} else /*if(body.entities.length === 1)*/ {
-				return message.channel.send(MSS.kahoot.embed(body.entities[0]));
-			} /* else {
-				let print = `${body.totalHits} Kahoots found - Select one of the top Kahoots or try again. (10s limit)`
-				print += "\n```md"
-				body.entities.forEach((item, iterator)=>{
-					print += `\n${iterator + 1}. ${item.title}`;
-				});
-				print += "\n```"
-
-				message.channel.send(print)
-
-				return message.channel.awaitMessages((m) => {
-					return Number.isInteger(m.content) && parseInt(m.content) <= body.entities.length && parseInt(m.content) >= 1;
-				}, {maxMatches: 1, time: 10000, errors: ["time"]})
-				.catch((collected) => {
-					if(collected.size === 0) return false;
-					let input = collected.entries().next().value.content.replace(/\n/g, "").split(" ");
-					message.channel.send(MSS.kahoot.embed(body.entities[parseInt(input[0])]));
-				});
-			} */
+			} else {
+				return message.channel.send(`${body.totalHits} Kahoots found - Displaying top result`,MSS.kahoot.embed(body.entities[0]));
+			}
 		});
 		return false;
 	}
@@ -56,6 +38,6 @@ module.exports = function help(message) {
 		return MSS.kahoot.add(message, id);
 	}
 
-	message.channel.send("Valid Kahoot commands:\n```\nstop, search, play\n```")
+	message.channel.send("Invalid subcommand! Run `@MSS man kahoot` for all subcommands");
 
 }

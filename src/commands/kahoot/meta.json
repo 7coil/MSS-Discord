@@ -5,11 +5,14 @@
 		"url": "https://kahoot.it/",
 		"examples" : [
 			{
-				"var": "https://create.kahoot.it/#quiz/<uuid>",
+				"var": "play https://create.kahoot.it/#quiz/<uuid>",
 				"description": "Play this Kahoot"
 			},{
-				"var": "<uuid>",
+				"var": "play <uuid>",
 				"description": "Play this Kahoot"
+			},{
+				"var": "search <query>",
+				"description": "Find a Kahoot"
 			},{
 				"var": "stop",
 				"description": "Stop the currently running Kahoot as an admin"
@@ -22,11 +25,14 @@
 		"url": "https://kahoot.it/",
 		"examples" : [
 			{
-				"var": "https://create.kahoot.it/#quiz/<uuid>",
+				"var": "play https://create.kahoot.it/#quiz/<uuid>",
 				"description": "Riddle me this Kahoot!"
 			},{
-				"var": "<uuid>",
+				"var": "play <uuid>",
 				"description": "Riddle me this Kahoot!"
+			},{
+				"var": "search <island>",
+				"description": "Find me a Kahoot!"
 			},{
 				"var": "stop",
 				"description": "Halt the Kahoots!"
