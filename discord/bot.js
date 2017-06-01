@@ -36,6 +36,8 @@ client.login(client.mss.api.discord);
 client.on("ready", function() {
 	console.log("Successfully connected to Discord!");
 
+	client.user.setGame("mss.ovh " + client.mss.mss.version);
+
 	//Push both types of mention to the allowed prefixes array
 	client.mss.config.prefix.push(`<@!${client.user.id}>`);
 
