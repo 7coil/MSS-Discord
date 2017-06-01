@@ -1,12 +1,12 @@
 {
-	"meta": {
-		"name": "MSS-Discord URL",
+	"embed": {
+		"title": "MSS-Discord URL",
 		"description": "A command that plays a multimedia URL",
 		"url": "http://moustacheminer.com/",
-		"examples" : [
+		"fieldss" : [
 			{
-				"var": "<URL>",
-				"description": "Add this url to the playlist"
+				"name": "<URL>",
+				"value": "Add this url to the playlist"
 			}
 		]
 	}

@@ -1,12 +1,12 @@
 {
-	"meta": {
-		"name": "MSS-Discord Stop",
-		"description": "A command that stops the bot.",
+	"embed": {
+		"title": "MSS-Discord Stop",
+		"description": "A command that stops the currently playing song.",
 		"url": "http://moustacheminer.com/",
-		"examples" : [
+		"fields" : [
 			{
-				"var": "",
-				"description": "Stops the bot."
+				"name": "-",
+				"value": "Stops the currently playing song."
 			}
 		]
 	}

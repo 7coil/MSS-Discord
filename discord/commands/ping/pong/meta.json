@@ -1,14 +1,12 @@
 {
-	"en-UK": {
-		"embed": {
-			"title": "Latency Checker",
-			"description": "Find the latency between us and Discord",
-			"fields": [
-				{
-					"name": "(no input)",
-					"value": "Return the latency in milliseconds"
-				}
-			]
-		}
+	"embed": {
+		"title": "Latency Checker",
+		"description": "Find the latency between us and Discord",
+		"fields": [
+			{
+				"name": "-",
+				"value": "Return the latency in milliseconds"
+			}
+		]
 	}
 }

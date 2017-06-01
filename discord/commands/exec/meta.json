@@ -1,23 +1,12 @@
 {
-	"en": {
-		"name": "Execute Bash Command",
+	"embed": {
+		"title": "Execute Bash Command",
 		"description": "Run a bash command in the context of the directory this extension is installed in",
 		"url": "https://moustacheminer.com/",
-		"examples" : [
+		"fields" : [
 			{
-				"var": "<command>",
-				"description": "Executes the command"
-			}
-		]
-	},
-	"pi": {
-		"name": "Yer cryptic executor",
-		"description": "He killed many a pirate, we must stay wary",
-		"url": "http://moustacheminer.com/",
-		"examples" : [
-			{
-				"var": "<coordinates>",
-				"description": "Make her BASH this command"
+				"name": "<command>",
+				"value": "Executes the command"
 			}
 		]
 	}

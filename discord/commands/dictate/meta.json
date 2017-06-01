@@ -1,39 +1,20 @@
 {
-	"en": {
-		"name": "SpeechFX DECtalk",
+	"embed": {
+		"title": "SpeechFX DECtalk",
 		"description": "A command that is narrated using the DECtalk text to speech technology, powered by [MSS's webservice](https://talk.moustacheminer.com)",
 		"url": "http://www.speechfxinc.com/text-to-speech.html",
-		"examples" : [
+		"fields" : [
 			{
-				"var": "<dectalk>",
-				"description": "Say the specified input"
+				"name": "<dectalk>",
+				"value": "Say the specified input"
 			},
 			{
-				"var": "<ID>",
-				"description": "Play the specific DECtalk sound with an ID. Check for all IDs [here](https://talk.moustacheminer.com/lib.html)"
+				"name": "<ID>",
+				"value": "Play the specific DECtalk sound with an ID. Check for all IDs [here](https://talk.moustacheminer.com/lib.html)"
 			},
 			{
-				"var": "[:phone on]mamma mia, poppa pia, baby got the dy[aa<999,999>]reeeeeeeeeaaaaaaaaaa",
-				"description": "Uh oh."
-			}
-		]
-	},
-	"pi": {
-		"name": "Yer captain speaking!",
-		"description": "Yer [website](https://talk.moustacheminer.com) now speaks for the ship!",
-		"url": "http://www.speechfxinc.com/text-to-speech.html",
-		"examples" : [
-			{
-				"var": "<dectalk>",
-				"description": "Yer captain says"
-			},
-			{
-				"var": "<ID>",
-				"description": "Yer captain sings a specific [song!](https://talk.moustacheminer.com/lib.html)"
-			},
-			{
-				"var": "[:phone on]mamma mia, poppa pia, baby got the dy[aa<999,999>]reeeeeeeeeaaaaaaaaaa",
-				"description": "Yer captain jumps overboard"
+				"name": "[:phone on]mamma mia, poppa pia, baby got the dy[aa<999,999>]reeeeeeeeeaaaaaaaaaa",
+				"value": "Uh oh."
 			}
 		]
 	}

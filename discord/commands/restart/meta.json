@@ -1,12 +1,12 @@
 {
-	"meta": {
-		"name": "restart",
+	"embed": {
+		"title": "restart",
 		"description": "Restarts MSS-Discord",
 		"url": "https://moustacheminer.com/",
-		"examples" : [
+		"fields" : [
 			{
-				"var": "",
-				"description": "Restarts MSS-Discord"
+				"name": "-",
+				"value": "Restarts MSS-Discord"
 			}
 		]
 	}

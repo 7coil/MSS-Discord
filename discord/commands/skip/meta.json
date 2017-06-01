@@ -1,12 +1,12 @@
 {
-	"meta": {
-		"name": "MSS-Discord Skip",
+	"embed": {
+		"title": "MSS-Discord Skip",
 		"description": "A command that skips the currently playing song.",
 		"url": "http://moustacheminer.com/",
-		"examples" : [
+		"fields" : [
 			{
-				"var": "",
-				"description": "Skips the currently playing song."
+				"name": "-",
+				"value": "Skips the currently playing song."
 			}
 		]
 	}

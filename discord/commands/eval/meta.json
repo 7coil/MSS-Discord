@@ -1,23 +1,12 @@
 {
-	"en": {
-		"name": "MSS-Discord EVAL",
+	"embed": {
+		"title": "MSS-Discord EVAL",
 		"description": "A command that you shouldn't use.",
 		"url": "http://moustacheminer.com/",
-		"examples" : [
+		"fields" : [
 			{
-				"var": "<js code>",
-				"description": "Runs directly in the bot"
-			}
-		]
-	},
-	"pi": {
-		"name": "Yer cryptic evaluator",
-		"description": "Yer blurry vision says not to use this",
-		"url": "http://moustacheminer.com/",
-		"examples" : [
-			{
-				"var": "<coordinates>",
-				"description": "Make her run this code"
+				"name": "<js code>",
+				"value": "Runs directly in the bot"
 			}
 		]
 	}

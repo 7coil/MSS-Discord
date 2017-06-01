@@ -1,12 +1,12 @@
 {
-	"en": {
-		"name": "fortune-cookie",
+	"embed": {
+		"title": "fortune-cookie",
 		"description": "A command that replies with a cookie. Powered by a list from an open source project",
 		"url": "https://github.com/reggi/fortune-cookie",
-		"examples" : [
+		"values" : [
 			{
-				"var": "",
-				"description": "Returns a cookie."
+				"name": "-",
+				"value": "Returns a response"
 			}
 		]
 	}

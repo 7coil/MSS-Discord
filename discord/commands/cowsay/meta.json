@@ -1,135 +1,68 @@
 {
-	"en": {
-		"name": "cowsay",
+	"embed": {
+		"title": "cowsay",
 		"description": "Runs 'cowsay' in the host. Is protected from your 'sudo rm -r's",
 		"url": "https://en.wikipedia.org/wiki/Cowsay",
-		"examples" : [
+		"fields" : [
 			{
-				"var": "<message>",
-				"description": "Generates an ASCII image of a cow with a message"
+				"name": "<message>",
+				"value": "Generates an ASCII image of a cow with a message"
 			},
 			{
-				"var": "-n",
-				"description": "Disables word wrap, allowing the cow to speak FIGlet or to display other embedded ASCII art. Width in columns becomes that of the longest line, ignoring any value of `-W`."
+				"name": "-n",
+				"value": "Disables word wrap, allowing the cow to speak FIGlet or to display other embedded ASCII art. Width in columns becomes that of the longest line, ignoring any value of `-W`."
 			},
 			{
-				"var": "-W",
-				"description": "Specifies width of the speech balloon in columns, i.e. characters in a monospace font. Default value is 40."
+				"name": "-W",
+				"value": "Specifies width of the speech balloon in columns, i.e. characters in a monospace font. Default value is 40."
 			},
 			{
-				"var": "-b",
-				"description": "“Borg mode”, uses == in place of oo for the cow′s eyes."
+				"name": "-b",
+				"value": "“Borg mode”, uses == in place of oo for the cow′s eyes."
 			},
 			{
-				"var": "-d",
-				"description": "“Dead”, uses XX, plus a descending U to represent an extruded tongue, also used on Linux kernel oops."
+				"name": "-d",
+				"value": "“Dead”, uses XX, plus a descending U to represent an extruded tongue, also used on Linux kernel oops."
 			},
 			{
-				"var": "-g",
-				"description": "“Greedy”, uses $$."
+				"name": "-g",
+				"value": "“Greedy”, uses $$."
 			},
 			{
-				"var": "-p",
-				"description": "“Paranoid”, uses @@."
+				"name": "-p",
+				"value": "“Paranoid”, uses @@."
 			},
 			{
-				"var": "-s",
-				"description": "“Stoned”, uses ** to represent bloodshot eyes, plus a descending U to represent an extruded tongue."
+				"name": "-s",
+				"value": "“Stoned”, uses ** to represent bloodshot eyes, plus a descending U to represent an extruded tongue."
 			},
 			{
-				"var": "-t",
-				"description": "“Tired”, uses --."
+				"name": "-t",
+				"value": "“Tired”, uses --."
 			},
 			{
-				"var": "-w",
-				"description": "“Wired”, uses OO."
+				"name": "-w",
+				"value": "“Wired”, uses OO."
 			},
 			{
-				"var": "-y",
-				"description": "“Youthful”, uses .. to represent smaller eyes."
+				"name": "-y",
+				"value": "“Youthful”, uses .. to represent smaller eyes."
 			},
 			{
-				"var": "-e <string>",
-				"description": "Manually specifies the cow′s eye-type, e.g. `cowsay -e ^^`"
+				"name": "-e <string>",
+				"value": "Manually specifies the cow′s eye-type, e.g. `cowsay -e ^^`"
 			},
 			{
-				"var": "-t <string>",
-				"description": "Manually specifies the cow′s tongue shape, e.g. `cowsay -T \\(\\)` for a pair of parentheses."
+				"name": "-t <string>",
+				"value": "Manually specifies the cow′s tongue shape, e.g. `cowsay -T \\(\\)` for a pair of parentheses."
 			},
 			{
-				"var": "-f <cowfile>",
-				"description": "Specifies a .cow file from which to load alternative ASCII art. Accepts both absolute file-paths and those relative to the environment variable `COWPATH`."
+				"name": "-f <cowfile>",
+				"value": "Specifies a .cow file from which to load alternative ASCII art. Accepts both absolute file-paths and those relative to the environment nameiable `COWPATH`."
 			},
 			{
-				"var": "-l",
-				"description": "Lists the names of available cow-files in the `COWPATH` directory instead of displaying a quote."
-			}
-		]
-	},
-	"pi": {
-		"name": "Cow!",
-		"description": "Force a cow to fight in the brig",
-		"url": "https://en.wikipedia.org/wiki/Cowsay",
-		"examples" : [
-			{
-				"var": "<message>",
-				"description": "Write a message on the map"
-			},
-			{
-				"var": "-n",
-				"description": "Ye switch to disable word wrapping"
-			},
-			{
-				"var": "-W",
-				"description": "Set yer width"
-			},
-			{
-				"var": "-b",
-				"description": "Yer `oo` eyes"
-			},
-			{
-				"var": "-d",
-				"description": "Yer `XX` eyes"
-			},
-			{
-				"var": "-g",
-				"description": "Yer `$$` eyes"
-			},
-			{
-				"var": "-p",
-				"description": "Yer `@@` eyes"
-			},
-			{
-				"var": "-s",
-				"description": "Yer `**` eyes"
-			},
-			{
-				"var": "-t",
-				"description": "Yer `--` eyes"
-			},
-			{
-				"var": "-w",
-				"description": "Yer `OO` eyes"
-			},
-			{
-				"var": "-y",
-				"description": "Yer `..` eyes"
-			},
-			{
-				"var": "-e <eyepatch>",
-				"description": "Put yer own eyepatch on yer cow"
-			},
-			{
-				"var": "-t <tongue>",
-				"description": "Put yer own tongue on yer cow"
-			},
-			{
-				"var": "-f <cowfile>",
-				"description": "Select a specific cow from the market"
-			},
-			{
-				"var": "-l",
-				"description": "Get all cows that you can steal"
+				"name": "-l",
+				"value": "Lists the names of available cow-files in the `COWPATH` directory instead of displaying a quote."
 			}
 		]
 	}

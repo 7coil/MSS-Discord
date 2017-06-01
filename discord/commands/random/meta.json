@@ -1,23 +1,32 @@
 {
-	"en": {
-		"name": "Magic 8 Ball",
-		"description": "A command that replies with an 8 ball message.",
+	"embed": {
+		"name": "Random Commands",
+		"description": "A command with subcommands",
 		"url": "https://moustacheminer.com/",
-		"examples" : [
+		"fields" : [
 			{
-				"var": "",
-				"description": "Returns a response"
-			}
-		]
-	},
-	"pi": {
-		"name": "Yer Crystal Ball",
-		"description": "She proclaims if we be with Davy Jone's Locker",
-		"url": "https://moustacheminer.com/",
-		"examples" : [
+				"name": "8",
+				"value": "Returns a response"
+			},{
+				"name": "cookie",
+				"value": "Returns a response"
+			},{
+				"name": "proverb",
+				"value": "Returns a response"
+			},{
+				"name": "roll",
+				"value": "Returns a random value from 1-6"
+			},{
+				"name": "roll <dice>",
+				"value": "Returns a random value from each die from 1-6, and displays the total for the dice."
+			},
 			{
-				"var": "",
-				"description": "Yer crystal ball speaks"
+				"name": "roll d<sides>",
+				"value": "Returns a random value from each dice from 1 to the number of sides selected."
+			},
+			{
+				"name": "roll <dice> <sides>",
+				"value": "Returns a random value from each die from 1 to the number of sides selected, and displays the total for the dice."
 			}
 		]
 	}

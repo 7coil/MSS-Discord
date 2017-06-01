@@ -1,12 +1,12 @@
 {
-	"meta": {
-		"name": "MSS-Discord List",
+	"embed": {
+		"title": "MSS-Discord List",
 		"description": "List all the songs in the playlist",
 		"url": "http://moustacheminer.com/",
-		"examples" : [
+		"fields" : [
 			{
-				"var": "",
-				"description": "Show the playlist"
+				"name": "-",
+				"value": "Show the playlist"
 			}
 		]
 	}

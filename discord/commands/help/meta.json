@@ -1,12 +1,15 @@
 {
-	"meta": {
-		"name": "MSS-Discord Help",
-		"description": "A legacy list of commands. Use man. Oh wait, you're already using it.",
+	"embed": {
+		"title": "MSS-Discord Help",
+		"description": "Get Help on MSS!",
 		"url": "http://moustacheminer.com/",
-		"examples" : [
+		"fields" : [
 			{
-				"var": "",
-				"description": "List all commands"
+				"name": "-",
+				"value": "Get general info about MSS"
+			},{
+				"name": "<command>",
+				"value": "Get info about this command"
 			}
 		]
 	}

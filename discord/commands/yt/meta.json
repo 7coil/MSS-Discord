@@ -1,16 +1,16 @@
 {
-	"meta": {
-		"name": "MSS-Discord YT",
+	"embed": {
+		"title": "MSS-Discord YT",
 		"description": "A command that searches YouTube for a video and adds it to the playlist",
 		"url": "http://moustacheminer.com/",
-		"examples" : [
+		"fields" : [
 			{
-				"var": "<search term>",
-				"description": "Search YouTube for this video and add to playlist"
+				"name": "<search term>",
+				"value": "Search YouTube for this video and add to playlist"
 			},
 			{
-				"var": "<URL>",
-				"description": "Add this YouTube video to the playlist"
+				"name": "<URL>",
+				"value": "Add this YouTube video to the playlist"
 			}
 		]
 	}

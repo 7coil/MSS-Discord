@@ -1,12 +1,12 @@
 {
-	"meta": {
-		"name": "MSS-Discord EVAL",
+	"embed": {
+		"title": "MSS-Discord EVAL",
 		"description": "A command that you shouldn't use.",
 		"url": "http://moustacheminer.com/",
-		"examples" : [
+		"fields" : [
 			{
-				"var": "<js code>",
-				"description": "Runs directly in the bot, but with a fancy border."
+				"name": "<js code>",
+				"value": "Runs directly in the bot, but with a fancy border."
 			}
 		]
 	}
