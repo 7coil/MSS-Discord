@@ -1,0 +1,13 @@
+{
+	"embed": {
+		"title": "MSS-Discord List",
+		"description": "List all the songs in the playlist",
+		"url": "http://moustacheminer.com/",
+		"fields" : [
+			{
+				"name": "-",
+				"value": "Show the playlist"
+			}
+		]
+	}
+}

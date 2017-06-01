@@ -1,0 +1,13 @@
+{
+	"embed": {
+		"title": "Kahoot Search",
+		"description": "Search for a Kahoot",
+		"url": "https://kahoot.it/",
+		"fields" : [
+			{
+				"name": "<query>",
+				"value": "Search for a Kahoot"
+			}
+		]
+	}
+}

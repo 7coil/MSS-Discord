@@ -1,0 +1,13 @@
+{
+	"embed": {
+		"title": "Execute Bash Command",
+		"description": "Run a bash command in the context of the directory this extension is installed in",
+		"url": "https://moustacheminer.com/",
+		"fields" : [
+			{
+				"name": "<command>",
+				"value": "Executes the command"
+			}
+		]
+	}
+}

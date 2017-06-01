@@ -1,0 +1,13 @@
+{
+	"embed": {
+		"title": "MSS-Discord URL",
+		"description": "A command that plays a multimedia URL",
+		"url": "http://moustacheminer.com/",
+		"fieldss" : [
+			{
+				"name": "<URL>",
+				"value": "Add this url to the playlist"
+			}
+		]
+	}
+}

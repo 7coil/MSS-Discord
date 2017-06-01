@@ -1,0 +1,69 @@
+{
+	"embed": {
+		"title": "cowsay",
+		"description": "Runs 'cowsay' in the host. Is protected from your 'sudo rm -r's",
+		"url": "https://en.wikipedia.org/wiki/Cowsay",
+		"fields" : [
+			{
+				"name": "<message>",
+				"value": "Generates an ASCII image of a cow with a message"
+			},
+			{
+				"name": "-n",
+				"value": "Disables word wrap, allowing the cow to speak FIGlet or to display other embedded ASCII art. Width in columns becomes that of the longest line, ignoring any value of `-W`."
+			},
+			{
+				"name": "-W",
+				"value": "Specifies width of the speech balloon in columns, i.e. characters in a monospace font. Default value is 40."
+			},
+			{
+				"name": "-b",
+				"value": "“Borg mode”, uses == in place of oo for the cow′s eyes."
+			},
+			{
+				"name": "-d",
+				"value": "“Dead”, uses XX, plus a descending U to represent an extruded tongue, also used on Linux kernel oops."
+			},
+			{
+				"name": "-g",
+				"value": "“Greedy”, uses $$."
+			},
+			{
+				"name": "-p",
+				"value": "“Paranoid”, uses @@."
+			},
+			{
+				"name": "-s",
+				"value": "“Stoned”, uses ** to represent bloodshot eyes, plus a descending U to represent an extruded tongue."
+			},
+			{
+				"name": "-t",
+				"value": "“Tired”, uses --."
+			},
+			{
+				"name": "-w",
+				"value": "“Wired”, uses OO."
+			},
+			{
+				"name": "-y",
+				"value": "“Youthful”, uses .. to represent smaller eyes."
+			},
+			{
+				"name": "-e <string>",
+				"value": "Manually specifies the cow′s eye-type, e.g. `cowsay -e ^^`"
+			},
+			{
+				"name": "-t <string>",
+				"value": "Manually specifies the cow′s tongue shape, e.g. `cowsay -T \\(\\)` for a pair of parentheses."
+			},
+			{
+				"name": "-f <cowfile>",
+				"value": "Specifies a .cow file from which to load alternative ASCII art. Accepts both absolute file-paths and those relative to the environment nameiable `COWPATH`."
+			},
+			{
+				"name": "-l",
+				"value": "Lists the names of available cow-files in the `COWPATH` directory instead of displaying a quote."
+			}
+		]
+	}
+}

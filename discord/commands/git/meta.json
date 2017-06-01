@@ -1,0 +1,13 @@
+{
+	"enbed": {
+		"title": "git",
+		"description": "Execute a git command",
+		"url": "https://moustacheminer.com/",
+		"fields" : [
+			{
+				"name": "<command>",
+				"value": "Executes the command"
+			}
+		]
+	}
+}
