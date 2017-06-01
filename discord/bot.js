@@ -38,6 +38,22 @@ client.on("ready", function() {
 
 	//Push both types of mention to the allowed prefixes array
 	client.mss.config.prefix.push(`<@!${client.user.id}>`);
+
+	//Send DBOTS info if it was provided.
+	if (client.mss.api.botdiscordpw) {
+		client.mss.functions.system.dbotsupdate(client);
+		setInterval(() => {
+			client.mss.functions.system.dbotsupdate(client);
+		}, 1800000);
+	}
+
+	//Send FAKEDBOTS info if it was provided.
+	if (client.mss.api.discordbotsorg) {
+		client.mss.functions.system.fakedbotsupdate(client);
+		setInterval(() => {
+			client.mss.functions.system.fakedbotsupdate(client);
+		}, 1800000);
+	}
 });
 
 client.on("message", function(message) {
