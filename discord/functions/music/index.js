@@ -7,6 +7,7 @@ const Players = [];
 
 exports.init = init;
 exports.add = add;
+exports.addSilent = addSilent;
 exports.stop = stop;
 exports.skip = skip;
 exports.list = list;
@@ -24,6 +25,14 @@ function add(message, type, url, title, thumb) {
 	if (!message.guild) return guildError(message);
 	init(message);
 	if (!vcCheck(message)) return;
+    Players[message.guild.id].message = message;
+	Players[message.guild.id].add(type, url, title, thumb);
+}
+
+function addSilent(message, type, url, title, thumb) {
+	if (!message.guild) return;
+	if (!message.member.voiceChannel) return;
+	init(message);
     Players[message.guild.id].message = message;
 	Players[message.guild.id].add(type, url, title, thumb);
 }

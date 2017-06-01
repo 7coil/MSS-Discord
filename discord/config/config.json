@@ -2,9 +2,8 @@
 	"name": "Moustacheminer Server Services",
 	"selfbot": false,
 	"prefix": [
-		"7coil",
 		"coil",
-		"<@!190519304972664832>"
+		"mss"
 	],
 	"sysadmin": "190519304972664832"
 }

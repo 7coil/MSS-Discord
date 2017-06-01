@@ -2,12 +2,6 @@
 	"embed": {
 		"title": "restart",
 		"description": "Restarts MSS-Discord",
-		"url": "https://moustacheminer.com/",
-		"fields" : [
-			{
-				"name": "-",
-				"value": "Restarts MSS-Discord"
-			}
-		]
+		"url": "https://moustacheminer.com/"
 	}
 }

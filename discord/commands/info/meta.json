@@ -2,12 +2,6 @@
 	"embed": {
 		"title": "MSS-Discord Info",
 		"description": "A command that replies with data about this shard.",
-		"url": "http://moustacheminer.com/",
-		"fields" : [
-			{
-				"name": "-",
-				"value": "Returns all info about the bot"
-			}
-		]
+		"url": "http://moustacheminer.com/"
 	}
 }

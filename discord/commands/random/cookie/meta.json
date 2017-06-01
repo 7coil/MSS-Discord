@@ -2,12 +2,6 @@
 	"embed": {
 		"title": "fortune-cookie",
 		"description": "A command that replies with a cookie. Powered by a list from an open source project",
-		"url": "https://github.com/reggi/fortune-cookie",
-		"values" : [
-			{
-				"name": "-",
-				"value": "Returns a response"
-			}
-		]
+		"url": "https://github.com/reggi/fortune-cookie"
 	}
 }
