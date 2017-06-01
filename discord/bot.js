@@ -39,6 +39,7 @@ client.on("ready", function() {
 	client.user.setGame("mss.ovh " + client.mss.mss.version);
 
 	//Push both types of mention to the allowed prefixes array
+	client.mss.config.prefix.push(`<@${client.user.id}>`);
 	client.mss.config.prefix.push(`<@!${client.user.id}>`);
 
 	//Send DBOTS info if it was provided.
