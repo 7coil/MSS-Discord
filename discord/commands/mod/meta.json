@@ -1,0 +1,13 @@
+{
+	"embed": {
+		"title": "mod",
+		"description": "Ping a moderator",
+		"url": "http://moustacheminer.com/",
+		"fields": [
+			{
+				"name": "",
+				"value": "Ping a random online moderator, or the owner if none was found"
+			}
+		]
+	}
+}

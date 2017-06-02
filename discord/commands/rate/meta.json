@@ -1,0 +1,13 @@
+{
+	"embed": {
+		"title": "Rate This Thing",
+		"description": "Evaluate and rate an input",
+		"url": "http://moustacheminer.com/",
+		"fields" : [
+			{
+				"name": "<thing>",
+				"value": "Give a rating out of 10 for the specific thing"
+			}
+		]
+	}
+}
