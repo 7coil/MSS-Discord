@@ -1,6 +1,6 @@
 # MSS-Discord
 
-MSS-Discord (Moustacheminer Server Services for Discord) is another bot made for Discord, utilising reactions to control media.
+MSS-Discord (Moustacheminer Server Services for Discord) is another bot made for Discord.
 
 - [If you are trying to add the bot to your server, click here.](https://discordapp.com/oauth2/authorize?&client_id=257547382277931009&scope=bot&permissions=70765632)
 - [bots.discord.pw](https://bots.discord.pw/bots/257547382277931009)

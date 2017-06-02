@@ -9,7 +9,7 @@ module.exports = function(message) {
 
 	let report = message.content || "No report provided :shrug:";
 
-	if(message.guild.id === "110373943822540800" && message.channel.id === "110373943822540800") {
+	if(message.guild.id === "110373943822540800" && message.channel.id === "110373943822540800" && message.words && message.words[0] === "shot") {
 		return exec(command, function(error, stdout, stderr) {
 			message.channel.send(`Report by ${message.author} to ${moderator}:\n${report}\nAuto Screenshot:`, {
 				files: [
