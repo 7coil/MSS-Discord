@@ -72,11 +72,18 @@ function Player(message) {
 				case "http":
 				case "https":
 					request.get(this.current.url)
-						.on("error", (err) => {
-							this.message.channel.send(`A HTTP error occured. Congratulations!`);
-							this.play();
+						.on("response", (res) => {
+							if(res.statusCode != 200) {
+								this.message.channel.send(`A HTTP error occured. Congratulations!`);
+							}
 						})
 						.pipe(ffmpeg.stdin);
+					break;
+				case "post":
+					console.dir(this.current.url);
+					request.post(this.current.url)
+						.pipe(ffmpeg.stdin);
+
 					break;
 				default:
 					console.log(`Failure: Incorrect audio type`);

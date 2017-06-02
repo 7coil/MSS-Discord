@@ -1,4 +1,5 @@
 const API = require("./../../config/api.json");
+const mss = require("./../../config/mss.json");
 const request = require('request');
 
 module.exports = function dbotsupdate(client) {
@@ -7,6 +8,7 @@ module.exports = function dbotsupdate(client) {
 		method: "POST",
 		json: true,
 		headers: {
+			"User-Agent": mss.useragent,
 			authorization: API.fakedBots
 		},
 		body: {

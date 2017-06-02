@@ -1,6 +1,16 @@
-module.exports = function yt(message) {
-	let encoded = encodeURIComponent(message.content);
+module.exports = function dictate(message) {
 
-	message.client.mss.functions.music.add(message, "http", `http://talk.moustacheminer.com/get?input=${encoded}`, "MSS DecTalk", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/DECtalk_DCT01_and_Tink.jpg/300px-DECtalk_DCT01_and_Tink.jpg");
+	let data = {
+		url: `https://talk.moustacheminer.com/post`,
+		method: "POST",
+		json: true,
+		headers: {
+			"User-Agent": message.client.mss.mss.useragent
+		},
+		body: {
+			input: `${message.content}[_<7000>]`
+		}
+	}
+
+	message.client.mss.functions.music.add(message, "post", data, "MSS DecTalk", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/DECtalk_DCT01_and_Tink.jpg/300px-DECtalk_DCT01_and_Tink.jpg");
 }
-

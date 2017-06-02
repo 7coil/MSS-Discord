@@ -1,0 +1,13 @@
+{
+	"embed": {
+		"title": "SpeechFX DECtalk",
+		"description": "A command that plays a specific ID, powered by [MSS's webservice](https://talk.moustacheminer.com)",
+		"url": "http://www.speechfxinc.com/text-to-speech.html",
+		"fields" : [
+			{
+				"name": "<ID>",
+				"value": "Play the specific DECtalk sound with an ID. Check for all IDs [here](https://talk.moustacheminer.com/lib.html)"
+			}
+		]
+	}
+}
