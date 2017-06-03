@@ -9,7 +9,7 @@ module.exports = function dbotsupdate(client) {
 		json: true,
 		headers: {
 			"User-Agent": mss.useragent,
-			authorization: API.fakedBots
+			authorization: API.discordbotsorg
 		},
 		body: {
 			server_count: client.guilds.size
