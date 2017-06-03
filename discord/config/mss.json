@@ -1,4 +1,7 @@
 {
 	"version": "2017-06-03",
-	"useragent": "MSS-Discord (https://mss.ovh/)"
+	"useragent": "MSS-Discord (https://mss.ovh/)",
+	"discord": "https://discord.gg/wHgdmf4",
+	"invite": "https://discordapp.com/oauth2/authorize?&client_id=257547382277931009&scope=bot&permissions=70765632",
+	"github": "https://github.com/moustacheminer/mss-discord/"
 }

@@ -21,7 +21,7 @@ module.exports = function help(message) {
 						"value": message.client.mss.config.prefix.join(" OR ")
 					},{
 						"name": "Links",
-						"value": "[Discord Server](http://moustacheminer.com/r/invite-server)\n[Invite Bot](http://moustacheminer.com/r/invite-bot)\n[GitHub](http://moustacheminer.com/r/github-bot)"
+						"value": `[Discord Server](${message.client.mss.mss.discord})\n[Invite Bot](${message.client.mss.mss.invite})\n[GitHub](${message.client.mss.mss.github})`
 					},{
 						"name": "Licence",
 						"value": "This copy of MSS-Discord is licenced under the MIT Licence"
