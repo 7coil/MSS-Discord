@@ -11,6 +11,6 @@ module.exports = function screenshot(message) {
 
 	let rank = parseInt(crypto.createHash("md5").update(message.content.toLowerCase()).digest("hex"), 16) % outof;
 
-	message.channel.send(`I rate ${message.content} a ${rank} out of 10`);
+	message.channel.send(`I rate ${message.content} a ${rank} out of ${outof}`);
 
 }
