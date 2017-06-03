@@ -5,7 +5,7 @@ module.exports = function screenshot(message) {
 
 	if (message.content.length > 100) message.content = message.content.substring(0,100) + "...";
 
-	let rank = parseInt(crypto.createHash("md5").update(message.content).digest("hex"), 16) % 11;
+	let rank = parseInt(crypto.createHash("md5").update(message.content.toLowerCase()).digest("hex"), 16) % 11;
 
 	message.channel.send(`I rate ${message.content} a ${rank} out of 10`);
 
