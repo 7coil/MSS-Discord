@@ -1,5 +1,5 @@
 {
-	"enbed": {
+	"embed": {
 		"title": "git",
 		"description": "Execute a git command",
 		"url": "https://moustacheminer.com/",
