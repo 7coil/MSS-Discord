@@ -33,9 +33,11 @@ function timestamp(s) {
 	var d, h, m;
 
 	m = Math.floor(s / 60);
-	s = s % 60;
+	s = Math.floor(s % 60);
+
 	h = Math.floor(m / 60);
 	m = m % 60;
+
 	d = Math.floor(h / 24);
 	h = h % 24;
 
