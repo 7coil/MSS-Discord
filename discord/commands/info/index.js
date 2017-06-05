@@ -47,16 +47,16 @@ function timestamp(s) {
 	};
 
 	if(m === 1) {
-		message += d + " minute "
-	} else if (d > 1) {
-		message += d + " minutes "
+		message += m + " minute "
+	} else if (m > 1) {
+		message += m + " minutes "
 	};
 
 	if(s === 1) {
-		message += d + " second "
-	} else if (d > 1) {
-		message += d + " seconds "
+		message += s + " second "
+	} else if (s > 1) {
+		message += s + " seconds "
 	};
 
-	return message;
+	return message || "Literally no time whatsoever";
 }
