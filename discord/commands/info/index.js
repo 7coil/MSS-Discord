@@ -18,7 +18,7 @@ module.exports = function(message) {
 		.addField("MSS", message.client.mss.mss.version, true)
 		.addField("Ping", pinginfo, true)
 		.addField("Node.js", process.version, true)
-		.addField("Uptime", process.uptime(), true)
+		.addField("Uptime", timestamp(process.uptime()), true)
 		.addField("Guilds", guildcount, true)
 		.addField("PID", process.pid, true)
 		.addField("Hardware", hardwareinfo)
@@ -27,4 +27,36 @@ module.exports = function(message) {
 
 
 	message.channel.send("", { embed: embed, disableEveryone: true });
+}
+
+function timestamp(s) {
+	var d, h, m;
+
+	m = Math.floor(s / 60);
+	s = s % 60;
+	h = Math.floor(m / 60);
+	m = m % 60;
+	d = Math.floor(h / 24);
+	h = h % 24;
+
+	var message = "";
+	if(d === 1) {
+		message += d + " days "
+	} else if (d > 1) {
+		message += d + " day "
+	};
+
+	if(m === 1) {
+		message += d + " minute "
+	} else if (d > 1) {
+		message += d + " minutes "
+	};
+
+	if(s === 1) {
+		message += d + " second "
+	} else if (d > 1) {
+		message += d + " seconds "
+	};
+
+	return message;
 }
