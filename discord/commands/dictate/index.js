@@ -1,14 +1,14 @@
 module.exports = function dictate(message) {
 
 	let data = {
-		url: `https://talk.moustacheminer.com/post`,
+		url: `https://talk.moustacheminer.com/api/gen`,
 		method: "POST",
 		json: true,
 		headers: {
 			"User-Agent": message.client.mss.mss.useragent
 		},
 		body: {
-			input: `${message.content}[_<7000>]`
+			dectalk: `${message.content}[_<7000>]`
 		}
 	}
 
