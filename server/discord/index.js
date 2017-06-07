@@ -8,3 +8,5 @@ const manager = new Discord.ShardingManager('./server/discord/bot.js', {
 
 //Spawn with a relevant number of shards automatically
 manager.spawn();
+
+module.exports = manager;
