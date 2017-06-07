@@ -15,7 +15,7 @@
 	"callback": "https://discord.mss.ovh/auth/login/callback",
 	"useragent": "MSS-Discord (https://discord.mss.ovh/)",
 	"ports": {
-		"http": 8080
+		"http": 8000
 	},
 	"rethinkdb": {
 		"host": "",
