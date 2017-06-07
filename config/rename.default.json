@@ -1,0 +1,42 @@
+{
+	"api": {
+		"discord": {
+			"clientID": "",
+			"clientSecret": "",
+			"scope": [ "identify" ],
+			"bot": ""
+		},
+		"youtube": "",
+		"kahoot": "",
+		"discordbotsorg": "",
+		"botsdiscordpw": ""
+	},
+	"name": "Moustacheminer Server Services",
+	"callback": "https://discord.mss.ovh/auth/login/callback",
+	"useragent": "MSS-Discord (https://discord.mss.ovh/)",
+	"ports": {
+		"http": 8000
+	},
+	"rethinkdb": {
+		"host": "",
+		"port": 28015,
+		"db": "discord"
+	},
+	"session": {
+		"secret": ""
+	},
+	"admins": [
+		"190519304972664832"
+	],
+	"url": {
+		"discord": "https://discord.gg/wHgdmf4",
+		"invite": "https://discordapp.com/oauth2/authorize?&client_id=257547382277931009&scope=bot&permissions=70765632",
+		"github": "https://github.com/moustacheminer/mss-discord/",
+		"manual": "https://discord.mss.ovh/manual",
+		"website": "https://discord.mss.ovh/"
+	},
+	"prefix": [
+		"coil",
+		"mss"
+	]
+}
