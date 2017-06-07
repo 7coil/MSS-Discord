@@ -16,5 +16,7 @@ module.exports = function dbotsupdate(client) {
 		}
 	}
 
-	request.post(data);
+	request.post(data, (err, res, body)=>{
+		console.log(err, body)
+	});
 }
