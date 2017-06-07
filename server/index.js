@@ -46,7 +46,7 @@ app.use('/auth', authRouter)
 	.get('/info', (req, res) => {
 		let data = {};
 		let nav = req.query.nav !== undefined ? true : false;
-		data.shards = discord.shards.size || "No Sharding";
+		data.shards = discord.shards && discord.shards.size || "No Sharding";
 		data.hardware = `(${os.arch()}) ${os.cpus()[0].model} clocked at ${os.cpus()[0].speed} MHz`;
 		data.software = `[${os.type()}] ${os.release()}`
 		data.hostname = os.hostname();
