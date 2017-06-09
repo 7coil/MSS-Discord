@@ -79,7 +79,7 @@
 						</li>
 						<li class="list-group-item justify-content-between">
 							Uptime
-							<span class="badge badge-default badge-pill">{{ data.uptime }}</span>
+							<span class="badge badge-default badge-pill" id="uptime"></span>
 						</li>
 					</ul>
 				</div>
@@ -93,6 +93,17 @@
 			</footer>
 		</div>
 
+		<script src="/js/timestamp.js"></script>
+		<script>
+			//let uptime = {{ data.uptime }};
+			let uptime = 0;
+			const uptime_text = document.getElementById("uptime")
+			uptime_text.innerHTML = timestamp(uptime);
+			setInterval(()=>{
+				uptime_text.innerHTML = timestamp(uptime);
+				uptime++;
+			}, 1000)
+		</script>
 		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
