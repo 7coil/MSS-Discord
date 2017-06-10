@@ -17,6 +17,12 @@ function timestamp(s) {
 		message += d + " days "
 	};
 
+	if(h === 1) {
+		message += h + " hour "
+	} else if (h > 1) {
+		message += h + " hours "
+	};
+
 	if(m === 1) {
 		message += m + " minute "
 	} else if (m > 1) {
