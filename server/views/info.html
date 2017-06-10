@@ -95,8 +95,7 @@
 
 		<script src="/js/timestamp.js"></script>
 		<script>
-			//let uptime = {{ data.uptime }};
-			let uptime = 0;
+			let uptime = {{ data.uptime }};
 			const uptime_text = document.getElementById("uptime")
 			uptime_text.innerHTML = timestamp(uptime);
 			setInterval(()=>{
