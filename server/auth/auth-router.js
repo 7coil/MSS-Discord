@@ -1,14 +1,11 @@
-/*jshint node:true */
-'use strict';
+const express = require('express');
+const authControllers = require('./auth-controller');
+const auth = require('./index');
 
-var express = require('express');
-var authControllers = require('./auth-controller');
-
-var auth = require('./index');
-var authRouter = express.Router();
+const authRouter = express.Router();
 
 // DiscordApp
-authRouter.use('/login/callback/discord', auth.authenticate('discord'), function (req, res) {
+authRouter.use('/login/callback/discord', auth.authenticate('discord'), (req, res) => {
 	res.redirect('/');
 });
 authRouter.get('/login/discord', auth.authenticate('discord'));

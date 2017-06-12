@@ -59,6 +59,7 @@ client.on("ready", function() {
 
 client.on("message", function(message) {
 	if(!(message.prefix = client.mss.prefix.find(prefix=>{return message.content.startsWith(prefix)}))) return false;
+	if(config.get('selfbot') && !(config.get('admins').includes(message.author.id))) return false;
 	message.words = message.content.replace(/\n/g, " ").split(/\ +/g);
 	if(message.words[0] === message.prefix) {message.words.shift()} else {message.words[0] = message.words[0].substring(message.prefix.length)};
 	message.content = message.words.join(" ");
