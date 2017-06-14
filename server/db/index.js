@@ -2,7 +2,6 @@ const r = require('rethinkdb');
 const config = require('config');
 require('rethinkdb-init')(r);
 
-
 r.connections = [];
 r.getNewConnection = () =>
 	r.connect(config.get('rethinkdb'))
