@@ -1,6 +1,7 @@
 // Get the required shit together
 const Discord = require('eris');
 const config = require('config');
+const utils = require('./utils.js');
 
 const client = new Discord.Client(config.get('api').discord.token, { maxShards: config.get('shards') });
 const prefixes = config.get('prefix');
@@ -8,7 +9,6 @@ let regex = null;
 
 // Setup commands and util objects.
 const commands = require('./cogs.js');
-client.utils = require('./utils.js');
 
 // Just plop all valid commands in for other cogs to look at it.
 client.commands = commands;
@@ -20,6 +20,22 @@ client.on('ready', () => {
 	// Add mentions to the prefix list
 	prefixes.push(`<@${client.user.id}>`);
 	console.log('Connected to Discord!');
+
+	// Send DBOTS info if it was provided.
+	if (config.get('api').botsdiscordpw) {
+		utils.botsdiscordpw(client);
+		setInterval(() => {
+			utils.botsdiscordpw(client);
+		}, 1800000);
+	}
+
+	// Send FAKEDBOTS info if it was provided.
+	if (config.get('api').discordbotsorg) {
+		utils.discordbotsorg(client);
+		setInterval(() => {
+			utils.discordbotsorg(client);
+		}, 1800000);
+	}
 });
 
 client.on('messageCreate', (message) => {
