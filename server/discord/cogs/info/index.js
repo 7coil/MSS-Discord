@@ -11,9 +11,6 @@ module.exports.alias = [
 ];
 
 module.exports.command = (message, client) => {
-	// Realtime statistics
-	const pinginfo = `${message.guild.shard.latency.toFixed(2)}ms`;
-	const guildcount = message.client.guilds.size;
 	const embed = {
 		embed: {
 			title: 'MSS-Discord',
@@ -30,7 +27,7 @@ module.exports.command = (message, client) => {
 				},
 				{
 					name: 'Guilds',
-					value: guildcount,
+					value: client.guilds.size,
 					embed: true
 				},
 				{
