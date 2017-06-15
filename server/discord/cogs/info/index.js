@@ -1,4 +1,5 @@
 const os = require('os');
+const utils = require('./../../utils.js');
 
 // Non-changing statistics
 // (x64) AMD Athlon (x3) Something @ 3ghz (clocked at ????MHz)
@@ -22,7 +23,7 @@ module.exports.command = (message, client) => {
 				},
 				{
 					name: 'Uptime',
-					value: client.utils.timestamp(process.uptime()),
+					value: utils.timestamp(process.uptime()),
 					embed: true
 				},
 				{

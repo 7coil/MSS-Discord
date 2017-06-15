@@ -1,11 +1,12 @@
 const config = require('config');
+const utils = require('./../../utils.js');
 
 module.exports.alias = [
 	'js',
 	'javascript'
 ];
 
-module.exports.command = (message, client) => {
+module.exports.command = (message) => {
 	if (config.get('admins').includes(message.author.id)) {
 		const embed = {
 			embed: {
@@ -24,11 +25,11 @@ module.exports.command = (message, client) => {
 			if (output.length < 500) {
 				embed.embed.fields.push({ name: 'Output', value: `\`\`\`\n${output}\n\`\`\`` });
 			}
-			client.utils.gist(message.content, (url) => {
+			utils.gist(message.content, (url) => {
 				embed.embed.fields.push({ name: 'Output', value: `[GitHub Gist](${url})` });
 			});
 		} catch (err) {
-			client.utils.gist(err.stack, (url) => {
+			utils.gist(err.stack, (url) => {
 				embed.embed.fields.push({ name: 'Error', value: `[GitHub Gist](${url})` });
 			});
 		}

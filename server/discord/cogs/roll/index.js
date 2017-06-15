@@ -1,3 +1,5 @@
+const utils = require('./../../utils.js');
+
 const regex = /(\d*)d?(\d*)/;
 
 function randInt(d) {
@@ -14,7 +16,7 @@ module.exports.alias = [
 	'random dice'
 ];
 
-module.exports.command = function roll(message, client) {
+module.exports.command = function roll(message) {
 	const parsed = regex.exec(message.input);
 	const rolls = parseInt(parsed[1], 10) || 1;
 	const sides = parseInt(parsed[2], 10) || 6;
@@ -91,7 +93,7 @@ module.exports.command = function roll(message, client) {
 		embed.embed.fields.push({ name: 'Die output', value: result.join(' ') });
 		message.channel.createMessage(embed);
 	} else {
-		client.utils.gist(result.join(' '), (url) => {
+		utils.gist(result.join(' '), (url) => {
 			embed.embed.fields.push({ name: 'Die output', value: `[Full output](${url})` });
 			message.channel.createMessage(embed);
 		});
