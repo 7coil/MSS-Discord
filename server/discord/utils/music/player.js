@@ -74,7 +74,7 @@ function Player(message, client) {
 			this.message.channel.createMessage(`${e.message} - Skipping...`);
 			this.play();
 		}
-		return console.log('doing something');
+		return false;
 	};
 	this.add = (type, url, title, thumb) => {
 		this.playlist.push({

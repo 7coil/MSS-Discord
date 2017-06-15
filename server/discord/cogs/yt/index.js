@@ -15,8 +15,6 @@ module.exports.command = function yt(message, client) {
 	searchYTClient.search(message.input, 10, (error, result) => {
 		const video = result.items.find(youtube => youtube.id.videoId);
 
-		console.dir(video);
-
 		if (error) {
 			console.log(error);
 			message.channel.createMessage(error);
