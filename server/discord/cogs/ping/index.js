@@ -1,3 +1,3 @@
 module.exports = (message) => {
-	message.channel.send(`Ping! ${Math.floor(message.client.ping)}ms`);
+	message.channel.createMessage(`Ping! ${Math.floor(message.client.ping)}ms`);
 };

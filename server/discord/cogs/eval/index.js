@@ -5,7 +5,7 @@ module.exports = (message) => {
 		try {
 			eval(message.content); // eslint-disable-line no-eval
 		} catch (err) {
-			message.channel.send(`\`\`\`${err.stack}\`\`\``);
+			message.channel.createMessage(`\`\`\`${err.stack}\`\`\``);
 		}
 	}
 };

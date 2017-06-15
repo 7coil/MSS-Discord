@@ -20,10 +20,11 @@ module.exports = (message) => {
 			}
 
 			if (output && output.length > 1900) {
-				message.channel.send('```\nUploading output to GitHub\n```');
-				message.client.mss.functions.system.gist(message, output);
+				message.client.mss.functions.system.gist(message, (url) => {
+					message.channel.createMessage(`[GitHub](${url})`);
+				});
 			} else {
-				message.channel.send(`\nOutput\n\`\`\`\n${output}\`\`\``);
+				message.channel.createMessage(`\nOutput\n\`\`\`\n${output}\`\`\``);
 			}
 		});
 	}

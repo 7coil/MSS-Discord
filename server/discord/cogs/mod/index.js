@@ -6,5 +6,5 @@ module.exports = (message) => {
 
 	const report = message.content || 'No report provided :shrug:';
 
-	return message.channel.send(`Report by ${message.author} to ${moderator}:\n${report}`);
+	return message.channel.createMessage(`Report by ${message.author} to ${moderator}:\n${report}`);
 };

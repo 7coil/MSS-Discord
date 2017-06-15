@@ -9,5 +9,5 @@ module.exports = (message) => {
 			}
 		}
 	};
-	message.channel.send(embed);
+	message.channel.createMessage(embed);
 };

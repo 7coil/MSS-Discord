@@ -27,7 +27,7 @@ module.exports = (message, client) => {
 				embed.embed.fields.push({ name: 'Error', value: `[GitHub Gist](${url})` });
 			});
 		}
-		return message.channel.send(embed);
+		return message.channel.createMessage(embed);
 	}
 	return false;
 };

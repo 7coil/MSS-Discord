@@ -54,5 +54,5 @@ module.exports = (message, client) => {
 		}
 	};
 
-	return message.channel.send(embed);
+	return message.channel.createMessage(embed);
 };
