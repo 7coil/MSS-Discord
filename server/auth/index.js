@@ -49,10 +49,10 @@ const loginCallbackHandler = (objectMapper, type) =>
 // DiscordApp
 passport.use(new DiscordStrategy(
 	{
-		clientID: config.get('discord').clientID,
-		clientSecret: config.get('discord').clientSecret,
+		clientID: config.get('api').discord.clientID,
+		clientSecret: config.get('api').discord.clientSecret,
 		callbackURL: `${config.get('callback')}/discord`,
-		scope: config.get('discord').scope,
+		scope: config.get('api').discord.scope,
 	},
 	loginCallbackHandler(profile => (
 		{

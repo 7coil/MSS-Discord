@@ -1,7 +1,7 @@
-var r = require("./db");
-var config = require('config');
+const r = require('./db');
+const config = require('config');
 
-setTimeout(()=>{
+setTimeout(() => {
 	r.init(config.get('rethinkdb'), [
 		{
 			name: 'users',
@@ -15,11 +15,10 @@ setTimeout(()=>{
 			name: 'commands',
 			indexes: ['']
 		}
-	]).then(function (conn) {
+	]).then((conn) => {
 		r.conn = conn;
 		r.connections.push(conn);
 		r.conn.use(config.get('rethinkdb').db);
-		console.log("Finished!");
 		process.exit(1);
 	});
-}, 3000)
+}, 3000);
