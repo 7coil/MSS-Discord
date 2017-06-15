@@ -1,4 +1,8 @@
-module.exports = (message) => {
+module.exports.alias = [
+	'pls'
+];
+
+module.exports.command = (message) => {
 	const embed = {
 		embed: {
 			description: 'Yeah, well, I\'m gonna go build my own "coilpls"... with blackjack and hookers. In fact, forget the "pls"',

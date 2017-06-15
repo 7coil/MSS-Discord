@@ -1,6 +1,16 @@
 const config = require('config');
 
-module.exports = (message) => {
+module.exports.alias = [
+	'help',
+	'man',
+	'manual',
+	'instructions',
+	'ree',
+	'reee',
+	'reeee'
+];
+
+module.exports.command = (message) => {
 	const embed = {
 		embed: {
 			title: 'MSS-Discord',

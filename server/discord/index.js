@@ -19,6 +19,7 @@ client.on('ready', () => {
 
 	// Add mentions to the prefix list
 	prefixes.push(`<@${client.user.id}>`);
+	console.log('Connected to Discord!');
 });
 
 client.on('messageCreate', (message) => {
@@ -32,16 +33,17 @@ client.on('messageCreate', (message) => {
 	if (!result) return;
 
 	// Bake some cool extra crap into the message
-	/* eslint-disable no-param-reassign */
 	message.prefix = result[1];
 	message.command = result[2];
 	message.input = result[3] || null;
 	message.words = result[3].split(/\n+|\s+/g);
-	/* eslint-enable no-param-reassign */
 
 	// Run the actual command
 	commands[message.command].command(message, client);
 });
 
 // Connect to Discord
+console.log('Discord loaded');
 client.connect();
+
+module.exports = client;

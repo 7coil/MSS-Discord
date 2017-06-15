@@ -1,6 +1,11 @@
 const config = require('config');
 
-module.exports = (message, client) => {
+module.exports.alias = [
+	'js',
+	'javascript'
+];
+
+module.exports.command = (message, client) => {
 	if (config.get('admins').includes(message.author.id)) {
 		const embed = {
 			embed: {

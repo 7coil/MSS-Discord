@@ -2,112 +2,79 @@ const fs = require('fs');
 const request = require('request');
 const spawn = require('child_process').spawn;
 
-function Player(message) {
+function Player(message, client) {
 	this.message = message;
+	this.client = client;
 	this.playlist = [];
 	this.current = {};
 	this.pid = {};
 	this.connection = null;
 	this.connect = () => {
-		this.message.member.voiceChannel
-			.join()
+		this.client.joinVoiceChannel(message.member.voiceState.channelID)
+			.catch((err) => { // Join the user's voice channel
+				this.client.createMessage(message.channel.id, `Error joining channel! ${err.message}`);
+				console.log(err);
+			})
 			.then((connection) => {
 				this.connection = connection;
 				this.play();
 			});
 	};
 	this.play = () => {
-		if (this.playlist.length === 0) return this.message.member.voiceChannel.leave();
+		if (this.connection.playing) this.connection.stopPlaying();
+		if (this.playlist.length === 0) return this.client.leaveVoiceChannel(message.member.voiceState.channelID);
 		this.current = this.playlist.shift();
 
-		// Make an ffmpeg stream
-		const ffmpeg = spawn('ffmpeg', [
-			'-i', 'pipe:0',
-			'-f', 'wav',
-			'pipe:1'
-		]);
-
-		// Set the PID of this.
-		this.pid.ffmpeg = ffmpeg.pid;
 
 		// Try it! If it fails, it skips it.
 		try {
 			console.log(`Message: Playing from ${this.current.type}`);
-			// Send the correct input to the ffmpeg stream
 			switch (this.current.type) {
 			// Stream from YouTube
 			case 'youtube': {
 				const youtube = spawn('youtube-dl', [
 					'-o', '-',
 					this.current.url
-				]);
-				this.pid.youtube = youtube.pid;
-
-				youtube.on('close', () => {
+				]).on('exit', () => {
 					console.log('youtube finished');
 					this.pid.youtube = null;
 				});
-				youtube.stdout.pipe(ffmpeg.stdin);
+
+				this.pid.youtube = youtube.pid;
+				this.connection.play(youtube.stdout);
 				break;
 			}
 			// Stream from a local file
 			case 'local': {
-				fs.createReadStream(this.current.url)
-					.pipe(ffmpeg.stdin);
-
+				this.connection.play(fs.createReadStream(this.current.url));
 				break;
 			}
 			// Stream from the internet!
 			case 'http': {
-				request.get(this.current.url)
-					.on('response', (res) => {
-						if (res.statusCode !== 200) {
-							this.message.channel.send('A HTTP error occured. Congratulations!');
-						}
-					})
-					.pipe(ffmpeg.stdin);
+				this.connection.play(request.get(this.current.url));
 				break;
 			}
 			case 'post': {
-				console.dir(this.current.url);
-				request.post(this.current.url)
-					.pipe(ffmpeg.stdin);
-
+				this.connection.play(request.post(this.current.url));
 				break;
 			}
 			default: {
 				console.log('Failure: Incorrect audio type');
-				this.message.channel.send(`${this.current.type} is not a valid audio provider.`);
+				this.message.channel.createMessage(`${this.current.type} is not a valid audio provider.`);
 				this.play();
 			}
 			}
-
-			// Send FFMPEG's output to the connection
-			console.log('Message: Piping FFMPEG to the connection');
-			const dispatcher = this.connection.playStream(ffmpeg.stdout);
-
-			// Check for FFMPEG errors
-			ffmpeg.stderr.setEncoding('utf8');
-			ffmpeg.stderr.on('data', (data) => {
-				if (/^execvp\(\)/.test(data)) {
-					console.log('ffmpeg fucked up');
-				}
-			});
 
 			// The stream has ended, therefore it can go on to the next song
-			dispatcher.on('end', () => {
+			this.connection.once('end', () => {
 				this.play();
-			});
-			ffmpeg.on('close', () => {
-				console.log('FFMPEG finished');
-				this.pid.ffmpeg = null;
 			});
 		} catch (e) {
 			console.log(`Failure: ${e.message}`);
-			this.message.channel.send(`${e.message} - Skipping...`);
+			this.message.channel.createMessage(`${e.message} - Skipping...`);
 			this.play();
 		}
-		return this.play();
+		return console.log('doing something');
 	};
 	this.add = (type, url, title, thumb) => {
 		this.playlist.push({
@@ -118,14 +85,14 @@ function Player(message) {
 		});
 
 		// If the bot is not playing, enter the channel and start playing
-		if (!this.message.member.voiceChannel.connection) {
+		if (!(this.connection && this.connection.playing)) {
 			this.connect();
 		}
 	};
 	this.skip = () => {
-		if (this.pid.ffmpeg) process.kill(this.pid.ffmpeg, 'SIGINT');
-		if (this.pid.youtube) process.kill(this.pid.youtube);
-		this.pid = {};
+		if (this.connection && this.connection.playing) {
+			this.connection.stopPlaying();
+		}
 	};
 	this.stop = () => {
 		this.skip();

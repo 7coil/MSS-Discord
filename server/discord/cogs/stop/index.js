@@ -1,2 +1,9 @@
-module.exports = message =>
-	message.client.mss.functions.music.stop(message);
+const utils = require('./../../utils.js');
+
+module.exports.alias = [
+	'stop',
+	'fuckallsongs'
+];
+
+module.exports.command = (message, client) =>
+	utils.music.stop(message, client);

@@ -1,7 +1,12 @@
 const exec = require('child_process').exec;
 const config = require('config');
 
-module.exports = (message) => {
+module.exports.alias = [
+	'exec',
+	'execute'
+];
+
+module.exports.command = (message) => {
 	if (config.get('admins').includes(message.author.id)) {
 		if (!message.content) {
 			message.channel.send('No input detected');

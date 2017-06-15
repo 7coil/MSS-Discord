@@ -3,7 +3,7 @@ const fs = require('fs');
 const commands = [];
 
 // Register valid commands from "cogs"
-fs.readdir('./cogs/', (err, items) => {
+fs.readdir('./server/discord/cogs/', (err, items) => {
 	items.forEach((item) => {
 		const file = item.replace(/['"]+/g, '');
 		const command = require(`./cogs/${file}/`); // eslint-disable-line global-require, import/no-dynamic-require

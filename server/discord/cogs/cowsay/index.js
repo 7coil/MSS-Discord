@@ -1,9 +1,15 @@
 const execFile = require('child_process').execFile;
 
-module.exports = function screenshot(message) {
-	if (message.content) message.words = ('Have you mooed today?').split(' ');
+module.exports.alias = [
+	'cowsay',
+	'moo',
+	'cow'
+];
 
-	execFile('cowsay', message.words, (error, result) =>
+module.exports.command = (message) => {
+	const input = message.words[0] ? message.words : ['Have', 'you', 'mooed', 'today?'];
+
+	return execFile('cowsay', input, (error, result) =>
 		message.channel.createMessage(`\`\`\`\n${result}\n\`\`\``)
 	);
 };

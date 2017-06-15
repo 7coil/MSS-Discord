@@ -44,33 +44,14 @@ app.use('/auth', authRouter)
 	.get('/info', (req, res) => {
 		const data = {};
 		const nav = req.query.nav !== undefined;
-		data.shards = (discord.shards && discord.shards.size) || 'No Sharding';
+		data.shards = discord.shards.size || 'No Sharding';
 		data.hardware = `(${os.arch()}) ${os.cpus()[0].model} clocked at ${os.cpus()[0].speed} MHz`;
 		data.software = `[${os.type()}] ${os.release()}`;
 		data.hostname = os.hostname();
 		data.uptime = Math.floor(process.uptime());
-
-		discord.fetchClientValues('guilds.size').then((info1) => {
-			data.guilds = info1.reduce((a, b) => a + b, 0);
-			discord.fetchClientValues('users.size').then((info2) => {
-				data.users = info2.reduce((a, b) => a + b, 0);
-				discord.fetchClientValues('ping').then((info3) => {
-					data.ping = {};
-					data.ping.max = Math.floor(info3.reduce((a, b) => Math.max(a, b)));
-					data.ping.min = Math.floor(info3.reduce((a, b) => Math.min(a, b)));
-					if (data.ping.min < 50) {
-						data.ping.css = 'list-group-item-success';
-					} else if (data.ping.min < 150) {
-						data.ping.css = 'list-group-item-warning';
-					} else {
-						data.ping.css = 'list-group-item-danger';
-					}
-					return res.status(200).render('info.html', { user: req.user, data, navoff: nav });
-				});
-			});
-		}).catch(err =>
-			res.status(500).render('error.html', { user: req.user, status: 500, message: err.message })
-		);
+		data.guilds = discord.guilds.size;
+		data.users = discord.users.size;
+		return res.status(200).render('info.html', { user: req.user, data, navoff: nav });
 	})
 	.get('/manual', (req, res) => {
 		const nav = req.query.nav !== undefined;
@@ -94,9 +75,9 @@ app.use('/auth', authRouter)
 		res.status(404).render('error.html', { user: req.user, status: 404 })
 	);
 
-
-console.log('Welcome to MOUSTACHEMINER SERVER SERVICES');
-console.log('=========================================');
+console.log('============================================');
+console.log('Welcome to "Moustacheminer Server Services"!');
+console.log('============================================');
 
 // Initialisation process
 console.log('Listening on', config.get('ports').http);

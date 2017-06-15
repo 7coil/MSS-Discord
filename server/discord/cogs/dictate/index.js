@@ -1,6 +1,14 @@
 const config = require('config');
+const utils = require('./../../utils.js');
 
-module.exports = function dictate(message) {
+module.exports.alias = [
+	'dictate',
+	'dectalk',
+	'dec',
+	'fonix'
+];
+
+module.exports.command = (message, client) => {
 	const data = {
 		url: 'https://talk.moustacheminer.com/api/gen',
 		method: 'POST',
@@ -9,9 +17,9 @@ module.exports = function dictate(message) {
 			'User-Agent': config.get('useragent')
 		},
 		body: {
-			dectalk: `${message.content}[_<7000>]`
+			dectalk: message.input
 		}
 	};
 
-	return message.client.mss.functions.music.add(message, 'post', data, 'MSS DecTalk', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/DECtalk_DCT01_and_Tink.jpg/300px-DECtalk_DCT01_and_Tink.jpg');
+	if (message.content) utils.music.add(message, client, 'post', data, 'MSS DecTalk', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/DECtalk_DCT01_and_Tink.jpg/300px-DECtalk_DCT01_and_Tink.jpg');
 };

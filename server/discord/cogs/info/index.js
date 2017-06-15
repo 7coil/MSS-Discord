@@ -5,19 +5,19 @@ const os = require('os');
 const hardwareinfo = `(${os.arch()}) ${os.cpus()[0].model} clocked at ${os.cpus()[0].speed} MHz`;
 const softwareinfo = `[${os.type()}] ${os.release()}`;
 
-module.exports = (message, client) => {
+module.exports.alias = [
+	'info',
+	'information'
+];
+
+module.exports.command = (message, client) => {
 	// Realtime statistics
-	const pinginfo = `${message.client.ping.toFixed(2)}ms`;
+	const pinginfo = `${message.guild.shard.latency.toFixed(2)}ms`;
 	const guildcount = message.client.guilds.size;
 	const embed = {
 		embed: {
 			title: 'MSS-Discord',
 			fields: [
-				{
-					name: 'Ping',
-					value: pinginfo,
-					embed: true
-				},
 				{
 					name: 'Node.js',
 					value: process.version,

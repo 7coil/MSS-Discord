@@ -8,6 +8,10 @@ function randInt(d) {
 module.exports.alias = [
 	'roll',
 	'dice',
+	'die',
+	'random',
+	'random roll',
+	'random dice'
 ];
 
 module.exports.command = function roll(message, client) {
