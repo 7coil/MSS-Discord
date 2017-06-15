@@ -1,6 +1,6 @@
 {
   "name": "mss-discord",
-  "version": "2017.6.7",
+  "version": "2017.6.15",
   "description": "Moustacheminer Server Services, but for Discord.",
   "main": "./server",
   "scripts": {
