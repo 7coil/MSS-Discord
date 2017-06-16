@@ -98,6 +98,7 @@ function Player(message, client) {
 		this.current = {};
 		this.playlist = [];
 		this.skip();
+		this.client.leaveVoiceChannel(this.message.member.voiceState.channelID);
 	};
 }
 
