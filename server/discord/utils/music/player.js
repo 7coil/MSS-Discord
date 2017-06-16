@@ -109,8 +109,8 @@ process.on('unhandledRejection', (err) => {
 
 process.on('uncaughtException', (err) => {
 	if (err.message !== 'read ECONNRESET') {
-		console.log(err.stack);
-		return process.exit(1);
+		//console.log(err.stack);
+		//return process.exit(1);
 	}
 	return false;
 });
