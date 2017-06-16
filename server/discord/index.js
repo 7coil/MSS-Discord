@@ -15,7 +15,7 @@ client.commands = commands;
 
 client.on('ready', () => {
 	// Set up regex for the bot.
-	regex = new RegExp(`(${prefixes.join('|')}).?(${Object.keys(commands).join('|')})\\s?([\s\S]*)`);
+	regex = new RegExp(`(${prefixes.join('|')}).?(${Object.keys(commands).join('|')})\\s?([\\s\\S]*)`);
 
 	// Add mentions to the prefix list
 	prefixes.push(`<@${client.user.id}>`);
