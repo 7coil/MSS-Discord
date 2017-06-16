@@ -43,7 +43,7 @@ client.on('messageCreate', (message) => {
 	if (message.author.bot) return;
 
 	// Test the message content on the regular expression
-	const result = regex.exec(message.content);
+	const result = regex.exec(message.content.replace(/\n/g, ' '));
 
 	// Return if it fails the regex commands check test
 	if (!result) return;
