@@ -2,7 +2,8 @@ const utils = require('./../../utils.js');
 
 module.exports.alias = [
 	'list',
-	'playlist'
+	'playlist',
+	'queue'
 ];
 
 module.exports.command = function list(message) {
