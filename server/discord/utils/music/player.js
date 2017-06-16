@@ -95,9 +95,9 @@ function Player(message, client) {
 		}
 	};
 	this.stop = () => {
-		this.skip();
 		this.current = {};
 		this.playlist = [];
+		this.skip();
 	};
 }
 
