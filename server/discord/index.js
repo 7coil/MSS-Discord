@@ -15,7 +15,7 @@ client.commands = commands;
 
 client.on('ready', () => {
 	// Set up regex for the bot.
-	regex = new RegExp(`(${prefixes.join('|')}).?(${Object.keys(commands).join('|')})\\s?(.*)`);
+	regex = new RegExp(`(${prefixes.join('|')}).?(${Object.keys(commands).join('|')})\\s?([\s\S]*)`);
 
 	// Add mentions to the prefix list
 	prefixes.push(`<@${client.user.id}>`);
@@ -43,7 +43,7 @@ client.on('messageCreate', (message) => {
 	if (message.author.bot) return;
 
 	// Test the message content on the regular expression
-	const result = regex.exec(message.content.replace(/\n/g, ' '));
+	const result = regex.exec(message.content);
 
 	// Return if it fails the regex commands check test
 	if (!result) return;
