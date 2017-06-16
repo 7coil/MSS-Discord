@@ -21,5 +21,7 @@ module.exports.command = (message, client) => {
 		}
 	};
 
+	console.dir(data);
+
 	if (message.content) utils.music.add(message, client, 'post', data, 'MSS DecTalk', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/DECtalk_DCT01_and_Tink.jpg/300px-DECtalk_DCT01_and_Tink.jpg');
 };
