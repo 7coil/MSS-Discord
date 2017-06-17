@@ -25,7 +25,7 @@ module.exports.command = message =>
 
 		stream.on('end', () => {
 			const file = Buffer.concat(buffer);
-			message.channel.createMessage('Break the Virtual Machine! http://vnc.moustacheminer.com/', {
+			message.channel.createMessage('Do stuff with the Virtual Machine! http://vnc.moustacheminer.com/', {
 				file,
 				name: 'vnc.jpg'
 			});
