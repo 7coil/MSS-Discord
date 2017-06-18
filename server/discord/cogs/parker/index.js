@@ -22,7 +22,10 @@ module.exports.command = (message, client) => {
 	let sender = null;
 	let reciever = null;
 
-	if (message.author.id === id[1]) {
+	if (!id[1]) {
+		sender = 'Nobody';
+		reciever = escapeChar(message.author.username);
+	} else if (message.author.id === id[1]) {
 		sender = 'yourself';
 		reciever = escapeChar(message.author.username);
 	} else if (client.users.get(id[1])) {
