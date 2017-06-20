@@ -6,7 +6,7 @@ module.exports.alias = [
 	'javascript'
 ];
 
-module.exports.command = (message) => {
+module.exports.command = (message, client) => { // eslint-disable-line no-unused-vars
 	if (config.get('admins').includes(message.author.id)) {
 		const embed = {
 			embed: {
