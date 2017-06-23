@@ -1,19 +1,9 @@
 const request = require('request');
 const config = require('config');
+const utils = require('./../../utils.js');
 
 module.exports = function gist(input, callback) {
-	let text = null;
-	if (typeof input === 'string') {
-		text = input;
-	} else if (typeof input === 'number') {
-		text = input.toString();
-	} else if (typeof input === 'boolean') {
-		text = input;
-	} else if (typeof input === 'object') {
-		text = JSON.stringify(input);
-	} else {
-		throw new Error('Input for GitHub Gists was invalid.');
-	}
+	const text = utils.makeString(input);
 
 	const data = {
 		url: 'https://api.github.com/gists',

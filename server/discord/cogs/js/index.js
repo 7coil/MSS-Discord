@@ -22,7 +22,7 @@ module.exports.command = (message, client) => { // eslint-disable-line no-unused
 
 		try {
 			const output = eval(`(${message.input})`); // eslint-disable-line no-eval
-			if (output && output.length < 500) {
+			if (output && utils.makeString(output).length < 500) {
 				embed.embed.fields.push({ name: 'Output', value: `\`\`\`\n${output}\n\`\`\`` });
 				message.channel.createMessage(embed);
 			} else if (typeof output !== 'undefined') {
