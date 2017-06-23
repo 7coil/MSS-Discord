@@ -21,9 +21,6 @@ function generate(user, callback) {
 			cursor.toArray((err2, result) => {
 				if (err2) throw new Error('Fuck!');
 
-				console.dir(result);
-				console.dir(result[0]);
-
 				// Find a first word
 				let word = choice(result[0].start);
 
