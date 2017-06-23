@@ -42,16 +42,24 @@ function generate(user, callback) {
 
 				const author = client.users.get(result[0].author);
 
-				const embed = {
-					content: `If I recall correctly, ${author.username} said:`,
-					embed: {
-						description: title.join(' '),
-						author: {
-							name: `${author.username}#${author.discriminator}`,
-							icon_url: author.avatarURL
+				let embed = {};
+
+				if (author) {
+					embed = {
+						content: `If I recall correctly, ${author.username} said:`,
+						embed: {
+							description: title.join(' '),
+							author: {
+								name: `${author.username}#${author.discriminator}`,
+								icon_url: author.avatarURL
+							}
 						}
-					}
-				};
+					};
+				} else {
+					embed = {
+						content: 'Seems like this person is offline, or has deleted themselves from all of eternity.'
+					};
+				}
 
 				// Join the sentence and call the callback.
 				callback(embed);
