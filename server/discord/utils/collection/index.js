@@ -27,8 +27,7 @@ function banGuild(id) {
 }
 
 function checkGuilds(bot) {
-	console.log('hokey');
-	//bot.guilds.filter(guild => guildStats(guild).fail).forEach(guild => banGuild(guild.id));
+	bot.guilds.filter(guild => guildStats(guild).fail).forEach(guild => banGuild(guild.id));
 }
 
 client.on('guildCreate', (guild) => {
@@ -55,5 +54,5 @@ client.on('guildCreate', (guild) => {
 	}
 });
 
-module.ban = banGuild;
-module.check = checkGuilds;
+exports.ban = banGuild;
+exports.check = checkGuilds;
