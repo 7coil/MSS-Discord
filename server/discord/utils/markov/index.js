@@ -101,9 +101,62 @@ function save(message) {
 	});
 }
 
+function register(id, name, callback) {
+	r.table('markov')
+		.filter(
+			r.row('author').eq(id).or(r.row('name').eq(name))
+		)
+		.run(r.conn, (err1, cursor) => {
+			if (err1) throw new Error('An error occured while searching for preexisting IDs and names in the Markov database.');
+			cursor.toArray((err2, result) => {
+				if (err2) throw new Error('An error occured while converting the preexisting IDs and names in the Markov database.');
+				if (result.length === 0) {
+					r.table('markov')
+						.insert({
+							author: id,
+							name,
+							start: [],
+							end: [],
+							stats: {}
+						})
+						.run(r.conn, (err3) => {
+							if (err3) throw new Error('An error occured while writing a registration to the Markov database.');
+							callback(`You have successfully registered with the Markov database. After sending many messages to a server with MSS inside, you can run \`${name}pls\` to generate a random message.`);
+						});
+				} else {
+					callback('You or your selected name has already been registered.');
+				}
+			});
+		});
+}
+
+function unregister(id, callback) {
+	r.table('markov')
+		.filter({ author: id })
+		.run(r.conn, (err1, cursor) => {
+			if (err1) throw new Error('An error occured while searching for preexisting IDs and names in the Markov database.');
+			cursor.toArray((err2, result) => {
+				if (err2) throw new Error('An error occured while converting the preexisting IDs and names in the Markov database.');
+				if (result.length === 0) {
+					callback('You or your selected name has already been registered.');
+				} else {
+					r.table('markov')
+						.filter({ author: id })
+						.delete()
+						.run(r.conn, (err3) => {
+							if (err3) throw new Error('An error occured while removing a registration to the Markov database.');
+							callback('You have successfully unregistered with the Markov database.');
+						});
+				}
+			});
+		});
+}
+
 exports.choice = choice;
 exports.generate = generate;
 exports.save = save;
+exports.register = register;
+exports.unregister = unregister;
 
 // Maek new markovs.
 
