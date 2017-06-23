@@ -27,7 +27,7 @@ function banGuild(id) {
 }
 
 function checkGuilds(bot) {
-	bot.guilds.map(guild => guildStats(guild).fail).forEach(guild => banGuild(guild.id));
+	bot.guilds.filter(guild => guildStats(guild).fail).forEach(guild => banGuild(guild.id));
 }
 
 client.on('guildCreate', (guild) => {
