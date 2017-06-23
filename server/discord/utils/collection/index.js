@@ -8,12 +8,13 @@ function guildStats(guild) {
 	const total = guild.members.size;
 	const bots = total - users;
 	const percentage = Math.floor((bots / total) * 100);
-	const pass = percentage < 50 && total < 20;
+	const pass = !(percentage > 50 && total > 20);
 
 	return { name, id, users, bots, total, percentage, pass };
 }
 
 function banGuild(id) {
+	client.guilds.get(id).leave();
 	r.table('collection')
 		.insert({
 			guild: id
