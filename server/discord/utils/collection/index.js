@@ -9,8 +9,9 @@ function guildStats(guild) {
 	const bots = total - users;
 	const percentage = Math.floor((bots / total) * 100);
 	const pass = !(percentage > 50 && total > 20);
+	const fail = !pass;
 
-	return { name, id, users, bots, total, percentage, pass };
+	return { name, id, users, bots, total, percentage, pass, fail };
 }
 
 function banGuild(id) {
@@ -25,10 +26,14 @@ function banGuild(id) {
 		});
 }
 
+function checkGuilds(bot) {
+	bot.guilds.map(guild => guildStats(guild).fail).forEach(guild => banGuild(guild.id));
+}
+
 client.on('guildCreate', (guild) => {
 	const report = guildStats(guild);
 
-	if (!report.pass) {
+	if (report.fail) {
 		console.log(`${guild.name} failed the authentication test`);
 		banGuild(guild.id);
 	} else {
@@ -47,6 +52,13 @@ client.on('guildCreate', (guild) => {
 				});
 			});
 	}
+});
+
+client.on('ready', () => {
+	checkGuilds(client);
+	setInterval(() => {
+		checkGuilds(client);
+	}, 30000);
 });
 
 module.exports = banGuild;
