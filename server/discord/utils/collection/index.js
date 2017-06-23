@@ -8,8 +8,8 @@ function guildStats(guild) {
 	const total = guild.members.size;
 	const bots = total - users;
 	const percentage = Math.floor((bots / total) * 100);
-	const pass = !(percentage > 50 && total > 20);
-	const fail = !pass;
+	const fail = percentage > 50 && total > 20;
+	const pass = !fail;
 
 	return { name, id, users, bots, total, percentage, pass, fail };
 }
@@ -32,6 +32,7 @@ function checkGuilds(bot) {
 
 client.on('guildCreate', (guild) => {
 	const report = guildStats(guild);
+	console.log(report);
 
 	if (report.fail) {
 		console.log(`${guild.name} failed the authentication test`);
