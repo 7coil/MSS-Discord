@@ -42,6 +42,7 @@ client.on('guildCreate', (guild) => {
 						console.log(`${guild.name} passed the authentication test`);
 					} else {
 						console.log(`${guild.name} was already banned!`);
+						guild.leave();
 					}
 				});
 			});
