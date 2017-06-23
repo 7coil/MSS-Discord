@@ -54,11 +54,5 @@ client.on('guildCreate', (guild) => {
 	}
 });
 
-client.on('ready', () => {
-	checkGuilds(client);
-	setInterval(() => {
-		checkGuilds(client);
-	}, 30000);
-});
-
-module.exports = banGuild;
+module.ban = banGuild;
+module.check = checkGuilds;

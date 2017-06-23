@@ -45,6 +45,12 @@ client.on('ready', () => {
 			utils.discordbotsorg(client);
 		}, 1800000);
 	}
+
+	// Check for bot collection servers
+	utils.collection.check(client);
+	setInterval(() => {
+		utils.collection.check(client);
+	}, 1800000);
 });
 
 client.on('messageCreate', (message) => {
