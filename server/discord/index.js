@@ -24,7 +24,7 @@ client.on('ready', () => {
 	// /^(mss).?(ping)\s?([\s\S]*)/
 	// /(\w+)rly/
 	prefix = new RegExp(`^(${prefixes.join('|')}).?(${Object.keys(commands).join('|')})\\s?([\\s\\S]*)`);
-	suffix = /(\w+)y/;
+	suffix = /(\w+)pls/;
 
 	// Add mentions to the prefix list
 	prefixes.push(`<@${client.user.id}>`);
