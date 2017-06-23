@@ -2,7 +2,18 @@ const request = require('request');
 const config = require('config');
 
 module.exports = function gist(input, callback) {
-	if (typeof input !== 'string') throw new Error('Input for GitHub Gists was not a String.');
+	let text = null;
+	if (typeof input === 'string') {
+		text = input;
+	} else if (typeof input === 'number') {
+		text = input.toString();
+	} else if (typeof input === 'boolean') {
+		text = input;
+	} else if (typeof input === 'object') {
+		text = JSON.stringify(input);
+	} else {
+		throw new Error('Input for GitHub Gists was invalid.');
+	}
 
 	const data = {
 		url: 'https://api.github.com/gists',
@@ -16,7 +27,7 @@ module.exports = function gist(input, callback) {
 			public: true,
 			files: {
 				moustacheminer: {
-					content: input,
+					content: text,
 				}
 			}
 		}
