@@ -4,9 +4,9 @@ const client = require('./../../');
 function guildStats(guild) {
 	const name = guild.name;
 	const id = guild.id;
-	const users = guild.members.filter(member => !member.user.bot).size;
+	const bots = guild.members.filter(member => member.user.bot).size;
 	const total = guild.members.size;
-	const bots = total - users;
+	const users = total - bots;
 	const percentage = Math.floor((bots / total) * 100);
 	const fail = percentage > 50 && total > 20;
 	const pass = !fail;
