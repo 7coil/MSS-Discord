@@ -8,10 +8,10 @@ module.exports.alias = [
 
 module.exports.command = (message) => {
 	if (config.get('admins').includes(message.author.id)) {
-		if (!message.content) {
+		if (!message.input) {
 			message.channel.send('No input detected');
 		} else {
-			exec(message.content, (error, stdout, stderr) => {
+			exec(message.input, (error, stdout, stderr) => {
 				let output = '';
 
 				if (stdout) {
