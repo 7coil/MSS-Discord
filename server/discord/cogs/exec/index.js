@@ -27,7 +27,7 @@ module.exports.command = (message) => {
 
 				if (output && output.length > 1900) {
 					utils.gist(output, (url) => {
-						message.channel.createMessage(`[GitHub](${url})`);
+						message.channel.createMessage(url);
 					});
 				} else {
 					message.channel.createMessage(`\nOutput\n\`\`\`\n${output}\`\`\``);
