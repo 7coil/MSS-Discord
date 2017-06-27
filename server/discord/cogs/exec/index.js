@@ -1,5 +1,6 @@
 const exec = require('child_process').exec;
 const config = require('config');
+const utils = require('./../../utils.js');
 
 module.exports.alias = [
 	'exec',
@@ -25,7 +26,7 @@ module.exports.command = (message) => {
 				}
 
 				if (output && output.length > 1900) {
-					message.client.mss.functions.system.gist(message, (url) => {
+					utils.gist(output, (url) => {
 						message.channel.createMessage(`[GitHub](${url})`);
 					});
 				} else {
