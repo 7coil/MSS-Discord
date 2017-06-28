@@ -8,18 +8,27 @@ module.exports.alias = [
 	'fonix'
 ];
 
-module.exports.command = (message, client) => {
-	const data = {
-		url: 'https://talk.moustacheminer.com/api/gen',
-		method: 'POST',
-		json: true,
-		headers: {
-			'User-Agent': config.get('useragent')
-		},
-		body: {
-			dectalk: message.input
-		}
-	};
+module.exports.command = (message) => {
+	if (message.input) {
+		const data = {
+			url: 'https://talk.moustacheminer.com/api/gen',
+			method: 'POST',
+			json: true,
+			headers: {
+				'User-Agent': config.get('useragent')
+			},
+			body: {
+				dectalk: message.input
+			}
+		};
 
-	if (message.content) utils.music.add(message, client, 'post', data, 'MSS DecTalk', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/DECtalk_DCT01_and_Tink.jpg/300px-DECtalk_DCT01_and_Tink.jpg');
+		utils.music.add(message, {
+			type: 'post',
+			from: 'DECtalk',
+			media: data,
+			title: 'DECtalk Text To Speech',
+			thumb: 'https://upload.wikimedia.org/wikipedia/commons/2/2b/DECtalk_DCT01_and_Tink.jpg',
+			desc: message.input
+		});
+	}
 };
