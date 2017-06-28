@@ -2,6 +2,7 @@ const r = require('./../../../db');
 const client = require('./../../');
 const spawn = require('child_process').spawn;
 const request = require('request');
+const utils = require('./../../utils.js');
 
 const connections = {};
 
@@ -103,19 +104,27 @@ const add = (message, details) => {
 };
 const skip = (message) => {
 	// Stop playing if there it is playing
-	if (connections[message.channel.guild.id] && connections[message.channel.guild.id].playing) connections[message.channel.guild.id].stopPlaying();
+	if (utils.isadmin(message.member)) {
+		if (connections[message.channel.guild.id] && connections[message.channel.guild.id].playing) connections[message.channel.guild.id].stopPlaying();
+	} else {
+		message.channel.createMessage('You do not have permission to perform this command!');
+	}
 };
 const stop = (message) => {
-	r.table('playlist')
-		.get(message.channel.guild.id)
-		.replace({
-			id: message.channel.guild.id,
-			playlist: []
-		})
-		.run(r.conn, (err) => {
-			if (err) throw new Error('Failed to clear Rethonk(TM) playlist.');
-			skip(message);
-		});
+	if (utils.isadmin(message.member)) {
+		r.table('playlist')
+			.get(message.channel.guild.id)
+			.replace({
+				id: message.channel.guild.id,
+				playlist: []
+			})
+			.run(r.conn, (err) => {
+				if (err) throw new Error('Failed to clear Rethonk(TM) playlist.');
+				skip(message);
+			});
+	} else {
+		message.channel.createMessage('You do not have permission to perform this command!');
+	}
 };
 
 exports.connect = connect;
