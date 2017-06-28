@@ -74,9 +74,7 @@ app.use('/auth', authRouter)
 		const guild = discord.guilds.get(req.params.id);
 		const nav = req.query.nav !== undefined;
 
-		if (!req.user) {
-			res.status(401).render('error.html', { user: req.user, status: 401, message: 'You have not logged in yet' });
-		} else if (typeof guild === 'undefined') {
+		if (typeof guild === 'undefined') {
 			res.status(404).render('error.html', { user: req.user, status: 404, message: 'The guild could not be found.' });
 		} else {
 			r.table('playlist')
