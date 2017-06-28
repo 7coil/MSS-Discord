@@ -83,7 +83,12 @@ app.use('/auth', authRouter)
 					if (err) {
 						res.status(404).render('error.html', { user: req.user, status: 404 });
 					} else {
-						res.status(200).render('music.html', { user: req.user, playlist: result, nav });
+						const indexedarray = result.map((elem, index) => {
+							elem.index = index;
+							return elem;
+						});
+
+						res.status(200).render('music.html', { user: req.user, playlist: indexedarray, nav });
 					}
 				});
 		}

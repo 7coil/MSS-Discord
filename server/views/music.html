@@ -50,10 +50,10 @@
 					<div id="accordion" role="tablist" aria-multiselectable="true">
 						{{ #playlist }}
 						<div class="card">
-							<a name="{{ @index }}"></a>
-							<div class="card-header" role="tab" id="heading_{{ @index }}">
+							<a name="{{ index }}"></a>
+							<div class="card-header" role="tab" id="heading_{{ index }}">
 								<h5 class="mb-0">
-									<a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{ @index }}" aria-expanded="true" aria-controls="collapse_{{ @index }}">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{ index }}" aria-expanded="true" aria-controls="collapse_{{ index }}">
 										{{ title }} <span class="badge badge-default badge-pill">{{ from }}</span>
 									</a>
 								</h5>
