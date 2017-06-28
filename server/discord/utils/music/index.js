@@ -62,6 +62,13 @@ const play = (message) => {
 				'pipe:1'
 			]);
 
+			ffmpeg.stdout.on('error', (err) => {
+				message.channel.createMessage(`Error playing audio! ${err.message}`);
+			});
+			ffmpeg.stderr.on('error', (err) => {
+				message.channel.createMessage(`Error playing audio! ${err.message}`);
+			});
+
 			request.get(playlist[0].media).pipe(ffmpeg.stdin);
 			connections[message.channel.guild.id].play(ffmpeg.stdout);
 			after();
@@ -72,6 +79,13 @@ const play = (message) => {
 				'-ac', '2',
 				'pipe:1'
 			]);
+
+			ffmpeg.stdout.on('error', (err) => {
+				message.channel.createMessage(`Error playing audio! ${err.message}`);
+			});
+			ffmpeg.stderr.on('error', (err) => {
+				message.channel.createMessage(`Error playing audio! ${err.message}`);
+			});
 
 			request.post(playlist[0].media).pipe(ffmpeg.stdin);
 			connections[message.channel.guild.id].play(ffmpeg.stdout);
