@@ -7,16 +7,20 @@ const utils = require('./../../utils.js');
 const connections = {};
 
 const list = (message, callback) => {
-	r.table('playlist')
-		.get(message.channel.guild.id)
-		.run(r.conn, (err, res) => {
-			if (err) throw new Error('Failed to read Rethonk(TM) playlist.');
-			if (res === null) {
-				callback([]);
-			} else {
-				callback(res.playlist);
-			}
-		});
+	if (!message.member) {
+		message.channel.createMessage('You need to be in a Guild!');
+	} else {
+		r.table('playlist')
+			.get(message.channel.guild.id)
+			.run(r.conn, (err, res) => {
+				if (err) throw new Error('Failed to read Rethonk(TM) playlist.');
+				if (res === null) {
+					callback([]);
+				} else {
+					callback(res.playlist);
+				}
+			});
+	}
 };
 const play = (message) => {
 	list(message, (playlist) => {
