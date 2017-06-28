@@ -74,20 +74,24 @@ client.on('messageCreate', (message) => {
 		// Run the actual command
 		commands[message.command].command(message, client);
 	} else if (suf) {
-		// If the suffix matches a user's name in the database...
-		r.table('markov')
-			.filter({ name: suf[1] })
-			.run(r.conn, (err1, cursor) => {
-				if (err1) return;
-				cursor.toArray((err2, result) => {
-					if (err2) return;
-					if (result.length === 0) return;
-					// Generate a Markov
-					utils.markov.generate(suf[1], (embed) => {
-						message.channel.createMessage(embed);
+		if (message.guild && message.channel && message.guild.id === '110373943822540800' && message.channel.id === '110373943822540800') {
+			message.channel.createMessage('For Markovs in this server, please go to <#132632676225122304>');
+		} else {
+			// If the suffix matches a user's name in the database...
+			r.table('markov')
+				.filter({ name: suf[1] })
+				.run(r.conn, (err1, cursor) => {
+					if (err1) return;
+					cursor.toArray((err2, result) => {
+						if (err2) return;
+						if (result.length === 0) return;
+						// Generate a Markov
+						utils.markov.generate(suf[1], (embed) => {
+							message.channel.createMessage(embed);
+						});
 					});
 				});
-			});
+		}
 	} else {
 		// If the user exists in the rethonk Markov database...
 		r.table('markov')
