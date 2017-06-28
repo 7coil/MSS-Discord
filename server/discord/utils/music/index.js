@@ -8,10 +8,14 @@ const connections = {};
 
 const list = (message, callback) => {
 	r.table('playlist')
-		.get(message.channel.guild.id)('playlist')
+		.get(message.channel.guild.id)
 		.run(r.conn, (err, res) => {
 			if (err) throw new Error('Failed to read Rethonk(TM) playlist.');
-			callback(res);
+			if (res === null) {
+				callback([]);
+			} else {
+				callback(res);
+			}
 		});
 };
 const play = (message) => {
