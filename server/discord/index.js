@@ -74,7 +74,7 @@ client.on('messageCreate', (message) => {
 		// Run the actual command
 		commands[message.command].command(message, client);
 	} else if (suf) {
-		if (message.guild && message.channel && message.guild.id === '110373943822540800' && message.channel.id === '110373943822540800') {
+		if (message.channel && message.channel.id === '110373943822540800') {
 			message.channel.createMessage('For Markovs in this server, please go to <#132632676225122304>');
 		} else {
 			// If the suffix matches a user's name in the database...
