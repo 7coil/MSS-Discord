@@ -54,6 +54,8 @@ client.on('ready', () => {
 });
 
 client.on('messageCreate', (message) => {
+	// It crashed on this before. No explaination.
+	if (!message.author) return;
 	// Disallow if the author is a bot
 	if (message.author.bot) return;
 
