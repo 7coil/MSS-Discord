@@ -78,8 +78,6 @@ app.use('/auth', authRouter)
 			res.status(401).render('error.html', { user: req.user, status: 401, message: 'You have not logged in yet' });
 		} else if (typeof guild === 'undefined') {
 			res.status(404).render('error.html', { user: req.user, status: 404, message: 'The guild could not be found.' });
-		} else if (!guild.members.get(req.user.login)) {
-			res.status(400).render('error.html', { user: req.user, status: 400, message: 'You are not allowed to view the playlist for this guild because you are not in the guild.' });
 		} else {
 			r.table('playlist')
 				.get(guild.id)('playlist')
