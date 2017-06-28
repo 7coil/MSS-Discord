@@ -5,5 +5,5 @@ module.exports.alias = [
 	'fuckthissong'
 ];
 
-module.exports.command = (message, client) =>
-	utils.music.skip(message, client);
+module.exports.command = message =>
+	utils.music.skip(message);

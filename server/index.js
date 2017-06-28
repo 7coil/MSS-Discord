@@ -51,7 +51,7 @@ app.use('/auth', authRouter)
 		data.uptime = Math.floor(process.uptime());
 		data.guilds = discord.guilds.size;
 		data.users = discord.users.size;
-		return res.status(200).render('info.html', { user: req.user, data, navoff: nav });
+		res.status(200).render('info.html', { user: req.user, data, nav });
 	})
 	.get('/manual', (req, res) => {
 		const nav = req.query.nav !== undefined;
@@ -66,9 +66,31 @@ app.use('/auth', authRouter)
 						if (a.message.embed.title.toLowerCase() > b.message.embed.title.toLowerCase()) return 1;
 						return 0;
 					});
-					return res.render('manual.html', { user: req.user, command: data, navoff: nav });
+					return res.render('manual.html', { user: req.user, command: data, nav });
 				});
 			});
+	})
+	.get('/music/:id', (req, res) => {
+		const guild = discord.guilds.get(req.params.id);
+		const nav = req.query.nav !== undefined;
+
+		if (!req.user) {
+			res.status(401).render('error.html', { user: req.user, status: 401, message: 'You have not logged in yet' });
+		} else if (typeof guild === 'undefined') {
+			res.status(404).render('error.html', { user: req.user, status: 404, message: 'The guild could not be found.' });
+		} else if (!guild.members.get(req.user.login)) {
+			res.status(400).render('error.html', { user: req.user, status: 400, message: 'You are not allowed to view the playlist for this guild because you are not in the guild.' });
+		} else {
+			r.table('playlist')
+				.get(guild.id)('playlist')
+				.run(r.conn, (err, result) => {
+					if (err) {
+						res.status(404).render('error.html', { user: req.user, status: 404 });
+					} else {
+						res.status(200).render('music.html', { user: req.user, playlist: result, nav });
+					}
+				});
+		}
 	})
 	.use(express.static(path.join(__dirname, '/../client')))
 	.use('*', (req, res) =>

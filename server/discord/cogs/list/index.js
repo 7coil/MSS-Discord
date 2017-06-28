@@ -6,6 +6,18 @@ module.exports.alias = [
 	'queue'
 ];
 
-module.exports.command = function list(message) {
-	utils.music.list(message);
-}
+module.exports.command = (message) => {
+	utils.music.list(message, (playlist) => {
+		if (playlist.length === 0) {
+			message.channel.createMessage('The playlist is empty.');
+		} else {
+			let reply = '```\n';
+			playlist.forEach((element, index) => {
+				reply += `[${index || 'Current'}] ${element.title}\n`;
+			});
+			reply += '```';
+
+			message.channel.createMessage(reply);
+		}
+	});
+};

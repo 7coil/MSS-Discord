@@ -10,21 +10,28 @@ module.exports.alias = [
 	'youtube'
 ];
 
-module.exports.command = function yt(message, client) {
-	if (!message.input) return message.channel.createMessage('Please enter query.');
-	searchYTClient.search(message.input, 10, (error, result) => {
-		const video = result.items.find(youtube => youtube.id.videoId);
+module.exports.command = (message) => {
+	if (!message.input) {
+		message.channel.createMessage('Please enter query.');
+	} else {
+		searchYTClient.search(message.input, 10, (error, result) => {
+			const video = result.items.find(youtube => youtube.id.videoId);
 
-		if (error) {
-			console.log(error);
-			message.channel.createMessage(error);
-			return false;
-		} else if (!video) {
-			message.channel.createMessage('No results found');
-			return false;
-		}
-
-		return utils.music.add(message, client, 'youtube', `https://youtube.com/watch?v=${video.id.videoId}`, video.snippet.title, video.snippet.thumbnails.default.url);
-	});
-	return false;
+			if (error) {
+				console.log(error);
+				message.channel.createMessage(error);
+			} else if (!video) {
+				message.channel.createMessage('No results found');
+			} else {
+				utils.music.add(message, {
+					type: 'ytdl',
+					from: 'YouTube',
+					media: `https://youtube.com/watch?v=${video.id.videoId}`,
+					title: video.snippet.title,
+					thumb: video.snippet.thumbnails.default.url,
+					desc: video.snippet.description
+				});
+			}
+		});
+	}
 };

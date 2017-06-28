@@ -1,98 +1,135 @@
-const Player = require('./player.js');
-const utils = require('./../../utils.js');
+const r = require('./../../../db');
+const client = require('./../../');
+const spawn = require('child_process').spawn;
+const request = require('request');
 
-const Players = [];
+const connections = {};
 
-function guildError(message) {
-	message.channel.createMessage('You cannot run this command outside a guild!');
-}
-
-function vcCheck(message) {
-	if (message.member.voiceState.channelID) {
-		return true;
-	}
-	message.channel.createMessage('You are not in a voice channel');
-	return false;
-}
-
-function botCheck(message) {
-	if (Players[message.channel.guild.id].connection) {
-		return true;
-	}
-	message.channel.createMessage('There is no bot in the guild');
-	return false;
-}
-
-function adminCheck(message) {
-	if (utils.isadmin(message.member)) {
-		return true;
-	}
-	message.channel.createMessage('You are not an Administrator!');
-	return false;
-}
-
-function init(message, client) {
-	console.log(typeof Players[message.channel.guild.id]);
-	if (typeof Players[message.channel.guild.id] !== 'undefined') return;
-	Players[message.channel.guild.id] = new Player(message, client);
-}
-
-function add(message, client, type, url, title, thumb) {
-	if (!message.channel.guild) return guildError(message);
-	init(message, client);
-	if (!vcCheck(message)) return false;
-	Players[message.channel.guild.id].message = message;
-	return Players[message.channel.guild.id].add(type, url, title, thumb);
-}
-
-function addSilent(message, client, type, url, title, thumb) {
-	if (!message.channel.guild) return;
-	if (!message.member.voiceChannel) return;
-	init(message, client);
-	Players[message.channel.guild.id].message = message;
-	Players[message.channel.guild.id].add(type, url, title, thumb);
-}
-
-function stop(message, client) {
-	if (!message.channel.guild) return guildError(message);
-	init(message, client);
-	if (!botCheck(message)) return false;
-	if (!adminCheck(message)) return false;
-	return Players[message.channel.guild.id].stop();
-}
-
-function skip(message, client) {
-	if (!message.channel.guild) return guildError(message);
-	init(message, client);
-	if (!botCheck(message)) return false;
-	if (!adminCheck(message)) return false;
-	return Players[message.channel.guild.id].skip();
-}
-
-function list(message, client) {
-	if (!message.channel.guild) return;
-	init(message, client);
-	if (!botCheck(message)) return;
-	if (Players[message.channel.guild.id].playlist.length > 0) {
-		let string = 'Playlist\n```\n';
-		Players[message.channel.guild.id].playlist.every((elem, index) => {
-			if ((`${string}\n${index} - ${elem.title}`).length > 1900) {
-				string += '...';
-				return false;
-			}
-			string += `${index} - ${elem.title}\n`;
-			return true;
+const list = (message, callback) => {
+	r.table('playlist')
+		.get(message.channel.guild.id)('playlist')
+		.run(r.conn, (err, res) => {
+			if (err) throw new Error('Failed to read Rethonk(TM) playlist.');
+			callback(res);
 		});
-		string += '```';
-		message.channel.createMessage(string);
-	} else {
-		message.channel.createMessage('The Playlist is empty');
-	}
-}
+};
+const play = (message) => {
+	list(message, (playlist) => {
+		const after = () => {
+			connections[message.channel.guild.id].once('end', () => {
+				r.table('playlist')
+					.get(message.channel.guild.id)
+					.update({
+						playlist: r.row('playlist').deleteAt(0)
+					})
+					.run(r.conn, (err) => {
+						if (err) throw new Error('Failed to modify Rethonk(TM) playlist.');
+						play(message);
+					});
+			});
 
-exports.init = init;
+			connections[message.channel.guild.id].once('error', (err) => {
+				message.channel.createMessage(`Error playing audio! ${err.message}`);
+			});
+		};
+
+		// If the playlist is empty, leave.
+		if (playlist.length === 0) {
+			client.leaveVoiceChannel(connections[message.channel.guild.id].channelID);
+			connections[message.channel.guild.id] = false;
+		} else if (playlist[0].type === 'ytdl') { // Play from youtube-dl, which can do many many things.
+			const youtube = spawn('youtube-dl', [
+				'-o', '-',
+				playlist[0].media
+			]);
+
+			connections[message.channel.guild.id].play(youtube.stdout);
+			after();
+		} else if (playlist[0].type === 'get') { // Play directly with a GET request
+			const ffmpeg = spawn('ffmpeg', [
+				'-i', 'pipe:0',
+				'-f', 'wav',
+				'-ac', '2',
+				'pipe:1'
+			]);
+
+			request.get(playlist[0].media).pipe(ffmpeg.stdin);
+			connections[message.channel.guild.id].play(ffmpeg.stdout);
+			after();
+		} else if (playlist[0].type === 'post') { // Send POST data then play the file
+			const ffmpeg = spawn('ffmpeg', [
+				'-i', 'pipe:0',
+				'-f', 'wav',
+				'-ac', '2',
+				'pipe:1'
+			]);
+
+			request.post(playlist[0].media).pipe(ffmpeg.stdin);
+			connections[message.channel.guild.id].play(ffmpeg.stdout);
+			after();
+		} else {
+			throw new Error('Invalid audio type provided.');
+		}
+	});
+};
+const connect = (message) => {
+	if (!connections[message.channel.guild.id]) {
+		connections[message.channel.guild.id] = true;
+		client.joinVoiceChannel(message.member.voiceState.channelID)
+			.catch((err) => { // Join the user's voice channel
+				message.channel.createMessage(`Error joining channel! ${err.message}`);
+				console.log(err);
+			})
+			.then((connection) => {
+				connections[message.channel.guild.id] = connection;
+				play(message);
+			});
+	}
+};
+const add = (message, details) => {
+	// Add the details to the playlist. If the playlist doesn't exist, create it.
+	r.table('playlist')
+		.get(message.channel.guild.id)
+		.replace({
+			id: message.channel.guild.id,
+			playlist: r.row('playlist').append(details).default([])
+		})
+		.run(r.conn, (err) => {
+			if (err) throw new Error('Failed to add to Rethonk(TM) playlist.');
+
+			// If the bot is not connected to the guild, run the init procedures
+			if (!connections[message.channel.guild.id]) connect(message);
+		});
+};
+const skip = (message) => {
+	// Stop playing if there it is playing
+	if (connections[message.channel.guild.id] && connections[message.channel.guild.id].playing) connections[message.channel.guild.id].stopPlaying();
+};
+const stop = (message) => {
+	r.table('playlist')
+		.get(message.channel.guild.id)
+		.replace({
+			id: message.channel.guild.id,
+			playlist: []
+		})
+		.run(r.conn, (err) => {
+			if (err) throw new Error('Failed to clear Rethonk(TM) playlist.');
+			skip(message);
+		});
+};
+
+exports.connect = connect;
 exports.add = add;
-exports.addSilent = addSilent;
 exports.stop = stop;
 exports.skip = skip;
 exports.list = list;
+
+/*
+
+{
+	media: Object or string,
+	type: string,
+	name: string
+}
+
+*/

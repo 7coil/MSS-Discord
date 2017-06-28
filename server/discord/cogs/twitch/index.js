@@ -6,25 +6,38 @@ module.exports.alias = [
 	'twitch'
 ];
 
-module.exports.command = function yt(message, client) {
+module.exports.command = (message) => {
 	const username = message.input.substring(message.content.lastIndexOf('/') + 1);
-	if (!message.input) return message.channel.createMessage('No Twitch username provided');
-	if (!username) return message.channel.createMessage('Invalid Twitch username');
+	if (!message.input) {
+		message.channel.createMessage('No Twitch username provided');
+	} else if (!username) {
+		message.channel.createMessage('Invalid Twitch username');
+	} else {
+		const query = {
+			method: 'GET',
+			json: true,
+			uri: `https://api.twitch.tv/kraken/streams/${message.input}`,
+			headers: {
+				'User-Agent': config.get('useragent'),
+				'Client-ID': config.get('api').twitch
+			}
+		};
 
-	const query = {
-		method: 'GET',
-		json: true,
-		uri: `https://api.twitch.tv/kraken/streams/${message.input}`,
-		headers: {
-			'User-Agent': config.get('useragent'),
-			'Client-ID': config.get('api').twitch
-		}
-	};
-
-	return request(query, (err, res, body) => {
-		if (body.error) return message.channel.createMessage('Error - Blob on fire. The Twitch API server borked.');
-		if (!body.stream) return message.channel.createMessage('The streamer is currently not live.');
-		return utils.music.add(message, client, 'youtube', body.stream.channel.url, 'youtube-dl', 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/YouTube_logo_2015.svg/1200px-YouTube_logo_2015.svg.png');
-	});
+		request(query, (err, res, body) => {
+			if (body.error) {
+				message.channel.createMessage('Error - Blob on fire. The Twitch API server borked.');
+			} else if (!body.stream) {
+				message.channel.createMessage('The streamer is currently not live.');
+			} else {
+				utils.music.add(message, {
+					type: 'ytdl',
+					from: 'twitch.tv',
+					media: body.stream.channel.url,
+					title: body.stream.channel.display_name,
+					thumb: body.stream.preview.large,
+					desc: body.stream.channel.status
+				});
+			}
+		});
+	}
 };
-
