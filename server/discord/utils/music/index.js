@@ -14,7 +14,7 @@ const list = (message, callback) => {
 			if (res === null) {
 				callback([]);
 			} else {
-				callback(res);
+				callback(res.playlist);
 			}
 		});
 };
