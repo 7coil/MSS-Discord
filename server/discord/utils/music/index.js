@@ -88,30 +88,39 @@ const connect = (message) => {
 	}
 };
 const add = (message, details) => {
-	// Add the details to the playlist. If the playlist doesn't exist, create it.
-	r.table('playlist')
-		.get(message.channel.guild.id)
-		.replace({
-			id: message.channel.guild.id,
-			playlist: r.row('playlist').append(details).default([])
-		})
-		.run(r.conn, (err) => {
-			if (err) throw new Error('Failed to add to Rethonk(TM) playlist.');
+	if (!message.member) {
+		message.channel.createMessage('You need to be in a Guild!');
+	} else if (!message.member.voiceState || !message.member.voiceState.channelID) {
+		message.channel.createMessage('You need to be in a Voice Channel!');
+	} else {
+		// Add the details to the playlist. If the playlist doesn't exist, create it.
+		r.table('playlist')
+			.get(message.channel.guild.id)
+			.replace({
+				id: message.channel.guild.id,
+				playlist: r.row('playlist').append(details).default([])
+			})
+			.run(r.conn, (err) => {
+				if (err) throw new Error('Failed to add to Rethonk(TM) playlist.');
 
-			// If the bot is not connected to the guild, run the init procedures
-			if (!connections[message.channel.guild.id]) connect(message);
-		});
+				// If the bot is not connected to the guild, run the init procedures
+				if (!connections[message.channel.guild.id]) connect(message);
+			});
+	}
 };
 const skip = (message) => {
-	// Stop playing if there it is playing
-	if (utils.isadmin(message.member)) {
+	if (!message.member) {
+		message.channel.createMessage('You need to be in a Guild!');
+	} else if (utils.isadmin(message.member)) {
 		if (connections[message.channel.guild.id] && connections[message.channel.guild.id].playing) connections[message.channel.guild.id].stopPlaying();
 	} else {
 		message.channel.createMessage('You do not have permission to perform this command!');
 	}
 };
 const stop = (message) => {
-	if (utils.isadmin(message.member)) {
+	if (!message.member) {
+		message.channel.createMessage('You need to be in a Guild!');
+	} else if (utils.isadmin(message.member)) {
 		r.table('playlist')
 			.get(message.channel.guild.id)
 			.replace({
