@@ -11,7 +11,7 @@ module.exports.command = (message) => {
 		if (playlist.length === 0) {
 			message.channel.createMessage('The playlist is empty.');
 		} else {
-			let reply = '```\n';
+			let reply = `https://discord.mss.ovh/music/${message.channel.guild.id}\n\`\`\`\n`;
 			playlist.forEach((element, index) => {
 				reply += `[${index || 'Current'}] ${element.title}\n`;
 			});
