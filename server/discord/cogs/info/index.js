@@ -8,7 +8,9 @@ const softwareinfo = `[${os.type()}] ${os.release()}`;
 
 module.exports.alias = [
 	'info',
-	'information'
+	'information',
+	'status',
+	'stats'
 ];
 
 module.exports.command = (message, client) => {
