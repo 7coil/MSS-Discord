@@ -13,7 +13,7 @@ module.exports.alias = [
 ];
 
 module.exports.command = (message) => {
-	if (!message.guild || !message.guild.nsfw) {
+	if (!message.channel || !message.channel.guild || !message.channel.guild.nsfw) {
 		message.channel.createMessage('Due to the nature of content potentially found on this VM, please enter a NSFW channel');
 	} else {
 		exec(command, (error, stdout, stderr) => {
