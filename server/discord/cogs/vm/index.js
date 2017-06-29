@@ -15,23 +15,24 @@ module.exports.alias = [
 module.exports.command = (message) => {
 	if (!message.guild || !message.guild.nsfw) {
 		message.channel.createMessage('Due to the nature of content potentially found on this VM, please enter a NSFW channel');
-	}
-	exec(command, (error, stdout, stderr) => {
-		console.log(stdout);
-		console.log(stderr);
-		const buffer = [];
-		const stream = fs.createReadStream('./vnc.jpg');
+	} else {
+		exec(command, (error, stdout, stderr) => {
+			console.log(stdout);
+			console.log(stderr);
+			const buffer = [];
+			const stream = fs.createReadStream('./vnc.jpg');
 
-		stream.on('data', (d) => {
-			buffer.push(d);
-		});
+			stream.on('data', (d) => {
+				buffer.push(d);
+			});
 
-		stream.on('end', () => {
-			const file = Buffer.concat(buffer);
-			message.channel.createMessage('Do stuff with the Virtual Machine! http://vnc.moustacheminer.com/', {
-				file,
-				name: 'vnc.jpg'
+			stream.on('end', () => {
+				const file = Buffer.concat(buffer);
+				message.channel.createMessage('Do stuff with the Virtual Machine! http://vnc.moustacheminer.com/', {
+					file,
+					name: 'vnc.jpg'
+				});
 			});
 		});
-	});
+	}
 };
