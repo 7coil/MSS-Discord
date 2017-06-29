@@ -12,7 +12,10 @@ module.exports.alias = [
 	'mdmck10'
 ];
 
-module.exports.command = message =>
+module.exports.command = (message) => {
+	if (!message.guild || !message.guild.nsfw) {
+		message.channel.createMessage('Due to the nature of content potentially found on this VM, please enter a NSFW channel');
+	}
 	exec(command, (error, stdout, stderr) => {
 		console.log(stdout);
 		console.log(stderr);
@@ -31,3 +34,4 @@ module.exports.command = message =>
 			});
 		});
 	});
+};
