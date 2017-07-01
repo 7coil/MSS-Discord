@@ -1,7 +1,7 @@
 const exec = require('child_process').exec;
 const fs = require('fs');
 
-const command = 'vncsnapshot 192.168.0.3:20 vnc.jpg';
+const command = 'vncsnapshot 192.168.0.3:19 vnc.jpg';
 
 module.exports.alias = [
 	'vm',
