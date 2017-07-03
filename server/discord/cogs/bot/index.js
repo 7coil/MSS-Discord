@@ -65,7 +65,6 @@ module.exports.command = (message) => {
 					info.website = compare(body1.website, body2.website);
 
 					message.channel.createMessage({
-						content: 'Info',
 						embed: {
 							title: `Bot info for ${info.name}`,
 							description: info.description,
@@ -130,7 +129,6 @@ module.exports.command = (message) => {
 		request(bdpw, (err1, res1, body1) => {
 			request(dbli, (err2, res2, body2) => {
 				const embed = {
-					content: 'Info',
 					embed: {
 						title: `Bots by ${user.username}`,
 						thumbnail: {
