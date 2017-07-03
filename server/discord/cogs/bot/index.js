@@ -20,7 +20,7 @@ module.exports.alias = [
 ];
 
 module.exports.command = (message) => {
-	message.guild.fetchAllMembers();
+	if (message.channel.guild) message.channel.guild.fetchAllMembers();
 
 	const id = regex.exec(message.input);
 	const user = client.users.get(id[1]);
