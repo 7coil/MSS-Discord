@@ -62,7 +62,7 @@ module.exports.command = (message) => {
 					info.description = compare(body1.description, body2.shortdesc);
 					info.library = compare(body1.library, body2.lib);
 					info.name = compare(body1.name, body2.username);
-					info.owners = [...new Set((body1.owners || []).concat((body2.owners || [])))].reduce((before, current) => `${before}<@${current}> `, '');
+					info.owners = [...new Set((body1.owner_ids || []).concat((body2.owners || [])))].reduce((before, current) => `${before}<@${current}> `, '');
 					info.prefix = compare(body1.prefix, body2.prefix);
 					info.website = compare(body1.website, body2.website);
 
