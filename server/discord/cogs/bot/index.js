@@ -20,6 +20,8 @@ module.exports.alias = [
 ];
 
 module.exports.command = (message) => {
+	message.guild.fetchAllMembers();
+
 	const id = regex.exec(message.input);
 	const user = client.users.get(id[1]);
 
