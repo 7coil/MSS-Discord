@@ -70,7 +70,6 @@ module.exports.command = (message) => {
 							description: info.description,
 							thumbnail: {
 								url: user.avatarURL,
-								proxy_url: user.staticAvatarURL,
 								height: 256,
 								width: 256
 							},
@@ -133,7 +132,6 @@ module.exports.command = (message) => {
 						title: `Bots by ${user.username}`,
 						thumbnail: {
 							url: user.avatarURL,
-							proxy_url: user.staticAvatarURL,
 							height: 256,
 							width: 256
 						},
