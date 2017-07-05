@@ -1,8 +1,12 @@
 const utils = require('./../../utils.js');
 
-module.exports.alias = [
-	'markov'
-];
+module.exports.info = {
+	name: 'Markov Message Chains',
+	category: 'fun',
+	aliases: [
+		'markov'
+	]
+};
 
 module.exports.command = (message) => {
 	if (message.words[0] === 'register') {

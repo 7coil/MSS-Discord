@@ -3,7 +3,6 @@ const request = require('request');
 const client = require('./../../');
 
 const regex = /(\d+)/;
-
 const compare = (botsdiscordpw, discordbotsorg) => {
 	if (typeof botsdiscordpw === 'string' && typeof discordbotsorg === 'string' && botsdiscordpw !== discordbotsorg) {
 		// If they're not the same, and they are strings, return some fancy text
@@ -14,10 +13,13 @@ const compare = (botsdiscordpw, discordbotsorg) => {
 	return botsdiscordpw || discordbotsorg || 'Not found';
 };
 
-module.exports.alias = [
-	'bot',
-	'dbots'
-];
+module.exports.info = {
+	name: 'Bot website information',
+	category: 'development',
+	aliases: [
+		'bot'
+	]
+};
 
 module.exports.command = (message) => {
 	if (message.channel.guild) message.channel.guild.fetchAllMembers();

@@ -3,14 +3,14 @@ const fs = require('fs');
 
 const command = 'vncsnapshot 192.168.0.3:19 vnc.jpg';
 
-module.exports.alias = [
-	'vm',
-	'virt',
-	'virtual',
-	'vnc',
-	'novnc',
-	'mdmck10'
-];
+module.exports.info = {
+	name: 'vnc.moustacheminer.com',
+	category: 'nsfw',
+	aliases: [
+		'vnc',
+		'vm'
+	]
+};
 
 module.exports.command = (message) => {
 	if (!message.channel || !message.channel.guild || !message.channel.nsfw) {

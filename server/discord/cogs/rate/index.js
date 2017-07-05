@@ -1,10 +1,14 @@
 const config = require('config');
 const crypto = require('crypto');
 
-module.exports.alias = [
-	'rate',
-	'rank'
-];
+module.exports.info = {
+	name: 'Rate and Rank',
+	category: 'fun',
+	aliases: [
+		'rate',
+		'rank'
+	]
+};
 
 module.exports.command = (message) => {
 	if (!message.input) return message.channel.createMessage(`I ${message.command} undefined an 11 out of 10`);

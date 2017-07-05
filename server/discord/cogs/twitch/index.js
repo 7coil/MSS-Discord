@@ -2,9 +2,14 @@ const config = require('config');
 const request = require('request');
 const utils = require('./../../utils.js');
 
-module.exports.alias = [
-	'twitch'
-];
+module.exports.info = {
+	name: 'Twitch.tv Livestream',
+	category: 'music',
+	aliases: [
+		'twitch',
+		'ttv'
+	]
+};
 
 module.exports.command = (message) => {
 	const username = message.input.substring(message.content.lastIndexOf('/') + 1);

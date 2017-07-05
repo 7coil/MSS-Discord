@@ -1,14 +1,13 @@
 const config = require('config');
 
-module.exports.alias = [
-	'help',
-	'man',
-	'manual',
-	'instructions',
-	'ree',
-	'reee',
-	'reeee'
-];
+module.exports.info = {
+	name: 'Help',
+	category: 'info',
+	aliases: [
+		'help',
+		'man'
+	]
+};
 
 module.exports.command = (message) => {
 	const embed = {

@@ -1,11 +1,14 @@
 const utils = require('./../../utils.js');
 
-module.exports.alias = [
-	'list',
-	'playlist',
-	'queue'
-];
-
+module.exports.info = {
+	name: 'Playlist',
+	category: 'music',
+	aliases: [
+		'list',
+		'playlist',
+		'queue'
+	]
+};
 module.exports.command = (message) => {
 	utils.music.list(message, (playlist) => {
 		if (playlist.length === 0) {

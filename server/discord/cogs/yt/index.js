@@ -5,10 +5,14 @@ const utils = require('./../../utils.js');
 const searchYTClient = new searchYT(); // eslint-disable-line new-cap
 searchYTClient.setKey(config.get('api').youtube);
 
-module.exports.alias = [
-	'yt',
-	'youtube'
-];
+module.exports.info = {
+	name: 'YouTube',
+	category: 'music',
+	aliases: [
+		'yt',
+		'youtube'
+	]
+};
 
 module.exports.command = (message) => {
 	if (!message.input) {

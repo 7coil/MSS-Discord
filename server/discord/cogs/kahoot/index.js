@@ -1,10 +1,13 @@
 const request = require('request');
 const config = require('config');
 
-module.exports.alias = [
-	'kahoot',
-	'kahoot search'
-];
+module.exports.info = {
+	name: 'Kahoot Search',
+	category: 'fun',
+	aliases: [
+		'kahoot'
+	]
+};
 
 module.exports.command = (message) => {
 	const search = encodeURIComponent(message.input);

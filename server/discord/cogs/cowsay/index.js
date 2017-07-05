@@ -1,10 +1,12 @@
 const execFile = require('child_process').execFile;
 
-module.exports.alias = [
-	'cowsay',
-	'moo',
-	'cow'
-];
+module.exports.info = {
+	name: 'cowsay',
+	category: 'fun',
+	aliases: [
+		'cowsay'
+	]
+};
 
 module.exports.command = (message) => {
 	const input = message.words[0] ? message.words : ['Have', 'you', 'mooed', 'today?'];

@@ -1,10 +1,13 @@
 const config = require('config');
 const utils = require('./../../utils.js');
 
-module.exports.alias = [
-	'js',
-	'javascript'
-];
+module.exports.info = {
+	name: 'Rich JavaScript Evaluation',
+	category: 'development',
+	aliases: [
+		'js'
+	]
+};
 
 module.exports.command = (message, client) => { // eslint-disable-line no-unused-vars
 	if (config.get('admins').includes(message.author.id)) {

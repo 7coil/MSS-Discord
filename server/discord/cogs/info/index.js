@@ -6,12 +6,13 @@ const utils = require('./../../utils.js');
 const hardwareinfo = `(${os.arch()}) ${os.cpus()[0].model} clocked at ${os.cpus()[0].speed} MHz`;
 const softwareinfo = `[${os.type()}] ${os.release()}`;
 
-module.exports.alias = [
-	'info',
-	'information',
-	'status',
-	'stats'
-];
+module.exports.info = {
+	name: 'Information',
+	category: 'info',
+	aliases: [
+		'info'
+	]
+};
 
 module.exports.command = (message, client) => {
 	const embed = {

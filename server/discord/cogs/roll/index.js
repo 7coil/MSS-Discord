@@ -6,15 +6,15 @@ function randInt(d) {
 	return Math.floor(Math.random() * d) + 1;
 }
 
-// The first alias is always the actual name of the command.
-module.exports.alias = [
-	'roll',
-	'dice',
-	'die',
-	'random',
-	'random roll',
-	'random dice'
-];
+module.exports.info = {
+	name: 'Dice Roll',
+	category: 'fun',
+	aliases: [
+		'roll',
+		'die',
+		'dice'
+	]
+};
 
 module.exports.command = function roll(message) {
 	const parsed = regex.exec(message.input);

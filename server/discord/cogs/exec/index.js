@@ -2,10 +2,13 @@ const exec = require('child_process').exec;
 const config = require('config');
 const utils = require('./../../utils.js');
 
-module.exports.alias = [
-	'exec',
-	'execute'
-];
+module.exports.info = {
+	name: 'Bash Execution',
+	category: 'development',
+	aliases: [
+		'exec'
+	]
+};
 
 module.exports.command = (message) => {
 	if (config.get('admins').includes(message.author.id)) {

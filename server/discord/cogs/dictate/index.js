@@ -1,12 +1,15 @@
 const config = require('config');
 const utils = require('./../../utils.js');
 
-module.exports.alias = [
-	'dictate',
-	'dectalk',
-	'dec',
-	'fonix'
-];
+module.exports.info = {
+	name: 'Fonix DECtalk Text to Speech',
+	category: 'music',
+	aliases: [
+		'dictate',
+		'tts',
+		'dec'
+	]
+};
 
 module.exports.command = (message) => {
 	if (message.input) {

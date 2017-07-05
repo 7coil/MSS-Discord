@@ -9,12 +9,13 @@ function escapeChar(name) {
 		.replace(/`/g, '\\`');
 }
 
-module.exports.alias = [
-	'parker',
-	'matt',
-	'matt parker',
-	'square'
-];
+module.exports.info = {
+	name: 'Matt Parker',
+	category: 'fun',
+	aliases: [
+		'parker'
+	]
+};
 
 module.exports.command = (message, client) => {
 	const url = data.data[Math.floor(Math.random() * data.data.length)];
