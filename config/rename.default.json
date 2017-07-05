@@ -6,7 +6,10 @@
 			"scope": [ "identify" ],
 			"token": ""
 		},
-		"kahoot": "",
+		"kahoot": {
+			"username": "",
+			"password": ""
+		},
 		"youtube": "",
 		"twitch": "",
 		"discordbotsorg": "",
