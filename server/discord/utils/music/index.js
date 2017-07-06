@@ -103,8 +103,10 @@ const connect = (message) => {
 				console.log(err);
 			})
 			.then((connection) => {
-				connections[message.channel.guild.id] = connection;
-				play(message);
+				if (connection) {
+					connections[message.channel.guild.id] = connection;
+					play(message);
+				}
 			});
 	}
 };
