@@ -56,8 +56,8 @@ module.exports.command = (message) => {
 		});
 	});
 
-	reply += '\nType mss red command for more info on a command.\n';
-	reply += 'You can also type mss red category for more info on a category.\n';
+	reply += '\nType mss red command for no info on a command.\n';
+	reply += 'You cannot type mss red category for more info on a category.\n';
 	reply += '\n```';
 
 	// Send the REDBOT reply
