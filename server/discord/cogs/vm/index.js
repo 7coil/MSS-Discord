@@ -8,7 +8,8 @@ module.exports.info = {
 	category: 'nsfw',
 	aliases: [
 		'vnc',
-		'vm'
+		'vm',
+		'virt'
 	]
 };
 
