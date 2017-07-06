@@ -13,20 +13,22 @@ const prefixes = config.get('prefix');
 // Setup commands and util objects.
 const commands = require('./cogs.js').cogs;
 
-// Set up regex for the bot.
-// It's "man's essential illness"
-// Use this regex for testing in regexr.com
-// /^(mss).?(ping)\s?([\s\S]*)/
-// /(\w+)rly/
-const prefix = new RegExp(`^(${prefixes.join('|')}).?(${Object.keys(commands).join('|')})\\s?([\\s\\S]*)`);
-const suffix = /(\w+)pls/;
-console.dir(Object.keys(commands).join('|'));
+let prefix = null;
+let suffix = null;
 
 client.on('shardReady', (id) => {
 	console.log(`Shard ${id} is online`.green);
 });
 
 client.on('ready', () => {
+	// Set up regex for the bot.
+	// It's "man's essential illness"
+	// Use this regex for testing in regexr.com
+	// /^(mss).?(ping)\s?([\s\S]*)/
+	// /(\w+)rly/
+	prefix = new RegExp(`^(${prefixes.join('|')}).?(${Object.keys(commands).join('|')})\\s?([\\s\\S]*)`);
+	suffix = /(\w+)pls/;
+
 	// Add mentions to the prefix list
 	prefixes.push(`<@${client.user.id}>`);
 	console.log('All shards are online'.green.bold);
@@ -63,9 +65,6 @@ client.on('messageCreate', (message) => {
 	// Test the message content on the regular expression for prefixed commands and the suffixed commands
 	const pre = prefix.exec(message.content);
 	const suf = suffix.exec(message.content);
-
-	console.dir(pre);
-	console.dir(suf);
 
 	// If there's a result, do this crap.
 	if (pre) {
