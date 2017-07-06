@@ -63,6 +63,9 @@ client.on('messageCreate', (message) => {
 	const pre = prefix.exec(message.content);
 	const suf = suffix.exec(message.content);
 
+	console.dir(pre);
+	console.dir(suf);
+
 	// If there's a result, do this crap.
 	if (pre) {
 		// Bake some cool extra crap into the message
@@ -72,9 +75,7 @@ client.on('messageCreate', (message) => {
 		message.words = pre[3].split(/\n+|\s+/g);
 
 		// Run the actual command, if the command exists
-		if (commands[message.command]) {
-			commands[message.command].command(message, client);
-		}
+		commands[message.command].command(message, client);
 	} else if (suf) {
 		if (message.channel && message.channel.id !== '110373943822540800') {
 			// If the suffix matches a user's name in the database...
