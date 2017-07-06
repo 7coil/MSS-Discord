@@ -71,8 +71,10 @@ client.on('messageCreate', (message) => {
 		message.input = pre[3] || null;
 		message.words = pre[3].split(/\n+|\s+/g);
 
-		// Run the actual command
-		commands[message.command].command(message, client);
+		// Run the actual command, if the command exists
+		if (commands[message.command]) {
+			commands[message.command].command(message, client);
+		}
 	} else if (suf) {
 		if (message.channel && message.channel.id !== '110373943822540800') {
 			// If the suffix matches a user's name in the database...
