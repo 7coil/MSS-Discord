@@ -20,6 +20,7 @@ const commands = require('./cogs.js').cogs;
 // /(\w+)rly/
 const prefix = new RegExp(`^(${prefixes.join('|')}).?(${Object.keys(commands).join('|')})\\s?([\\s\\S]*)`);
 const suffix = /(\w+)pls/;
+console.dir(Object.keys(commands).join('|'));
 
 client.on('shardReady', (id) => {
 	console.log(`Shard ${id} is online`.green);
