@@ -7,7 +7,7 @@ require('colors');
 // Database
 const r = require('./../db');
 
-const client = new Discord.Client(config.get('api').discord.token, { maxShards: 2 });
+const client = new Discord.Client(config.get('api').discord.token, { maxShards: config.get('shards') });
 const prefixes = config.get('prefix');
 let prefix = null;
 let suffix = null;
