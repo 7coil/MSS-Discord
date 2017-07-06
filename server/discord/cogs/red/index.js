@@ -38,12 +38,13 @@ module.exports.command = (message) => {
 	reply += `Available prefixes are: ${config.get('prefix').join(', ')}\n`;
 
 	Object.keys(categories).forEach((key) => {
-		reply += `\n${capitalise(key)}:\n`;
+		reply += `${capitalise(key)}:\n`;
 		categories[key].forEach((command) => {
 			const spaces = column - command.command.length;
 			reply += '  ';
 			reply += command.command;
 
+			// Fill in spaces to the description
 			let i = 0;
 			do {
 				i += 1;
