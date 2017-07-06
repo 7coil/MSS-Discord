@@ -9,28 +9,23 @@ const r = require('./../db');
 
 const client = new Discord.Client(config.get('api').discord.token, { maxShards: config.get('shards') });
 const prefixes = config.get('prefix');
-let prefix = null;
-let suffix = null;
 
 // Setup commands and util objects.
 const commands = require('./cogs.js').cogs;
 
-// Just plop all valid commands in for other cogs to look at it.
-client.commands = commands;
+// Set up regex for the bot.
+// It's "man's essential illness"
+// Use this regex for testing in regexr.com
+// /^(mss).?(ping)\s?([\s\S]*)/
+// /(\w+)rly/
+const prefix = new RegExp(`^(${prefixes.join('|')}).?(${Object.keys(commands).join('|')})\\s?([\\s\\S]*)`);
+const suffix = /(\w+)pls/;
 
 client.on('shardReady', (id) => {
 	console.log(`Shard ${id} is online`.green);
 });
 
 client.on('ready', () => {
-	// Set up regex for the bot.
-	// It's "man's essential illness"
-	// Use this regex for testing in regexr.com
-	// /^(mss).?(ping)\s?([\s\S]*)/
-	// /(\w+)rly/
-	prefix = new RegExp(`^(${prefixes.join('|')}).?(${Object.keys(commands).join('|')})\\s?([\\s\\S]*)`);
-	suffix = /(\w+)pls/;
-
 	// Add mentions to the prefix list
 	prefixes.push(`<@${client.user.id}>`);
 	console.log('All shards are online'.green.bold);
