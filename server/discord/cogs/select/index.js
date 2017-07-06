@@ -11,5 +11,5 @@ module.exports.info = {
 };
 
 module.exports.command = (message) => {
-
+	message.channel.createMessage('This command does not exist (yet)');
 };

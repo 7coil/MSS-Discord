@@ -13,7 +13,7 @@ let prefix = null;
 let suffix = null;
 
 // Setup commands and util objects.
-const commands = require('./cogs.js');
+const commands = require('./cogs.js').cogs;
 
 // Just plop all valid commands in for other cogs to look at it.
 client.commands = commands;

@@ -36,6 +36,7 @@
     "passport": "^0.3.2",
     "passport-discord": "^0.1.2",
     "request": "^2.81.0",
+    "require-reload": "^0.2.2",
     "rethinkdb": "^2.3.3",
     "rethinkdb-init": "^0.2.2",
     "twitch-get-stream": "^0.4.0",

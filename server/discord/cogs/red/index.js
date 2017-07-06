@@ -1,5 +1,5 @@
 const config = require('config');
-const cogs = require('./../../cogs.js');
+const cogs = require('./../../cogs.js').cogs;
 
 const column = 14;
 
