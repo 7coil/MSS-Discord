@@ -1,3 +1,8 @@
+require('colors');
+
+console.log('  Welcome to "Moustacheminer Server Services"!  '.inverse.bold);
+console.log('Loading modules:');
+
 const config = require('config');
 const express = require('express');
 const session = require('express-session');
@@ -98,10 +103,6 @@ app.use('/auth', authRouter)
 		res.status(404).render('error.html', { user: req.user, status: 404 })
 	);
 
-console.log('============================================');
-console.log('Welcome to "Moustacheminer Server Services"!');
-console.log('============================================');
-
 // Initialisation process
-console.log('Listening on', config.get('ports').http);
+console.log('Webserver listening on port', config.get('ports').http);
 app.listen(config.get('ports').http);

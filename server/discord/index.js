@@ -2,11 +2,12 @@
 const Discord = require('eris');
 const config = require('config');
 const utils = require('./utils.js');
+require('colors');
 
 // Database
 const r = require('./../db');
 
-const client = new Discord.Client(config.get('api').discord.token, { maxShards: config.get('shards') });
+const client = new Discord.Client(config.get('api').discord.token, { maxShards: 2 });
 const prefixes = config.get('prefix');
 let prefix = null;
 let suffix = null;
@@ -16,6 +17,10 @@ const commands = require('./cogs.js');
 
 // Just plop all valid commands in for other cogs to look at it.
 client.commands = commands;
+
+client.on('shardReady', (id) => {
+	console.log(`Shard ${id} is online`.green);
+});
 
 client.on('ready', () => {
 	// Set up regex for the bot.
@@ -28,7 +33,7 @@ client.on('ready', () => {
 
 	// Add mentions to the prefix list
 	prefixes.push(`<@${client.user.id}>`);
-	console.log('Connected to Discord!');
+	console.log('All shards are online'.green.bold);
 
 	// Send DBOTS info if it was provided.
 	if (config.get('api').botsdiscordpw) {
@@ -106,8 +111,5 @@ client.on('messageCreate', (message) => {
 	}
 });
 
-// Connect to Discord
-console.log('Discord loaded');
 client.connect();
-
 module.exports = client;

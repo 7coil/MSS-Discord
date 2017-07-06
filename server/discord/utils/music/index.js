@@ -56,7 +56,7 @@ const play = (message) => {
 			after();
 		} else if (playlist[0].type === 'get') { // Play directly with a GET request
 			const ffmpeg = spawn('ffmpeg', [
-				'-i', 'pipe:0',
+				'-i', playlist[0].media,
 				'-f', 'wav',
 				'-ac', '2',
 				'pipe:1'
@@ -69,7 +69,6 @@ const play = (message) => {
 				message.channel.createMessage(`Error playing audio! ${err.message}`);
 			});
 
-			request.get(playlist[0].media).pipe(ffmpeg.stdin);
 			connections[message.channel.guild.id].play(ffmpeg.stdout);
 			after();
 		} else if (playlist[0].type === 'post') { // Send POST data then play the file
