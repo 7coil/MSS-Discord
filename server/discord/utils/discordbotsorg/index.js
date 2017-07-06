@@ -11,7 +11,9 @@ module.exports = function dbotsupdate(client) {
 			authorization: config.get('api').discordbotsorg
 		},
 		body: {
-			server_count: client.guilds.size
+			server_count: client.guilds.size,
+			shard_id: 0,
+			shard_count: config.get('shards')
 		}
 	};
 
