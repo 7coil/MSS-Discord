@@ -16,7 +16,7 @@ module.exports.command = (message) => {
 			fields: [
 				{
 					name: 'Commands',
-					value: `For help on a specific command, please refer to the [Moustacheminer Manual Manual](${config.get('url').manual})`
+					value: 'For a list of all commands, run `mss commands`'
 				},
 				{
 					name: 'Prefixes',

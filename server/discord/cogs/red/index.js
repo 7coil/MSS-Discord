@@ -10,7 +10,8 @@ module.exports.info = {
 	name: 'Redbot Help',
 	category: 'info',
 	aliases: [
-		'red'
+		'red',
+		'commands'
 	]
 };
 
