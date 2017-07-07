@@ -1,5 +1,6 @@
 const r = require('./../../../db');
 const client = require('./../../');
+const config = require('config');
 
 function flatten(array) {
 	return array.reduce((acc, val) =>
