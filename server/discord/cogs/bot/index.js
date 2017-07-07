@@ -17,7 +17,7 @@ module.exports.info = {
 	name: 'Bot website information',
 	category: 'development',
 	aliases: [
-		'bot'
+		'dbots'
 	]
 };
 
