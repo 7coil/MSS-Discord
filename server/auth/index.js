@@ -51,7 +51,7 @@ passport.use(new DiscordStrategy(
 	{
 		clientID: config.get('api').discord.clientID,
 		clientSecret: config.get('api').discord.clientSecret,
-		callbackURL: `${config.get('callback')}/discord`,
+		callbackURL: `${config.get('webserver').callback}/discord`,
 		scope: config.get('api').discord.scope,
 	},
 	loginCallbackHandler(profile => (

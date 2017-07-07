@@ -1,6 +1,8 @@
-# MSS-Discord
+# Parkerbot
 
-MSS-Discord (Moustacheminer Server Services for Discord) is another bot made for Discord.
+![A picture of Matt Parker. Looks rapey.](client/parker.png)
+
+Parkerbot is an all rounded bot designed to do as many things, even if they are terribly implemented. You could say it's a Parker Square of an implementation.
 
 - [If you are trying to add the bot to your server, click here.](https://discordapp.com/oauth2/authorize?&client_id=257547382277931009&scope=bot&permissions=70765632)
 - [bots.discord.pw](https://bots.discord.pw/bots/257547382277931009)
@@ -24,9 +26,12 @@ Ubuntu Linux is officially supported from 14.04, your milage may vary with other
 * cowsay
 * FFMPEG
 * A working internet connection
-* API keys for
-	* Discord Bot
-	* Google (for YouTube)
+* Login details for:
+	* Discord
+	* Google
+	* Kahoot
+	* Discord Bots API key (bots.discord.pw)
+	* Discord Bot List API key (discordbots.org)
 * Rethonk DB
 
 #### Step 0
@@ -40,7 +45,7 @@ git clone https://github.com/moustacheminer/mss-discord borkbot
 
 #### Step 1
 
-Go into the working folder (src) and install all the node dependancies
+Go into the working folder (src) and install all the node dependencies
 
 ```bash
 cd borkbot/src
@@ -73,6 +78,6 @@ Run the program
 node index.js
 ```
 
-### Microsoft Windows (Vista and up!)
+### Microsoft Windows
 
 No.

@@ -1,5 +1,6 @@
 const os = require('os');
 const utils = require('./../../utils.js');
+const config = require('config');
 
 // Non-changing statistics
 // (x64) AMD Athlon (x3) Something @ 3ghz (clocked at ????MHz)
@@ -17,7 +18,7 @@ module.exports.info = {
 module.exports.command = (message, client) => {
 	const embed = {
 		embed: {
-			title: 'MSS-Discord',
+			title: config.get('name'),
 			fields: [
 				{
 					name: 'Node.js',
@@ -49,7 +50,7 @@ module.exports.command = (message, client) => {
 				},
 				{
 					name: 'Licence',
-					value: 'This copy of MSS-Discord is licenced under the MIT Licence'
+					value: `${config.get('name')}, an instance of MSS-Discord is licenced under the MIT Licence`
 				}
 			]
 		}

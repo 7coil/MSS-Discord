@@ -13,7 +13,7 @@ module.exports = function dbotsupdate(client) {
 		body: {
 			server_count: client.guilds.size,
 			shard_id: 0,
-			shard_count: config.get('shards')
+			shard_count: config.get('discord').shards
 		}
 	};
 

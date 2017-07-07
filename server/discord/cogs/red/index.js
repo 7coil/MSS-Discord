@@ -34,8 +34,8 @@ module.exports.command = (message) => {
 	});
 
 	let reply = '```\n';
-	reply += 'MSS-Discord is a bot with many random features.\n';
-	reply += `Available prefixes are: ${config.get('prefix').join(', ')}\n`;
+	reply += `${config.get('name')} is a bot with many random features.\n`;
+	reply += `Available prefixes are: ${config.get('discord').prefix.join(', ')}\n`;
 
 	Object.keys(categories).forEach((key) => {
 		reply += `${capitalise(key)}:\n`;
@@ -56,8 +56,8 @@ module.exports.command = (message) => {
 		});
 	});
 
-	reply += '\nType mss red command for no info on a command.\n';
-	reply += 'You cannot type mss red category for more info on a category.\n';
+	reply += `\nType ${message.prefix} ${message.command} command for no info on a command.\n`;
+	reply += `You cannot type ${message.prefix} ${message.command} category for more info on a category.\n`;
 	reply += '\n```';
 
 	// Send the REDBOT reply

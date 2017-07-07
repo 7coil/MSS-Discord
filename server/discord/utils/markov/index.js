@@ -129,7 +129,7 @@ function register(id, name, callback) {
 						})
 						.run(r.conn, (err3) => {
 							if (err3) throw new Error('An error occured while writing a registration to the Markov database.');
-							callback(`You have successfully registered with the Markov database. After sending many messages to a server with MSS inside, you can run \`${name}pls\` to generate a random message.`);
+							callback(`You have successfully registered with the Markov database. After sending many messages to a server with ${config.get('name')} inside, you can run \`${name}pls\` to generate a random message.`);
 						});
 				} else {
 					callback('You or your selected name has already been registered.');

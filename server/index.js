@@ -15,6 +15,8 @@ const app = express();
 const auth = require('./auth');
 const authRouter = require('./auth/auth-router');
 
+const botname = config.get('name');
+
 // Database
 const r = require('./db');
 
@@ -24,7 +26,7 @@ const discord = require('./discord');
 // Middleware
 app.use(session(
 	{
-		secret: config.get('session').secret,
+		secret: config.get('secret'),
 		resave: false,
 		saveUninitialized: true,
 		proxy: true
@@ -44,7 +46,7 @@ app.set('views', path.join(__dirname, '/views'))
 // Routes
 app.use('/auth', authRouter)
 	.get('/', (req, res) => {
-		res.render('index.html', { user: req.user });
+		res.render('index.html', { user: req.user, botname });
 	})
 	.get('/info', (req, res) => {
 		const data = {};
@@ -56,22 +58,22 @@ app.use('/auth', authRouter)
 		data.uptime = Math.floor(process.uptime());
 		data.guilds = discord.guilds.size;
 		data.users = discord.users.size;
-		res.status(200).render('info.html', { user: req.user, data, nav });
+		res.status(200).render('info.html', { user: req.user, data, nav, botname });
 	})
 	.get('/manual', (req, res) => {
 		const nav = req.query.nav !== undefined;
 		r.table('commands')
 			.run(r.conn, (err1, cursor) => {
-				if (err1) res.status(500).render('error.html', { user: req.user, status: 500, message: err1.message });
+				if (err1) res.status(500).render('error.html', { user: req.user, status: 500, message: err1.message, botname });
 				cursor.toArray((err2, result) => {
-					if (err2) res.status(500).render('error.html', { user: req.user, status: 500, message: err2.message });
-					if (!result) return res.status(404).render('error.html', { user: req.user, status: 404, message: 'Apparently MSS has no commands.' });
+					if (err2) res.status(500).render('error.html', { user: req.user, status: 500, message: err2.message, botname });
+					if (!result) return res.status(404).render('error.html', { user: req.user, status: 404, message: `Apparently ${config.get('name')} has no commands.`, botname });
 					const data = result.sort((a, b) => {
 						if (a.message.embed.title.toLowerCase() < b.message.embed.title.toLowerCase()) return -1;
 						if (a.message.embed.title.toLowerCase() > b.message.embed.title.toLowerCase()) return 1;
 						return 0;
 					});
-					return res.render('manual.html', { user: req.user, command: data, nav });
+					return res.render('manual.html', { user: req.user, command: data, nav, botname });
 				});
 			});
 	})
@@ -80,29 +82,29 @@ app.use('/auth', authRouter)
 		const nav = req.query.nav !== undefined;
 
 		if (typeof guild === 'undefined') {
-			res.status(404).render('error.html', { user: req.user, status: 404, message: 'The guild could not be found.' });
+			res.status(404).render('error.html', { user: req.user, status: 404, message: 'The guild could not be found.', botname });
 		} else {
 			r.table('playlist')
 				.get(guild.id)('playlist')
 				.run(r.conn, (err, result) => {
 					if (err) {
-						res.status(404).render('error.html', { user: req.user, status: 404 });
+						res.status(404).render('error.html', { user: req.user, status: 404, botname });
 					} else {
 						const indexedarray = result.map((elem, index) => {
 							elem.index = index;
 							return elem;
 						});
 
-						res.status(200).render('music.html', { user: req.user, playlist: indexedarray, nav });
+						res.status(200).render('music.html', { user: req.user, playlist: indexedarray, nav, botname });
 					}
 				});
 		}
 	})
 	.use(express.static(path.join(__dirname, '/../client')))
 	.use('*', (req, res) =>
-		res.status(404).render('error.html', { user: req.user, status: 404 })
+		res.status(404).render('error.html', { user: req.user, status: 404, botname })
 	);
 
 // Initialisation process
-console.log('Webserver listening on port', config.get('ports').http);
-app.listen(config.get('ports').http);
+console.log('Webserver listening on port', config.get('webserver').port);
+app.listen(config.get('webserver').port);

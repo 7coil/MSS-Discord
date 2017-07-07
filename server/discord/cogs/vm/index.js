@@ -17,9 +17,7 @@ module.exports.command = (message) => {
 	if (!message.channel || !message.channel.guild || !message.channel.nsfw) {
 		message.channel.createMessage('Due to the nature of content potentially found on this VM, please enter a NSFW channel within a guild.');
 	} else {
-		exec(command, (error, stdout, stderr) => {
-			console.log(stdout);
-			console.log(stderr);
+		exec(command, () => {
 			const buffer = [];
 			const stream = fs.createReadStream('./vnc.jpg');
 

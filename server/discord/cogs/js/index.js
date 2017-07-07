@@ -10,10 +10,10 @@ module.exports.info = {
 };
 
 module.exports.command = (message, client) => { // eslint-disable-line no-unused-vars
-	if (config.get('admins').includes(message.author.id)) {
+	if (config.get('discord').admins.includes(message.author.id)) {
 		const embed = {
 			embed: {
-				title: 'MSS-Discord',
+				title: config.get('name'),
 				fields: [
 					{
 						name: 'Input',

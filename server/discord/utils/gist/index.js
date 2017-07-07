@@ -13,7 +13,7 @@ module.exports = function gist(input, callback) {
 			'User-Agent': config.get('useragent'),
 		},
 		body: {
-			description: 'Collabot Discord Bot Large-Text Output',
+			description: 'Parkerbot Output',
 			public: true,
 			files: {
 				moustacheminer: {

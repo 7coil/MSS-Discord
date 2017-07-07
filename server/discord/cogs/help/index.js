@@ -12,15 +12,15 @@ module.exports.info = {
 module.exports.command = (message) => {
 	const embed = {
 		embed: {
-			title: 'MSS-Discord',
+			title: config.get('name'),
 			fields: [
 				{
 					name: 'Commands',
-					value: 'For a list of all commands, run `mss commands`'
+					value: `For a list of all commands, run \`${message.prefix} commands\`, or visit the rarely updated online list [here](${config.get('url').manual})`
 				},
 				{
 					name: 'Prefixes',
-					value: config.get('prefix').join(' OR ')
+					value: config.get('discord').prefix.join(' OR ')
 				},
 				{
 					name: 'Links',
@@ -28,7 +28,7 @@ module.exports.command = (message) => {
 				},
 				{
 					name: 'Licence',
-					value: 'This copy of MSS-Discord is licenced under the MIT Licence'
+					value: `${config.get('name')}, an instance of MSS-Discord is licenced under the MIT Licence`
 				}
 			]
 		}

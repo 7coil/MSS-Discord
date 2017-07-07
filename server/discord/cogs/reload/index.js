@@ -11,7 +11,7 @@ module.exports.info = {
 };
 
 module.exports.command = (message) => {
-	if (config.get('admins').includes(message.author.id)) {
+	if (config.get('discord').admins.includes(message.author.id)) {
 		try {
 			reload(`./../${message.input}/`);
 			reload('./../../cogs.js');

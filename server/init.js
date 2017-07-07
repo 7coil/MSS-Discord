@@ -2,7 +2,7 @@ const r = require('./db');
 const config = require('config');
 
 setTimeout(() => {
-	r.init(config.get('rethinkdb'), [
+	r.init(config.get('api').rethinkdb, [
 		{
 			name: 'users',
 			indexes: ['login']
