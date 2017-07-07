@@ -13,12 +13,10 @@ module.exports.info = {
 };
 
 module.exports.command = (message) => {
-	console.log(message.input);
 	if (utils.isadmin(message.member)) {
 		const regex = /\w+/g;
 
 		const input = regex.exec(message.input);
-		console.dir(input);
 		let prune = '';
 
 		if (input && input[0] && message.input) {
@@ -27,7 +25,6 @@ module.exports.command = (message) => {
 			prune = client.user.id;
 		}
 
-		console.log(prune);
 		message.channel.getMessages().then((messages) => {
 			const delet = messages.filter((msg) => {
 				if (prune === 'bots') {
