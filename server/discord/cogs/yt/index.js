@@ -29,7 +29,7 @@ module.exports.command = (message) => {
 					message.channel.createMessage('No results found');
 				} else {
 					utils.music.add(message, {
-						type: 'ytdl',
+						type: 'ytdl-core',
 						from: 'YouTube',
 						media: `https://youtube.com/watch?v=${video.id.videoId}`,
 						title: video.snippet.title,

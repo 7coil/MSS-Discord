@@ -3,6 +3,7 @@ const client = require('./../../');
 const spawn = require('child_process').spawn;
 const request = require('request');
 const utils = require('./../../utils.js');
+const ytdl = require('ytdl-core');
 
 const connections = {};
 
@@ -53,6 +54,11 @@ const play = (message) => {
 			]);
 
 			connections[message.channel.guild.id].play(youtube.stdout);
+			after();
+		} else if (playlist[0].type === 'ytdl-core') { // Play from youtube-dl, which can do many many things.
+			const stream = ytdl(playlist[0].media, { filter: 'audioonly' });
+
+			connections[message.channel.guild.id].play(stream);
 			after();
 		} else if (playlist[0].type === 'get') { // Play directly with a GET request
 			const ffmpeg = spawn('ffmpeg', [
