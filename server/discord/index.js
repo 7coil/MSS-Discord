@@ -75,36 +75,38 @@ client.on('ready', () => {
 
 			// Run the actual command, if the command exists
 			commands[message.command].command(message, client);
-		} else if (suf) {
-			if (message.channel && message.channel.id !== '110373943822540800') {
-				// If the suffix matches a user's name in the database...
+		} else if (config.get('discord').features.markov) {
+			if (suf) {
+				if (message.channel && message.channel.id !== '110373943822540800') {
+					// If the suffix matches a user's name in the database...
+					r.table('markov')
+						.filter({ name: suf[1] })
+						.run(r.conn, (err1, cursor) => {
+							if (err1) return;
+							cursor.toArray((err2, result) => {
+								if (err2) return;
+								if (result.length === 0) return;
+								// Generate a Markov
+								utils.markov.generate(suf[1], (embed) => {
+									message.channel.createMessage(embed);
+								});
+							});
+						});
+				}
+			} else {
+				// If the user exists in the rethonk Markov database...
 				r.table('markov')
-					.filter({ name: suf[1] })
+					.filter({ author: message.author.id })
 					.run(r.conn, (err1, cursor) => {
 						if (err1) return;
 						cursor.toArray((err2, result) => {
 							if (err2) return;
 							if (result.length === 0) return;
-							// Generate a Markov
-							utils.markov.generate(suf[1], (embed) => {
-								message.channel.createMessage(embed);
-							});
+							// Save the markov.
+							utils.markov.save(message);
 						});
 					});
 			}
-		} else {
-			// If the user exists in the rethonk Markov database...
-			r.table('markov')
-				.filter({ author: message.author.id })
-				.run(r.conn, (err1, cursor) => {
-					if (err1) return;
-					cursor.toArray((err2, result) => {
-						if (err2) return;
-						if (result.length === 0) return;
-						// Save the markov.
-						utils.markov.save(message);
-					});
-				});
 		}
 	});
 });

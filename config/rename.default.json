@@ -30,7 +30,10 @@
 			"190519304972664832"
 		],
 		"selfbot": false,
-		"shards": 1
+		"shards": 1,
+		"features": {
+			"markov": false
+		}
 	},
 	"webserver": {
 		"callback": "http://127.0.0.1:8080/auth/login/callback",
