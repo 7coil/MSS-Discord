@@ -55,8 +55,8 @@ const play = (message) => {
 
 			connections[message.channel.guild.id].play(youtube.stdout);
 			after();
-		} else if (playlist[0].type === 'ytdl-core') { // Play from youtube-dl, which can do many many things.
-			const stream = ytdl(playlist[0].media, { filter: 'audioonly' });
+		} else if (playlist[0].type === 'ytdl-core') { // Play with ytdl-core, which can do many many things.
+			const stream = ytdl(playlist[0].media.url, playlist[0].media.search);
 
 			connections[message.channel.guild.id].play(stream);
 			after();

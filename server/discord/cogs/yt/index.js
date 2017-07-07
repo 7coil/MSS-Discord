@@ -31,7 +31,10 @@ module.exports.command = (message) => {
 					utils.music.add(message, {
 						type: 'ytdl-core',
 						from: 'YouTube',
-						media: `https://youtube.com/watch?v=${video.id.videoId}`,
+						media: {
+							url: `https://youtube.com/watch?v=${video.id.videoId}`,
+							search: video.snippet.liveBroadcastContent ? { quality: ['96', '95', '94', '93', '92', '91'] } : { filter: 'audioonly' }
+						},
 						title: video.snippet.title,
 						thumb: video.snippet.thumbnails.default.url,
 						desc: video.snippet.description
