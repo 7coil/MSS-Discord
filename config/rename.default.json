@@ -1,7 +1,12 @@
 {
 	"api": {
+		"rethinkdb": {
+			"host": "",
+			"port": 28015,
+			"db": "discord"
+		},
 		"discord": {
-			"clientID": "",
+			"clientID": "233702481375395843",
 			"clientSecret": "",
 			"scope": [ "identify" ],
 			"token": ""
@@ -15,25 +20,22 @@
 		"discordbotsorg": "",
 		"botsdiscordpw": ""
 	},
-	"name": "Moustacheminer Server Services",
-	"callback": "https://discord.mss.ovh/auth/login/callback",
-	"useragent": "MSS-Discord (https://discord.mss.ovh/)",
-	"selfbot": false,
-	"shards": 1,
-	"ports": {
-		"http": 8080
+	"discord": {
+		"prefix": [
+			"pk!",
+			"parker",
+			"mss"
+		],
+		"admins": [
+			"190519304972664832"
+		],
+		"selfbot": false,
+		"shards": 1
 	},
-	"rethinkdb": {
-		"host": "192.168.0.102",
-		"port": 28015,
-		"db": "discord"
+	"webserver": {
+		"callback": "http://127.0.0.1:8080/auth/login/callback",
+		"port": 8080
 	},
-	"session": {
-		"secret": ""
-	},
-	"admins": [
-		"190519304972664832"
-	],
 	"url": {
 		"discord": "https://discord.gg/wHgdmf4",
 		"invite": "https://discordapp.com/oauth2/authorize?&client_id=257547382277931009&scope=bot&permissions=70765632",
@@ -41,8 +43,7 @@
 		"manual": "https://discord.mss.ovh/manual",
 		"website": "https://discord.mss.ovh/"
 	},
-	"prefix": [
-		"coil",
-		"mss"
-	]
+	"name": "Parkerbot",
+	"useragent": "ParkerBot/4.1 (noud.js; Linux x86_64)",
+	"secret": ""
 }
