@@ -6,7 +6,9 @@ module.exports.info = {
 	category: 'utilities',
 	aliases: [
 		'clean',
-		'prune'
+		'prune',
+		'delete',
+		'delet'
 	]
 };
 
@@ -14,7 +16,6 @@ module.exports.command = (message) => {
 	console.log(message.input);
 	if (utils.isadmin(message.member)) {
 		const regex = /\w+/g;
-		let fail = false;
 
 		const input = regex.exec(message.input);
 		console.dir(input);
@@ -28,16 +29,35 @@ module.exports.command = (message) => {
 
 		console.log(prune);
 		message.channel.getMessages().then((messages) => {
-			messages.filter((msg) => {
+			const delet = messages.filter((msg) => {
 				if (prune === 'bots') {
 					return msg.author.bot;
 				}
 				return msg.author.id === prune;
-			}).forEach((msg) => {
-				msg.delete();
 			});
+
+			if (delet.length === 0) {
+				message.channel.createMessage(`Nothing to ${message.command}!`);
+			} else {
+				let i = 0;
+				const deleteMessage = () => {
+					delet[i].delete()
+						.then(() => {
+							i += 1;
+							if (delet[i + 1]) {
+								deleteMessage();
+							} else {
+								message.channel.createMessage(`Deleted ${i} messages`);
+							}
+						})
+						.catch(() => {
+							message.channel.createMessage(`Failed to ${message.command} messages`);
+						});
+				};
+				deleteMessage();
+			}
 		});
 	} else {
-		message.channel.createMessage('You do not have permission to perform this command!');
+		message.channel.createMessage(`You do not have permission to ${message.command}!`);
 	}
 };
