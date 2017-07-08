@@ -27,7 +27,6 @@ module.exports.command = (message) => {
 		} else {
 			const regex = /name="form_build_id" value="(.+)"/g;
 			const form = regex.exec(body1);
-			console.log(form[1]);
 
 			// Query for uploading the Discord Avatar
 			const query2 = {
@@ -54,7 +53,6 @@ module.exports.command = (message) => {
 			};
 
 			request(query2, (err2, res2, body2) => {
-				console.dir(body2);
 				if (err2 || res2.statusCode !== 200) {
 					message.channel.createMessage('An error occured while retriving a `spreadsheet`');
 				} else if (res2.headers['content-type'] !== 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
