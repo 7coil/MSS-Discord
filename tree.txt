@@ -1,0 +1,46 @@
+                                
+                    MSS-Discord
+                         |
+                         |
+                    make modular
+                         |
+                         V
+                         +-----------> XML-Discord
+                         |                  | 
+                         |                  | 
+                         |                  V 
+                         |                 bin
+     git-gud <-----------+
+        |                |
+        |                |
+        |          move to eris
+        |                |
+        V                V
+-----------------------------------------------------
+=== add discord bots and discord bot list counter ===
+-----------------------------------------------------
+        |                |
+        |                V
+        |        MSS-Discord (eris)
+        |                |
+        |                |
+        |                +-----------> Discord Mail
+        |                |                  |
+        |                |                  |
+        |           rename bot              |
+        |                |                  |
+        |                V                  |
+        |            Parkerbot              |
+        |                |                  |
+        |                |                  |
+        |           add colours             |
+        |                |                  |
+        |                |                  |
+        |                |-- copy colours ->+
+        |                |                  |
+        |                |                  |
+        V                V                  V
+
+?????????????????????????????????????????????????????
+                            
+                       today

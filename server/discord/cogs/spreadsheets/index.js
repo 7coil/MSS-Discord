@@ -8,6 +8,7 @@ module.exports.info = {
 	category: 'Fun',
 	aliases: [
 		'spreadsheets',
+		'spreadsheet',
 		'xlsx',
 		'xls'
 	]
