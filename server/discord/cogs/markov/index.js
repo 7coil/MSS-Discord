@@ -2,7 +2,7 @@ const utils = require('./../../utils.js');
 
 module.exports.info = {
 	name: 'Markov Message Chains',
-	category: 'fun',
+	category: 'Fun',
 	aliases: [
 		'markov'
 	]

@@ -3,7 +3,7 @@ const config = require('config');
 
 module.exports.info = {
 	name: 'Git Execution',
-	category: 'development',
+	category: 'Development',
 	aliases: [
 		'git'
 	]

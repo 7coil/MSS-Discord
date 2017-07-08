@@ -2,7 +2,7 @@ const data = require('./data.json');
 
 module.exports.info = {
 	name: 'Proverb',
-	category: 'random',
+	category: 'Random',
 	aliases: [
 		'proverb'
 	]

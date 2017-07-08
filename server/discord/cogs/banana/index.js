@@ -1,6 +1,6 @@
 module.exports.info = {
 	name: '🍌',
-	category: 'random',
+	category: 'Random',
 	aliases: [
 		'🍌',
 		'banana',

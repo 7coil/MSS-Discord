@@ -2,7 +2,7 @@ const config = require('config');
 
 module.exports.info = {
 	name: 'Restart',
-	category: 'development',
+	category: 'Development',
 	aliases: [
 		'restart',
 		'reboot'

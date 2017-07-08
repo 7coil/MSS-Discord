@@ -4,7 +4,7 @@ const cogs = require('./../../cogs.js');
 
 module.exports.info = {
 	name: 'Reload',
-	category: 'development',
+	category: 'Development',
 	aliases: [
 		'reload'
 	]

@@ -15,7 +15,7 @@ const compare = (botsdiscordpw, discordbotsorg) => {
 
 module.exports.info = {
 	name: 'Bot website information',
-	category: 'development',
+	category: 'Development',
 	aliases: [
 		'dbots'
 	]

@@ -2,7 +2,7 @@ const data = require('./data.json');
 
 module.exports.info = {
 	name: 'Magic 8 Ball',
-	category: 'random',
+	category: 'Random',
 	aliases: [
 		'8',
 		'8-ball'

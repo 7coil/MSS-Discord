@@ -9,7 +9,7 @@ const softwareinfo = `[${os.type()}] ${os.release()}`;
 
 module.exports.info = {
 	name: 'Information',
-	category: 'info',
+	category: 'Info',
 	aliases: [
 		'info'
 	]

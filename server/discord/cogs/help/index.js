@@ -2,7 +2,7 @@ const config = require('config');
 
 module.exports.info = {
 	name: 'Help',
-	category: 'info',
+	category: 'Info',
 	aliases: [
 		'help',
 		'man'

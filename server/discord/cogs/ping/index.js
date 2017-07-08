@@ -2,7 +2,7 @@ const client = require('./../../');
 
 module.exports.info = {
 	name: 'Ping',
-	category: 'info',
+	category: 'Info',
 	aliases: [
 		'ping',
 		'pong'

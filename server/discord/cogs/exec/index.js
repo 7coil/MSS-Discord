@@ -4,7 +4,7 @@ const utils = require('./../../utils.js');
 
 module.exports.info = {
 	name: 'Bash Execution',
-	category: 'development',
+	category: 'Development',
 	aliases: [
 		'exec'
 	]

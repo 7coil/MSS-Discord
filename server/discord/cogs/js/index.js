@@ -3,7 +3,7 @@ const utils = require('./../../utils.js');
 
 module.exports.info = {
 	name: 'Rich JavaScript Evaluation',
-	category: 'development',
+	category: 'Development',
 	aliases: [
 		'js'
 	]

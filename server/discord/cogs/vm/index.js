@@ -5,7 +5,7 @@ const command = 'vncsnapshot 192.168.0.3:19 vnc.jpg';
 
 module.exports.info = {
 	name: 'vnc.moustacheminer.com',
-	category: 'nsfw',
+	category: 'NSFW',
 	aliases: [
 		'vnc',
 		'vm',

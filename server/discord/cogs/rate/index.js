@@ -3,7 +3,7 @@ const crypto = require('crypto');
 
 module.exports.info = {
 	name: 'Rate and Rank',
-	category: 'fun',
+	category: 'Fun',
 	aliases: [
 		'rate',
 		'rank'

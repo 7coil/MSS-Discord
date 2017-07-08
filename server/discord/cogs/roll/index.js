@@ -8,7 +8,7 @@ function randInt(d) {
 
 module.exports.info = {
 	name: 'Dice Roll',
-	category: 'fun',
+	category: 'Fun',
 	aliases: [
 		'roll',
 		'die',

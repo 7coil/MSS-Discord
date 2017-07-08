@@ -11,7 +11,7 @@ function escapeChar(name) {
 
 module.exports.info = {
 	name: 'Matt Parker',
-	category: 'fun',
+	category: 'Fun',
 	aliases: [
 		'parker'
 	]

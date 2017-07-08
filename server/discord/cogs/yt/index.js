@@ -7,7 +7,7 @@ searchYTClient.setKey(config.get('api').youtube);
 
 module.exports.info = {
 	name: 'YouTube',
-	category: 'music',
+	category: 'Music',
 	aliases: [
 		'yt',
 		'youtube'

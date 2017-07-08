@@ -3,7 +3,7 @@ const utils = require('./../../utils.js');
 
 module.exports.info = {
 	name: 'Clean messages by MSS',
-	category: 'utilities',
+	category: 'Utilities',
 	aliases: [
 		'clean',
 		'prune',

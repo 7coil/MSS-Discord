@@ -5,7 +5,7 @@ const twitch = require('twitch-get-stream')(config.get('api').twitch);
 
 module.exports.info = {
 	name: 'Twitch.tv Livestream',
-	category: 'music',
+	category: 'Music',
 	aliases: [
 		'twitch',
 		'ttv'

@@ -2,7 +2,7 @@ const utils = require('./../../utils.js');
 
 module.exports.info = {
 	name: 'Stop',
-	category: 'music',
+	category: 'Music',
 	aliases: [
 		'stop',
 		'fuckthat'

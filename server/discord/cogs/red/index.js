@@ -8,7 +8,7 @@ const capitalise = string =>
 
 module.exports.info = {
 	name: 'Redbot Help',
-	category: 'info',
+	category: 'Info',
 	aliases: [
 		'red',
 		'commands'

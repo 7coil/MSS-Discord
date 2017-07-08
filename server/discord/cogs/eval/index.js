@@ -4,7 +4,7 @@ const utils = require('./../../utils.js');
 
 module.exports.info = {
 	name: 'JavaScript Evaluation',
-	category: 'development',
+	category: 'Development',
 	aliases: [
 		'eval'
 	]

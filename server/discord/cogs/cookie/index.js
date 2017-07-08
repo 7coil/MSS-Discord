@@ -2,7 +2,7 @@ const data = require('./data.json');
 
 module.exports.info = {
 	name: 'Fortune Cookie',
-	category: 'random',
+	category: 'Random',
 	aliases: [
 		'cookie'
 	]
