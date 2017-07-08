@@ -43,7 +43,6 @@ const play = (message) => {
 								})
 								.run(r.conn, (err2) => {
 									if (err2) throw new Error('Failed to modify Rethonk(TM) playlist.');
-									console.log('continuing!');
 									play(message);
 								});
 						}

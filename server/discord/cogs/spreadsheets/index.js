@@ -7,7 +7,9 @@ module.exports.info = {
 	name: 'Spreadsheets',
 	category: 'Fun',
 	aliases: [
-		'spreadsheets'
+		'spreadsheets',
+		'xlsx',
+		'xls'
 	]
 };
 
