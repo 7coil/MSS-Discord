@@ -16,7 +16,8 @@ module.exports.info = {
 };
 
 module.exports.command = (message) => {
-	const rank = parseInt(crypto.createHash('sha512').update(message.input + config.get('secret')).digest('hex'), 16) % 2;
+	const hash = crypto.createHash('md5').update(message.input + config.get('secret')).digest('hex').substring(0, 4);
+	const rank = parseInt(hash, 16) % 2;
 
 	if (rank) {
 		message.channel.createMessage('That\'s numberwang!');
