@@ -21,6 +21,9 @@ client.on('shardReady', (id) => {
 });
 
 client.on('ready', () => {
+	// Add mentions to the prefix list
+	prefixes.push(`<@${client.user.id}>`);
+
 	// Set up regex for the bot.
 	// It's "man's essential illness"
 	// Use this regex for testing in regexr.com
@@ -29,8 +32,6 @@ client.on('ready', () => {
 	prefix = new RegExp(`^(${prefixes.join('|')}).?(${Object.keys(commands).join('|')})\\s?([\\s\\S]*)`);
 	suffix = /(\w+)pls/;
 
-	// Add mentions to the prefix list
-	prefixes.push(`<@${client.user.id}>`);
 	console.log('All shards are online'.green.bold);
 
 	// Send DBOTS info if it was provided.

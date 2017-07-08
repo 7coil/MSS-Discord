@@ -1,5 +1,4 @@
 require('colors');
-
 const fs = require('fs');
 
 const commands = [];
