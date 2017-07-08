@@ -47,6 +47,6 @@
 		"website": "https://discord.mss.ovh/"
 	},
 	"name": "Parkerbot",
-	"useragent": "ParkerBot/4.1 (noud.js; Linux x86_64)",
+	"useragent": "ParkerBot/4.1 (noud.js; Linux x86_64); https://mss.ovh/",
 	"secret": ""
 }
