@@ -18,7 +18,7 @@ const list = (message, callback) => {
 				if (res === null) {
 					callback([]);
 				} else {
-					callback(res.playlist);
+					callback(res.playlist, res.repeat);
 				}
 			});
 	}
@@ -26,15 +26,27 @@ const list = (message, callback) => {
 const play = (message) => {
 	list(message, (playlist) => {
 		const after = () => {
+			// When the playlist ends, either delete the next track, or not,
+			// depending on if they have single repeat on or not
 			connections[message.channel.guild.id].once('end', () => {
 				r.table('playlist')
 					.get(message.channel.guild.id)
-					.update({
-						playlist: r.row('playlist').deleteAt(0)
-					})
-					.run(r.conn, (err) => {
-						if (err) throw new Error('Failed to modify Rethonk(TM) playlist.');
-						play(message);
+					.run(r.conn, (err1, result) => {
+						if (err1) throw new Error('Failed to obtain repeat data.');
+						if (result.repeat) {
+							play(message);
+						} else {
+							r.table('playlist')
+								.get(message.channel.guild.id)
+								.update({
+									playlist: r.row('playlist').deleteAt(0)
+								})
+								.run(r.conn, (err2) => {
+									if (err2) throw new Error('Failed to modify Rethonk(TM) playlist.');
+									console.log('continuing!');
+									play(message);
+								});
+						}
 					});
 			});
 
@@ -124,13 +136,13 @@ const add = (message, details) => {
 	} else {
 		// Add the details to the playlist. If the playlist doesn't exist, create it.
 		r.table('playlist')
-			.get(message.channel.guild.id)
 			.replace({
 				id: message.channel.guild.id,
-				playlist: r.row('playlist').append(details).default([])
+				playlist: r.row('playlist').append(details).default([details]),
+				repeat: r.row('repeat').default(false)
 			})
 			.run(r.conn, (err) => {
-				if (err) throw new Error('Failed to add to Rethonk(TM) playlist.');
+				if (err) throw err;
 
 				// If the bot is not connected to the guild, run the init procedures
 				if (!connections[message.channel.guild.id]) connect(message);
@@ -154,11 +166,29 @@ const stop = (message) => {
 			.get(message.channel.guild.id)
 			.replace({
 				id: message.channel.guild.id,
-				playlist: []
+				playlist: [],
+				repeat: false
 			})
 			.run(r.conn, (err) => {
-				if (err) throw new Error('Failed to clear Rethonk(TM) playlist.');
+				if (err) throw err;
 				skip(message);
+			});
+	} else {
+		message.channel.createMessage('You do not have permission to perform this command!');
+	}
+};
+const repeat = (message) => {
+	if (!message.member) {
+		message.channel.createMessage('You need to be in a Guild!');
+	} else if (utils.isadmin(message.member)) {
+		r.table('playlist')
+			.replace({
+				id: message.channel.guild.id,
+				playlist: r.row('playlist'),
+				repeat: r.row('repeat').not().default(false)
+			})
+			.run(r.conn, (err) => {
+				if (err) throw err;
 			});
 	} else {
 		message.channel.createMessage('You do not have permission to perform this command!');
@@ -170,6 +200,7 @@ exports.add = add;
 exports.stop = stop;
 exports.skip = skip;
 exports.list = list;
+exports.repeat = repeat;
 
 /*
 
