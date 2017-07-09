@@ -139,6 +139,7 @@ const add = (message, details) => {
 	} else {
 		// Add the details to the playlist. If the playlist doesn't exist, create it.
 		r.table('playlist')
+			.get(message.channel.guild.id)
 			.replace({
 				id: message.channel.guild.id,
 				playlist: r.row('playlist').append(details).default([details]),
