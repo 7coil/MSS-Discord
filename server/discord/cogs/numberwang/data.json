@@ -1,0 +1,37 @@
+{
+	"contestants": [
+		"Julie",
+		"Simon"
+	],
+	"fail": [
+		"fail/1.ogg",
+		"fail/2.ogg",
+		"fail/3.ogg"
+	],
+	"numberwang": [
+		"numberwang/1.ogg",
+		"numberwang/2.ogg",
+		"numberwang/3.ogg",
+		"numberwang/4.ogg",
+		"numberwang/5.ogg",
+		"numberwang/6.ogg",
+		"numberwang/7.ogg",
+		"numberwang/8.ogg",
+		"numberwang/9.ogg",
+		"numberwang/10.ogg",
+		"numberwang/11.ogg",
+		"numberwang/12.ogg",
+		"numberwang/13.ogg",
+		"numberwang/14.ogg",
+		"numberwang/15.ogg"
+	],
+	"noreply": [
+		"end/1.ogg",
+		"end/2.ogg",
+		"end/2.ogg",
+		"start/1.ogg",
+		"start/2.ogg",
+		"wangernumb/1.ogg",
+		"wangernumb/2.ogg"
+	]
+}
