@@ -117,7 +117,6 @@ const connect = (message) => {
 		client.joinVoiceChannel(message.member.voiceState.channelID)
 			.catch((err) => { // Join the user's voice channel
 				message.channel.createMessage(`Error joining channel! ${err.message}`);
-				console.log(err);
 			})
 			.then((connection) => {
 				if (connection) {
