@@ -12,6 +12,8 @@ const os = require('os');
 const path = require('path');
 
 const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 const auth = require('./auth');
 const authRouter = require('./auth/auth-router');
 
@@ -105,6 +107,24 @@ app.use('/auth', authRouter)
 		res.status(404).render('error.html', { user: req.user, status: 404, botname })
 	);
 
+io.on('connection', (socket) => {
+	const infostream = setInterval(() => {
+		const data = {
+			time: new Date().getTime(),
+			uptime: Math.floor(process.uptime()),
+			ram: process.memoryUsage(),
+			user: discord.users.size,
+			guild: discord.guilds.size,
+			voice: discord.voiceConnections.size
+		};
+		socket.emit('info', data);
+	}, 500);
+
+	socket.on('disconnect', () => {
+		clearInterval(infostream);
+	});
+});
+
 // Initialisation process
 console.log('Webserver listening on port', config.get('webserver').port);
-app.listen(config.get('webserver').port);
+server.listen(config.get('webserver').port);

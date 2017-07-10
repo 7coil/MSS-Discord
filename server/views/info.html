@@ -75,9 +75,21 @@
 						</li>
 						<li class="list-group-item justify-content-between">
 							Uptime
-							<span class="badge badge-default badge-pill" id="uptime"></span>
+							<span class="badge badge-default badge-pill" id="uptime">Waiting for data...</span>
 						</li>
 					</ul>
+				</div>
+				<div class="col-xs-12 col-md-6 col-lg-4">
+					<h3>Users</h3>
+					<canvas id="userchart" style="width: 100%; height: 100px;" width="500" height="100"></canvas>
+				</div>
+				<div class="col-xs-12 col-md-6 col-lg-4">
+					<h3>Guilds</h3>
+					<canvas id="guildchart" style="width: 100%; height: 100px;" width="500" height="100"></canvas>
+				</div>
+				<div class="col-xs-12 col-md-6 col-lg-4">
+					<h3>Voice Connections</h3>
+					<canvas id="voicechart" style="width: 100%; height: 100px;" width="500" height="100"></canvas>
 				</div>
 			</div>
 
@@ -89,18 +101,13 @@
 			</footer>
 		</div>
 
-		<script src="/js/timestamp.js"></script>
-		<script>
-			let uptime = {{ data.uptime }};
-			const uptime_text = document.getElementById("uptime")
-			uptime_text.innerHTML = timestamp(uptime);
-			setInterval(()=>{
-				uptime_text.innerHTML = timestamp(uptime);
-				uptime++;
-			}, 1000)
-		</script>
 		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+		<script src="/js/timestamp.js"></script>
+		<script src="js/smoothie.js"></script>
+		<script src="js/info.js"></script>
 	</body>
 </html>
