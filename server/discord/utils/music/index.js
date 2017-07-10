@@ -128,11 +128,11 @@ const connect = (message) => {
 };
 const add = (message, details) => {
 	if (!message.member) {
-		if (!details.slient) {
+		if (!details.silent) {
 			message.channel.createMessage('You need to be in a Guild!');
 		}
 	} else if (!message.member.voiceState || !message.member.voiceState.channelID) {
-		if (!details.slient) {
+		if (!details.silent) {
 			message.channel.createMessage('You need to be in a Voice Channel!');
 		}
 	} else {
