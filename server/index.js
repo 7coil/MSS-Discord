@@ -135,6 +135,17 @@ io.on('connection', (socket) => {
 	});
 });
 
+// Error!
+process.on('uncaughtException', (err) => {
+	if (err.code === 'ECONNRESET') {
+		console.log('ECONNREST occured, stream broke');
+	} else {
+		console.log('Moustacheminer Server Services has crashed!'.red);
+		console.log(err.stack);
+		process.exit(1);
+	}
+});
+
 // Initialisation process
 console.log('Webserver listening on port', config.get('webserver').port);
 server.listen(config.get('webserver').port);
