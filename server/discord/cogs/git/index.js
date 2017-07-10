@@ -3,9 +3,16 @@ const config = require('config');
 
 module.exports.info = {
 	name: 'Git Execution',
-	category: 'Development',
+	description: 'Execute git commands.',
+	category: 'Owner',
 	aliases: [
 		'git'
+	],
+	use: [
+		{
+			name: '<command>',
+			value: 'Execute the git command.'
+		}
 	]
 };
 

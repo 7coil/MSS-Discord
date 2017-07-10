@@ -4,9 +4,16 @@ const cogs = require('./../../cogs.js');
 
 module.exports.info = {
 	name: 'Reload',
-	category: 'Development',
+	description: 'Reload a command.',
+	category: 'Owner',
 	aliases: [
 		'reload'
+	],
+	use: [
+		{
+			name: '<folder>',
+			value: 'Reload a specific cog'
+		}
 	]
 };
 

@@ -2,10 +2,17 @@ const config = require('config');
 
 module.exports.info = {
 	name: 'Help',
+	description: 'Get help regarding the bot.',
 	category: 'Info',
 	aliases: [
 		'help',
 		'man'
+	],
+	use: [
+		{
+			name: '',
+			value: 'Obtain help'
+		}
 	]
 };
 

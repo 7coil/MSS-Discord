@@ -3,11 +3,18 @@ const utils = require('./../../utils.js');
 
 module.exports.info = {
 	name: 'Fonix DECtalk Text to Speech',
+	description: 'Turn the supplied text into a DECtalk sound.',
 	category: 'Music',
 	aliases: [
 		'dictate',
 		'tts',
 		'dec'
+	],
+	use: [
+		{
+			name: '<input>',
+			value: 'Turn the supplied text into a DECtalk response.'
+		}
 	]
 };
 

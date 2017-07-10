@@ -6,13 +6,21 @@ const mention = /(\d+)/;
 const url = 'http://www.think-maths.co.uk/spreadsheet';
 
 module.exports.info = {
-	name: 'Casual Spreadsheets ',
+	name: 'Avatar Spreadsheet Generation',
+	description: 'Generate a casual spreadsheet for yourself, or the mentioned user.',
 	category: 'Fun',
 	aliases: [
 		'spreadsheets',
-		'spreadsheet',
-		'xlsx',
-		'xls'
+		'spreadsheet'
+	],
+	use: [
+		{
+			name: '',
+			value: 'Generate a spreadsheet of your own avatar'
+		}, {
+			name: '<mention>',
+			value: 'Generate a spreadsheet of the mentioned user'
+		}
 	]
 };
 

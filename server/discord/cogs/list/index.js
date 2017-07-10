@@ -2,11 +2,18 @@ const utils = require('./../../utils.js');
 
 module.exports.info = {
 	name: 'Playlist',
+	description: 'List the current sounds and music that is stored within the playlist.',
 	category: 'Music',
 	aliases: [
 		'list',
 		'playlist',
 		'queue'
+	],
+	use: [
+		{
+			name: '',
+			value: 'List the playlist'
+		}
 	]
 };
 module.exports.command = (message) => {

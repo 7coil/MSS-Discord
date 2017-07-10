@@ -1,10 +1,17 @@
 module.exports.info = {
 	name: '🍌',
+	description: '🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌🍌.',
 	category: 'Random',
 	aliases: [
 		'🍌',
 		'banana',
 		':banana:'
+	],
+	use: [
+		{
+			name: '',
+			value: '🍌🍌🍌, 🍌🍌🍌. 🍌🍌! 🍌🍌🍌🍌🍌?'
+		}
 	]
 };
 

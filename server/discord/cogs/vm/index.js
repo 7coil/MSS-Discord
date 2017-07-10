@@ -5,11 +5,18 @@ const command = 'vncsnapshot 192.168.0.3:19 vnc.jpg';
 
 module.exports.info = {
 	name: 'vnc.moustacheminer.com',
+	description: 'Obtain the latest image from the Moustacheminer Public Virtual Machine.',
 	category: 'NSFW',
 	aliases: [
 		'vnc',
 		'vm',
 		'virt'
+	],
+	use: [
+		{
+			name: '',
+			value: 'Obtain the latest image from vnc.mss.ovh'
+		}
 	]
 };
 

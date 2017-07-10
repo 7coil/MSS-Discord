@@ -11,9 +11,19 @@ function escapeChar(name) {
 
 module.exports.info = {
 	name: 'Matt Parker',
+	description: 'Fetch a random image of Matt Parker.',
 	category: 'Fun',
 	aliases: [
 		'parker'
+	],
+	use: [
+		{
+			name: '',
+			value: 'Parker Square nobody.'
+		}, {
+			name: '<mention>',
+			value: 'Parker Square the mentioned user'
+		}
 	]
 };
 

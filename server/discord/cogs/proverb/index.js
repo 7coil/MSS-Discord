@@ -2,9 +2,16 @@ const data = require('./data.json');
 
 module.exports.info = {
 	name: 'Proverb',
+	description: 'Reply with an proverbial response.',
 	category: 'Random',
 	aliases: [
 		'proverb'
+	],
+	use: [
+		{
+			name: '',
+			value: 'Reply with an 8 bot response'
+		}
 	]
 };
 

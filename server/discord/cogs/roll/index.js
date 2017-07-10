@@ -8,11 +8,27 @@ function randInt(d) {
 
 module.exports.info = {
 	name: 'Dice Roll',
+	description: 'Roll a dice or die, with an arbitary number of sides and/or an arbitary number of rolls.',
 	category: 'Fun',
 	aliases: [
 		'roll',
 		'die',
 		'dice'
+	],
+	use: [
+		{
+			name: '',
+			value: 'Roll a 6 sided die'
+		}, {
+			name: '<times>',
+			value: 'Roll a 6 sided die the indicated number of times'
+		}, {
+			name: 'd<sides>',
+			value: 'Roll an n-sided die'
+		}, {
+			name: '<times>d<sides>',
+			value: 'Roll an n-sided die the indicated number of times'
+		}
 	]
 };
 

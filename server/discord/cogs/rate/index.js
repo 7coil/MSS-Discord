@@ -3,10 +3,20 @@ const crypto = require('crypto');
 
 module.exports.info = {
 	name: 'Rate and Rank',
+	description: 'Interprets and determines the relevant rank for a query',
 	category: 'Fun',
 	aliases: [
 		'rate',
 		'rank'
+	],
+	use: [
+		{
+			name: '',
+			value: 'Rate the empty air of silence after you and your children\'s deaths, past the end of civilisation, past the end of our Sun, past the heat death of the universe, and is at a global temperature of absolute zero.'
+		}, {
+			name: '<thing>',
+			value: 'Rate the thing'
+		}
 	]
 };
 

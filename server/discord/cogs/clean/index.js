@@ -2,13 +2,24 @@ const client = require('./../../');
 const utils = require('./../../utils.js');
 
 module.exports.info = {
-	name: 'Clean messages by MSS',
+	name: 'Prune messages',
 	category: 'Utilities',
+	description: 'Delete the last 50 messages sent by the bot or by a specified person.',
 	aliases: [
 		'clean',
 		'prune',
 		'delete',
 		'delet'
+	],
+	use: [
+		{
+			name: '',
+			value: 'Prune messages sent by the bot'
+		},
+		{
+			name: '<user>',
+			value: 'Prune messages sent by the specific user. Needs permission to do so.'
+		}
 	]
 };
 

@@ -4,9 +4,16 @@ const utils = require('./../../utils.js');
 
 module.exports.info = {
 	name: 'Bash Execution',
-	category: 'Development',
+	description: 'Execute bash commands.',
+	category: 'Owner',
 	aliases: [
 		'exec'
+	],
+	use: [
+		{
+			name: '<command>',
+			value: 'Execute the bash command.'
+		}
 	]
 };
 

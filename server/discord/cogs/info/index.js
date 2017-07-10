@@ -9,9 +9,16 @@ const softwareinfo = `[${os.type()}] ${os.release()}`;
 
 module.exports.info = {
 	name: 'Information',
+	description: 'Get info regarding the bot.',
 	category: 'Info',
 	aliases: [
 		'info'
+	],
+	use: [
+		{
+			name: '',
+			value: 'Obtain info'
+		}
 	]
 };
 

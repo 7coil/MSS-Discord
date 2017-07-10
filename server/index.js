@@ -24,6 +24,7 @@ const r = require('./db');
 
 // Discord
 const discord = require('./discord');
+const cogs = require('./discord/cogs.js').info;
 
 // Middleware
 app.use(session(
@@ -78,6 +79,15 @@ app.use('/auth', authRouter)
 					return res.render('manual.html', { user: req.user, command: data, nav, botname });
 				});
 			});
+	})
+	.get('/promo', (req, res) => {
+		res.status(200).render('promo.html', {
+			user: req.user,
+			cogs,
+			prefixes: config.get('discord').prefix,
+			prefix: config.get('discord').prefix[0],
+			botname
+		});
 	})
 	.get('/music/:id', (req, res) => {
 		const guild = discord.guilds.get(req.params.id);

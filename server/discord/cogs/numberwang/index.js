@@ -9,9 +9,19 @@ const desc = 'Hello, and welcome to Numberwang, the maths quiz that simply every
 
 module.exports.info = {
 	name: 'Numberwang',
+	description: 'Check if a number is Numberwang.',
 	category: 'Fun',
 	aliases: [
 		'numberwang'
+	],
+	use: [
+		{
+			name: '',
+			value: 'Play a random numberwang'
+		}, {
+			name: '<number>',
+			value: 'Check if a number is actually numberwang'
+		}
 	]
 };
 

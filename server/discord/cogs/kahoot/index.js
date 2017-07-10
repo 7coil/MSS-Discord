@@ -36,9 +36,16 @@ const authenticate = (callback) => {
 
 module.exports.info = {
 	name: 'Kahoot Search',
+	description: 'Search for a Kahoot.',
 	category: 'Fun',
 	aliases: [
 		'kahoot'
+	],
+	use: [
+		{
+			name: '[search]',
+			value: 'Search for the input on kahoot.it'
+		}
 	]
 };
 

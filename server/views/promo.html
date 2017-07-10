@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="{{ botname }} information. For info, of course.">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+		<title>{{ botname }}</title>
+	</head>
+
+	<body>
+		{{^nav}}
+		<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+			<a class="navbar-brand" href="#">{{ botname }}</a>
+		</nav>
+		<br><br>
+
+		<div class="jumbotron">
+			<div class="container">
+				<h1 class="display-3">{{ botname }}</h1>
+				<h2>A parker square of a bot.</h2>
+			</div>
+		</div>
+		{{/nav}}
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2>Moustacheminer Server Services</h2>
+					<p>Parkerbot is a diverse bot, implementing many commands to accomidate a wide range of users, while being up for a whole <span id="uptime">second</span>.</p>
+					<p>Available prefixes: <code>{{ prefixes }}</code></p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-md-6 col-lg-4">
+					<h3>Users</h3>
+					<canvas id="userchart" style="width: 100%; height: 100px;" width="500" height="100"></canvas>
+				</div>
+				<div class="col-xs-12 col-md-6 col-lg-4">
+					<h3>Guilds</h3>
+					<canvas id="guildchart" style="width: 100%; height: 100px;" width="500" height="100"></canvas>
+				</div>
+				<div class="col-xs-12 col-md-6 col-lg-4">
+					<h3>Voice Connections</h3>
+					<canvas id="voicechart" style="width: 100%; height: 100px;" width="500" height="100"></canvas>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Commands</h3>
+				</div>
+				<div class="col-md-12">
+					<div id="accordion" role="tablist" aria-multiselectable="true">
+						{{ #cogs }}
+						<div class="card">
+							<a name="{{ name }}"></a>
+							<div class="card-header justify-content-between" role="tab" id="heading_{{ id }}">
+								<h5 class="mb-0 left">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{ id }}" aria-expanded="true" aria-controls="collapse_{{ id }}">
+										{{ name }}
+									</a>
+									<span class="right badge badge-default badge-pill">{{ category }}</span>
+								</h5>
+							</div>
+							<div id="collapse_{{ id }}" class="collapse" role="tabpanel" aria-labelledby="heading_{{ id }}">
+								<div class="card-block">
+									<p>{{ description }}</p>
+									<h5>Aliases</h5>
+									<p><code>{{ aliases }}</code></p>
+									<h5>Use</h5>
+									{{ #use }}
+									<p><code>{{ prefix }} {{ id }} {{ name }}</code></p>
+									<p>{{ value }}</p>
+									{{ /use }}
+								</div>
+							</div>
+						</div>
+						{{ /cogs }}
+					</div>
+				</div>
+			</div>
+
+			<hr>
+
+			<footer>
+				<p>&copy; 2015 - 2017 moustacheminer.com</p>
+				<i>Powered by yesterday</i>
+			</footer>
+		</div>
+
+		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+		<script src="/js/timestamp.js"></script>
+		<script src="js/smoothie.js"></script>
+		<script src="js/info.js"></script>
+	</body>
+</html>

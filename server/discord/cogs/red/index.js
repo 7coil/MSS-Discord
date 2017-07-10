@@ -7,11 +7,18 @@ const capitalise = string =>
 	string.charAt(0).toUpperCase() + string.slice(1);
 
 module.exports.info = {
-	name: 'Redbot Help',
+	name: 'Commands',
+	description: 'Displays the full automatically generated commands list.',
 	category: 'Info',
 	aliases: [
-		'red',
-		'commands'
+		'commands',
+		'red'
+	],
+	use: [
+		{
+			name: '',
+			value: 'Obtain a list of commands'
+		}
 	]
 };
 

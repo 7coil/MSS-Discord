@@ -3,9 +3,16 @@ const utils = require('./../../utils.js');
 
 module.exports.info = {
 	name: 'Rich JavaScript Evaluation',
-	category: 'Development',
+	description: 'Evaluate JavaScript with a Rich Embed.',
+	category: 'Owner',
 	aliases: [
 		'js'
+	],
+	use: [
+		{
+			name: '<javascript>',
+			value: 'Evaluate and execute the javascript code'
+		}
 	]
 };
 

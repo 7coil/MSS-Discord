@@ -5,10 +5,17 @@ const twitch = require('twitch-get-stream')(config.get('api').twitch);
 
 module.exports.info = {
 	name: 'Twitch.tv Livestream',
+	description: 'Play a Twitch.tv livestream using youtube-dl, which is prone to cutting out.',
 	category: 'Music',
 	aliases: [
 		'twitch',
 		'ttv'
+	],
+	use: [
+		{
+			name: '<username>',
+			value: 'Play the audio of the Twitch streamer.'
+		}
 	]
 };
 

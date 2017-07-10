@@ -7,10 +7,17 @@ searchYTClient.setKey(config.get('api').youtube);
 
 module.exports.info = {
 	name: 'YouTube',
+	description: 'Play a YouTube video/livestream using ytdl-core. Livestreams will start from the beginning, or 4 hours ago.',
 	category: 'Music',
 	aliases: [
 		'yt',
 		'youtube'
+	],
+	use: [
+		{
+			name: '<query>',
+			value: 'Search and play the audio of the YouTube video/livestream.'
+		}
 	]
 };
 
