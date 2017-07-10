@@ -34,7 +34,7 @@ module.exports.command = (message) => {
 					message.channel.createMessage(error);
 				} else if (!video) {
 					message.channel.createMessage('No results found');
-				} else if (video.snippet.liveBroadcastContent) {
+				} else if (video.snippet.liveBroadcastContent === 'live') {
 					utils.music.add(message, {
 						type: 'ytdl-core',
 						from: 'YouTube',
