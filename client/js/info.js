@@ -50,7 +50,7 @@ graphs.forEach((graph) => {
 	chart.streamTo(document.getElementById(`${graph}chart`), 500);
 });
 
-const socket = io('http://127.0.0.1:8080/');
+const socket = io(`${window.location.protocol}//${window.location.hostname}${window.location.port ? `:${window.location.port}` : ''}/`);
 
 socket.on('connect', () => {
 	socket.on('info', (msg) => {
