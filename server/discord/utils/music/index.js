@@ -79,10 +79,10 @@ const play = (message) => {
 				'pipe:1'
 			]);
 
-			ffmpeg.stdout.on('error', (err) => {
+			ffmpeg.stdout.once('error', (err) => {
 				message.channel.createMessage(`Error playing audio! ${err.message}`);
 			});
-			ffmpeg.stderr.on('error', (err) => {
+			ffmpeg.stderr.once('error', (err) => {
 				message.channel.createMessage(`Error playing audio! ${err.message}`);
 			});
 
@@ -96,10 +96,10 @@ const play = (message) => {
 				'pipe:1'
 			]);
 
-			ffmpeg.stdout.on('error', (err) => {
+			ffmpeg.stdout.once('error', (err) => {
 				message.channel.createMessage(`Error playing audio! ${err.message}`);
 			});
-			ffmpeg.stderr.on('error', (err) => {
+			ffmpeg.stderr.once('error', (err) => {
 				message.channel.createMessage(`Error playing audio! ${err.message}`);
 			});
 
