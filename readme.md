@@ -53,13 +53,18 @@ npm i
 
 #### Step 2
 
-Copy and configure the `config/default.json` files
+Copy the `rename.default.json` to `default.json` and edit `default.json`
 
 ```
+cd config
+cp rename.default.json default.json
+
 ##### If you are professional bubbie hacker, you can replace nano for your text editor of choice
-nano config/default.json
+nano default.json
 
 ##### You can leave discordbotsorg and botsdiscordpw empty
+
+cd ..
 ```
 
 #### Step 3
