@@ -45,37 +45,37 @@ git clone https://github.com/moustacheminer/mss-discord borkbot
 
 #### Step 1
 
-Go into the working folder (src) and install all the node dependencies
+Go into the folder (MSS-Discord/) and install all the node dependencies
 
 ```bash
-cd borkbot/src
 npm i
 ```
 
 #### Step 2
 
-Copy and configure the `api.json` and `config.json` files
+Copy and configure the `config/default.json` files
 
-```bash
-cp api.json.rename api.json
-
+```
 ##### If you are professional bubbie hacker, you can replace nano for your text editor of choice
-nano api.json
-nano config.json
+nano config/default.json
 
 ##### You can leave the dBots inside api.json blank.
 ```
 
 #### Step 3
 
-Create a table in Rethonk called "users"
+Run the database initialisaion program
+
+```bash
+npm dbinit
+```
 
 #### Step 4
 
 Run the program
 
 ```bash
-node index.js
+npm start
 ```
 
 ### Microsoft Windows

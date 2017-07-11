@@ -5,7 +5,7 @@
   "main": "./server",
   "scripts": {
     "start": "node server/index.js",
-    "render": "node server/render.js",
+    "dbinit": "node server/db/init.js",
     "test": "echo Testing is not available.",
     "dev": "./node_modules/nodemon/bin/nodemon.js ./server"
   },
