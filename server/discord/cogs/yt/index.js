@@ -34,18 +34,6 @@ module.exports.command = (message) => {
 					message.channel.createMessage(error);
 				} else if (!video) {
 					message.channel.createMessage('No results found');
-				} else if (video.snippet.liveBroadcastContent === 'live') {
-					utils.music.add(message, {
-						type: 'ytdl-core',
-						from: 'YouTube',
-						media: {
-							url: `https://youtube.com/watch?v=${video.id.videoId}`,
-							search: { quality: ['96', '95', '94', '93', '92', '91'] }
-						},
-						title: video.snippet.title,
-						thumb: video.snippet.thumbnails.default.url,
-						desc: video.snippet.description
-					});
 				} else {
 					utils.music.add(message, {
 						type: 'youtube-dl',
