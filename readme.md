@@ -59,7 +59,7 @@ Copy and configure the `config/default.json` files
 ##### If you are professional bubbie hacker, you can replace nano for your text editor of choice
 nano config/default.json
 
-##### You can leave the dBots inside api.json blank.
+##### You can leave discordbotsorg and botsdiscordpw empty
 ```
 
 #### Step 3
