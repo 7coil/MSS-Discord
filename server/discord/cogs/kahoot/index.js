@@ -77,7 +77,8 @@ module.exports.command = (message) => {
 						description: body.entities[0].description,
 						timestamp: new Date(body.entities[0].created),
 						author: {
-							name: body.entities[0].creator_username
+							name: body.entities[0].creator_username,
+							url: `https://create.kahoot.it/#public/kahoots?filter=1&tags=doc.creator_username:${encodeURI(body.entities[0].creator_username)}`
 						},
 						image: {
 							url: body.entities[0].cover
