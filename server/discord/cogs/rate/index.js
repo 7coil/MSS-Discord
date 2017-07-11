@@ -23,7 +23,7 @@ module.exports.info = {
 module.exports.command = (message) => {
 	if (message.input) {
 		const input = message.input.replace(/[^@[\\\]^_`a-z0-9:;<=>?{|}~!ツ/'¯()┬─┻━ノ゜\-╯°□）︵ ]/ig, '');
-		const hash = crypto.createHash('md5').update(input + config.get('secret')).digest('hex').substring(0, 4);
+		const hash = crypto.createHash('md5').update(input.toUpperCase() + config.get('secret')).digest('hex').substring(0, 4);
 		const rank = parseInt(hash, 16) % 11;
 		const thing = message.input.length < 100 ? input : `${input.substring(0, 100)}...`;
 		message.channel.createMessage(`I ${message.command} ${thing} a ${rank} out of 10`);
