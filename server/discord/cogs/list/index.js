@@ -28,7 +28,11 @@ module.exports.command = (message) => {
 			});
 			reply += '```';
 
-			message.channel.createMessage(reply);
+			if (reply && reply.length > 1900) {
+				message.channel.createMessage(`https://discord.mss.ovh/music/${message.channel.guild.id}\nThe list is too long to display. Please view the playlist online.`);
+			} else {
+				message.channel.createMessage(reply);
+			}
 		}
 	});
 };
