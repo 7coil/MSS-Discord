@@ -29,7 +29,7 @@ client.on('ready', () => {
 	// Use this regex for testing in regexr.com
 	// /^(mss).?(ping)\s?([\s\S]*)/
 	// /(\w+)rly/
-	prefix = new RegExp(`^(${prefixes.join('|')}).?(${Object.keys(commands).join('|')})\\s?([\\s\\S]*)`);
+	prefix = new RegExp(`^(${prefixes.join('|')}).?(${Object.keys(commands).join('|')})\\s?([\\s\\S]*)`, 'i');
 	suffix = /(\w+)pls/;
 
 	console.log('All shards are online'.green.bold);
