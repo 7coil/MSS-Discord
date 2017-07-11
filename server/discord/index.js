@@ -75,7 +75,7 @@ client.on('ready', () => {
 			message.words = pre[3].split(/\n+|\s+/g);
 
 			// Run the actual command, if the command exists
-			commands[message.command].command(message, client);
+			commands[message.command.toLowerCase()].command(message, client);
 		} else if (config.get('discord').features.markov) {
 			if (suf) {
 				if (message.channel && message.channel.id !== '110373943822540800') {
