@@ -63,23 +63,6 @@ app.use('/auth', authRouter)
 		data.users = discord.users.size;
 		res.status(200).render('info.html', { user: req.user, data, nav, botname });
 	})
-	.get('/manual', (req, res) => {
-		const nav = req.query.nav !== undefined;
-		r.table('commands')
-			.run(r.conn, (err1, cursor) => {
-				if (err1) res.status(500).render('error.html', { user: req.user, status: 500, message: err1.message, botname });
-				cursor.toArray((err2, result) => {
-					if (err2) res.status(500).render('error.html', { user: req.user, status: 500, message: err2.message, botname });
-					if (!result) return res.status(404).render('error.html', { user: req.user, status: 404, message: `Apparently ${config.get('name')} has no commands.`, botname });
-					const data = result.sort((a, b) => {
-						if (a.message.embed.title.toLowerCase() < b.message.embed.title.toLowerCase()) return -1;
-						if (a.message.embed.title.toLowerCase() > b.message.embed.title.toLowerCase()) return 1;
-						return 0;
-					});
-					return res.render('manual.html', { user: req.user, command: data, nav, botname });
-				});
-			});
-	})
 	.get('/promo', (req, res) => {
 		res.status(200).render('promo.html', {
 			user: req.user,
