@@ -23,7 +23,7 @@ module.exports.command = (message) => {
 			fields: [
 				{
 					name: 'Commands',
-					value: `For a list of all commands, run \`${message.prefix} commands\`, or visit the rarely updated online list [here](${config.get('url').manual})`
+					value: `For a list of all commands, run \`${message.prefix} commands\`, or visit the online list [here](${config.get('url').manual})`
 				},
 				{
 					name: 'Prefixes',
