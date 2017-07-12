@@ -16,6 +16,7 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server);
 const auth = require('./auth');
 const authRouter = require('./auth/auth-router');
+const timeout = require('connect-timeout');
 
 const botname = config.get('name');
 
@@ -26,20 +27,29 @@ const r = require('./db');
 const discord = require('./discord');
 const cogs = require('./discord/cogs.js').info;
 
+const onTimeout = (req, res, next) => {
+	if (!req.timeout) next();
+};
+
 // Middleware
-app.use(session(
-	{
+app.use(timeout(60000))
+	.use(session({
 		secret: config.get('secret'),
 		resave: false,
 		saveUninitialized: true,
 		proxy: true
 	}))
+	.use(onTimeout)
 	.use(auth.initialize())
+	.use(onTimeout)
 	.use(auth.session())
+	.use(onTimeout)
 	.use(bodyParser.json())
+	.use(onTimeout)
 	.use(bodyParser.urlencoded({
 		extended: true
-	}));
+	}))
+	.use(onTimeout);
 
 // Views
 app.set('views', path.join(__dirname, '/views'))
@@ -98,7 +108,8 @@ app.use('/auth', authRouter)
 	.use(express.static(path.join(__dirname, '/../client')))
 	.use('*', (req, res) =>
 		res.status(404).render('error.html', { user: req.user, status: 404, botname })
-	);
+	)
+	.use(onTimeout);
 
 io.on('connection', (socket) => {
 	const infostream = setInterval(() => {
