@@ -7,8 +7,8 @@ const capitalise = string =>
 	string.charAt(0).toUpperCase() + string.slice(1);
 
 module.exports.info = {
-	name: 'Commands',
-	description: 'Displays the full automatically generated commands list.',
+	name: 'Red Bot like commands list',
+	description: 'Obtain a list of commands',
 	category: 'Info',
 	aliases: [
 		'commands',
@@ -17,7 +17,7 @@ module.exports.info = {
 	use: [
 		{
 			name: '',
-			value: 'Obtain a list of commands'
+			value: 'Obtain a list of commands in a Red Bot format'
 		}
 	]
 };

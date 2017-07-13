@@ -147,7 +147,7 @@ function unregister(id, callback) {
 			cursor.toArray((err2, result) => {
 				if (err2) throw new Error('An error occured while converting the preexisting IDs and names in the Markov database.');
 				if (result.length === 0) {
-					callback('You or your selected name has already been registered.');
+					callback('You have not registered yet!');
 				} else {
 					r.table('markov')
 						.filter({ author: id })
