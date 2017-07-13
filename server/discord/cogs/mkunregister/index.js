@@ -5,7 +5,7 @@ module.exports.info = {
 	description: 'Un-register for Markov based messaging.',
 	category: 'Fun',
 	aliases: [
-		'markov'
+		'mkunregister'
 	],
 	use: [
 		{

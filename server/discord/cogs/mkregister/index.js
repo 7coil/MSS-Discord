@@ -5,7 +5,7 @@ module.exports.info = {
 	description: 'Register for Markov based messaging. Stores messages you send, but in such a way that only analytics about the data is stores, so complies with EU and UK data protection policies.',
 	category: 'Fun',
 	aliases: [
-		'markov'
+		'mkregister'
 	],
 	use: [
 		{
