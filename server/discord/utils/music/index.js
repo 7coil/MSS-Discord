@@ -55,7 +55,7 @@ const play = (message) => {
 		};
 
 		// If the playlist is empty, leave.
-		if (playlist.length === 0 && connections[message.channel.guild.id].channelID) {
+		if (!playlist[0] && connections[message.channel.guild.id].channelID) {
 			client.leaveVoiceChannel(connections[message.channel.guild.id].channelID);
 			connections[message.channel.guild.id] = false;
 		} else if (playlist[0].type === 'youtube-dl') { // Play from youtube-dl, which can do many many things.
