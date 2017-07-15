@@ -7,7 +7,7 @@ require('colors');
 // Database
 const r = require('./../db');
 
-const client = new Discord.Client(config.get('api').discord.token, { maxShards: config.get('discord').shards });
+const client = config.get('discord').features.selfbot ? new Discord.Client(config.get('api').discord.token) : new Discord.Client(config.get('api').discord.token, { maxShards: config.get('discord').shards });
 const prefixes = config.get('discord').prefix;
 
 // Setup commands and util objects.
