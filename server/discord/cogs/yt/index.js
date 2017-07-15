@@ -32,7 +32,7 @@ module.exports.command = (message) => {
 				if (error) {
 					console.log(error);
 					message.channel.createMessage(error);
-				} else if (!video) {
+				} else if (!result || !result.items || !video) {
 					message.channel.createMessage('No results found');
 				} else {
 					utils.music.add(message, {
