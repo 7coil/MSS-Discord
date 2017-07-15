@@ -66,7 +66,9 @@ const play = (message) => {
 				'vlc://quit'
 			]);
 
-			connections[message.channel.guild.id].play(vlc.stdout);
+			connections[message.channel.guild.id].play(vlc.stdout, {
+				inputArgs: ['-err_detect', 'ignore_err']
+			});
 			after();
 		} else if (playlist[0].type === 'post') { // Send POST data then play the file
 			const vlc = spawn('cvlc', [
