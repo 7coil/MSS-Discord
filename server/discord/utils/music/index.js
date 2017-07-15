@@ -50,7 +50,7 @@ const play = (message) => {
 
 			connections[message.channel.guild.id].once('error', (err) => {
 				message.channel.createMessage(`Eris error while playing audio: ${err.message}`);
-				console.log(err.stack);
+				console.dir(err);
 			});
 		};
 
