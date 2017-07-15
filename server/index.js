@@ -141,5 +141,7 @@ process.on('uncaughtException', (err) => {
 });
 
 // Initialisation process
-console.log('Webserver listening on port', config.get('webserver').port);
-server.listen(config.get('webserver').port);
+if (config.get('webserver').enabled) {
+	console.log('Webserver listening on port', config.get('webserver').port);
+	server.listen(config.get('webserver').port);
+}
