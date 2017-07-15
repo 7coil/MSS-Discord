@@ -55,8 +55,8 @@ const play = (message) => {
 		};
 
 		// If the playlist is empty, leave.
-		if (!playlist[0] && connections[message.channel.guild.id].channelID) {
-			client.leaveVoiceChannel(connections[message.channel.guild.id].channelID);
+		if (!playlist[0]) {
+			if (connections[message.channel.guild.id].channelID) client.leaveVoiceChannel(connections[message.channel.guild.id].channelID);
 			connections[message.channel.guild.id] = false;
 		} else if (playlist[0].type === 'get') { // Play directly with a GET request
 			const vlc = spawn('cvlc', [
