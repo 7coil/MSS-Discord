@@ -61,6 +61,8 @@ client.on('ready', () => {
 		if (!message.author) return;
 		// Disallow if the author is a bot
 		if (message.author.bot) return;
+		// Disallow if not from author if selfbot mode on
+		if (config.get('discord').features.selfbot && message.author.id !== client.user.id) return;
 
 		// Test the message content on the regular expression for prefixed commands and the suffixed commands
 		const pre = prefix.exec(message.content);
