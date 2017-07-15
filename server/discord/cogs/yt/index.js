@@ -27,22 +27,27 @@ module.exports.command = (message) => {
 	} else {
 		try {
 			searchYTClient.search(message.input, 10, (error, result) => {
-				const video = result.items.find(youtube => youtube.id.videoId);
-
 				if (error) {
 					console.log(error);
 					message.channel.createMessage(error);
-				} else if (!result || !result.items || !video) {
+				} else if (!result) {
 					message.channel.createMessage('No results found');
+				} else if (!result.items) {
+					message.channel.createMessage('No items found');
 				} else {
-					utils.music.add(message, {
-						type: 'get',
-						from: 'YouTube',
-						media: `https://youtube.com/watch?v=${video.id.videoId}`,
-						title: video.snippet.title,
-						thumb: video.snippet.thumbnails.default.url,
-						desc: video.snippet.description
-					});
+					const video = result.items.find(youtube => youtube.id.videoId);
+					if (!video) {
+						message.channel.createMessage('No video found');
+					} else {
+						utils.music.add(message, {
+							type: 'get',
+							from: 'YouTube',
+							media: `https://youtube.com/watch?v=${video.id.videoId}`,
+							title: video.snippet.title,
+							thumb: video.snippet.thumbnails.default.url,
+							desc: video.snippet.description
+						});
+					}
 				}
 			});
 		} catch (err) {
