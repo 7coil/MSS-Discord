@@ -51,6 +51,16 @@ const play = (message) => {
 			connections[message.channel.guild.id].once('error', (err) => {
 				message.channel.createMessage(`Eris error while playing audio: \n\`\`\`${err.message}\n\`\`\``);
 				console.dir(err);
+				r.table('playlist')
+					.get(message.channel.guild.id)
+					.update({
+						playlist: r.row('playlist').deleteAt(0)
+					})
+					.run(r.conn, (err2) => {
+						if (err2) throw new Error('Failed to modify Rethonk(TM) playlist.');
+						play(message);
+					});
+				skip(message);
 			});
 		};
 
