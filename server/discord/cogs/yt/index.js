@@ -25,33 +25,24 @@ module.exports.command = (message) => {
 	if (!message.input) {
 		message.channel.createMessage('Please enter query.');
 	} else {
-		try {
-			searchYTClient.search(message.input, 10, (error, result) => {
-				if (error) {
-					console.log(error);
-					message.channel.createMessage(error);
-				} else if (!result) {
-					message.channel.createMessage('No results found');
-				} else if (!result.items) {
-					message.channel.createMessage('No items found');
-				} else {
-					const video = result.items.find(youtube => youtube.id.videoId);
-					if (!video) {
-						message.channel.createMessage('No video found');
-					} else {
-						utils.music.add(message, {
-							type: 'get',
-							from: 'YouTube',
-							media: `https://youtube.com/watch?v=${video.id.videoId}`,
-							title: video.snippet.title,
-							thumb: video.snippet.thumbnails.default.url,
-							desc: video.snippet.description
-						});
-					}
-				}
-			});
-		} catch (err) {
-			message.channel.createMessage('The `youtube-node` module exploded.');
-		}
+		searchYTClient.search(message.input, 10, (error, result) => {
+			const video = result.items.find(youtube => youtube.id.videoId);
+
+			if (error) {
+				console.log(error);
+				message.channel.createMessage(error);
+			} else if (!result || !result.items || !video) {
+				message.channel.createMessage('No results found');
+			} else {
+				utils.music.add(message, {
+					type: 'get',
+					from: 'YouTube',
+					media: video.id.videoId,
+					title: video.snippet.title,
+					thumb: video.snippet.thumbnails.default.url,
+					desc: video.snippet.description
+				});
+			}
+		});
 	}
 };

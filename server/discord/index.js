@@ -4,9 +4,6 @@ const config = require('config');
 const utils = require('./utils.js');
 require('colors');
 
-// Database
-const r = require('./../db');
-
 const client = new Discord.Client(config.get('api').discord.token, {
 	maxShards: config.get('discord').shards,
 	opusOnly: true
@@ -18,7 +15,6 @@ const prefixes = config.get('discord').prefix;
 const commands = require('./cogs.js').cogs;
 
 let prefix = null;
-let suffix = null;
 
 client.on('shardReady', (id) => {
 	console.log(`Shard ${id} is online`.green);
@@ -32,9 +28,7 @@ client.on('ready', () => {
 	// It's "man's essential illness"
 	// Use this regex for testing in regexr.com
 	// /^(mss).?(ping)\s?([\s\S]*)/
-	// /(\w+)rly/
 	prefix = new RegExp(`^(${prefixes.join('|')}).?(${Object.keys(commands).join('|')})\\s?([\\s\\S]*)`, 'i');
-	suffix = /(\w+)pls/;
 
 	console.log('All shards are online'.green.bold);
 
@@ -70,7 +64,6 @@ client.on('ready', () => {
 
 		// Test the message content on the regular expression for prefixed commands and the suffixed commands
 		const pre = prefix.exec(message.content);
-		const suf = suffix.exec(message.content);
 
 		// If there's a result, do this crap.
 		if (pre) {
@@ -82,38 +75,6 @@ client.on('ready', () => {
 
 			// Run the actual command, if the command exists
 			commands[message.command.toLowerCase()].command(message, client);
-		} else if (config.get('discord').features.markov) {
-			if (suf) {
-				if (message.channel && message.channel.id !== '110373943822540800') {
-					// If the suffix matches a user's name in the database...
-					r.table('markov')
-						.filter({ name: suf[1] })
-						.run(r.conn, (err1, cursor) => {
-							if (err1) return;
-							cursor.toArray((err2, result) => {
-								if (err2) return;
-								if (result.length === 0) return;
-								// Generate a Markov
-								utils.markov.generate(suf[1], (embed) => {
-									message.channel.createMessage(embed);
-								});
-							});
-						});
-				}
-			} else {
-				// If the user exists in the rethonk Markov database...
-				r.table('markov')
-					.filter({ author: message.author.id })
-					.run(r.conn, (err1, cursor) => {
-						if (err1) return;
-						cursor.toArray((err2, result) => {
-							if (err2) return;
-							if (result.length === 0) return;
-							// Save the markov.
-							utils.markov.save(message);
-						});
-					});
-			}
 		}
 	});
 });

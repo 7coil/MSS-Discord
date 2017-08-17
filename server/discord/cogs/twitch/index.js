@@ -1,7 +1,6 @@
 const config = require('config');
 const request = require('request');
 const utils = require('./../../utils.js');
-const twitch = require('twitch-get-stream')(config.get('api').twitch);
 
 module.exports.info = {
 	name: 'Twitch.tv Livestream',
@@ -44,20 +43,13 @@ module.exports.command = (message) => {
 				} else if (!body.stream) {
 					message.channel.createMessage('The streamer is currently not live.');
 				} else {
-					twitch.get(username).then((streams) => {
-						const audio = streams.find(stream => stream.quality === 'Audio Only');
-						if (audio) {
-							utils.music.add(message, {
-								type: 'get',
-								from: 'twitch.tv',
-								media: audio.url,
-								title: body.stream.channel.display_name,
-								thumb: body.stream.preview.large,
-								desc: body.stream.channel.status
-							});
-						} else {
-							message.channel.createMessage('Could not find an adequate stream URL for this streamer.');
-						}
+					utils.music.add(message, {
+						type: 'get',
+						from: 'Twitch',
+						media: username,
+						title: body.stream.channel.display_name,
+						thumb: body.stream.preview.large,
+						desc: body.stream.channel.status
 					});
 				}
 			});
