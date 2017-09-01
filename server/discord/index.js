@@ -5,8 +5,7 @@ const utils = require('./utils.js');
 require('colors');
 
 const client = new Discord.Client(config.get('api').discord.token, {
-	maxShards: config.get('discord').shards,
-	opusOnly: true
+	maxShards: config.get('discord').shards
 });
 
 const prefixes = config.get('discord').prefix;
@@ -76,6 +75,10 @@ client.on('ready', () => {
 			// Run the actual command, if the command exists
 			commands[message.command.toLowerCase()].command(message, client);
 		}
+	});
+
+	client.on('debug', (message, shard) => {
+		console.log(shard, message);
 	});
 });
 

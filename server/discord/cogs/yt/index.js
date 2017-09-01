@@ -35,7 +35,7 @@ module.exports.command = (message) => {
 				message.channel.createMessage('No results found');
 			} else {
 				utils.music.add(message, {
-					type: 'get',
+					type: 'youtube-dl',
 					from: 'YouTube',
 					media: video.id.videoId,
 					title: video.snippet.title,

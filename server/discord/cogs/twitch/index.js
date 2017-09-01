@@ -44,9 +44,9 @@ module.exports.command = (message) => {
 					message.channel.createMessage('The streamer is currently not live.');
 				} else {
 					utils.music.add(message, {
-						type: 'get',
+						type: 'youtube-dl',
 						from: 'Twitch',
-						media: username,
+						media: `https://twitch.tv/${username}`,
 						title: body.stream.channel.display_name,
 						thumb: body.stream.preview.large,
 						desc: body.stream.channel.status
