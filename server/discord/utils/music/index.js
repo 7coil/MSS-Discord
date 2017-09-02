@@ -58,7 +58,9 @@ const play = (message) => {
 		if (playlist.length === 0 && connections[message.channel.guild.id].channelID) {
 			client.leaveVoiceChannel(connections[message.channel.guild.id].channelID);
 			connections[message.channel.guild.id] = false;
-		} else if (playlist[0].type === 'youtube-dl') { // Play from youtube-dl, which can do many many things.
+		} else if (!playlist[0]) {
+			throw new Error('Found nothing to play, but skipped playlist end feature.');
+		} if (playlist[0].type === 'youtube-dl') { // Play from youtube-dl, which can do many many things.
 			const youtube = spawn('youtube-dl', [
 				'-o', '-',
 				playlist[0].media
