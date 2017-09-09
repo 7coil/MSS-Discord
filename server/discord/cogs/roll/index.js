@@ -1,6 +1,6 @@
 const utils = require('./../../utils.js');
 
-const regex = /(\d*)d?(\d*)/;
+const regex = /(-?\d+)d?(-?\d+)/;
 
 function randInt(d) {
 	return Math.floor(Math.random() * d) + 1;
@@ -22,9 +22,6 @@ module.exports.info = {
 		}, {
 			name: '<times>',
 			value: 'Roll a 6 sided die the indicated number of times'
-		}, {
-			name: 'd<sides>',
-			value: 'Roll an n-sided die'
 		}, {
 			name: '<times>d<sides>',
 			value: 'Roll an n-sided die the indicated number of times'
