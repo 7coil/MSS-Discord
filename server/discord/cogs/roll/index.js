@@ -83,7 +83,13 @@ module.exports.command = function roll(message) {
 			result.push('Error');
 		} else if (rolls === 0 || sides === 0) {
 			sum = 0;
-			result.push(0);
+			if (rolls === 0) {
+				result.push('Empty');
+			} else {
+				for (let i = 0; i < rolls; i += 1) {
+					result.push('null');
+				}
+			}
 		} else {
 			for (let i = 0; i < rolls; i += 1) {
 				const value = randInt(sides);
