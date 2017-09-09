@@ -77,7 +77,7 @@ module.exports.command = function roll(message) {
 			output += '\nHowever, such a shape cannot be rolled for a negative number of times.';
 			sum = 'Error';
 			result.push('Error');
-		} else if (rolls > 50000) {
+		} else if (rolls >= 100000) {
 			output += '\nHowever, this was way too much to handle for this bot.';
 			sum = 'Error';
 			result.push('Error');
