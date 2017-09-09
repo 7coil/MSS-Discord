@@ -31,8 +31,8 @@ module.exports.info = {
 
 module.exports.command = function roll(message) {
 	const parsed = regex.exec(message.input);
-	const rolls = parseInt(parsed[1], 10) || 1;
-	const sides = parseInt(parsed[2], 10) || 6;
+	const rolls = !isNaN(parseInt(parsed[1], 10)) ? parseInt(parsed[1], 10) : 1;
+	const sides = !isNaN(parseInt(parsed[2], 10)) ? parseInt(parsed[2], 10) : 6;
 	const result = [];
 	let sum = 0;
 	let output = '';
