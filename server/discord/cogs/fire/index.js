@@ -14,4 +14,4 @@ module.exports.info = {
 };
 
 module.exports.command = message =>
-	message.channel.createMessage('https://mss.ovh/pkfire.gif');
+	message.channel.createMessage('https://moustacheminer.com/img/pkfire.gif');
