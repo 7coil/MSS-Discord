@@ -76,10 +76,6 @@ client.on('ready', () => {
 			commands[message.command.toLowerCase()].command(message, client);
 		}
 	});
-
-	client.on('debug', (message, shard) => {
-		console.log(shard, message);
-	});
 });
 
 client.connect();
