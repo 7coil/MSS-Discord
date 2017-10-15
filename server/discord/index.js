@@ -19,7 +19,7 @@ client.on('shardReady', (id) => {
 	console.log(`Shard ${id} is online`.green);
 });
 
-client.on('ready', () => {
+client.once('ready', () => {
 	// Add mentions to the prefix list
 	prefixes.push(`<@${client.user.id}>`);
 
