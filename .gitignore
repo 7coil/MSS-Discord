@@ -1,9 +1,5 @@
-# npm crap
-node_modules
-npm-debug.log
-
-# No API files please thank you
-api.json
+/node_modules/
 /config/default.json
-/vnc.jpg
-/errrpt
+npm-debug.log
+/package-lock.json
+.directory

@@ -1,3 +1,0 @@
-cvlc -vvv --sout \
-     "#transcode{acodec=opus,ab=96,channels=2,samplerate=48000}:std{access=file,mux=ogg,dst=-}" \
-     lashaaudio.mp4 vlc://quit 

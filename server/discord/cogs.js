@@ -1,35 +1,27 @@
-require('colors');
 const fs = require('fs');
 
-const commands = [];
-const info = [];
+const commands = {};
 
-module.exports.reload = () => {
-	// Register valid commands from "cogs"
-	fs.readdir('./server/discord/cogs/', (err, items) => {
-		items.forEach((item) => {
-			const file = item.replace(/['"]+/g, '');
-			const command = require(`./cogs/${file}/`); // eslint-disable-line global-require, import/no-dynamic-require
-			const infomation = command.info;
-			infomation.id = command.info.aliases[0];
-			info.push(infomation);
-			command.info.aliases.forEach((name) => {
-				if (commands[name]) console.log(`Alias ${name} from ${file} was already assigned to another command! Overwriting...`.red);
-				commands[name] = require(`./cogs/${file}/`); // eslint-disable-line global-require, import/no-dynamic-require
+const CommandOverlapException = (name, file) => {
+	this.message = `Alias ${name} from ${file} was already assigned to another command!`;
+	this.name = 'CommandOverlapException';
+};
+
+// Register valid commands from "cogs"
+fs.readdir('./server/discord/cogs/', (err, items) => {
+	items.forEach((item) => {
+		const file = item.replace(/['"]+/g, '');
+		const cog = require(`./cogs/${file}`); // eslint-disable-line global-require, import/no-dynamic-require
+		cog.forEach((com) => {
+			com.names.forEach((alias) => {
+				if (commands[alias]) {
+					throw new CommandOverlapException(alias, file);
+				} else {
+					commands[alias] = com;
+				}
 			});
 		});
 	});
-};
+});
 
-module.exports.reload();
-module.exports.cogs = commands;
-module.exports.info = info;
-
-//	module.exports.info = {
-//		name: 'Redbot Help',
-//		category: 'Info',
-//		aliases: [
-//			'red',
-//			'commands'
-//		]
-//	};
+module.exports = commands;
