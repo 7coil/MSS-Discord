@@ -21,8 +21,8 @@ client.once('ready', () => {
 
 	client.on('messageCreate', (message) => {
 		handler(message);
-		if (commands[message.content.toLowerCase()]) {
-			commands[message.content.toLowerCase()].command(message);
+		if (message.mss.command) {
+			commands[message.mss.command].command(message);
 		}
 	});
 });
