@@ -47,12 +47,12 @@ module.exports = (message) => {
 	mss.content = message.content.trim();
 
 	// Check for any prefixes
-	mss.prefix = prefixes.find(prefix => mss.content.startsWith(prefix));
+	mss.prefix = prefixes.find(prefix => mss.content.toLowerCase().startsWith(prefix));
 
 	// If there's a prefix, get rid of the prefix and check for any command
-	if (mss.prefix) {
+	if (mss.prefix && !message.author.bot) {
 		const noprefix = mss.content.replace(mss.prefix, '').trim();
-		mss.command = Object.keys(commands).find(command => noprefix.startsWith(command));
+		mss.command = Object.keys(commands).find(command => noprefix.toLowerCase().startsWith(command));
 		if (mss.command) {
 			mss.input = noprefix.replace(mss.command, '').trim();
 			mss.cleanInput = clean(message, mss.input);
