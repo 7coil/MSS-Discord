@@ -2,9 +2,9 @@
 	"api": {
 		"discord": {
 			"clientID": "233702481375395843",
-			"clientSecret": "77YU65SR6f_cCqMhbjpMM4ILEgJT_z0k",
+			"clientSecret": "",
 			"scope": ["identify"],
-			"token": "MjMzNzAyNDgxMzc1Mzk1ODQz.DEKgEg.ucatlRcTrIXkhhgcRQcL-_36tW4"
+			"token": ""
 		}
 	},
 	"webserver": {
