@@ -2,8 +2,17 @@ console.log('Welcome to Moustacheminer Server Services');
 
 //	const config = require('config');
 //	const express = require('express');
-//	const path = require('path');
+const path = require('path');
+const i18n = require('i18n');
 require('./discord');
+
+i18n.configure({
+	directory: path.join(__dirname, '..', 'locales'),
+	cookie: 'lang',
+	defaultLocale: 'en-gb',
+	autoReload: true,
+	updateFiles: false
+});
 //
 //	const app = express();
 //
@@ -18,3 +27,7 @@ require('./discord');
 //
 //	console.log('Listening on', config.get('webserver').port);
 //	app.listen(config.get('webserver').port);
+
+process.on('unhandledRejection', (reason) => {
+	console.dir(reason);
+});

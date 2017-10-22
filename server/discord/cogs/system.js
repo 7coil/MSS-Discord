@@ -1,49 +1,136 @@
-const config = require('config');
+const client = require('./..');
+const cogs = require('./../cogs');
+const { exec } = require('child_process');
+const r = require('./../../db');
+const i18n = require('i18n');
 
-module.exports = [
-	{
-		names: [
-			'ping'
-		],
-		command: (message) => {
-			let s = 0;
+module.exports = [{
+	aliases: [
+		'ping'
+	],
+	name: 'ping',
+	uses: 1,
+	admin: 0,
+	command: (message) => {
+		let s = 0;
 
-			if (message.channel.guild) {
-				s = client.guildShardMap[message.channel.guild.id];
+		if (message.channel.guild) {
+			s = client.guildShardMap[message.channel.guild.id];
+		}
+
+		message.channel.createMessage(`\`\`\`\n${client.shards.map(shard => `${s === shard.id ? '>' : ' '}Shard ${shard.id} | ${shard.latency}ms`).join('\n')}\n\`\`\``);
+	}
+}, {
+	aliases: [
+		'eval'
+	],
+	name: 'eval',
+	uses: 1,
+	admin: 3,
+	command: (message) => {
+		eval(message.mss.input); // eslint-disable-line no-eval
+	}
+}, {
+	aliases: [
+		'exec'
+	],
+	name: 'exec',
+	uses: 1,
+	admin: 3,
+	command: (message) => {
+		exec(message.input, (error, stdout, stderr) => {
+			let output = '';
+
+			if (stdout) {
+				output += '=== stdout ===\n';
+				output += `${stdout.replace(/`/g, '\'')}\n`;
 			}
 
-			message.channel.createMessage(`\`\`\`\n${client.shards.map(shard => `${s === shard.id ? '>' : ' '}Shard ${shard.id} | ${shard.latency}ms`).join('\n')}\n\`\`\``);
-		}
-	}, {
-		names: [
-			'help'
-		],
-		command: (message) => {
-			const embed = {
-				embed: {
-					title: config.get('name'),
-					fields: [
-						{
-							name: 'Commands',
-							value: `For a list of all commands, run \`${message.prefix} commands\`, or visit the online list [here](${config.get('url').manual})`
-						},
-						{
-							name: 'Prefixes',
-							value: config.get('discord').prefix.join(' OR ')
-						},
-						{
-							name: 'Links',
-							value: `[Website](${config.get('url').website})\n[Discord Server](${config.get('url').discord})\n[Invite Bot](${config.get('url').invite})\n[GitHub](${config.get('url').github})`
-						},
-						{
-							name: 'Licence',
-							value: `${config.get('name')}, an instance of MSS-Discord is licenced under the MIT Licence`
-						}
-					]
-				}
-			};
+			if (stderr) {
+				output += '=== stderr ===\n';
+				output += `${stderr.replace(/`/g, '\'')}\n`;
+			}
 
-			message.channel.createMessage(embed);
+			message.channel.createMessage(`\n${message.__('exec_output')}\n\`\`\`\n${output}\`\`\``);
+		});
+	}
+}, {
+	aliases: [
+		'help'
+	],
+	name: 'help',
+	uses: 3,
+	admin: 0,
+	command: (message) => {
+		if (message.mss.input && cogs.commands[message.mss.input]) {
+			const command = cogs.commands[message.mss.input];
+			const fields = [];
+			for (let i = 1; i <= command.uses; i += 1) {
+				fields.push({
+					name: message.__(`${command.name}_${i}_in`, { prefix: message.mss.prefix, command: command.name }),
+					value: message.__(`${command.name}_${i}_out`)
+				});
+			}
+
+			message.channel.createMessage({
+				embed: {
+					title: message.__(command.name),
+					description: message.__(`${command.name}_desc`),
+					fields
+				}
+			});
+		} else if (message.mss.input && cogs.categories[message.mss.input]) {
+			message.channel.createMessage({
+				embed: {
+					title: message.mss.input,
+					fields: cogs.categories[message.mss.input].map(command => ({
+						name: command.aliases[0],
+						value: message.__(`${command.name}_desc`)
+					}))
+				}
+			});
+		} else if (!message.mss.input) {
+			Object.keys(cogs.categories).forEach((category) => {
+				message.channel.createMessage({
+					embed: {
+						title: category,
+						fields: cogs.categories[category].map(command => ({
+							name: command.aliases[0],
+							value: message.__(`${command.name}_desc`)
+						}))
+					}
+				});
+			});
+		} else {
+			message.channel.createMessage(message.__('help_invalid'));
 		}
 	}
-];
+}, {
+	aliases: [
+		'locale'
+	],
+	name: 'locale',
+	uses: 2,
+	admin: 0,
+	command: (message) => {
+		if (message.mss.input && Object.keys(i18n.getCatalog()).includes(message.mss.input)) {
+			r.table('i18n')
+				.insert({
+					id: message.author.id,
+					lang: message.mss.input
+				}, {
+					conflict: 'update'
+				})
+				.run(r.conn, (err) => {
+					if (err) {
+						message.channel.createMessage(message.__('err_generic'));
+					} else {
+						message.setLocale(message.mss.input);
+						message.channel.createMessage(message.__('locale_set', { locale: message.__(`lang_${message.mss.input.replace(/-/g, '_')}`) }));
+					}
+				});
+		} else {
+			message.channel.createMessage(`${message.__('locale_incorrect')}\n${Object.keys(i18n.getCatalog()).map(lang => `\`${lang}\` - ${message.__(`lang_${lang.replace(/-/g, '_')}`)}`).join('\n')}`);
+		}
+	}
+}];

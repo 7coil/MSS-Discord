@@ -1,6 +1,8 @@
 const config = require('config');
-const commands = require('./cogs');
+const { commands } = require('./cogs');
 const client = require('./');
+const r = require('./../db');
+const i18n = require('i18n');
 
 const prefixes = config.get('discord').prefix;
 
@@ -41,30 +43,40 @@ const clean = (message, content) => {
 	return cleanContent.replace(/@everyone/g, '@\u200beveryone').replace(/@here/g, '@\u200bhere');
 };
 
-module.exports = (message) => {
+module.exports = async (message) => {
 	const mss = {};
 
-	mss.content = message.content.trim();
+	// Set default values
+	mss.content = message.content.trim() || '';
+	mss.prefix = prefixes.find(prefix => mss.content.toLowerCase().startsWith(prefix)) || '';
+	mss.command = '';
+	mss.input = '';
+	mss.admin = 0;
 
-	// Check for any prefixes
-	mss.prefix = prefixes.find(prefix => mss.content.toLowerCase().startsWith(prefix));
+	i18n.init(message);
 
 	// If there's a prefix, get rid of the prefix and check for any command
 	if (mss.prefix && !message.author.bot) {
-		const noprefix = mss.content.replace(mss.prefix, '').trim();
-		mss.command = Object.keys(commands).find(command => noprefix.toLowerCase().startsWith(command));
+		const noprefix = mss.content.substring(mss.prefix.length).trim();
+		mss.command = Object.keys(commands).find(command => noprefix.startsWith(command)) || '';
 		if (mss.command) {
-			mss.input = noprefix.replace(mss.command, '').trim();
+			mss.input = noprefix.substring(mss.command.length).trim();
 			mss.cleanInput = clean(message, mss.input);
 		}
 	}
 
-	// Set default values of empty string
-	mss.content = mss.content || '';
-	mss.prefix = mss.prefix || '';
-	mss.command = mss.command || '';
-	mss.content = mss.content || '';
-	mss.input = mss.input || '';
-
+	if (config.get('discord').admins.includes(message.author.id)) {
+		mss.admin = 3;
+	} else if (message.member && message.member.permission.has('administrator')) {
+		mss.admin = 2;
+	} else if (message.member && (message.member.permission.has('kickMembers') || message.member.permission.has('banMembers'))) {
+		mss.admin = 1;
+	}
 	message.mss = mss;
+	if (message.command) console.dir(mss);
+	const locale = await r.table('i18n')
+		.get(message.author.id)
+		.run(r.conn);
+
+	i18n.init(locale || 'en-gb');
 };

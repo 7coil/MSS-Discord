@@ -7,7 +7,7 @@ const client = new Discord.Client(config.get('api').discord.token, {
 });
 
 const prefixes = config.get('discord').prefix;
-const commands = require('./cogs');
+const { commands } = require('./cogs');
 const handler = require('./handler');
 
 client.once('ready', () => {
@@ -21,7 +21,8 @@ client.once('ready', () => {
 
 	client.on('messageCreate', (message) => {
 		handler(message);
-		if (message.mss.command) {
+		// Run command if it exists, and if their permissions level is good enough
+		if (message.mss.command && message.mss.admin >= commands[message.mss.command].admin) {
 			commands[message.mss.command].command(message);
 		}
 	});

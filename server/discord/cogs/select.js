@@ -1,4 +1,4 @@
-const select = data => data.data[Math.floor(Math.random() * data.data.length)];
+const select = data => data[Math.floor(Math.random() * data.length)];
 const cookie = [
 	'With integrity and consistency -- your credits are piling up.',
 	'Reach out your hand today to support others who need you.',
@@ -886,36 +886,46 @@ const parker = [
 	'http://i.imgur.com/df1an2D.jpg'
 ];
 
-module.exports = [
-	{
-		names: [
-			'cookie'
-		],
-		command: (message) => {
-			message.channel.createMessage(select(cookie));
-		}
-	}, {
-		names: [
-			'proverb'
-		],
-		command: (message) => {
-			message.channel.createMessage(select(proverb));
-		}
-	}, {
-		names: [
-			'8ball',
-			'magic8',
-			'8'
-		],
-		command: (message) => {
-			message.channel.createMessage(select(ball));
-		}
-	}, {
-		names: [
-			'parker'
-		],
-		command: (message) => {
-			message.channel.createMessage(select(parker));
-		}
+module.exports = [{
+	aliases: [
+		'cookie'
+	],
+	name: 'cookie',
+	uses: 1,
+	admin: 0,
+	command: (message) => {
+		message.channel.createMessage(select(cookie));
 	}
-];
+}, {
+	aliases: [
+		'proverb'
+	],
+	name: 'proverb',
+	uses: 1,
+	admin: 0,
+	command: (message) => {
+		message.channel.createMessage(select(proverb));
+	}
+}, {
+	aliases: [
+		'8ball',
+		'magic8',
+		'8'
+	],
+	name: '8ball',
+	uses: 1,
+	admin: 0,
+	command: (message) => {
+		message.channel.createMessage(select(ball));
+	}
+}, {
+	aliases: [
+		'parker'
+	],
+	name: 'parker',
+	uses: 1,
+	admin: 0,
+	command: (message) => {
+		message.channel.createMessage(select(parker));
+	}
+}];

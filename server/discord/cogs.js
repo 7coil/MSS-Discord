@@ -1,21 +1,18 @@
 const fs = require('fs');
 
 const commands = {};
-
-const CommandOverlapException = (name, file) => {
-	this.message = `Alias ${name} from ${file} was already assigned to another command!`;
-	this.name = 'CommandOverlapException';
-};
+const categories = {};
 
 // Register valid commands from "cogs"
 fs.readdir('./server/discord/cogs/', (err, items) => {
 	items.forEach((item) => {
-		const file = item.replace(/['"]+/g, '');
+		const file = item.replace(/\.js/g, '');
 		const cog = require(`./cogs/${file}`); // eslint-disable-line global-require, import/no-dynamic-require
+		categories[file] = cog;
 		cog.forEach((com) => {
-			com.names.forEach((alias) => {
+			com.aliases.forEach((alias) => {
 				if (commands[alias]) {
-					throw new CommandOverlapException(alias, file);
+					throw new Error(`Alias ${alias} from ${file} was already assigned to another command!`);
 				} else {
 					commands[alias] = com;
 				}
@@ -24,4 +21,4 @@ fs.readdir('./server/discord/cogs/', (err, items) => {
 	});
 });
 
-module.exports = commands;
+module.exports = { commands, categories };
