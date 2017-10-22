@@ -2,7 +2,6 @@ const request = require('request');
 const config = require('config');
 
 module.exports = (client) => {
-	console.log(client);
 	if (config.get('api').botsdiscordpw) {
 		const botsdiscordpw = {
 			url: `https://bots.discord.pw/api/bots/${client.user.id}/stats`,

@@ -20,8 +20,6 @@ client.once('ready', () => {
 		type: 0
 	});
 
-	console.log(client.user);
-
 	setInterval(() => {
 		botlist(client);
 	}, 1800000);
