@@ -20,10 +20,12 @@ client.once('ready', () => {
 		type: 0
 	});
 
+	console.log(client.user);
+
 	setInterval(() => {
-		botlist();
+		botlist(client);
 	}, 1800000);
-	botlist();
+	botlist(client);
 
 	client.on('messageCreate', (message) => {
 		handler(message);
