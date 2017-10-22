@@ -114,7 +114,7 @@ module.exports = [{
 				media: data,
 				title: 'DECtalk Text To Speech',
 				thumb: 'https://upload.wikimedia.org/wikipedia/commons/2/2b/DECtalk_DCT01_and_Tink.jpg',
-				desc: message.input
+				desc: message.mss.input
 			});
 		}
 	}
