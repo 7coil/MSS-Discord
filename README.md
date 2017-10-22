@@ -14,6 +14,7 @@ Cryptographically verified as more random than `/dev/urandom`
 1. `git clone`
 2. `npm i`
 3. Edit `config/default.json`, using `config/default.rename.json` as a template
+4. Create a database in Rethink with table: `i18n`
 6. `npm start`
 
 ## Translations

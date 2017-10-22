@@ -5,12 +5,24 @@
 			"clientSecret": "",
 			"scope": ["identify"],
 			"token": ""
-		}
+		},
+		"kahoot": {
+			"username": "",
+			"password": ""
+		},
+		"rethinkdb": {
+			"host": "",
+			"port": 28015,
+			"db": ""
+		},
+		"youtube": "",
+		"twitch": "",
+		"botsdiscordpw": "",
+		"discordbotsorg": ""
 	},
 	"webserver": {
 		"port": 8080,
-		"domain": "https://mail.moustacheminer.com",
-		"secret": "James Grime is mathematically worse than Matt Parker"
+		"domain": ""
 	},
 	"discord": {
 		"prefix": [
@@ -21,6 +33,11 @@
 		],
 		"disable": false,
 		"shards": 1
+	},
+	"url": {
+		"discord": "https://discord.gg/wHgdmf4",
+		"invite": "https://discordapp.com/oauth2/authorize?&client_id=257547382277931009&scope=bot&permissions=0",
+		"github": "https://github.com/moustacheminer/mss-discord/"
 	},
 	"name": "DiscordMail Test Bot",
 	"useragent": "DiscordMail/2.0 (node.js; Linux x86_64)"

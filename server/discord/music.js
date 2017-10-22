@@ -156,16 +156,12 @@ const add = (message, details) => {
 const skip = (message) => {
 	if (!message.member) {
 		message.channel.createMessage('You need to be in a Guild!');
-	} else if (message.mss.admin > 1) {
-		if (connections[message.channel.guild.id] && connections[message.channel.guild.id].playing) connections[message.channel.guild.id].stopPlaying();
-	} else {
-		message.channel.createMessage('You do not have permission to perform this command!');
-	}
+	} else if (connections[message.channel.guild.id] && connections[message.channel.guild.id].playing) connections[message.channel.guild.id].stopPlaying();
 };
 const stop = (message) => {
 	if (!message.member) {
 		message.channel.createMessage('You need to be in a Guild!');
-	} else if (message.mss.admin > 1) {
+	} else {
 		r.table('playlist')
 			.get(message.channel.guild.id)
 			.replace({
@@ -177,14 +173,12 @@ const stop = (message) => {
 				if (err) throw err;
 				skip(message);
 			});
-	} else {
-		message.channel.createMessage('You do not have permission to perform this command!');
 	}
 };
 const repeat = (message) => {
 	if (!message.member) {
 		message.channel.createMessage('You need to be in a Guild!');
-	} else if (message.mss.admin > 1) {
+	} else {
 		r.table('playlist')
 			.get(message.channel.guild.id)
 			.replace({
@@ -195,8 +189,6 @@ const repeat = (message) => {
 			.run(r.conn, (err) => {
 				if (err) throw err;
 			});
-	} else {
-		message.channel.createMessage('You do not have permission to perform this command!');
 	}
 };
 
