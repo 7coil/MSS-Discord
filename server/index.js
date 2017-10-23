@@ -36,7 +36,7 @@ process.on('uncaughtException', (err) => {
 	if (err.code === 'ECONNRESET') {
 		console.log('ECONNREST occured, stream broke');
 	} else {
-		console.log('Moustacheminer Server Services has crashed!'.red);
+		console.log('Moustacheminer Server Services has crashed!');
 		console.log(err.stack);
 		process.exit(1);
 	}
