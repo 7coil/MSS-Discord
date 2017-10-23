@@ -3,6 +3,10 @@ const cogs = require('./../cogs');
 const { exec } = require('child_process');
 const r = require('./../../db');
 const i18n = require('i18n');
+const os = require('os');
+
+const hardwareinfo = `(${os.arch()}) ${os.cpus()[0].model} @ ${os.cpus()[0].speed} MHz`;
+const softwareinfo = `[${os.type()}] ${os.release()}`;
 
 module.exports = [{
 	aliases: [
@@ -38,7 +42,7 @@ module.exports = [{
 	uses: 1,
 	admin: 3,
 	command: (message) => {
-		exec(message.input, (error, stdout, stderr) => {
+		exec(message.mss.input, (error, stdout, stderr) => {
 			let output = '';
 
 			if (stdout) {
@@ -83,10 +87,12 @@ module.exports = [{
 			message.channel.createMessage({
 				embed: {
 					title: message.mss.input,
-					fields: cogs.categories[message.mss.input].map(command => ({
-						name: command.aliases[0],
-						value: message.__(`${command.name}_desc`)
-					}))
+					fields: cogs.categories[message.mss.input]
+						.filter(command => message.mss.admin >= command.admin)
+						.map(command => ({
+							name: command.aliases[0],
+							value: message.__(`${command.name}_desc`)
+						}))
 				}
 			});
 		} else if (!message.mss.input) {
@@ -94,10 +100,12 @@ module.exports = [{
 				message.channel.createMessage({
 					embed: {
 						title: category,
-						fields: cogs.categories[category].map(command => ({
-							name: command.aliases[0],
-							value: message.__(`${command.name}_desc`)
-						}))
+						fields: cogs.categories[category]
+							.filter(command => message.mss.admin >= command.admin)
+							.map(command => ({
+								name: command.aliases[0],
+								value: message.__(`${command.name}_desc`)
+							}))
 					}
 				});
 			});
@@ -132,5 +140,49 @@ module.exports = [{
 		} else {
 			message.channel.createMessage(`${message.__('locale_incorrect')}\n${Object.keys(i18n.getCatalog()).map(lang => `\`${lang}\` - ${message.__(`lang_${lang.replace(/-/g, '_')}`)}`).join('\n')}`);
 		}
+	}
+}, {
+	aliases: [
+		'info'
+	],
+	name: 'info',
+	uses: 1,
+	admin: 0,
+	command: (message) => {
+		const embed = {
+			embed: {
+				fields: [
+					{
+						name: message.__('info_nodejs'),
+						value: process.version,
+						inline: true
+					},
+					{
+						name: message.__('info_guilds'),
+						value: client.guilds.size,
+						inline: true
+					},
+					{
+						name: message.__('info_pid'),
+						value: process.pid,
+						inline: true
+					},
+					{
+						name: message.__('info_hard'),
+						value: hardwareinfo
+					},
+					{
+						name: message.__('info_soft'),
+						value: softwareinfo
+					},
+					{
+						name: message.__('info_licence'),
+						value: message.__('info_licencedesc', { name: message.__('name') })
+					}
+				]
+			}
+		};
+
+		message.channel.createMessage(embed);
 	}
 }];
