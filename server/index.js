@@ -31,3 +31,13 @@ i18n.configure({
 process.on('unhandledRejection', (reason) => {
 	console.dir(reason);
 });
+
+process.on('uncaughtException', (err) => {
+	if (err.code === 'ECONNRESET') {
+		console.log('ECONNREST occured, stream broke');
+	} else {
+		console.log('Moustacheminer Server Services has crashed!'.red);
+		console.log(err.stack);
+		process.exit(1);
+	}
+});
