@@ -73,7 +73,7 @@ module.exports = async (message) => {
 		mss.admin = 1;
 	}
 	message.mss = mss;
-	if (message.command) console.dir(mss);
+
 	const locale = await r.table('i18n')
 		.get(message.author.id)
 		.run(r.conn);
