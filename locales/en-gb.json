@@ -123,5 +123,12 @@
 	"locale_2_in": "{{ prefix }} {{ command }} [locale]",
 	"locale_2_out": "Change your locale",
 	"locale_incorrect": "Valid locales: {{{ locales }}}",
-	"locale_set": "Set locale to {{{ locale }}}"
+	"locale_set": "Set locale to {{{ locale }}}",
+	"info_nodejs": "Node.js",
+	"info_guilds": "Guild Count",
+	"info_pid": "Process ID",
+	"info_hard": "Hardware",
+	"info_soft": "Software",
+	"info_licence": "Licence",
+	"info_licencedesc": "{{{ name }}}, an instance of [MSS-Discord](https://moustacheminer.com/) is licenced under the MIT Licence."
 }
