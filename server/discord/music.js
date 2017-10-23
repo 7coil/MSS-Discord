@@ -142,7 +142,7 @@ const add = (message, details) => {
 			.get(message.channel.guild.id)
 			.replace({
 				id: message.channel.guild.id,
-				playlist: r.row('playlist').append(details).default([details]),
+				playlist: r.row('playlist').default([]).append(details),
 				repeat: r.row('repeat').default(false)
 			})
 			.run(r.conn, (err) => {
