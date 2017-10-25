@@ -53,65 +53,63 @@ const play = (message) => {
 			});
 		};
 
-		connections[message.channel.guild.id].once('ready', () => {
 		// If the playlist is empty, leave.
-			if (playlist.length === 0 && connections[message.channel.guild.id].channelID) {
-				client.leaveVoiceChannel(connections[message.channel.guild.id].channelID);
-				connections[message.channel.guild.id] = false;
-			} else if (!playlist[0]) {
-				throw new Error('Found nothing to play, but skipped playlist end feature.');
-			} else if (playlist[0].type === 'youtube-dl') { // Play from youtube-dl, which can do many many things.
-				const youtube = spawn('youtube-dl', [
-					'-o', '-',
-					playlist[0].media
-				]);
+		if (playlist.length === 0 && connections[message.channel.guild.id].channelID) {
+			client.leaveVoiceChannel(connections[message.channel.guild.id].channelID);
+			connections[message.channel.guild.id] = false;
+		} else if (!playlist[0]) {
+			throw new Error('Found nothing to play, but skipped playlist end feature.');
+		} else if (playlist[0].type === 'youtube-dl') { // Play from youtube-dl, which can do many many things.
+			const youtube = spawn('youtube-dl', [
+				'-o', '-',
+				playlist[0].media
+			]);
 
-				connections[message.channel.guild.id].play(youtube.stdout);
-				after();
-			} else if (playlist[0].type === 'ytdl-core') { // Play with ytdl-core, which can do many many things.
-				const stream = ytdl(playlist[0].media.url, playlist[0].media.search);
+			connections[message.channel.guild.id].play(youtube.stdout);
+			after();
+		} else if (playlist[0].type === 'ytdl-core') { // Play with ytdl-core, which can do many many things.
+			const stream = ytdl(playlist[0].media.url, playlist[0].media.search);
 
-				connections[message.channel.guild.id].play(stream);
-				after();
-			} else if (playlist[0].type === 'get') { // Play directly with a GET request
-				const ffmpeg = spawn('ffmpeg', [
-					'-i', playlist[0].media,
-					'-f', 'wav',
-					'-ac', '2',
-					'pipe:1'
-				]);
+			connections[message.channel.guild.id].play(stream);
+			after();
+		} else if (playlist[0].type === 'get') { // Play directly with a GET request
+			const ffmpeg = spawn('ffmpeg', [
+				'-i', playlist[0].media,
+				'-f', 'wav',
+				'-ac', '2',
+				'pipe:1'
+			]);
 
-				ffmpeg.stdout.once('error', (err) => {
-					message.channel.createMessage(`Error playing audio! ${err.message}`);
-				});
-				ffmpeg.stderr.once('error', (err) => {
-					message.channel.createMessage(`Error playing audio! ${err.message}`);
-				});
+			ffmpeg.stdout.once('error', (err) => {
+				message.channel.createMessage(`Error playing audio! ${err.message}`);
+			});
+			ffmpeg.stderr.once('error', (err) => {
+				message.channel.createMessage(`Error playing audio! ${err.message}`);
+			});
 
-				connections[message.channel.guild.id].play(ffmpeg.stdout);
-				after();
-			} else if (playlist[0].type === 'post') { // Send POST data then play the file
-				const ffmpeg = spawn('ffmpeg', [
-					'-i', 'pipe:0',
-					'-f', 'wav',
-					'-ac', '2',
-					'pipe:1'
-				]);
+			connections[message.channel.guild.id].play(ffmpeg.stdout);
+			after();
+		} else if (playlist[0].type === 'post') { // Send POST data then play the file
+			const ffmpeg = spawn('ffmpeg', [
+				'-i', 'pipe:0',
+				'-f', 'wav',
+				'-ac', '2',
+				'pipe:1'
+			]);
 
-				ffmpeg.stdout.once('error', (err) => {
-					message.channel.createMessage(`Error playing audio! ${err.message}`);
-				});
-				ffmpeg.stderr.once('error', (err) => {
-					message.channel.createMessage(`Error playing audio! ${err.message}`);
-				});
+			ffmpeg.stdout.once('error', (err) => {
+				message.channel.createMessage(`Error playing audio! ${err.message}`);
+			});
+			ffmpeg.stderr.once('error', (err) => {
+				message.channel.createMessage(`Error playing audio! ${err.message}`);
+			});
 
-				request.post(playlist[0].media).pipe(ffmpeg.stdin);
-				connections[message.channel.guild.id].play(ffmpeg.stdout);
-				after();
-			} else {
-				throw new Error('Invalid audio type provided.');
-			}
-		});
+			request.post(playlist[0].media).pipe(ffmpeg.stdin);
+			connections[message.channel.guild.id].play(ffmpeg.stdout);
+			after();
+		} else {
+			throw new Error('Invalid audio type provided.');
+		}
 	});
 };
 const connect = (message) => {
