@@ -42,21 +42,23 @@ module.exports = [{
 	uses: 1,
 	admin: 3,
 	command: (message) => {
-		exec(message.mss.input, (error, stdout, stderr) => {
-			let output = '';
+		if (message.mss.input) {
+			exec(message.mss.input, (error, stdout, stderr) => {
+				let output = '';
 
-			if (stdout) {
-				output += '=== stdout ===\n';
-				output += `${stdout.replace(/`/g, '\'')}\n`;
-			}
+				if (stdout) {
+					output += '=== stdout ===\n';
+					output += `${stdout.replace(/`/g, '\'')}\n`;
+				}
 
-			if (stderr) {
-				output += '=== stderr ===\n';
-				output += `${stderr.replace(/`/g, '\'')}\n`;
-			}
+				if (stderr) {
+					output += '=== stderr ===\n';
+					output += `${stderr.replace(/`/g, '\'')}\n`;
+				}
 
-			message.channel.createMessage(`\n${message.__('exec_output')}\n\`\`\`\n${output}\`\`\``);
-		});
+				message.channel.createMessage(`\n${message.__('exec_output')}\n\`\`\`\n${output}\`\`\``);
+			});
+		}
 	}
 }, {
 	aliases: [
