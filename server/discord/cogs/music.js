@@ -77,6 +77,8 @@ const radio = {
 	'rthk dab 32': { name: 'RTHK DAB 32', url: 'http://rthk.hk/live32.m3u', type: 'vlc' },
 	'rthk dab 33': { name: 'RTHK DAB 33', url: 'http://rthk.hk/live33.m3u', type: 'vlc' },
 	kiss: { name: 'Kiss', url: 'http://live-kiss.sharp-stream.com/kissnational.mp3', type: 'get' },
+	'macau cn': { name: '澳門電台', url: 'rtsp://live3.tdm.com.mo:80/radio/rch2.live', type: 'vlc' },
+	'macau pt': { name: 'Rádio Macau', url: 'rtsp://live3.tdm.com.mo:80/radio/rch1.live', type: 'vlc' },
 };
 
 module.exports = [
