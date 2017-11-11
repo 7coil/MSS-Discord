@@ -140,30 +140,18 @@ module.exports = [{
 	}
 }, {
 	aliases: [
-		'repeat'
-	],
-	name: 'repeat',
-	uses: 1,
-	admin: 1,
-	command: (message) => {
-		music.repeat(message);
-	}
-}, {
-	aliases: [
 		'list'
 	],
 	name: 'list',
 	uses: 1,
 	admin: 0,
 	command: (message) => {
-		music.list(message, (playlist, repeat) => {
-			if (playlist.length === 0) {
+		music.list(message, (info) => {
+			if (info.playlist.length === 0) {
 				message.channel.createMessage(message.__('list_empty'));
 			} else {
 				let reply = '```\n';
-				reply += repeat ? message.__('list_repeat_on') : message.__('list_repeat_off');
-				reply += '\n';
-				playlist.forEach((element, index) => {
+				info.playlist.forEach((element, index) => {
 					reply += `[${index || message.__('list_current')}] ${element.title}\n`;
 				});
 				reply += '```';
