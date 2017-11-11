@@ -22,7 +22,7 @@ module.exports = [{
 		};
 
 		// Get URL of an image
-		const image = message.mss.input || (message.mentions[0] && message.mentions[0].id) || message.author.staticAvatarURL;
+		const image = (message.mentions[0] && message.mentions[0].staticAvatarURL) || message.mss.input || message.author.staticAvatarURL;
 
 		if (image && validator.isURL(image)) {
 			request(query1, (err1, res1, body1) => {
