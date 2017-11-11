@@ -34,11 +34,9 @@ const play = async (message) => {
 		} else if (media.type === 'ytdl-core') {
 			audio = new BufferedStream();
 			ytdl(media.media, { filter: 'audioonly' }).pipe(audio);
-		} else if (media.type === 'get') {
-			audio = media.media;
-		} else if (media.type === 'post') {
+		} else if (media.type === 'post' || media.type === 'get') {
 			audio = new BufferedStream();
-			request.post(media.media).pipe(audio);
+			request(media.media).pipe(audio);
 		} else {
 			// Guess it out!
 			audio = media.media;

@@ -134,5 +134,12 @@
 	"info_hard": "Hardware",
 	"info_soft": "Software",
 	"info_licence": "Licence",
-	"info_licencedesc": "{{{ name }}}, an instance of [MSS-Discord](https://moustacheminer.com/) is licenced under the MIT Licence."
+	"info_licencedesc": "{{{ name }}}, an instance of [MSS-Discord](https://moustacheminer.com/) is licenced under the MIT Licence.",
+	"radio": "Radio",
+	"radio_desc": "Play a radio stream",
+	"radio_1_in": "{{ prefix }} {{ command }}",
+	"radio_1_out": "Get a list of radio stations",
+	"radio_2_in": "{{ prefix }} {{ command }} [station]",
+	"radio_2_out": "Play a radio stream",
+	"radio_incorrect": "Invalid radio station. For a list of valid stations, run `{{ prefix }} {{ command }}`"
 }
