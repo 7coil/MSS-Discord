@@ -185,11 +185,11 @@ module.exports = [
 			if (isURL(message.mss.input)) {
 				request.head(message.mss.input, (err, head) => {
 					if (!head.headers['content-type']) {
-						message.channel.createMessage('No content type provided');
+						message.channel.createMessage(message.__('tts_content_type_not_found'));
 					} else if (!head.headers['content-type'].startsWith('text/')) {
-						message.channel.createMessage('Invalid URL content type');
-					} else if (head.headers['content-length'] > 1000000) {
-						message.channel.createMessage('Content length too long');
+						message.channel.createMessage(message.__('tts_content_type_incorrect'));
+					} else if (head.headers['content-length'] > 100000) {
+						message.channel.createMessage(message.__('tts_content_size'));
 					} else {
 						request.get(message.mss.input)
 							.on('response', (res2) => {
@@ -198,8 +198,8 @@ module.exports = [
 								res2.on('data', (data) => {
 									size += data.length;
 									input += data;
-									if (size > 1000000) {
-										console.log('Server lied about size.');
+									if (size > 100000) {
+										console.log(message.__('tts_content_size'));
 										res2.abort();
 									}
 								});
