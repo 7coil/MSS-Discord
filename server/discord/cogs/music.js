@@ -204,7 +204,6 @@ module.exports = [
 									}
 								});
 								res2.on('end', () => {
-									console.log(input);
 									dictate(input);
 								});
 							});
