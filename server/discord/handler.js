@@ -78,5 +78,5 @@ module.exports = async (message) => {
 		.get(message.author.id)
 		.run(r.conn);
 
-	i18n.init(locale || 'en-gb');
+	message.setLocale((locale && locale.lang) || 'en-gb');
 };
