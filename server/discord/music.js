@@ -41,6 +41,15 @@ const play = async (message) => {
 			request(media.media).pipe(audio);
 		} else if (media.type === 'eris') {
 			audio = media.media;
+		} else if (media.type === 'vlc') {
+			audio = new BufferedStream();
+			const vlc = spawn('cvlc', [
+				'-q', '--sout',
+				'#transcode{acodec=opus,ab=128,channels=2,samplerate=44000}:std{access=file,mux=ogg,dst=-}',
+				media.media,
+				'vlc://quit'
+			]);
+			vlc.stdout.pipe(audio);
 		} else {
 			audio = media.media;
 		}

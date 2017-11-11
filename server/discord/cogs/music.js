@@ -67,16 +67,16 @@ const radio = {
 	wales: { name: 'BBC Radio Wales', url: 'http://bbcmedia.ic.llnwd.net/stream/bbcmedia_walesmw_mf_p', type: 'get' },
 	'world service uk': { name: 'BBC World Service UK stream', url: 'http://bbcwssc.ic.llnwd.net/stream/bbcwssc_mp1_ws-eieuk', type: 'get' },
 	'world service news': { name: 'BBC World Service News stream', url: 'http://bbcwssc.ic.llnwd.net/stream/bbcwssc_mp1_ws-einws', type: 'get' },
-	'rthk 1': { name: 'RTHK Radio 1', url: 'http://rthk.hk/live1.m3u', type: 'youtube-dl' },
-	'rthk 2': { name: 'RTHK Radio 2', url: 'http://rthk.hk/live2.m3u', type: 'youtube-dl' },
-	'rthk 3': { name: 'RTHK Radio 3', url: 'http://rthk.hk/live3.m3u', type: 'youtube-dl' },
-	'rthk 4': { name: 'RTHK Radio 4', url: 'http://rthk.hk/live4.m3u', type: 'youtube-dl' },
-	'rthk 5': { name: 'RTHK Radio 5', url: 'http://rthk.hk/live5.m3u', type: 'youtube-dl' },
-	'rthk pth': { name: 'RTHK PTH', url: 'http://rthk.hk/livepth.m3u', type: 'youtube-dl' },
-	'rthk dab 31': { name: 'RTHK DAB 31', url: 'http://rthk.hk/live31.m3u', type: 'youtube-dl' },
-	'rthk dab 32': { name: 'RTHK DAB 32', url: 'http://rthk.hk/live32.m3u', type: 'youtube-dl' },
-	'rthk dab 33': { name: 'RTHK DAB 33', url: 'http://rthk.hk/live33.m3u', type: 'youtube-dl' },
-	'kiss': { name: 'Kiss', url: 'http://live-kiss.sharp-stream.com/kissnational.mp3', type: 'get' },
+	'rthk 1': { name: 'RTHK Radio 1', url: 'http://rthk.hk/live1.m3u', type: 'vlc' },
+	'rthk 2': { name: 'RTHK Radio 2', url: 'http://rthk.hk/live2.m3u', type: 'vlc' },
+	'rthk 3': { name: 'RTHK Radio 3', url: 'http://rthk.hk/live3.m3u', type: 'vlc' },
+	'rthk 4': { name: 'RTHK Radio 4', url: 'http://rthk.hk/live4.m3u', type: 'vlc' },
+	'rthk 5': { name: 'RTHK Radio 5', url: 'http://rthk.hk/live5.m3u', type: 'vlc' },
+	'rthk pth': { name: 'RTHK PTH', url: 'http://rthk.hk/livepth.m3u', type: 'vlc' },
+	'rthk dab 31': { name: 'RTHK DAB 31', url: 'http://rthk.hk/live31.m3u', type: 'vlc' },
+	'rthk dab 32': { name: 'RTHK DAB 32', url: 'http://rthk.hk/live32.m3u', type: 'vlc' },
+	'rthk dab 33': { name: 'RTHK DAB 33', url: 'http://rthk.hk/live33.m3u', type: 'vlc' },
+	kiss: { name: 'Kiss', url: 'http://live-kiss.sharp-stream.com/kissnational.mp3', type: 'get' },
 };
 
 module.exports = [
@@ -149,12 +149,10 @@ module.exports = [
 						message.channel.createMessage(message.__('youtube_404'));
 					} else {
 						music.add(message, {
-							type: 'youtube-dl',
+							type: 'ytdl-core',
 							from: 'YouTube',
 							media: video.id.videoId,
 							title: video.snippet.title,
-							thumb: video.snippet.thumbnails.default.url,
-							desc: video.snippet.description
 						});
 					}
 				});
@@ -284,7 +282,6 @@ module.exports = [
 			if (!message.mss.input) {
 				message.channel.createMessage(Object.keys(radio).map(station => `\`${station}\``).join(', '));
 			} else if (radio[message.mss.input]) {
-				console.log(radio[message.mss.input]);
 				music.add(message, {
 					type: radio[message.mss.input].type,
 					from: 'Radio',
