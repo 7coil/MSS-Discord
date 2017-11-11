@@ -20,7 +20,6 @@ const current = async (message, callback) => {
 
 const play = async (message) => {
 	current(message, (media) => {
-		console.log(media);
 		let audio = null;
 		if (!media) {
 			if (bot.voiceConnections.get(message.channel.guild.id)) bot.leaveVoiceChannel(message.channel.guild.id);
