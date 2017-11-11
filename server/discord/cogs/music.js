@@ -2,6 +2,7 @@ const config = require('config');
 const request = require('request');
 const music = require('./../music');
 const YT = require('youtube-node');
+const { isURL } = require('validator');
 
 const searchYTClient = new YT();
 searchYTClient.setKey(config.get('api').youtube);
@@ -160,7 +161,7 @@ module.exports = [
 		uses: 1,
 		admin: 0,
 		command: (message) => {
-			if (message.mss.input) {
+			const dictate = (text) => {
 				const data = {
 					url: 'https://talk.moustacheminer.com/api/gen',
 					method: 'POST',
@@ -169,7 +170,7 @@ module.exports = [
 						'User-Agent': config.get('useragent')
 					},
 					body: {
-						dectalk: message.mss.input
+						dectalk: text
 					}
 				};
 
@@ -178,9 +179,39 @@ module.exports = [
 					from: 'DECtalk',
 					media: data,
 					title: 'DECtalk Text To Speech',
-					thumb: 'https://upload.wikimedia.org/wikipedia/commons/2/2b/DECtalk_DCT01_and_Tink.jpg',
-					desc: message.mss.input
 				});
+			};
+
+			if (isURL(message.mss.input)) {
+				request.head(message.mss.input, (err, head) => {
+					if (!head.headers['content-type']) {
+						message.channel.createMessage('No content type provided');
+					} else if (!head.headers['content-type'].startsWith('text/')) {
+						message.channel.createMessage('Invalid URL content type');
+					} else if (head.headers['content-length'] > 1000000) {
+						message.channel.createMessage('Content length too long');
+					} else {
+						request.get(message.mss.input)
+							.on('response', (res2) => {
+								let size = 0;
+								let input = '';
+								res2.on('data', (data) => {
+									size += data.length;
+									input += data;
+									if (size > 1000000) {
+										console.log('Server lied about size.');
+										res2.abort();
+									}
+								});
+								res2.on('end', () => {
+									console.log(input);
+									dictate(input);
+								});
+							});
+					}
+				});
+			} else if (message.mss.input) {
+				dictate(message.mss.input);
 			}
 		}
 	},
