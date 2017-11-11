@@ -188,7 +188,7 @@ module.exports = [
 						message.channel.createMessage(message.__('tts_content_type_not_found'));
 					} else if (!head.headers['content-type'].startsWith('text/')) {
 						message.channel.createMessage(message.__('tts_content_type_incorrect'));
-					} else if (head.headers['content-length'] > 100000) {
+					} else if (head.headers['content-length'] > 10000) {
 						message.channel.createMessage(message.__('tts_content_size'));
 					} else {
 						request.get(message.mss.input)
@@ -198,7 +198,7 @@ module.exports = [
 								res2.on('data', (data) => {
 									size += data.length;
 									input += data;
-									if (size > 100000) {
+									if (size > 10000) {
 										console.log(message.__('tts_content_size'));
 										res2.abort();
 									}

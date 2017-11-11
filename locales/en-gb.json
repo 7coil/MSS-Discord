@@ -59,7 +59,7 @@
 	"tts_1_out": "Play the DECtalk",
 	"tts_content_type_not_found": "Content type not found",
 	"tts_content_type_incorrect": "Content type was not of a `text` format",
-	"tts_content_size": "The size of the webpage exceeded 100Kb",
+	"tts_content_size": "The size of the webpage exceeded 10Kb",
 	"skip": "Skip",
 	"skip_desc": "Skip the currently playing track",
 	"skip_1_in": "{{ prefix }} {{ command }}",
