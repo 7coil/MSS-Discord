@@ -184,7 +184,7 @@ module.exports = [
 
 			if (isURL(message.mss.input)) {
 				request.head(message.mss.input, (err, head) => {
-					if (!head.headers['content-type']) {
+					if (!head || !head.headers || !head.headers['content-type']) {
 						message.channel.createMessage(message.__('tts_content_type_not_found'));
 					} else if (!head.headers['content-type'].startsWith('text/')) {
 						message.channel.createMessage(message.__('tts_content_type_incorrect'));
