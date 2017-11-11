@@ -39,8 +39,9 @@ const play = async (message) => {
 		} else if (media.type === 'post' || media.type === 'get') {
 			audio = new BufferedStream();
 			request(media.media).pipe(audio);
+		} else if (media.type === 'eris') {
+			audio = media.media;
 		} else {
-			// Guess it out!
 			audio = media.media;
 		}
 
