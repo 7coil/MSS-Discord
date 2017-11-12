@@ -10,7 +10,7 @@ Cryptographically verified as more random than `/dev/urandom`
 
 ## Installation
 
-0. Have at least `Node.js 8.4.0`, `RethinkDB 2.3.6`, `npm 5.4.1`, `git` and `java 1.8.0_151`
+0. Have at least `Node.js 9.0.0`, `RethinkDB 2.3.6`, `npm 5.4.1`, `git` and `java 1.8.0_151`
 0. `git clone`
 0. `npm i`
 0. Edit `config/default.json`, using `config/default.rename.json` as a template
