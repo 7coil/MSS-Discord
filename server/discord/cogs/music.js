@@ -9,10 +9,10 @@ searchYTClient.setKey(config.get('api').youtube);
 const resolve = (search, callback) => {
 	const query = encodeURIComponent(search);
 	request({
-		uri: `http://127.0.0.1:2333/loadtracks?identifier=${query}`,
+		uri: `${config.get('resolver').host}:${config.get('resolver').port}/loadtracks?identifier=${query}`,
 		headers: {
 			'User-Agent': config.get('useragent'),
-			Authorization: 'parkersquare'
+			Authorization: config.get('resolver').password
 		},
 		json: true
 	}, (err, res, body) => callback(body));

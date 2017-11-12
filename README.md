@@ -10,12 +10,13 @@ Cryptographically verified as more random than `/dev/urandom`
 
 ## Installation
 
-0. Have at least `Node.js 8.4.0`, `RethinkDB 2.3.6`, `npm 5.4.1` and `git`
-1. `git clone`
-2. `npm i`
-3. Edit `config/default.json`, using `config/default.rename.json` as a template
-4. Create a database in Rethink with table: `i18n`
-6. `npm start`
+0. Have at least `Node.js 8.4.0`, `RethinkDB 2.3.6`, `npm 5.4.1`, `git` and `java 1.8.0_151`
+0. `git clone`
+0. `npm i`
+0. Edit `config/default.json`, using `config/default.rename.json` as a template
+0. Create a database in Rethink with table: `i18n`
+0. `java -jar Lavalink.jar`
+0. `npm start`
 
 ## Translations
 

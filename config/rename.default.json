@@ -42,6 +42,11 @@
 			"password": ""
 		}
 	],
+	"resolver": {
+		"host": "127.0.0.1",
+		"port": 2333,
+		"password": ""
+	},
 	"url": {
 		"discord": "https://discord.gg/wHgdmf4",
 		"invite": "https://discordapp.com/oauth2/authorize?&client_id=257547382277931009&scope=bot&permissions=0",
