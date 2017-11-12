@@ -72,7 +72,6 @@ const play = (message) => {
 				});
 			} else {
 				setTimeout(async () => {
-					player.stop();
 					await r.table('playlist')
 						.get(message.channel.guild.id)
 						.replace({
