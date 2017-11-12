@@ -27,6 +27,7 @@
     "buffered2": "^1.0.0",
     "config": "^1.26.1",
     "eris": "^0.7.2",
+    "eris-lavalink": "github:briantanner/eris-lavalink",
     "express": "^4.15.3",
     "i18n": "^0.8.3",
     "opusscript": "0.0.3",

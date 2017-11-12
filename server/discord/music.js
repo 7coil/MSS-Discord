@@ -1,10 +1,18 @@
 const r = require('./../db');
 const client = require('./');
-const ytdl = require('ytdl-core');
 const bot = require('./');
-const { BufferedStream } = require('buffered2');
-const { spawn } = require('child_process');
-const request = require('request');
+
+const getPlayer = (message) => {
+	if (!message.member) {
+		return Promise.reject(new Error('Not a guild'));
+	}
+	const player = client.voiceConnections.get(message.channel.guild.id);
+	if (player) {
+		return Promise.resolve(player);
+	}
+	const options = {};
+	return client.voiceConnections.join(message.channel.guild.id, message.member.voiceState.channelID, options);
+};
 
 const list = async (message, callback) => {
 	const playlist = (await r.table('playlist')
@@ -18,59 +26,39 @@ const current = async (message, callback) => {
 	});
 };
 
-const play = async (message) => {
+const play = (message) => {
 	current(message, (media) => {
-		let audio = null;
-		if (!bot.voiceConnections.get(message.channel.guild.id)) {
-			return;
-		} else if (!media) {
-			if (bot.voiceConnections.get(message.channel.guild.id)) bot.leaveVoiceChannel(message.channel.guild.id);
-			return;
-		} else if (media.type === 'youtube-dl') {
-			audio = new BufferedStream();
-			const youtube = spawn('youtube-dl', [
-				'-o', '-',
-				media.media
-			]);
-			youtube.stdout.pipe(audio);
-		} else if (media.type === 'ytdl-core') {
-			audio = new BufferedStream();
-			ytdl(media.media, { filter: 'audioonly' }).pipe(audio);
-		} else if (media.type === 'post' || media.type === 'get') {
-			audio = new BufferedStream();
-			request(media.media).pipe(audio);
-		} else if (media.type === 'eris') {
-			audio = media.media;
-		} else if (media.type === 'vlc') {
-			audio = new BufferedStream();
-			const vlc = spawn('cvlc', [
-				'-q', '--sout',
-				'#transcode{acodec=opus,ab=128,channels=2,samplerate=44000}:std{access=file,mux=ogg,dst=-}',
-				media.media,
-				'vlc://quit'
-			]);
-			vlc.stdout.pipe(audio);
-		} else {
-			audio = media.media;
-		}
-
-		bot.voiceConnections.get(message.channel.guild.id).play(audio);
-		bot.voiceConnections.get(message.channel.guild.id).once('end', async () => {
-			await r.table('playlist')
-				.get(message.channel.guild.id)
-				.update({
-					playlist: r.row('playlist').deleteAt(0)
-				});
-			play(message);
+		getPlayer(message).then((player) => {
+			player.play(media.media);
+			player.on('disconnect', (err) => {
+				if (err) console.log(err);
+				console.log('Disconnected');
+			});
+			player.on('error', (err) => {
+				console.log('Error!');
+				console.log(err);
+			});
+			player.on('stuck', (err) => {
+				console.log('Stuck!');
+				console.log(err);
+			});
+			player.once('end', async (data) => {
+				if (!(data.reason && data.reason === 'REPLACED')) {
+					await r.table('playlist')
+						.get(message.channel.guild.id)
+						.update({
+							playlist: r.row('playlist').deleteAt(0)
+						});
+					play(message);
+				}
+			});
 		});
 	});
 };
+
 const connect = (message) => {
-	if (!bot.voiceConnections.get(message.channel.guild.id)) {
-		client.joinVoiceChannel(message.member.voiceState.channelID)
-			.catch((err) => {
-				message.channel.createMessage(`Error joining channel! ${err.message}`);
-			})
+	if (!client.voiceConnections.get(message.channel.guild.id)) {
+		getPlayer(message)
 			.then(() => {
 				play(message);
 			});
@@ -96,24 +84,21 @@ const add = async (message, details) => {
 	}
 };
 const skip = (message) => {
-	if (!message.member) {
-		message.channel.createMessage('You need to be in a Guild!');
-	} else if (bot.voiceConnections.get(message.channel.guild.id)) {
-		bot.voiceConnections.get(message.channel.guild.id).stopPlaying();
-	}
+	getPlayer(message).then(async (player) => {
+		player.stop();
+	});
 };
-const stop = async (message) => {
-	if (!message.member) {
-		message.channel.createMessage('You need to be in a Guild!');
-	} else {
+const stop = (message) => {
+	getPlayer(message).then(async (player) => {
+		player.stop();
 		await r.table('playlist')
 			.get(message.channel.guild.id)
 			.replace({
 				id: message.channel.guild.id,
 				playlist: []
 			});
-		skip(message);
-	}
+		player.leave();
+	});
 };
 
 exports.connect = connect;
