@@ -57,12 +57,10 @@ const play = (message) => {
 };
 
 const connect = (message) => {
-	if (!client.voiceConnections.get(message.channel.guild.id)) {
-		getPlayer(message)
-			.then(() => {
-				play(message);
-			});
-	}
+	getPlayer(message)
+		.then(() => {
+			play(message);
+		});
 };
 const add = async (message, details) => {
 	if (!message.member) {
