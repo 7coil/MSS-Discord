@@ -2,10 +2,21 @@ const config = require('config');
 const request = require('request');
 const music = require('./../music');
 const YT = require('youtube-node');
-const { isURL } = require('validator');
 
 const searchYTClient = new YT();
 searchYTClient.setKey(config.get('api').youtube);
+
+const resolve = (search, callback) => {
+	const query = encodeURIComponent(search);
+	request({
+		uri: `http://127.0.0.1:2333/loadtracks?identifier=${query}`,
+		headers: {
+			'User-Agent': config.get('useragent'),
+			Authorization: 'parkersquare'
+		},
+		json: true
+	}, (err, res, body) => callback(body));
+};
 
 const radio = {
 	1: { name: 'BBC Radio 1', url: 'http://bbcmedia.ic.llnwd.net/stream/bbcmedia_radio1_mf_p', type: 'get' },
@@ -76,7 +87,9 @@ const radio = {
 	'rthk dab 31': { name: 'RTHK DAB 31', url: 'http://rthk.hk/live31.m3u', type: 'vlc' },
 	'rthk dab 32': { name: 'RTHK DAB 32', url: 'http://rthk.hk/live32.m3u', type: 'vlc' },
 	'rthk dab 33': { name: 'RTHK DAB 33', url: 'http://rthk.hk/live33.m3u', type: 'vlc' },
-	kiss: { name: 'Kiss', url: 'http://live-kiss.sharp-stream.com/kissnational.mp3', type: 'get' }
+	kiss: { name: 'Kiss', url: 'http://live-kiss.sharp-stream.com/kissnational.mp3', type: 'get' },
+	'macau cn': { name: '澳門電台', url: 'rtsp://live3.tdm.com.mo:80/radio/rch2.live', type: 'vlc' },
+	'macau pt': { name: 'Rádio Macau', url: 'rtsp://live3.tdm.com.mo:80/radio/rch1.live', type: 'vlc' },
 };
 
 module.exports = [
@@ -107,19 +120,18 @@ module.exports = [
 						}
 					};
 
-					request(query, (err, res, body) => {
-						if (body.error) {
+					request(query, (err, res, body1) => {
+						if (body1.error) {
 							message.channel.createMessage(message.__('err_generic'));
-						} else if (!body.stream) {
+						} else if (!body1.stream) {
 							message.channel.createMessage(message.__('twitch_notlive'));
 						} else {
-							music.add(message, {
-								type: 'youtube-dl',
-								from: 'Twitch',
-								media: `https://twitch.tv/${username}`,
-								title: body.stream.channel.display_name,
-								thumb: body.stream.preview.large,
-								desc: body.stream.channel.status
+							resolve(`https://twitch.tv/${username}`, (body2) => {
+								if (body2.length === 0) {
+									message.channel.createMessage('No results');
+								} else {
+									music.add(message, body2[0]);
+								}
 							});
 						}
 					});
@@ -136,27 +148,13 @@ module.exports = [
 		uses: 1,
 		admin: 0,
 		command: (message) => {
-			if (!message.mss.input) {
-				message.channel.createMessage(message.__('youtube_none'));
-			} else {
-				searchYTClient.search(message.mss.input, 10, (error, result) => {
-					const video = result.items.find(youtube => youtube.id.videoId);
-
-					if (error) {
-						console.log(error);
-						message.channel.createMessage(error);
-					} else if (!result || !result.items || !video) {
-						message.channel.createMessage(message.__('youtube_404'));
-					} else {
-						music.add(message, {
-							type: 'ytdl-core',
-							from: 'YouTube',
-							media: video.id.videoId,
-							title: video.snippet.title,
-						});
-					}
-				});
-			}
+			resolve(`ytsearch:${message.mss.input}`, (body) => {
+				if (body.length === 0) {
+					message.channel.createMessage('No results');
+				} else {
+					music.add(message, body[0]);
+				}
+			});
 		}
 	},
 	{
@@ -167,59 +165,15 @@ module.exports = [
 		],
 		name: 'tts',
 		uses: 1,
-		admin: 0,
+		admin: 3,
 		command: (message) => {
-			const dictate = (text) => {
-				const data = {
-					url: 'https://talk.moustacheminer.com/api/gen',
-					method: 'POST',
-					json: true,
-					headers: {
-						'User-Agent': config.get('useragent')
-					},
-					body: {
-						dectalk: text
-					}
-				};
-
-				music.add(message, {
-					type: 'post',
-					from: 'DECtalk',
-					media: data,
-					title: 'DECtalk Text To Speech',
-				});
-			};
-
-			if (isURL(message.mss.input)) {
-				request.head(message.mss.input, (err, head) => {
-					if (!head || !head.headers || !head.headers['content-type']) {
-						message.channel.createMessage(message.__('tts_content_type_not_found'));
-					} else if (!head.headers['content-type'].startsWith('text/')) {
-						message.channel.createMessage(message.__('tts_content_type_incorrect'));
-					} else if (head.headers['content-length'] > 10000) {
-						message.channel.createMessage(message.__('tts_content_size'));
-					} else {
-						request.get(message.mss.input)
-							.on('response', (res2) => {
-								let size = 0;
-								let input = '';
-								res2.on('data', (data) => {
-									size += data.length;
-									input += data;
-									if (size > 10000) {
-										console.log(message.__('tts_content_size'));
-										res2.abort();
-									}
-								});
-								res2.on('end', () => {
-									dictate(input);
-								});
-							});
-					}
-				});
-			} else if (message.mss.input) {
-				dictate(message.mss.input);
-			}
+			resolve(`https://talk.moustacheminer.com/api/gen?dectalk=${encodeURIComponent(message.mss.input)}`, (body) => {
+				if (body.length === 0) {
+					message.channel.createMessage('Could not resolve media');
+				} else {
+					music.add(message, body[0]);
+				}
+			});
 		}
 	},
 	{
@@ -258,7 +212,7 @@ module.exports = [
 				} else {
 					let reply = '```\n';
 					info.playlist.forEach((element, index) => {
-						reply += `[${index || message.__('list_current')}] ${element.title}\n`;
+						reply += `[${index || message.__('list_current')}] ${element.info.title}\n`;
 					});
 					reply += '```';
 
@@ -282,15 +236,33 @@ module.exports = [
 			if (!message.mss.input) {
 				message.channel.createMessage(Object.keys(radio).map(station => `\`${station}\``).join(', '));
 			} else if (radio[message.mss.input]) {
-				music.add(message, {
-					type: radio[message.mss.input].type,
-					from: 'Radio',
-					media: radio[message.mss.input].url,
-					title: radio[message.mss.input].name,
+				resolve(radio[message.mss.input].url, (body) => {
+					if (body.length === 0) {
+						message.channel.createMessage('No results');
+					} else {
+						music.add(message, body[0]);
+					}
 				});
 			} else {
 				message.channel.createMessage(message.__('radio_incorrect', { prefix: message.mss.prefix, command: message.mss.command }));
 			}
+		}
+	},
+	{
+		aliases: [
+			'play'
+		],
+		name: 'play',
+		uses: 0,
+		admin: 3,
+		command: (message) => {
+			resolve(message.mss.input, (body) => {
+				if (body.length === 0) {
+					message.channel.createMessage('No results');
+				} else {
+					music.add(message, body[0]);
+				}
+			});
 		}
 	}
 ];
