@@ -165,7 +165,7 @@ module.exports = [
 		],
 		name: 'tts',
 		uses: 1,
-		admin: 3,
+		admin: 0,
 		command: (message) => {
 			resolve(`https://talk.moustacheminer.com/api/gen?dectalk=${encodeURIComponent(message.mss.input)}`, (body) => {
 				if (body.length === 0) {
