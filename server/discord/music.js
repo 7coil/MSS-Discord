@@ -14,13 +14,26 @@ const getPlayer = (message) => {
 	return client.voiceConnections.join(message.channel.guild.id, message.member.voiceState.channelID, options);
 };
 
+const stop = (message) => {
+	getPlayer(message).then(async (player) => {
+		player.stop();
+		await r.table('playlist')
+			.get(message.channel.guild.id)
+			.replace({
+				id: message.channel.guild.id,
+				playlist: []
+			});
+		player.disconnect();
+	});
+};
+
 const list = async (message, callback) => {
 	const playlist = (await r.table('playlist')
 		.get(message.channel.guild.id)) || [];
 	callback(playlist);
 };
 
-const current = async (message, callback) => {
+const current = (message, callback) => {
 	list(message, (playlist) => {
 		callback((playlist.playlist && playlist.playlist[0]) || null);
 	});
@@ -29,29 +42,46 @@ const current = async (message, callback) => {
 const play = (message) => {
 	current(message, (media) => {
 		getPlayer(message).then((player) => {
-			player.play(media.media);
-			player.on('disconnect', (err) => {
-				if (err) console.log(err);
-				console.log('Disconnected');
-			});
-			player.on('error', (err) => {
-				console.log('Error!');
-				console.log(err);
-			});
-			player.on('stuck', (err) => {
-				console.log('Stuck!');
-				console.log(err);
-			});
-			player.once('end', async (data) => {
-				if (!(data.reason && data.reason === 'REPLACED')) {
+			if (media) {
+				console.log(media);
+				player.play(media.track);
+				player.on('disconnect', (err) => {
+					if (err) console.log(err);
+					console.log('Disconnected');
+				});
+				player.on('error', (err) => {
+					if (err.type === 'TrackExceptionEvent') {
+						message.channel.createMessage('Something went wrong while decoding the track');
+					} else {
+						message.channel.createMessage('Generic music error message here');
+					}
+				});
+				player.on('stuck', (err) => {
+					console.log('Stuck!');
+					console.log(err);
+				});
+				player.once('end', async (data) => {
+					if (!(data.reason && data.reason === 'REPLACED')) {
+						await r.table('playlist')
+							.get(message.channel.guild.id)
+							.update({
+								playlist: r.row('playlist').deleteAt(0)
+							});
+						play(message);
+					}
+				});
+			} else {
+				setTimeout(async () => {
+					player.stop();
 					await r.table('playlist')
 						.get(message.channel.guild.id)
-						.update({
-							playlist: r.row('playlist').deleteAt(0)
+						.replace({
+							id: message.channel.guild.id,
+							playlist: []
 						});
-					play(message);
-				}
-			});
+					player.disconnect();
+				}, 2000);
+			}
 		});
 	});
 };
@@ -84,18 +114,6 @@ const add = async (message, details) => {
 const skip = (message) => {
 	getPlayer(message).then(async (player) => {
 		player.stop();
-	});
-};
-const stop = (message) => {
-	getPlayer(message).then(async (player) => {
-		player.stop();
-		await r.table('playlist')
-			.get(message.channel.guild.id)
-			.replace({
-				id: message.channel.guild.id,
-				playlist: []
-			});
-		player.leave();
 	});
 };
 
