@@ -17,7 +17,6 @@ const getPlayer = (message) => {
 const stop = async (message) => {
 	const player = bot.voiceConnections.get(message.channel.guild.id);
 	if (player) {
-		player.stop();
 		player.disconnect();
 		await r.table('playlist')
 			.get(message.channel.guild.id)
