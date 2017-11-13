@@ -14,17 +14,18 @@ const getPlayer = (message) => {
 	return client.voiceConnections.join(message.channel.guild.id, message.member.voiceState.channelID, options);
 };
 
-const stop = (message) => {
-	getPlayer(message).then(async (player) => {
+const stop = async (message) => {
+	const player = bot.voiceConnections.get(message.channel.guild.id);
+	if (player) {
 		player.stop();
+		player.disconnect();
 		await r.table('playlist')
 			.get(message.channel.guild.id)
 			.replace({
 				id: message.channel.guild.id,
 				playlist: []
 			});
-		player.disconnect();
-	});
+	}
 };
 
 const list = async (message, callback) => {
@@ -120,9 +121,10 @@ const add = async (message, details) => {
 	}
 };
 const skip = (message) => {
-	getPlayer(message).then(async (player) => {
+	const player = bot.voiceConnections.get(message.channel.guild.id);
+	if (player) {
 		player.stop();
-	});
+	}
 };
 
 exports.connect = connect;
