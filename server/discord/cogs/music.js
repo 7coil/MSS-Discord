@@ -262,7 +262,7 @@ module.exports = [
 			'play'
 		],
 		name: 'play',
-		uses: 0,
+		uses: 1,
 		admin: 0,
 		guild: true,
 		command: (message) => {
@@ -280,7 +280,7 @@ module.exports = [
 			'all'
 		],
 		name: 'all',
-		uses: 0,
+		uses: 1,
 		admin: 0,
 		guild: true,
 		command: (message) => {
