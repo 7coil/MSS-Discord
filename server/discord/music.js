@@ -17,6 +17,7 @@ const getPlayer = (message) => {
 const stop = async (message) => {
 	const player = bot.voiceConnections.get(message.channel.guild.id);
 	if (player) {
+		player.stop();
 		player.disconnect();
 		await r.table('playlist')
 			.get(message.channel.guild.id)
@@ -72,12 +73,7 @@ const play = (message) => {
 				});
 			} else {
 				setTimeout(async () => {
-					await r.table('playlist')
-						.get(message.channel.guild.id)
-						.replace({
-							id: message.channel.guild.id,
-							playlist: []
-						});
+					player.stop();
 					player.disconnect();
 				}, 2000);
 			}
