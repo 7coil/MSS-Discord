@@ -101,6 +101,7 @@ module.exports = [
 		name: 'twitch',
 		uses: 1,
 		admin: 0,
+		guild: true,
 		command: (message) => {
 			if (!message.mss.input) {
 				message.channel.createMessage(message.__('twitch_none'));
@@ -147,6 +148,7 @@ module.exports = [
 		name: 'youtube',
 		uses: 1,
 		admin: 0,
+		guild: true,
 		command: (message) => {
 			resolve(`ytsearch:${message.mss.input}`, (body) => {
 				if (body.length === 0) {
@@ -166,6 +168,7 @@ module.exports = [
 		name: 'tts',
 		uses: 1,
 		admin: 0,
+		guild: true,
 		command: (message) => {
 			resolve(`https://talk.moustacheminer.com/api/gen?dectalk=${encodeURIComponent(message.mss.input)}`, (body) => {
 				if (body.length === 0) {
@@ -183,6 +186,7 @@ module.exports = [
 		name: 'skip',
 		uses: 1,
 		admin: 1,
+		guild: true,
 		command: (message) => {
 			music.skip(message);
 		}
@@ -194,6 +198,7 @@ module.exports = [
 		name: 'stop',
 		uses: 1,
 		admin: 1,
+		guild: true,
 		command: (message) => {
 			music.stop(message);
 		}
@@ -205,6 +210,7 @@ module.exports = [
 		name: 'list',
 		uses: 1,
 		admin: 0,
+		guild: true,
 		command: (message) => {
 			music.list(message, (info) => {
 				if (info.playlist.length === 0) {
@@ -217,7 +223,7 @@ module.exports = [
 					reply += '```';
 
 					if (reply && reply.length > 1900) {
-						message.channel.createMessage(message.__('list_length'));
+						message.channel.createMessage(message.__('list_length', { url: `${config.get('webserver').location}guild/${message.channel.guild.id}/playlist` }));
 					} else {
 						message.channel.createMessage(reply);
 					}
@@ -232,6 +238,7 @@ module.exports = [
 		name: 'radio',
 		uses: 2,
 		admin: 0,
+		guild: true,
 		command: (message) => {
 			if (!message.mss.input) {
 				message.channel.createMessage(Object.keys(radio).map(station => `\`${station}\``).join(', '));
@@ -256,13 +263,32 @@ module.exports = [
 		],
 		name: 'play',
 		uses: 0,
-		admin: 3,
+		admin: 0,
+		guild: true,
 		command: (message) => {
 			resolve(message.mss.input, (body) => {
 				if (body.length === 0) {
 					message.channel.createMessage('No results');
 				} else {
 					music.add(message, body[0]);
+				}
+			});
+		}
+	},
+	{
+		aliases: [
+			'all'
+		],
+		name: 'all',
+		uses: 0,
+		admin: 0,
+		guild: true,
+		command: (message) => {
+			resolve(message.mss.input, (body) => {
+				if (body.length === 0) {
+					message.channel.createMessage('No results');
+				} else {
+					music.add(message, body.reverse());
 				}
 			});
 		}

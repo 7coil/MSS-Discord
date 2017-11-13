@@ -101,12 +101,21 @@ const add = async (message, details) => {
 			message.channel.createMessage('You need to be in a Voice Channel!');
 		}
 	} else {
-		await r.table('playlist')
-			.get(message.channel.guild.id)
-			.replace({
-				id: message.channel.guild.id,
-				playlist: r.row('playlist').default([]).append(details)
-			});
+		if (Array.isArray(details)) {
+			await r.table('playlist')
+				.get(message.channel.guild.id)
+				.replace({
+					id: message.channel.guild.id,
+					playlist: r.row('playlist').default([]).union(details)
+				});
+		} else {
+			await r.table('playlist')
+				.get(message.channel.guild.id)
+				.replace({
+					id: message.channel.guild.id,
+					playlist: r.row('playlist').default([]).append(details)
+				});
+		}
 		if (!bot.voiceConnections.get(message.channel.guild.id)) connect(message);
 	}
 };

@@ -12,6 +12,7 @@
 	"err_generic": "An error occured while processing your request.",
 	"err_ratelimit": "To help prevent abuse for this bot, you are being ratelimited. Please wait for {{ time }}s.",
 	"err_dm": "The bot detected that it cannot send DMs to your account.",
+	"err_guild": "This command is restricted to guilds only.",
 	"invite": "Invite",
 	"guild": "Guild",
 	"lang_en-gb": "English (United Kingdom)",
@@ -79,7 +80,7 @@
 	"list_empty": "The playlist is empty",
 	"list_repeat_on": "Repeat mode is enabled",
 	"list_repeat_off": "Repeat mode is disabled",
-	"list_length": "The list is too long to display",
+	"list_length": "The list is too long to display: View online here - {{{ url }}}",
 	"list_current": "Current",
 	"cookie": "Fortune Cookie",
 	"cookie_desc": "Get a random fortune cookie message",
@@ -144,5 +145,13 @@
 	"radio_1_out": "Get a list of radio stations",
 	"radio_2_in": "{{ prefix }} {{ command }} [station]",
 	"radio_2_out": "Play a radio stream",
-	"radio_incorrect": "Invalid radio station. For a list of valid stations, run `{{ prefix }} {{ command }}`"
+	"radio_incorrect": "Invalid radio station. For a list of valid stations, run `{{ prefix }} {{ command }}`",
+	"play": "Play",
+	"play_desc": "Play a URL",
+	"play_1_in": "{{ prefix }} {{ command }} [url]",
+	"play_1_out": "Plays the URL",
+	"all": "Play all",
+	"all_desc": "Play all found",
+	"all_1_in": "{{ prefix }} {{ command }} [YouTube Playlist]",
+	"all_1_out": "Play all videos in the playlist"
 }

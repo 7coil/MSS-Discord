@@ -11,7 +11,7 @@
 		"tdm": "cvlc -I http -vv rtsp://live3.tdm.com.mo:80/radio/rch2.live :sout=\"#transcode{acodec=opus,ab=128,channels=2,samplerate=44100}:http{mux=ffmpeg{mux=ogg},dst=127.0.0.1:4000}\""
 	},
 	"repository": {
-	"type": "git",
+		"type": "git",
 		"url": "git+https://github.com/moustacheminer/mss-discord.git"
 	},
 	"keywords": [
@@ -29,9 +29,10 @@
 		"config": "^1.26.1",
 		"eris": "github:abalabahaha/eris#dev",
 		"eris-lavalink": "github:briantanner/eris-lavalink",
-		"express": "^4.15.3",
+		"express": "^4.16.2",
 		"i18n": "^0.8.3",
 		"opusscript": "0.0.3",
+		"pug": "^2.0.0-rc.4",
 		"request": "^2.81.0",
 		"rethinkdb": "^2.3.3",
 		"rethinkdbdash": "^2.3.31",
