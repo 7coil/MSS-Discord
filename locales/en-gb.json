@@ -155,7 +155,7 @@
 	"all_1_in": "{{ prefix }} {{ command }} [YouTube Playlist]",
 	"all_1_out": "Play all videos in the playlist",
 	"red": "Red Joke",
-	"red_desc": "Display a `set` menu from Red",
+	"red_desc": "Display a 'really comedic' and 'funny' `set` menu from Red",
 	"red_1_in": "{{ prefix }} {{ command }}",
 	"red_1_out": "Display a `set` menu from Red"
 }
