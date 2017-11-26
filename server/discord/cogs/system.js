@@ -189,7 +189,7 @@ module.exports = [{
 	uses: 0,
 	admin: 0,
 	command: (message) => {
-		message.channel.createMessage(`${message.mss.prefix} ${message.mss.command}
+		message.channel.createMessage(`\`\`\`${message.mss.prefix} ${message.mss.command}
 
 Changes Red's core settings
 
@@ -197,6 +197,6 @@ Commands:
   owner            Sets owner
 
 Type .help command for more info on a command.
-You can also type .help category for more info on a category.`);
+You can also type .help category for more info on a category.\`\`\``);
 	}
 }];
