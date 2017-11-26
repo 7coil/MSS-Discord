@@ -183,7 +183,8 @@ module.exports = [{
 	}
 }, {
 	aliases: [
-		'red'
+		'red',
+		'set'
 	],
 	name: 'red',
 	uses: 0,
