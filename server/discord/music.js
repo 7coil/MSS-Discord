@@ -72,10 +72,7 @@ const play = (message) => {
 					}
 				});
 			} else {
-				setTimeout(async () => {
-					player.stop();
-					player.disconnect();
-				}, 2000);
+				stop(message);
 			}
 		});
 	});
