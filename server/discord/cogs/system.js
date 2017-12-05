@@ -197,7 +197,7 @@ Changes Red's core settings
 Commands:
   owner            Sets owner
 
-Type .help command for more info on a command.
-You can also type .help category for more info on a category.\`\`\``);
+Type ${message.mss.prefix} help command for more info on a command.
+You can also type ${message.mss.prefix} help category for more info on a category.\`\`\``);
 	}
 }];
