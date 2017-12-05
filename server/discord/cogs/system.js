@@ -190,7 +190,11 @@ module.exports = [{
 	uses: 0,
 	admin: 0,
 	command: (message) => {
-		message.channel.createMessage(`\`\`\`${message.mss.prefix} ${message.mss.command}
+		if (message.mss.input === 'owner') {
+			message.channel.createMessage('The owner is already set. Remember that setting the owner to someone else other than who hosts the bot has security repercussions and is NOT recommended. Proceed at your own risk.');
+			message.channel.createMessage('Confirm in the console that you\'re the owner.');
+		} else {
+			message.channel.createMessage(`\`\`\`${message.mss.prefix} ${message.mss.command}
 
 Changes Red's core settings
 
@@ -199,5 +203,6 @@ Commands:
 
 Type ${message.mss.prefix} help command for more info on a command.
 You can also type ${message.mss.prefix} help category for more info on a category.\`\`\``);
+		}
 	}
 }];
