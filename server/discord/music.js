@@ -50,7 +50,7 @@ const play = (message) => {
 					if (err) console.log(err);
 					console.log('Disconnected');
 				});
-				player.on('error', (err) => {
+				player.once('error', (err) => {
 					if (err.type === 'TrackExceptionEvent') {
 						message.channel.createMessage('Something went wrong while decoding the track');
 					} else {
