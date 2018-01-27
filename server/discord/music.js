@@ -44,22 +44,13 @@ const play = (message) => {
 	current(message, (media) => {
 		getPlayer(message).then((player) => {
 			if (media) {
-				console.log(media);
 				player.play(media.track);
-				player.on('disconnect', (err) => {
-					if (err) console.log(err);
-					console.log('Disconnected');
-				});
 				player.once('error', (err) => {
 					if (err.type === 'TrackExceptionEvent') {
 						message.channel.createMessage('Something went wrong while decoding the track');
 					} else {
 						message.channel.createMessage('Generic music error message here');
 					}
-				});
-				player.on('stuck', (err) => {
-					console.log('Stuck!');
-					console.log(err);
 				});
 				player.once('end', async (data) => {
 					if (!(data.reason && data.reason === 'REPLACED')) {
