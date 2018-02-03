@@ -42,8 +42,8 @@ const current = (message, callback) => {
 
 const play = (message) => {
 	current(message, (media) => {
-		getPlayer(message).then((player) => {
-			if (media) {
+		if (media) {
+			getPlayer(message).then((player) => {
 				player.play(media.track);
 				player.once('error', (err) => {
 					if (err.type === 'TrackExceptionEvent') {
@@ -62,10 +62,14 @@ const play = (message) => {
 						play(message);
 					}
 				});
-			} else {
-				stop(message);
-			}
-		});
+			});
+		} else {
+			// Check for more media within 10 seconds
+			setTimeout(() => {
+				
+			}, 10000);
+			stop(message);
+		}
 	});
 };
 

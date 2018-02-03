@@ -6,10 +6,6 @@
 			"scope": ["identify"],
 			"token": ""
 		},
-		"kahoot": {
-			"username": "",
-			"password": ""
-		},
 		"rethinkdb": {
 			"host": "",
 			"port": 28015,
@@ -28,9 +24,9 @@
 		"prefix": [
 			"msstest"
 		],
-		"admins": [
-			"190519304972664832"
-		],
+		"admins": {
+			"190519304972664832": 0
+		},
 		"disable": false,
 		"shards": 1
 	},
