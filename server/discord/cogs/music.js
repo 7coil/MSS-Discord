@@ -193,6 +193,7 @@ module.exports = [
 	},
 	{
 		aliases: [
+			'disconnect',
 			'stop'
 		],
 		name: 'stop',
@@ -200,7 +201,7 @@ module.exports = [
 		admin: 1,
 		guild: true,
 		command: (message) => {
-			music.stop(message);
+			music.disconnect(message);
 		}
 	},
 	{

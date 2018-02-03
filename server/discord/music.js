@@ -14,17 +14,17 @@ const getPlayer = (message) => {
 	return client.voiceConnections.join(message.channel.guild.id, message.member.voiceState.channelID, options);
 };
 
-const stop = async (message) => {
+const disconnect = async (message) => {
 	const player = bot.voiceConnections.get(message.channel.guild.id);
 	if (player) {
-		player.stop();
-		player.disconnect();
 		await r.table('playlist')
 			.get(message.channel.guild.id)
 			.replace({
 				id: message.channel.guild.id,
 				playlist: []
 			});
+		player.stop();
+		player.disconnect();
 	}
 };
 
@@ -53,7 +53,8 @@ const play = (message) => {
 					}
 				});
 				player.once('end', async (data) => {
-					if (!(data.reason && data.reason === 'REPLACED')) {
+					console.log(data);
+					if (data.reason && data.reason === 'FINISHED') {
 						await r.table('playlist')
 							.get(message.channel.guild.id)
 							.update({
@@ -62,8 +63,6 @@ const play = (message) => {
 						play(message);
 					}
 				});
-			} else {
-				stop(message);
 			}
 		});
 	});
@@ -112,7 +111,7 @@ const skip = (message) => {
 
 exports.connect = connect;
 exports.add = add;
-exports.stop = stop;
+exports.disconnect = disconnect;
 exports.skip = skip;
 exports.list = list;
 
