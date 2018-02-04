@@ -42,8 +42,8 @@ const current = (message, callback) => {
 
 const play = (message) => {
 	current(message, (media) => {
-		getPlayer(message).then((player) => {
-			if (media) {
+		if (media) {
+			getPlayer(message).then((player) => {
 				player.play(media.track);
 				player.once('error', (err) => {
 					if (err.type === 'TrackExceptionEvent') {
@@ -52,19 +52,16 @@ const play = (message) => {
 						message.channel.createMessage('Generic music error message here');
 					}
 				});
-				player.once('end', async (data) => {
-					console.log(data);
-					if (data.reason && data.reason === 'FINISHED') {
-						await r.table('playlist')
-							.get(message.channel.guild.id)
-							.update({
-								playlist: r.row('playlist').deleteAt(0)
-							});
-						play(message);
-					}
+				player.once('end', async () => {
+					await r.table('playlist')
+						.get(message.channel.guild.id)
+						.update({
+							playlist: r.row('playlist').deleteAt(0)
+						});
+					play(message);
 				});
-			}
-		});
+			});
+		}
 	});
 };
 
