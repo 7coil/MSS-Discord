@@ -96,7 +96,7 @@ const add = async (message, details) => {
 					playlist: r.row('playlist').default([]).append(details)
 				});
 		}
-		if (!bot.voiceConnections.get(message.channel.guild.id)) connect(message);
+		play(message);
 	}
 };
 const skip = (message) => {
