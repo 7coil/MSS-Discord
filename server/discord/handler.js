@@ -43,7 +43,7 @@ const clean = (message, content) => {
 	return cleanContent.replace(/@everyone/g, '@\u200beveryone').replace(/@here/g, '@\u200bhere');
 };
 
-module.exports = async (message) => {
+module.exports = async (message, callback) => {
 	const mss = {};
 
 	// Set default values
@@ -79,4 +79,6 @@ module.exports = async (message) => {
 		.run(r.conn);
 
 	message.setLocale((locale && locale.lang) || 'en-gb');
+
+	callback();
 };
