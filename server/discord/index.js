@@ -37,9 +37,9 @@ client.once('ready', () => {
 	client.on('messageCreate', (message) => {
 		handler(message);
 		// Run command if it exists, and if their permissions level is good enough
-		if (message.mss.command && commands[message.mss.command].guild && !message.member) {
+		if (message.mss && message.mss.command && commands[message.mss.command].guild && !message.member) {
 			message.channel.createMessage(message.__('err_guild'));
-		} else if (message.mss.command && message.mss.admin >= commands[message.mss.command].admin) {
+		} else if (message.mss && message.mss.command && message.mss.admin >= commands[message.mss.command].admin) {
 			commands[message.mss.command].command(message);
 		}
 	});
