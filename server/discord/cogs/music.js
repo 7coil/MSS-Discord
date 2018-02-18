@@ -27,7 +27,6 @@ module.exports = [
 		aliases: [
 			'now',
 			'np',
-			'n'
 		],
 		name: 'now',
 		uses: 1,
@@ -120,7 +119,6 @@ module.exports = [
 	{
 		aliases: [
 			'list',
-			'q',
 			'queue'
 		],
 		name: 'list',
@@ -132,7 +130,6 @@ module.exports = [
 	{
 		aliases: [
 			'play',
-			'p',
 			'yt',
 			'youtube'
 		],

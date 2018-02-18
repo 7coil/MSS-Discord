@@ -136,6 +136,7 @@
 	"ping_desc": "Fetch the latency from the bot to Discord",
 	"ping_1_in": "{{ prefix }} {{ command }}",
 	"ping_1_out": "Fetch the latency from the bot to Discord",
+	"ping_nomap": "A shard map was not found.",
 	"eval": "Evaluate JavaScript",
 	"eval_desc": "Takes in JavaScript and evals the code",
 	"eval_1_in": "{{ prefix }} {{ command }} while(true){}",

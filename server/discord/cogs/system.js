@@ -1,4 +1,3 @@
-const client = require('./..');
 const cogs = require('./../cogs');
 const { exec } = require('child_process');
 const r = require('./../../db');
@@ -15,14 +14,19 @@ module.exports = [{
 	name: 'ping',
 	uses: 1,
 	admin: 0,
-	command: (message) => {
-		let s = 0;
+	command: (message, client) => {
+		if (client.guildShardMap) {
+			console.log('aaa');
+			let s = 0;
 
-		if (message.channel.guild) {
-			s = client.guildShardMap[message.channel.guild.id];
+			if (message.channel.guild) {
+				s = client.guildShardMap[message.channel.guild.id];
+			}
+
+			message.channel.createMessage(`\`\`\`\n${client.shards.map(shard => `${s === shard.id ? '>' : ' '}Shard ${shard.id} | ${shard.latency}ms`).join('\n')}\n\`\`\``);
+		} else {
+			message.channel.createMessage(message.__('ping_nomap'));
 		}
-
-		message.channel.createMessage(`\`\`\`\n${client.shards.map(shard => `${s === shard.id ? '>' : ' '}Shard ${shard.id} | ${shard.latency}ms`).join('\n')}\n\`\`\``);
 	}
 }, {
 	aliases: [
@@ -144,7 +148,7 @@ module.exports = [{
 	name: 'info',
 	uses: 1,
 	admin: 0,
-	command: (message) => {
+	command: (message, client) => {
 		const embed = {
 			embed: {
 				fields: [

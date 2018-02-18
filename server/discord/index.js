@@ -40,7 +40,7 @@ client.once('ready', () => {
 		if (message.mss && message.mss.command && commands[message.mss.command].guild && !message.member) {
 			message.channel.createMessage(message.__('err_guild'));
 		} else if (message.mss && message.mss.command && message.mss.admin >= commands[message.mss.command].admin) {
-			commands[message.mss.command].command(message);
+			commands[message.mss.command].command(message, client);
 		}
 	});
 });
