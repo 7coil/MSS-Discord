@@ -60,7 +60,7 @@ class Music:
 
         await player.add_and_play(requester=ctx.author.id, track=tracks[0])
 
-    @commands.command(aliases=['p'])
+    @commands.command(aliases=['p', 'yt', 'youtube'])
     async def play(self, ctx, *, query):
         player = self.bot.lavalink.players.get(ctx.guild.id)
 
