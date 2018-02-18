@@ -35,6 +35,9 @@ client.once('ready', () => {
 	botlist(client);
 
 	client.on('messageCreate', (message) => {
+		// Return if eris is a terrible terrible man
+		if (!message.author) return;
+
 		handler(message);
 		// Run command if it exists, and if their permissions level is good enough
 		if (message.mss && message.mss.command && commands[message.mss.command].guild && !message.member) {
