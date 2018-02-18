@@ -5,7 +5,18 @@ const express = require('express');
 const path = require('path');
 const i18n = require('i18n');
 const guildM = require('./guild');
+const { spawn } = require('child_process');
 require('./discord');
+
+const music = spawn('python3', [path.join(__dirname, 'music', 'bot.py')], {
+	cwd: path.join(__dirname, 'music')
+});
+music.stdout.pipe(process.stdout);
+music.stderr.pipe(process.stderr);
+
+process.on('exit', () => {
+	music.kill();
+});
 
 i18n.configure({
 	directory: path.join(__dirname, '..', 'locales'),

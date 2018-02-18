@@ -22,7 +22,7 @@ client.once('ready', () => {
 	});
 
 	if (!(client.voiceConnections instanceof PlayerManager)) {
-		client.voiceConnections = new PlayerManager(client, config.get('lavalink'), {
+		client.voiceConnections = new PlayerManager(client, [config.get('lavalink')], {
 			numShards: config.get('discord').shards,
 			userId: client.user.id,
 			defaultRegion: 'eu'

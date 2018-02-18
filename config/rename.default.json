@@ -32,14 +32,12 @@
 		"disable": false,
 		"shards": 1
 	},
-	"lavalink": [
-		{
-			"host": "127.0.0.1",
-			"port": 8080,
-			"region": "eu",
-			"password": ""
-		}
-	],
+	"lavalink": {
+		"host": "127.0.0.1",
+		"port": 8080,
+		"region": "eu",
+		"password": ""
+	},
 	"resolver": {
 		"host": "127.0.0.1",
 		"port": 2333,
