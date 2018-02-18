@@ -137,7 +137,7 @@ module.exports = [
 			'youtube'
 		],
 		name: 'play',
-		uses: 1,
+		uses: 3,
 		admin: 0,
 		guild: true,
 		command: () => {}
