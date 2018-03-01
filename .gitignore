@@ -1,7 +1,0 @@
-/node_modules/
-/config/default.json
-npm-debug.log
-/package-lock.json
-.directory
-/lavalink/
-__pycache__
