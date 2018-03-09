@@ -1,0 +1,5 @@
+bin/*
+pkg/*
+src/*
+!*/moustacheminer.com
+!*/mss-discord

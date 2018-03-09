@@ -1,4 +1,5 @@
 {
     "python.pythonPath": "/usr/bin/python3.6",
-    "go.inferGopath": true
+    "go.inferGopath": true,
+    "go.lintOnSave": "off"
 }
