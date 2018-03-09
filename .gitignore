@@ -5,3 +5,8 @@ npm-debug.log
 .directory
 /lavalink/
 __pycache__
+bin/*
+pkg/*
+src/*
+!*/moustacheminer.com
+!*/mss-discord
