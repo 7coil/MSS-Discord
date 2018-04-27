@@ -8,7 +8,7 @@ from os import path
 from discord.ext import commands
 from discord.ext.commands import errors as commands_errors
 
-with open(path.abspath(path.join(path.dirname(__file__), '..', '..', 'config', 'default.json'))) as f:
+with open(path.abspath(path.join(path.dirname(__file__), '..', 'config', 'default.json'))) as f:
     config = json.load(f)
 
 token = config.get('api')['discord']['token']
@@ -21,6 +21,7 @@ class Bot(commands.AutoShardedBot):
     async def on_ready(self):
         app_info = await self.application_info()
         self.invite_url = discord.utils.oauth_url(app_info.id)
+        print(f'Logged in as {self.user.name}\nBot invite link: {self.invite_url}')
         self.load_extension('extensions.core')
 
     async def on_command_error(self, ctx, exception):
