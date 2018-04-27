@@ -4,7 +4,6 @@ const config = require('config');
 const { commands } = require('./cogs');
 const handler = require('./handler');
 const botlist = require('./botlist');
-const { PlayerManager } = require('eris-lavalink');
 
 const client = new Discord.Client(config.get('api').discord.token, {
 	maxShards: config.get('discord').shards
@@ -20,14 +19,6 @@ client.once('ready', () => {
 		name: `${prefixes[0]} help`,
 		type: 0
 	});
-
-	if (!(client.voiceConnections instanceof PlayerManager)) {
-		client.voiceConnections = new PlayerManager(client, [config.get('lavalink')], {
-			numShards: config.get('discord').shards,
-			userId: client.user.id,
-			defaultRegion: 'eu'
-		});
-	}
 
 	setInterval(() => {
 		botlist(client);

@@ -1,9 +1,7 @@
 console.log('Welcome to Moustacheminer Server Services');
 
-const config = require('config');
 const path = require('path');
 const i18n = require('i18n');
-const guildM = require('./guild');
 const { spawn } = require('child_process');
 require('./discord');
 
