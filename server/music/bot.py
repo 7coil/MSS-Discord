@@ -19,7 +19,6 @@ class Bot(commands.AutoShardedBot):
         super().__init__(**options)
 
     async def on_ready(self):
-        await self.change_presence(game=discord.Game(name=f"{prefix[0]}help | smonk weeds"))
         app_info = await self.application_info()
         self.invite_url = discord.utils.oauth_url(app_info.id)
         print(f'Logged in as {self.user.name}\nBot invite link: {self.invite_url}')
