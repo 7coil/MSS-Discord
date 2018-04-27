@@ -94,6 +94,8 @@ class Music:
 
         tracks = await self.bot.lavalink.get_tracks(query)
 
+        player.add(requester=ctx.author.id, track=tracks[0])
+
         if not tracks:
             return await ctx.send('Nothing found 👀')
 
