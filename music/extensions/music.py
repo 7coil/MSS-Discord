@@ -18,7 +18,7 @@ with open(path.abspath(path.join(path.dirname(__file__), '..', '..', 'config', '
 class Music:
     def __init__(self, bot):
         self.bot = bot
-        lavalink.Client(bot=bot, host=config.get('lavalink')['host'], password=config.get('lavalink')['password'], loop=self.bot.loop, log_level='debug')
+        lavalink.Client(bot=bot, host=config.get('lavalink')['host'], ws_port=config.get('lavalink')['ws_port'], rest_port=config.get('lavalink')['rest_port'], password=config.get('lavalink')['password'], loop=self.bot.loop, log_level='debug')
 
         self.bot.lavalink.client.register_hook(self.track_hook)
         # As of 2.0, lavalink.Client will be available via self.bot.lavalink.client

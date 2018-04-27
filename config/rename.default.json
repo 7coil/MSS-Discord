@@ -34,13 +34,9 @@
 	},
 	"lavalink": {
 		"host": "127.0.0.1",
-		"port": 8080,
+		"ws_port": 2334,
+		"rest_port": 2333,
 		"region": "eu",
-		"password": ""
-	},
-	"resolver": {
-		"host": "127.0.0.1",
-		"port": 2333,
 		"password": ""
 	},
 	"url": {
