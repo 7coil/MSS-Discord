@@ -11,7 +11,7 @@ import lavalink
 
 time_rx = re.compile('[0-9]+')
 
-with open(path.abspath(path.join(path.dirname(__file__), '..', '..', '..', 'config', 'default.json'))) as f:
+with open(path.abspath(path.join(path.dirname(__file__), '..', '..', 'config', 'default.json'))) as f:
     config = json.load(f)
 
 
