@@ -1,6 +1,5 @@
 const cogs = require('./../cogs');
 const { exec } = require('child_process');
-const r = require('./../../db');
 const i18n = require('i18n');
 const os = require('os');
 
