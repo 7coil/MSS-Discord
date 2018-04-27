@@ -1,39 +1,38 @@
-﻿import json
+﻿
+import logging
 import urllib
 from os import path
-import logging
-
 import math
 import re
 
 import discord
-from discord.ext import commands
 import lavalink
+from discord.ext import commands
 
 time_rx = re.compile('[0-9]+')
 
 with open(path.abspath(path.join(path.dirname(__file__), '..', '..', 'config', 'default.json'))) as f:
     config = json.load(f)
 
-
 class Music:
     def __init__(self, bot):
         self.bot = bot
-        lavalink.Client(bot=bot, host=config.get('lavalink')['host'], ws_port=config.get('lavalink')['ws_port'], rest_port=config.get('lavalink')['rest_port'], password=config.get('lavalink')['password'], loop=self.bot.loop, log_level=logging.DEBUG)
 
-        self.bot.lavalink.client.register_hook(self.track_hook)
-        # As of 2.0, lavalink.Client will be available via self.bot.lavalink.client
+        if not hasattr(bot, 'lavalink'):
+            lavalink.Client(bot=bot, host=config.get('lavalink')['host'], ws_port=config.get('lavalink')['ws_port'], rest_port=config.get('lavalink')['rest_port'], password=config.get('lavalink')['password'], loop=self.bot.loop, log_level=logging.DEBUG)
+            self.bot.lavalink.register_hook(self.track_hook)
 
-    async def track_hook(self, player, event):
-        if event == 'TrackStartEvent':
-            c = player.fetch('channel')
+    async def track_hook(self, event):
+        if isinstance(event, lavalink.Events.TrackStartEvent):
+            c = event.player.fetch('channel')
             if c:
                 c = self.bot.get_channel(c)
                 if c:
-                    embed = discord.Embed(colour=c.guild.me.top_role.colour, title='Now Playing', description=player.current.title)
+                    embed = discord.Embed(colour=c.guild.me.top_role.colour, title='Now Playing', description=event.track.title)
+                    embed.set_thumbnail(url=event.track.thumbnail)
                     await c.send(embed=embed)
-        elif event == 'QueueEndEvent':
-            c = player.fetch('channel')
+        elif isinstance(event, lavalink.Events.QueueEndEvent):
+            c = event.player.fetch('channel')
             if c:
                 c = self.bot.get_channel(c)
                 if c:
@@ -44,12 +43,18 @@ class Music:
         player = self.bot.lavalink.players.get(ctx.guild.id)
 
         if not player.is_connected:
-            if ctx.author.voice is None or ctx.author.voice.channel is None:
+            if not ctx.author.voice or not ctx.author.voice.channel:
                 return await ctx.send('Join a voice channel!')
+
+            permissions = ctx.author.voice.channel.permissions_for(ctx.me)
+
+            if not permissions.connect or not permissions.speak:
+                return await ctx.send('Missing permissions `CONNECT` and/or `SPEAK`.')
+
             player.store('channel', ctx.channel.id)
             await player.connect(ctx.author.voice.channel.id)
         else:
-            if ctx.author.voice is None or ctx.author.voice.channel is None or player.connected_channel.id != ctx.author.voice.channel.id:
+            if not ctx.author.voice or not ctx.author.voice.channel or player.connected_channel.id != ctx.author.voice.channel.id:
                 return await ctx.send('Join my voice channel!')
 
         query = 'https://talk.moustacheminer.com/api/gen?dectalk=' + urllib.parse.quote(urllib.parse.quote(query))
@@ -59,19 +64,26 @@ class Music:
         if not tracks:
             return await ctx.send('No tracks were found. `talk.moustacheminer.com` may be offline, or `lavalink.py` is broken. It\'s probably Kromatic\'s fault. I should have used pylava. This will be fixed soon. For now, try not to have spaces in your message.')
 
-        await player.add_and_play(requester=ctx.author.id, track=tracks[0])
+        if not player.is_playing:
+            await player.play()
 
     @commands.command(aliases=['p', 'yt', 'youtube'])
     async def play(self, ctx, *, query):
         player = self.bot.lavalink.players.get(ctx.guild.id)
 
         if not player.is_connected:
-            if ctx.author.voice is None or ctx.author.voice.channel is None:
+            if not ctx.author.voice or not ctx.author.voice.channel:
                 return await ctx.send('Join a voice channel!')
+
+            permissions = ctx.author.voice.channel.permissions_for(ctx.me)
+
+            if not permissions.connect or not permissions.speak:
+                return await ctx.send('Missing permissions `CONNECT` and/or `SPEAK`.')
+
             player.store('channel', ctx.channel.id)
             await player.connect(ctx.author.voice.channel.id)
         else:
-            if ctx.author.voice is None or ctx.author.voice.channel is None or player.connected_channel.id != ctx.author.voice.channel.id:
+            if not ctx.author.voice or not ctx.author.voice.channel or player.connected_channel.id != ctx.author.voice.channel.id:
                 return await ctx.send('Join my voice channel!')
 
         query = query.strip('<>')
@@ -79,25 +91,28 @@ class Music:
         if not query.startswith('http'):
             query = f'ytsearch:{query}'
 
-        tracks = await self.bot.lavalink.client.get_tracks(query)
+        tracks = await self.bot.lavalink.get_tracks(query)
 
         if not tracks:
             return await ctx.send('Nothing found 👀')
 
+        embed = discord.Embed(colour=ctx.guild.me.top_role.colour)
+
         if 'list' in query and 'ytsearch:' not in query:
             for track in tracks:
-                await player.add_and_play(requester=ctx.author.id, track=track)
+                player.add(requester=ctx.author.id, track=track)
 
-            embed = discord.Embed(colour=ctx.guild.me.top_role.colour,
-                                  title="Playlist Enqueued!",
-                                  description=f"Imported {len(tracks)} tracks from the playlist :)")
+            embed.title = "Playlist Enqueued!"
+            embed.description = f"Imported {len(tracks)} tracks from the playlist :)"
             await ctx.send(embed=embed)
         else:
-            embed = discord.Embed(colour=ctx.guild.me.top_role.colour,
-                                  title="Track Enqueued",
-                                  description=f'[{tracks[0]["info"]["title"]}]({tracks[0]["info"]["uri"]})')
+            embed.title = "Track Enqueued"
+            embed.description = f'[{tracks[0]["info"]["title"]}]({tracks[0]["info"]["uri"]})'
             await ctx.send(embed=embed)
-            await player.add_and_play(requester=ctx.author.id, track=tracks[0])
+            player.add(requester=ctx.author.id, track=tracks[0])
+
+        if not player.is_playing:
+            await player.play()
 
     @commands.command()
     async def seek(self, ctx, time):
@@ -163,7 +178,7 @@ class Music:
         embed = discord.Embed(colour=ctx.guild.me.top_role.colour, title='Now Playing', description=song)
         await ctx.send(embed=embed)
 
-    @commands.command(aliases=['q', 'list'])
+    @commands.command(aliases=['q', 'list', 'playlist'])
     async def queue(self, ctx, page: int=1):
         player = self.bot.lavalink.players.get(ctx.guild.id)
 
@@ -198,7 +213,7 @@ class Music:
             await ctx.send('⏯ | Resumed')
         else:
             await player.set_pause(True)
-            await ctx.send(' ⏯ | Paused')
+            await ctx.send('⏯ | Paused')
 
     @commands.command(aliases=['vol'])
     async def volume(self, ctx, volume: int=None):
@@ -223,16 +238,14 @@ class Music:
 
     @commands.command()
     async def repeat(self, ctx):
-        await ctx.send('Command pending rewrite.')
+        player = self.bot.lavalink.players.get(ctx.guild.id)
 
-        # player = self.bot.lavalink.players.get(ctx.guild.id)
+        if not player.is_playing:
+            return await ctx.send('Nothing playing.')
 
-        # if not player.is_playing:
-        #     return await ctx.send('Nothing playing.')
+        player.repeat = not player.repeat
 
-        # player.repeat = not player.repeat
-
-        # await ctx.send('🔁 | Repeat ' + ('enabled' if player.repeat else 'disabled'))
+        await ctx.send('🔁 | Repeat ' + ('enabled' if player.repeat else 'disabled'))
 
     @commands.command()
     async def remove(self, ctx, index: int):
@@ -254,7 +267,7 @@ class Music:
         if not query.startswith('ytsearch:') and not query.startswith('scsearch:'):
             query = 'ytsearch:' + query
 
-        tracks = await self.bot.lavalink.client.get_tracks(query)
+        tracks = await self.bot.lavalink.get_tracks(query)
 
         if not tracks:
             return await ctx.send('Nothing found')
@@ -270,7 +283,6 @@ class Music:
 
         await ctx.send(embed=embed)
 
-    @commands.is_owner()
     @commands.command(aliases=['dc'])
     async def disconnect(self, ctx):
         player = self.bot.lavalink.players.get(ctx.guild.id)
@@ -278,13 +290,11 @@ class Music:
         if not player.is_connected:
             return await ctx.send('Not connected.')
 
+        if not ctx.author.voice or (player.is_connected and ctx.author.voice.channel.id != int(player.channel_id)):
+            return await ctx.send('You\'re not in my voicechannel!')
+
         await player.disconnect()
         await ctx.send('*⃣ | Disconnected.')
 
-
 def setup(bot):
     bot.add_cog(Music(bot))
-
-
-def teardown(bot):
-    bot.lavalink.client.destroy()
