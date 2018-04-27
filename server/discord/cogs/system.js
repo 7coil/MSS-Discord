@@ -121,28 +121,6 @@ module.exports = [{
 	}
 }, {
 	aliases: [
-		'locale'
-	],
-	name: 'locale',
-	uses: 2,
-	admin: 0,
-	command: (message) => {
-		if (message.mss.input && Object.keys(i18n.getCatalog()).includes(message.mss.input)) {
-			r.table('i18n')
-				.insert({
-					id: message.author.id,
-					lang: message.mss.input
-				}, {
-					conflict: 'update'
-				});
-			message.setLocale(message.mss.input);
-			message.channel.createMessage(message.__('locale_set', { locale: message.__(`lang_${message.mss.input}`) }));
-		} else {
-			message.channel.createMessage(`${message.__('locale_incorrect')}\n${Object.keys(i18n.getCatalog()).map(lang => `\`${lang}\` - ${message.__(`lang_${lang}`)}`).join('\n')}`);
-		}
-	}
-}, {
-	aliases: [
 		'info'
 	],
 	name: 'info',

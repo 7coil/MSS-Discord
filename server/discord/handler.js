@@ -1,7 +1,6 @@
 const config = require('config');
 const { commands } = require('./cogs');
 const client = require('./');
-const r = require('./../db');
 const i18n = require('i18n');
 
 const prefixes = config.get('discord').prefix;
@@ -73,10 +72,6 @@ module.exports = async (message) => {
 		mss.admin = 1;
 	}
 	message.mss = mss;
-
-	const locale = await r.table('i18n')
-		.get(message.author.id)
-		.run(r.conn);
 
 	message.setLocale((locale && locale.lang) || 'en-gb');
 };
