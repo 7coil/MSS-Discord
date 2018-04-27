@@ -72,6 +72,4 @@ module.exports = async (message) => {
 		mss.admin = 1;
 	}
 	message.mss = mss;
-
-	message.setLocale((locale && locale.lang) || 'en-gb');
 };
