@@ -60,7 +60,7 @@ class Music:
 
         query = 'https://talk.moustacheminer.com/api/gen?dectalk=' + urllib.parse.quote(urllib.parse.quote(query))
 
-        tracks = await self.bot.lavalink.client.get_tracks(query)
+        tracks = await self.bot.lavalink.get_tracks(query)
 
         if not tracks:
             return await ctx.send('No tracks were found. `talk.moustacheminer.com` may be offline, or `lavalink.py` is broken. It\'s probably Kromatic\'s fault. I should have used pylava. This will be fixed soon. For now, try not to have spaces in your message.')
