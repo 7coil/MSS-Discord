@@ -16,7 +16,7 @@ client.once('ready', () => {
 
 	// Set up currently playing game
 	client.editStatus('online', {
-		name: `${prefixes[0]} help`,
+		name: `${prefixes[0]}help`,
 		type: 0
 	});
 
