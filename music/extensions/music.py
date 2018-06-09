@@ -65,7 +65,7 @@ class Music:
 
         player.add(requester=ctx.author.id, track=tracks[0])
 
-         if not results or not results['tracks']:
+        if not results or not results['tracks']:
             return await ctx.send('No tracks were found. `talk.moustacheminer.com` may be offline, or `lavalink.py` is broken. It\'s probably Kromatic\'s fault. I should have used pylava. This will be fixed soon. For now, try not to have spaces in your message.')
 
         if not player.is_playing:
