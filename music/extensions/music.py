@@ -38,6 +38,7 @@ class Music:
                 c = self.bot.get_channel(c)
                 if c:
                     await c.send('Queue ended! Why not queue more songs?')
+                    await event.player.disconnect()
 
     @commands.command(aliases=['tts', 'dictate'])
     async def dectalk(self, ctx, *, query):
@@ -64,7 +65,7 @@ class Music:
 
         player.add(requester=ctx.author.id, track=tracks[0])
 
-        if not tracks:
+         if not results or not results['tracks']:
             return await ctx.send('No tracks were found. `talk.moustacheminer.com` may be offline, or `lavalink.py` is broken. It\'s probably Kromatic\'s fault. I should have used pylava. This will be fixed soon. For now, try not to have spaces in your message.')
 
         if not player.is_playing:
@@ -96,23 +97,26 @@ class Music:
 
         tracks = await self.bot.lavalink.get_tracks(query)
 
-        if not tracks:
-            return await ctx.send('Nothing found 👀')
+        if not results or not results['tracks']:
+            return await ctx.send('Nothing found!')
 
         embed = discord.Embed(colour=ctx.guild.me.top_role.colour)
 
-        if 'list' in query and 'ytsearch:' not in query:
+        if results['isPlaylist']:
+            tracks = results['tracks']
+
             for track in tracks:
                 player.add(requester=ctx.author.id, track=track)
 
             embed.title = "Playlist Enqueued!"
-            embed.description = f"Imported {len(tracks)} tracks from the playlist :)"
+            embed.description = f"{results['playlistInfo']['name']} - {len(tracks)} tracks"
             await ctx.send(embed=embed)
         else:
+            track = results['tracks'][0]
             embed.title = "Track Enqueued"
-            embed.description = f'[{tracks[0]["info"]["title"]}]({tracks[0]["info"]["uri"]})'
+            embed.description = f'[{track["info"]["title"]}]({track["info"]["uri"]})'
             await ctx.send(embed=embed)
-            player.add(requester=ctx.author.id, track=tracks[0])
+            player.add(requester=ctx.author.id, track=track)
 
         if not player.is_playing:
             await player.play()
@@ -124,10 +128,6 @@ class Music:
         if not player.is_playing:
             return await ctx.send('Not playing.')
 
-        pos = '+'
-        if time.startswith('-'):
-            pos = '-'
-
         seconds = time_rx.search(time)
 
         if not seconds:
@@ -135,7 +135,7 @@ class Music:
 
         seconds = int(seconds.group()) * 1000
 
-        if pos == '-':
+        if time.startswith('-'):
             seconds = seconds * -1
 
         track_time = player.position + seconds
