@@ -4,9 +4,23 @@ const config = require('config');
 const { commands } = require('./cogs');
 const handler = require('./handler');
 const botlist = require('./botlist');
+const i18n = require('i18n');
+const path = require('path');
 
 const client = new Discord.Client(config.get('api').discord.token, {
 	maxShards: config.get('discord').shards
+});
+
+
+i18n.configure({
+	directory: path.join(__dirname, '..', 'locales'),
+	cookie: 'lang',
+	defaultLocale: 'en-gb',
+	autoReload: true,
+	updateFiles: false,
+	api: {
+		__: 't',
+	},
 });
 
 const prefixes = config.get('discord').prefix;
@@ -32,7 +46,7 @@ client.once('ready', () => {
 		handler(message);
 		// Run command if it exists, and if their permissions level is good enough
 		if (message.mss && message.mss.command && commands[message.mss.command].guild && !message.member) {
-			message.channel.createMessage(message.__('err_guild'));
+			message.channel.createMessage(message.h('err_guild'));
 		} else if (message.mss && message.mss.command && message.mss.admin >= commands[message.mss.command].admin) {
 			commands[message.mss.command].command(message, client);
 		}

@@ -1,6 +1,5 @@
 const cogs = require('./../cogs');
 const { exec } = require('child_process');
-const i18n = require('i18n');
 const os = require('os');
 
 const hardwareinfo = `(${os.arch()}) ${os.cpus()[0].model} @ ${os.cpus()[0].speed} MHz`;
@@ -24,7 +23,7 @@ module.exports = [{
 
 			message.channel.createMessage(`\`\`\`\n${client.shards.map(shard => `${s === shard.id ? '>' : ' '}Shard ${shard.id} | ${shard.latency}ms`).join('\n')}\n\`\`\``);
 		} else {
-			message.channel.createMessage(message.__('ping_nomap'));
+			message.channel.createMessage(message.h('ping_nomap'));
 		}
 	}
 }, {
@@ -59,7 +58,7 @@ module.exports = [{
 					output += `${stderr.replace(/`/g, '\'')}\n`;
 				}
 
-				message.channel.createMessage(`\n${message.__('exec_output')}\n\`\`\`\n${output}\`\`\``);
+				message.channel.createMessage(`\n${message.h('exec_output')}\n\`\`\`\n${output}\`\`\``);
 			});
 		}
 	}
@@ -76,15 +75,15 @@ module.exports = [{
 			const fields = [];
 			for (let i = 1; i <= command.uses; i += 1) {
 				fields.push({
-					name: message.__(`${command.name}_${i}_in`, { prefix: message.mss.prefix, command: command.name }),
-					value: message.__(`${command.name}_${i}_out`)
+					name: message.h(`${command.name}_${i}_in`, { prefix: message.mss.prefix, command: command.name }),
+					value: message.h(`${command.name}_${i}_out`)
 				});
 			}
 
 			message.channel.createMessage({
 				embed: {
-					title: message.__(command.name),
-					description: message.__(`${command.name}_desc`),
+					title: message.h(command.name),
+					description: message.h(`${command.name}_desc`),
 					fields
 				}
 			});
@@ -96,7 +95,7 @@ module.exports = [{
 						.filter(command => message.mss.admin >= command.admin)
 						.map(command => ({
 							name: command.aliases[0],
-							value: message.__(`${command.name}_desc`)
+							value: message.h(`${command.name}_desc`)
 						}))
 				}
 			});
@@ -124,7 +123,7 @@ module.exports = [{
 				},
 			});
 		} else {
-			message.channel.createMessage(message.__('help_invalid'));
+			message.channel.createMessage(message.h('help_invalid'));
 		}
 	}
 }, {
@@ -139,31 +138,31 @@ module.exports = [{
 			embed: {
 				fields: [
 					{
-						name: message.__('info_nodejs'),
+						name: message.h('info_nodejs'),
 						value: process.version,
 						inline: true
 					},
 					{
-						name: message.__('info_guilds'),
+						name: message.h('info_guilds'),
 						value: client.guilds.size,
 						inline: true
 					},
 					{
-						name: message.__('info_pid'),
+						name: message.h('info_pid'),
 						value: process.pid,
 						inline: true
 					},
 					{
-						name: message.__('info_hard'),
+						name: message.h('info_hard'),
 						value: hardwareinfo
 					},
 					{
-						name: message.__('info_soft'),
+						name: message.h('info_soft'),
 						value: softwareinfo
 					},
 					{
-						name: message.__('info_licence'),
-						value: message.__('info_licencedesc', { name: message.__('name') })
+						name: message.h('info_licence'),
+						value: message.h('info_licencedesc', { name: message.h('name') })
 					}
 				]
 			}
