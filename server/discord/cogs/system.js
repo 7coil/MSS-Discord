@@ -101,18 +101,27 @@ module.exports = [{
 				}
 			});
 		} else if (!message.mss.input) {
-			Object.keys(cogs.categories).forEach((category) => {
-				message.channel.createMessage({
-					embed: {
-						title: category,
-						fields: cogs.categories[category]
-							.filter(command => message.mss.admin >= command.admin)
-							.map(command => ({
-								name: command.aliases[0],
-								value: message.__(`${command.name}_desc`)
-							}))
-					}
-				});
+			// If there is no input, make a "field" for each category to embed, with a list of commands
+			const fields = Object.keys(cogs.categories).map(category => ({
+				name: `\`${category}\` - ${message.t(category)}`,
+				value: cogs.categories[category]
+					.filter(command => message.mss.admin >= command.admin)
+					.map(command => command.aliases[0])
+					.map(name => `\`${name}\``)
+					.join(', '),
+			}));
+
+			message.channel.createMessage({
+				embed: {
+					title: message.t('help_menu_title'),
+					description: message.t('help_menu_description'),
+					fields,
+					footer: {
+						text: message.t('help_menu_footer', {
+							prefix: message.mss.prefix,
+						}),
+					},
+				},
 			});
 		} else {
 			message.channel.createMessage(message.__('help_invalid'));
