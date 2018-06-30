@@ -13,7 +13,7 @@ const client = new Discord.Client(config.get('api').discord.token, {
 
 
 i18n.configure({
-	directory: path.join(__dirname, '..', 'locales'),
+	directory: path.join(__dirname, '..', '..', 'locales'),
 	cookie: 'lang',
 	defaultLocale: 'en-gb',
 	autoReload: true,
