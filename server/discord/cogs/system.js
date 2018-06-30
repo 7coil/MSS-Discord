@@ -23,7 +23,7 @@ module.exports = [{
 
 			message.channel.createMessage(`\`\`\`\n${client.shards.map(shard => `${s === shard.id ? '>' : ' '}Shard ${shard.id} | ${shard.latency}ms`).join('\n')}\n\`\`\``);
 		} else {
-			message.channel.createMessage(message.h('ping_nomap'));
+			message.channel.createMessage(message.t('ping_nomap'));
 		}
 	}
 }, {
@@ -58,7 +58,7 @@ module.exports = [{
 					output += `${stderr.replace(/`/g, '\'')}\n`;
 				}
 
-				message.channel.createMessage(`\n${message.h('exec_output')}\n\`\`\`\n${output}\`\`\``);
+				message.channel.createMessage(`\n${message.t('exec_output')}\n\`\`\`\n${output}\`\`\``);
 			});
 		}
 	}
@@ -75,15 +75,15 @@ module.exports = [{
 			const fields = [];
 			for (let i = 1; i <= command.uses; i += 1) {
 				fields.push({
-					name: message.h(`${command.name}_${i}_in`, { prefix: message.mss.prefix, command: command.name }),
-					value: message.h(`${command.name}_${i}_out`)
+					name: message.t(`${command.name}_${i}_in`, { prefix: message.mss.prefix, command: command.name }),
+					value: message.t(`${command.name}_${i}_out`)
 				});
 			}
 
 			message.channel.createMessage({
 				embed: {
-					title: message.h(command.name),
-					description: message.h(`${command.name}_desc`),
+					title: message.t(command.name),
+					description: message.t(`${command.name}_desc`),
 					fields
 				}
 			});
@@ -95,7 +95,7 @@ module.exports = [{
 						.filter(command => message.mss.admin >= command.admin)
 						.map(command => ({
 							name: command.aliases[0],
-							value: message.h(`${command.name}_desc`)
+							value: message.t(`${command.name}_desc`)
 						}))
 				}
 			});
@@ -123,7 +123,7 @@ module.exports = [{
 				},
 			});
 		} else {
-			message.channel.createMessage(message.h('help_invalid'));
+			message.channel.createMessage(message.t('help_invalid'));
 		}
 	}
 }, {
@@ -138,31 +138,31 @@ module.exports = [{
 			embed: {
 				fields: [
 					{
-						name: message.h('info_nodejs'),
+						name: message.t('info_nodejs'),
 						value: process.version,
 						inline: true
 					},
 					{
-						name: message.h('info_guilds'),
+						name: message.t('info_guilds'),
 						value: client.guilds.size,
 						inline: true
 					},
 					{
-						name: message.h('info_pid'),
+						name: message.t('info_pid'),
 						value: process.pid,
 						inline: true
 					},
 					{
-						name: message.h('info_hard'),
+						name: message.t('info_hard'),
 						value: hardwareinfo
 					},
 					{
-						name: message.h('info_soft'),
+						name: message.t('info_soft'),
 						value: softwareinfo
 					},
 					{
-						name: message.h('info_licence'),
-						value: message.h('info_licencedesc', { name: message.h('name') })
+						name: message.t('info_licence'),
+						value: message.t('info_licencedesc', { name: message.t('name') })
 					}
 				]
 			}

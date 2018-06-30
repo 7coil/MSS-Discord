@@ -27,7 +27,7 @@ module.exports = [{
 		if (image && validator.isURL(image)) {
 			request(query1, (err1, res1, body1) => {
 				if (err1 || res1.statusCode !== 200) {
-					message.channel.createMessage(message.h('err_generic'));
+					message.channel.createMessage(message.t('err_generic'));
 				} else {
 					const regex = /name="form_build_id" value="(.+)"/g;
 					const form = regex.exec(body1);
@@ -58,18 +58,18 @@ module.exports = [{
 
 					request(query2, (err2, res2, body2) => {
 						if (err2 || res2.statusCode !== 200 || res2.headers['content-type'] !== 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
-							message.channel.createMessage(message.h('err_generic'));
+							message.channel.createMessage(message.t('err_generic'));
 						} else {
 							message.channel.createMessage('', {
 								file: body2,
-								name: message.h('spreadsheets_filename')
+								name: message.t('spreadsheets_filename')
 							});
 						}
 					});
 				}
 			});
 		} else {
-			message.channel.createMessage(message.h('spreadsheets_url'));
+			message.channel.createMessage(message.t('spreadsheets_url'));
 		}
 	}
 }];

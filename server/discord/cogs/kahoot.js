@@ -56,11 +56,11 @@ module.exports = [{
 
 			request.get(data, (err, res, body) => {
 				if (err) {
-					message.channel.createMessage(message.h('err_generic'));
+					message.channel.createMessage(message.t('err_generic'));
 				} else if (body.error) {
 					message.channel.createMessage(body.error);
 				} else if (body.entities.length === 0) {
-					message.channel.createMessage(message.h('kahoot_404'));
+					message.channel.createMessage(message.t('kahoot_404'));
 				} else {
 					message.channel.createMessage({
 						embed: {
@@ -76,7 +76,7 @@ module.exports = [{
 								url: body.entities[0].cover
 							},
 							footer: {
-								text: message.h('kahoot_count', { count: body.totalHits })
+								text: message.t('kahoot_count', { count: body.totalHits })
 							}
 						}
 					});
