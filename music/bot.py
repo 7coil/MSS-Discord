@@ -52,7 +52,6 @@ class Bot(commands.AutoShardedBot):
         if message.author.bot:
             return
         if str(message.author.id) in config.get('discord')['ban']:
-            await ctx.send('go heck yourself')
             return
         
         await self.process_commands(message)
