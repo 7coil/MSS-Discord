@@ -157,7 +157,7 @@
 	"help_invalid": "Invalid category or command.",
 	"help_menu_title": "MSS-Discord Help Menu",
 	"help_menu_description": "Matt Parker (the bot) is a random bot, which provides no use whatsoever to the end user.",
-	"help_menu_footer": "Type `{{ prefix }} [command]` or `{{ prefix }} [category]` for more help.",
+	"help_menu_footer": "Type `{{ prefix }} {{ command }} [command]` or `{{ prefix }} {{ command }} [category]` for more help.",
 	"locale": "Internationalisation",
 	"locale_desc": "Change your internationalisation settings",
 	"locale_1_in": "{{ prefix }}{{ command }}",
