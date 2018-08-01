@@ -14,7 +14,6 @@ module.exports = [{
 	admin: 0,
 	command: (message, client) => {
 		if (client.guildShardMap) {
-			console.log('aaa');
 			let s = 0;
 
 			if (message.channel.guild) {
