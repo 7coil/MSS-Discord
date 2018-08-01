@@ -40,6 +40,19 @@ class Music:
                     await c.send('Queue ended! Why not queue more songs?')
                     await event.player.disconnect()
 
+    @commands.command()
+    async def move(self, ctx):
+        player = self.bot.lavalink.players.get(ctx.guild.id)
+
+        if not player.is_connected:
+            return await ctx.send('Not connected.')
+
+        if not ctx.author.voice or (player.is_connected and ctx.author.voice.channel.id != int(player.channel_id)):
+            return await ctx.send('You\'re not in my voicechannel!')
+        
+        player.store('channel', ctx.channel.id)
+        player.connect(ctx.author.voice.channel.id)
+
     @commands.command(aliases=['tts', 'dictate'])
     async def dectalk(self, ctx, *, query):
         player = self.bot.lavalink.players.get(ctx.guild.id)
