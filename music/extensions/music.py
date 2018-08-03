@@ -46,9 +46,13 @@ class Music:
 
         if not player.is_connected:
             return await ctx.send('Not connected.')
-        
+
+        if not permissions.connect or not permissions.speak:
+            return await ctx.send('Missing permissions `CONNECT` and/or `SPEAK`.')
+
         player.store('channel', ctx.channel.id)
         await player.connect(ctx.author.voice.channel.id)
+        await ctx.send('Moved channel.')
 
     @commands.command(aliases=['tts', 'dictate'])
     async def dectalk(self, ctx, *, query):
