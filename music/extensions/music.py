@@ -48,7 +48,7 @@ class Music:
             return await ctx.send('Not connected.')
         
         player.store('channel', ctx.channel.id)
-        player.connect(ctx.author.voice.channel.id)
+        await player.connect(ctx.author.voice.channel.id)
 
     @commands.command(aliases=['tts', 'dictate'])
     async def dectalk(self, ctx, *, query):
