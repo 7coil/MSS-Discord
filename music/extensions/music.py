@@ -47,6 +47,7 @@ class Music:
         if not player.is_connected:
             return await ctx.send('Not connected.')
 
+        permissions = ctx.author.voice.channel.permissions_for(ctx.me)
         if not permissions.connect or not permissions.speak:
             return await ctx.send('Missing permissions `CONNECT` and/or `SPEAK`.')
 
