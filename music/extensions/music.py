@@ -46,9 +46,6 @@ class Music:
 
         if not player.is_connected:
             return await ctx.send('Not connected.')
-
-        if not ctx.author.voice or (player.is_connected and ctx.author.voice.channel.id != int(player.channel_id)):
-            return await ctx.send('You\'re not in my voicechannel!')
         
         player.store('channel', ctx.channel.id)
         player.connect(ctx.author.voice.channel.id)
