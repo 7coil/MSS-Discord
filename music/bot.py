@@ -46,7 +46,7 @@ class Bot(commands.AutoShardedBot):
             await ctx.send('You can use this command in {0:.0f} seconds.'.format(exception.retry_after))
 
         else:
-            ctx.send(exception)
+            await ctx.send(exception)
 
     async def on_message(self, message):
         if message.author.bot:
