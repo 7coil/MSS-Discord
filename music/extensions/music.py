@@ -22,6 +22,8 @@ class Music:
 
         if not hasattr(bot, 'lavalink'):
             lavalink.Client(bot=bot, password=config.get('lavalink')['password'],
+                            ws_port=config.get('lavalink')['ws_port'],
+                            rest_port=config.get('lavalink')['rest_port'],
                             loop=bot.loop, log_level=logging.DEBUG)
             self.bot.lavalink.register_hook(self._track_hook)
 
