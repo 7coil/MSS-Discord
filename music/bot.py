@@ -45,6 +45,9 @@ class Bot(commands.AutoShardedBot):
         elif isinstance(exception, commands_errors.CommandOnCooldown):
             await ctx.send('You can use this command in {0:.0f} seconds.'.format(exception.retry_after))
 
+        elif isinstance(exception, commands_errors.CommandNotFound):
+            pass
+
         else:
             await ctx.send(exception)
 
