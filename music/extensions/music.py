@@ -50,7 +50,7 @@ class Music:
         elif isinstance(event, lavalink.Events.QueueEndEvent):
             await channel.send('Queue ended! Why not queue more songs?')
 
-    @commands.command(name='play', aliases=['p'])
+    @commands.command(name='play', aliases=['p', 'yt'])
     @commands.guild_only()
     async def _play(self, ctx, *, query: str):
         """ Searches and plays a song from a given query. """
