@@ -312,6 +312,28 @@ class Music:
         removed = player.queue.pop(index)
 
         await ctx.send(f'Removed **{removed.title}** from the queue.')
+        
+    @commands.command(name='move')
+    @commands.guild_only()
+    async def _move(self, ctx):
+        """ Moves the bot to a different channel. """
+        player = self.bot.lavalink.players.get(ctx.guild.id)
+
+        if not ctx.author.voice or not ctx.author.voice.channel:
+            await ctx.send('You aren\'t connected to any voice channel.')
+            raise commands.CommandInvokeError(
+                'Author not connected to voice channel.')
+
+            permissions = ctx.author.voice.channel.permissions_for(ctx.me)
+
+            if not permissions.connect or not permissions.speak:
+                await ctx.send('Missing permissions `CONNECT` and/or `SPEAK`.')
+                raise commands.CommandInvokeError(
+                    'Bot has no permissions CONNECT and/or SPEAK')
+
+            player.store('channel', ctx.channel.id)
+            await player.connect(ctx.author.voice.channel.id)
+            await ctx.send('Moved channel.')
 
     @commands.command(name='find')
     @commands.guild_only()
