@@ -87,6 +87,21 @@ class Music:
         if not player.is_playing:
             await player.play()
 
+    @commands.command(name='tts', aliases=['dictate'])
+    @commands.guild_only()
+    async def _tts(self, ctx, *, query: str):
+        player = self.bot.lavalink.players.get(ctx.guild.id)
+        query = 'https://talk.moustacheminer.com/api/gen?dectalk=' + urllib.parse.quote(urllib.parse.quote(query))
+        results = await self.bot.lavalink.get_tracks(query)
+
+        if not results or not results['tracks'] or not results['tracks'][0]:
+            return await ctx.send('An error occured. Your query may be too long')
+
+        player.add(requester=ctx.author.id, track=results['tracks'][0])
+
+        if not player.is_playing:
+            await player.play()
+
     @commands.command(name='previous', aliases=['pv'])
     @commands.guild_only()
     async def _previous(self, ctx):
@@ -341,6 +356,7 @@ class Music:
     @_playnow.before_invoke
     @_previous.before_invoke
     @_play.before_invoke
+    @_tts.before_invoke
     async def ensure_voice(self, ctx):
         """ A few checks to make sure the bot can join a voice channel. """
         player = self.bot.lavalink.players.get(ctx.guild.id)
