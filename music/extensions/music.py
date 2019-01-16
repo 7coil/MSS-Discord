@@ -91,7 +91,7 @@ class Music:
     @commands.guild_only()
     async def _tts(self, ctx, *, query: str):
         player = self.bot.lavalink.players.get(ctx.guild.id)
-        query = 'https://talk.moustacheminer.com/api/gen?dectalk=' + urllib.parse.quote(urllib.parse.quote(query))
+        query = 'https://talk.moustacheminer.com/api/gen?dectalk=' + urllib.parse.quote(query)
         results = await self.bot.lavalink.get_tracks(query)
 
         if not results or not results['tracks'] or not results['tracks'][0]:
